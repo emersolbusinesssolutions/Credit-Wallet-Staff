@@ -1,0 +1,62 @@
+
+
+<div class = "container-fluid spaceUp" >
+
+  <div class = "row">
+      <div class = "col-lg-10 col-lg-offset-2">
+         
+          <div class = "authDiv">
+              <h3 class = "heading"><strong>New Log</strong> </h3><hr/>
+              <div class = "row">
+                  <div class = "col-lg-4">
+                    <div class = "form-group">
+                      <p>Phone Number</p>
+                      <input type="text" class = "textBoxDesign" [(ngModel)]="telephone" >
+                    </div>
+                      <button type="button" class="btn btn-primary radiusaddition btnAdd" (click)="search()" >Get Phone Number</button> 
+                  </div>
+                </div>
+
+                <hr/>
+              <div *ngIf = "addResponse">
+                  <div class="row">
+                      <div class="col-lg-6">
+                        <p>Status</p>
+                        <select class = "textBoxDesign" name = "status" [(ngModel)]="status">
+                          <option value = "1">Not Called</option>
+                          <option value = "2">No Answer</option>
+                          <option value = "3">Phone not in use</option>
+                          <option value = "4">Answered - Busy to talk</option>
+                          <option value = "5">Answered - Not Interested</option>
+                          <option value = "6">Answered - Interested for the future</option>
+                          <option value = "7">Answered - Interested for now</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-6">
+                          <p>Comment</p>
+                          <textarea class = "textBoxDesign" rows = "5" name = "comment" [(ngModel)]="comment"></textarea>
+
+                          <br/>
+                          <button  style = "float:right" type="button" class="btn btn-primary radiusaddition btnAdd" (click)="addRecord()" >Add Call Log</button> 
+                        </div>
+
+                    </div>
+              </div>
+            
+              <br/>
+           					
+
+                           
+             
+           
+          
+        </div>
+        
+  </div>
+  
+</div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>

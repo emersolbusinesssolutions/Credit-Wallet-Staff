@@ -1,0 +1,84 @@
+
+
+<div class = "container-fluid spaceUp" >
+
+  <div class = "row">
+      <div class = "col-lg-10 col-lg-offset-2">
+         
+          <div class = "authDiv">
+              <h3 class = "heading">Contact Management <a style="float:right" routerLink = "/newcontact" class = "btn btn-default">New Log</a></h3><hr/>
+              <div class="row">
+                <div class="col-lg-3">
+                  <p>From:</p>
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                    [(ngModel)]="from" required></my-date-picker>
+                </div>
+                <div class="col-lg-3">
+                  <p>To:</p>
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                    [(ngModel)]="to" required></my-date-picker>
+                </div>
+                <div class="col-lg-3">
+                  <p>Status</p>
+                  <select class = "form-control" [(ngModel)]="status">
+                      <option value = "0">All Response</option>
+                    <option value = "1">Not Called</option>
+                    <option value = "2">No Answer</option>
+                    <option value = "3">Phone not in use</option>
+                    <option value = "4">Answered - Busy to talk</option>
+                    <option value = "5">Answered - Not Interested</option>
+                    <option value = "6">Answered - Interested for the future</option>
+                    <option value = "7">Answered - Interested for now</option>
+                  </select>
+                </div>
+              </div>
+              <div class = "row">
+                <div class = "col-lg-4">
+                      <button type="button" class="btn btn-primary radiusaddition btnAdd" (click)="search()" >Search</button> 
+                </div>
+              </div>
+              <br/>
+
+              <table class="table table-striped">
+                  <thead class="thead-light addNav">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Telephone</th>
+                      <th scope="col">Date and Time</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Comment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let calllog of calllogs; let i = index">
+                      <th style = "padding:10px" scope="row">{{i + 1}}</th>
+                      <td style = "padding:10px">{{calllog.telephone}}</td>
+                      <td style = "padding:10px">{{calllog.timeofevent | date:'dd/MM/yyyy'}}</td>
+                      <td style = "padding:10px"> <span  *ngIf = "calllog.status == 1" class="label label-success">Not Called</span>
+                        <span  *ngIf = "calllog.status == 2" class="label label-success">No Answer</span>
+                        <span  *ngIf = "calllog.status == 3" class="label label-success">Phone not in use</span>
+                        <span  *ngIf = "calllog.status == 4" class="label label-success">Answered - Busy to talk</span>
+                        <span  *ngIf = "calllog.status == 5" class="label label-success">Answered - Not Interested</span>
+                        <span  *ngIf = "calllog.status == 6" class="label label-success">Answered - Interested for the future</span>
+                        <span  *ngIf = "calllog.status == 7" class="label label-success"> Answered - Interested for now</span></td>
+                        <td>{{calllog.comment}}</td>
+                       
+                    </tr>
+                  </tbody>
+                </table>
+           					
+
+                           
+             
+           
+          
+        </div>
+        
+  </div>
+  
+</div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>

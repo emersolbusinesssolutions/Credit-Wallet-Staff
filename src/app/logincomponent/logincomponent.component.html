@@ -1,0 +1,59 @@
+
+<ngx-loading-bar color ="#700156"></ngx-loading-bar>
+<div class = "overLayDiv">
+    <div class="spaceUp">
+        <br/>    <br/>    <br/>    <br/>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-lg-6 col-lg-offset-3">
+            
+                <div class = "authDiv no-radius2" style = "border-radius: 6px;">
+
+                       
+                                 <h2 class = "heading text-center"><strong>Log In</strong></h2>  
+                                 <p class = "text-center gray">Please provide your email and password to access your account</p> 
+                       
+                     
+                    
+
+                    <br/>
+                    
+                             <form #form="ngForm" (ngSubmit)="login(form)"> 
+                              
+                        
+                                    <div class="form-group"> 
+                                      <p>Email Address</p>
+                                      <input type="text"
+                                      class="textBoxDesign " id="text" name="email" text required ngModel #email="ngModel">  
+                                      <span class="red" *ngIf="email.touched && !email.valid " >Please provide your email address</span>
+                                    </div>
+                                    <div class="form-group"> 
+                                            <p>Password</p>  
+                                      <input type="password" 
+                                        class="textBoxDesign " id="password" name="password" text required ngModel #password="ngModel">  
+                                      <span class="red" *ngIf="password.touched && !password.valid ">Please provide your password</span>  
+                                    </div>
+                          
+                                <br/>  
+                                <div class="form-group">
+                                    <button type="submit" class="btn-add primary-add btn-block addRadius" 
+                                    id="register" [disabled]="!form.valid" >Log In</button>  
+                                </div>  
+                              </form> 
+    
+                            
+    
+                            </div>
+                          </div>
+                         
+                          
+                </div>
+    
+            </div>
+            
+    
+    
+    
+    
+</div>

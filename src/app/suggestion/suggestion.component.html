@@ -1,0 +1,140 @@
+
+
+<div class = "container-fluid spaceUp" >
+
+  <div class = "row">
+      <div class = "col-lg-10 col-lg-offset-2">
+         
+          <div class = "authDiv">
+              <h3 class = "heading">Verification Suggestion</h3><hr/>
+             
+              <br/>
+
+              <div class="row">
+                <div class = "col-lg-6">
+                  <div class = "form-group">
+                    <p><strong>Bank Name</strong> </p>
+                    <select name = "salary_bank_name" class="textBoxDesign" [(ngModel)]="bankcode">
+                      <option value = "044">ACCESS BANK PLC</option>
+                      <option value = "023">CITI BANK</option>
+                      <option value = "063">DIAMOND BANK PLC</option>
+                      <option value = "050">ECOBANK NIGERIA PLC</option>
+                      <option value = "070">FIDELITY BANK PLC</option>
+                      <option value = "011">FIRST BANK OF NIGERIA PLC</option>
+                      <option value = "214">FIRST CITY MONUMENT BANK PLC</option>
+                      <option value = "058">GUARANTY TRUST BANK PLC</option>
+                      <option value = "030">HERITAGE BANK</option>
+                      <option value = "301">JAIZ BANK</option>
+                      <option value = "082">KEYSTONE BANK</option>
+                      <option value = "076">SKYE BANK PLC</option>
+                      <option value = "221">STANBIC-IBTC BANK PLC</option>
+                      <option value = "068">STANDARD CHARTERED</option>
+                      <option value = "232">STERLING BANK PLC</option>
+                      <option value = "100">SUNTRUST BANK</option>
+                      <option value = "032">UNION BANK OF NIGERIA PLC</option>
+                      <option value = "033">UNITED BANK FOR AFRICA PLC</option>
+                      <option value = "215">UNITY BANK PLC</option>
+                      <option value = "035">WEMA BANK PLC</option>
+                      <option value = "057">ZENITH BANK PLC</option>
+                      </select>
+                  </div>
+                </div>
+                <div class = "col-lg-6">
+                  <div class = "form-group">
+                    <p><strong>Account Number</strong></p>
+                    <input type="text" class="textBoxDesign"  name = "accountnumber" [(ngModel)]="accountnumber" />
+                  </div>
+                </div>
+              </div>
+
+              <br/>
+              <button (click)="getAccountNumber()" class = "btn btn-default">Get Basic Details</button>
+              <br/>
+              <br/>
+              <table class="table table-striped table-bordered" *ngIf = "verification">
+                        
+                <tbody>
+                   
+                    <tr style="padding:15px">
+                      <th style="padding:15px" scope="row">Account Name</th> 
+                      <td style="padding:15px">{{verification.account_name}}</td>
+                      <th style="padding:15px" scope="row">Bank Verification Number</th>
+                      <td style="padding:15px">{{verification.bvn}}
+                      </td>
+                      <td style="padding:15px"><button (click) = "getVerification()" class = "btn btn-default">Verify BVN</button></td>
+                    
+                    </tr>
+                </tbody>
+            </table>
+
+            <br/>
+            <table class="table table-striped table-bordered" *ngIf = "bvn">
+                        
+              <tbody>
+                 
+                  <tr style="padding:15px">
+                    <th style="padding:15px" scope="row">FIRSTNAME</th> 
+                    <td style="padding:15px">{{bvn.first_name | titlecase}}</td>
+                    <th style="padding:15px" scope="row">LAST NAME</th>
+                    <td style="padding:15px">{{bvn.last_name | titlecase}}
+                    </td>
+                  
+                  </tr>
+                  <tr style="padding:15px">
+                    <th style="padding:15px" scope="row">DATE OF BIRTH</th> 
+                    <td style="padding:15px">{{bvn.formatted_dob | date}}</td>
+                    <th style="padding:15px" scope="row">MOBILE NUMBER</th>
+                    <td style="padding:15px">{{bvn.mobile}}
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+          <br/>
+          <button *ngIf = "bvn" (click) = "getSalary()" class = "btn btn-default">Get Salary Details</button>
+
+          <h4 *ngIf = "salary" style="padding:15px" class="heading"><b>SALARY DETAILS</b></h4>
+              <table class="table table-striped table-bordered" *ngIf = "salary">
+
+                <tr>
+                        <th style="padding:15px" scope = "row">REMITA NAME</th>
+                        <td style="padding:15px">
+                            {{name | titlecase}}
+                        </td>
+                        <th style="padding:15px" scope = "row">REMITA MDA</th>
+                        <td style="padding:15px">{{companyName | titlecase}}</td>
+                    </tr>
+                </table>
+              <table class="table table-striped table-bordered" *ngIf = "salary">
+                  
+                  <thead>
+                      <tr>
+                          <th style="padding:15px" scope = "row">S/NO</th>
+                          <th style="padding:15px" scope = "row">AMOUNT</th>
+                          <th style="padding:15px" scope = "row">PAYMENT DATE</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr  *ngFor="let payment of salary; let i = index " >
+                              <td style="padding:15px">  {{i + 1}}
+                                  </td>
+                          <td style="padding:15px">  {{payment.amount | currency:'₦': 3}}
+                          </td>
+                          <td style="padding:15px">{{payment.paymentdate}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+               
+           					
+
+           
+          
+        </div>
+        
+  </div>
+  
+</div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>

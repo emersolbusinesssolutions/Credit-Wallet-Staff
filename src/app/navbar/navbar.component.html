@@ -1,0 +1,147 @@
+
+
+<ngx-loading-bar color ="#51A351"></ngx-loading-bar >
+    <nav class="navbar navbar-default shadow navAdd" role="navigation" >
+            <div class="container-fluid">
+        
+                <div class="navbar-header">
+                        <button  style="border:none"type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand heading" style = "font-size: 250%; margin-top:-30px;color:#0072BB;"> <img src ="assets/image.png" class = "centerImage"/> </a>
+                
+                    </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a>Need Help? Send an email to operations@creditwallet.ng</a></li>
+                        
+                    </ul>
+                      
+                  
+                  <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" style="background-color:white">
+                                <a style="background-color:white" class="dropdown-toggle" data-toggle="dropdown" href="#"><span>&nbsp;&nbsp;{{firstname}} {{lastname}}&nbsp; </span>   <img src ="assets/Profile.png" style = "width: 30px;height: 30px"/>
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                        <li><a routerLink = "/changepassword">Change Password</a></li>
+                                        <li class = "divider"></li>
+                                  <li><a routerLink = "/">Log Out</a></li>
+                                </ul>
+                              </li>
+                        
+                    </ul>
+                  
+                 
+              </div>
+            </div>
+         </nav>
+        
+    <div class="nav-side-menu no-radius" >
+        
+        <div class = "brand" style = "background-color: #F0AD4E; padding-top:20px; padding-bottom: 20px">
+            <span style ="font-size: 20px"><strong>CREDIT WALLET</strong></span>
+        </div>
+        
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+                <br/>
+                <p style = "color:#fff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>General</strong></p>
+                <div class="menu-list">
+          
+                    <ul id="menu-content" class="menu-content collapse out">
+                        <li>
+                          <a routerLink = "/dashboard">
+                          <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                          </a>
+                        </li>
+
+                        
+    
+                        <li  data-toggle="collapse" data-target="#orders" class="collapsed">
+                            <a ><i class="glyphicon glyphicon-shopping-cart"></i> Loan  <span class="arrow"></span></a>
+                        </li>
+                        <ul  [ngClass]="'sub-menu collapse'"  id="orders">
+                            <li><a  [routerLink]="['/loan/new']"  [queryParams]="{}">New Applications</a></li>
+                            <li><a [routerLink]="['/loan/rejected']"  [queryParams]="{}">Rejected Loans</a></li>
+                            <li><a [routerLink]="['/loan/processing']"  [queryParams]="{}">Processing</a></li>
+                            <li><a [routerLink]="['/loan/awaitingdisbursement']"  [queryParams]="{}">Awaiting Disbursement</a></li>
+                            <li><a [routerLink]="['/loan/ready']"  [queryParams]="{}">Ready for Disbursement</a></li>
+                            <li><a [routerLink]="['/loan/active']"  [queryParams]="{}">Active Loans</a></li>
+                            <li><a [routerLink]="['/loan/completed']"  [queryParams]="{}">Completed Loans</a></li>
+                            <li><a [routerLink]="['/loan/cancel']"  [queryParams]="{}">Cancelled Loans</a></li>
+                           
+                        </ul>
+        
+        
+                        <li data-toggle="collapse" data-target="#service" class="collapsed">
+                          <a><i class="glyphicon glyphicon-th-list"></i> Verification <span class="arrow"></span></a>
+                        </li>
+                          
+                        <ul class="sub-menu collapse" id="service">
+                          <li routerLink = "/uploadverificationdata">BVN Verification</li>
+                          <li routerLink = "/getverificationresult">IPPIS Verification</li>
+                          <li routerLink = "/suggestion">Verification Suggestion</li>
+
+                          
+                        </ul>
+                        <li data-toggle="collapse" data-target="#reports" class="collapsed">
+                          <a ><i class="glyphicon glyphicon-align-left"></i> Deductions<span class="arrow"></span></a>
+                      </li>
+                      <ul class="sub-menu collapse" id="reports">
+                          <li data-toggle="collapse" data-target="#subreports" class="collapsed">
+                              <a >Pending Deductions<span class="arrow"></span></a>
+                          </li>
+                          <ul class="sub-menu collapse" id="subreports">
+                              <li routerLink = "/deductions">Recurring</li>
+                              <li routerLink = "/deductions/onetime">One Time</li>
+                          </ul>
+                          <li >
+                              <a routerLink = "/deductions/paid">Paid</a>
+                          </li>
+                          
+                      </ul>
+                    
+
+                       
+                      
+
+
+                          <li>
+                            <a  routerLink = "/auditlog">
+                            <i class="glyphicon glyphicon-th-list"></i> Audit Log
+                            </a>
+                          </li>
+                          <li>
+                            <a  routerLink = "/contactmanagement">
+                            <i class="glyphicon glyphicon-th-list"></i> Contact Management
+                            </a>
+                          </li>
+
+                          <li>
+                            <a  routerLink = "/account-settings">
+                            <i class="glyphicon glyphicon-cog"></i> Customer
+                            </a>
+                          </li>
+        
+        
+    
+                      
+                   
+                        <li>
+                            <a  routerLink = "/users">
+                            <i class="glyphicon glyphicon-user"></i> Users Management
+                            </a>
+                          </li>
+                      
+        
+        
+                    
+                          <br/>
+                    </ul>
+             </div>
+        </div>
+    
+<router-outlet></router-outlet>

@@ -1,0 +1,60 @@
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        
+        <div class  = "authDiv no-radius2">
+            <div class = "">
+                <h3 class = "heading"><strong>Audit Log</strong></h3><hr/>
+          
+        
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                            <th>S/NO</th>
+                            <th>Date and Time</th>
+                            <th>Staff Name</th>
+                            <th>Narration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                      
+                     
+                            <tr  *ngFor="let audit of auditlogs; let i = index ">
+
+                                <td >
+
+                                 
+{{i + 1}}
+                                            
+                                           
+                                </td>
+                              <td >{{audit.datecreated }}</td>
+                              <td >{{audit.firstname  | titlecase  }} {{audit.lastname  | titlecase  }}</td>
+                              <td>{{audit.description}}</td>
+                             
+                            </tr>
+                        </tbody>
+                    </table>
+                
+            </div>
+            
+        </div> 
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+

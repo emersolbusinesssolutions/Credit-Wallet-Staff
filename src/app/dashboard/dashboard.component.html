@@ -1,0 +1,107 @@
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        <div class = "row ">
+            <div class = "col-lg-3">
+
+        
+             
+
+                <div class  = "authDiv no-radius2">
+
+                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ balance | currency:'₦ ': 2 }}</strong></p>
+                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                          <div class ="row">
+                              <div class = "col-lg-12">
+                                      <p style = "font-size:15px;" class = "gray">  New Application Amount</p>
+                              </div>
+                          </div>
+                          </div>
+                    </div> 
+            </div>
+            <div class = "col-lg-3">
+
+                    <div class  = "authDiv no-radius2">
+
+                            <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ totalsalesthismonth | currency:'₦ ': 2 }}</strong></p>
+                                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                  <div class ="row">
+                                      <div class = "col-lg-12">
+                                              <p style = "font-size:15px;" class = "gray"> Total Loans Disbursed this Month</p>
+                                      </div>
+                                  </div>
+                                  </div>
+                            </div> 
+        
+              </div>
+              <div class = "col-lg-3">
+               
+
+                  <div class  = "authDiv no-radius2">
+
+                        <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{neworders }}</strong></p>
+                            <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                              <div class ="row">
+                                  <div class = "col-lg-12">
+                                          <p style = "font-size:15px;" class = "gray">  New Application</p>
+                                  </div>
+                              </div>
+                              </div>
+                        </div>
+                </div>
+                <div class = "col-lg-3">
+
+                        <div class  = "authDiv no-radius2">
+
+                            <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{processedorders }}</strong></p>
+                            <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                <div class ="row">
+                                    <div class = "col-lg-12">
+                                            <p style = "font-size:15px;" class = "gray"> Active Loans</p>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+             
+
+
+                    
+                  </div>
+        
+          </div>
+        <br/>
+          <div class = "row ">
+              <div class = "col-lg-6" >
+                  <div class = "panel panel-default no-radius2">
+                    <div class = "panel-body">
+                        <div [chart]="barchart"></div>
+                    </div>
+                  </div>
+                </div>
+                    <div class = "col-lg-6" >
+                            <div class = "panel panel-default no-radius2">
+                              <div class = "panel-body">
+                                  <div [chart]="linechart"></div>
+                              </div>
+                            </div>
+                          </div>
+            </div>
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+

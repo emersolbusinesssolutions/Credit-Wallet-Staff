@@ -1,0 +1,44 @@
+
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+.navAdd{
+  padding:12px;
+  background-color: #232F3C;
+  border-color: #232F3C
+
+
+}
+body{
+  	font-family: 'Titillium Web', sans-serif;
+  	background-color: #273443;
+}
+
+.spaceUp{
+	margin-top: 100px;
+}
+.panelAdd{
+	border-radius: 0px;
+	padding: 0px;
+	padding-bottom: -50px;
+}
+.white{
+	color: white;
+}
+
+.yellow{
+	color: yellow;
+}
+
+.div-panel{
+	background-color: #232F3C;
+	padding:10px;
+}
+.right-align{
+	text-align: right
+}
+
+.footer{
+	margin-top: 200px;
+	color:white;
+	background-color: #232F3C;
+}
+

@@ -1,0 +1,275 @@
+<app-navbar></app-navbar>
+<div class = "container-fluid spaceUp" style="margin-top: 0 !important;">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        <div class = " authDiv no-radius2" *ngIf="data">
+            <div>
+                <div style ="float:right">
+                    <button *ngIf="data.status == '4'" type="button" (click)="completeLoan(data)" class="btn btn-primary">Complete Loan</button>
+
+                    <button *ngIf="data.status == '7'" type="button" (click)="disburseLoan(data)" class="btn btn-primary">Disburse Loan</button>
+
+                    <button *ngIf="data.status == '3'" type="button" (click)="notifyFinance(data)" class="btn btn-primary">Send to finance for disbursement</button>
+
+                    <button *ngIf="data.status == '2' && data.documents == 0" type="button" (click)="confirmDocuments(data)" class="btn btn-primary">Confirm Documents</button>
+                    <button *ngIf="(data.status == '2' || data.status == '3') && data.remita == 0" type="button" (click)="confirmRemita(data)" class="btn btn-primary">Confirm Remita</button> 
+                    <button *ngIf="data.status == '2' && data.documents == 1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-awaitingdisbursement">Send to Awaiting Disbursement</button>
+
+
+                    <button *ngIf="data.status == '0'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Generate offer letter</button>
+                    <button *ngIf="data.status == '0'" type="button" (click)="rejectLoan(data)" class="btn btn-default">Reject</button>
+                </div>
+                <h3 class = "heading"><strong>{{data.title}} {{data.firstname | titlecase}} {{data.lastname | titlecase}}</strong></h3> 
+            </div>
+            <hr/>
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Status</h5>
+                        <p>
+                            <span class="label label-warning" *ngIf="data.status == '0'">New Application</span>
+                            <span class="label label-danger" *ngIf="data.status == '1'">Rejected</span>
+                            <span class="label label-warning" *ngIf="data.status == '2'">Processing</span>
+                            <span class="label label-warning" *ngIf="data.status == '3'">Awaiting Disbursement</span>
+                            <span class="label label-success" *ngIf="data.status == '4'">Active</span>
+                            <span class="label label-success" *ngIf="data.status == '5'">Completed</span>
+                            <span class="label label-warning" *ngIf="data.status == '7'">Ready for Disbursement</span>
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Name</h5>
+                        <p>{{data.title}} {{data.firstname | titlecase}} {{data.lastname | titlecase}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Email</h5>
+                        <p>{{data.email}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Telephone</h5>
+                        <p>{{data.telephone}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Place of work</h5>
+                        <p>{{data.place_of_work}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>House Address</h5>
+                        <p>{{data.house_address}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>City</h5>
+                        <p>{{data.city}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>State</h5>
+                        <p>{{data.state}}</p>
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Amount</h5>
+                        <p>{{data.loan_amount | currency:'₦': 3}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Tenor</h5>
+                        <p>{{data.tenor}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Salary bank name</h5>
+                        <p *ngIf="data.salary_bank_name == '044'">ACCESS BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '023'">CITI BANK</p>
+                        <p *ngIf="data.salary_bank_name == '063'">DIAMOND BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '050'">ECOBANK NIGERIA PLC</p>
+                        <p *ngIf="data.salary_bank_name == '070'">FIDELITY BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '011'">FIRST BANK OF NIGERIA PLC</p>
+                        <p *ngIf="data.salary_bank_name == '214'">FIRST CITY MONUMENT BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '058'">GUARANTY TRUST BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '030'">HERITAGE BANK</p>
+                        <p *ngIf="data.salary_bank_name == '301'">JAIZ BANK</p>
+                        <p *ngIf="data.salary_bank_name == '082'">KEYSTONE BANK</p>
+                        <p *ngIf="data.salary_bank_name == '076'">SKYE BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '039'">STANBIC-IBTC BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '232'">STERLING BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '100'">SUNTRUST BANK</p>
+                        <p *ngIf="data.salary_bank_name == '032'">UNION BANK OF NIGERIA PLC</p>
+                        <p *ngIf="data.salary_bank_name == '033'">UNITED BANK FOR AFRICA PLC</p>
+                        <p *ngIf="data.salary_bank_name == '215'">UNITY BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '035'">WEMA BANK PLC</p>
+                        <p *ngIf="data.salary_bank_name == '057'">ZENITH BANK PLC</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Salary bank account</h5>
+                        <p>{{data.salary_bank_account}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>IPPIS number</h5>
+                        <p>{{data.ippisnumber}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Offer Letter status</h5>
+                        <p *ngIf="data.offerletter == 0"><span class="label label-default">Not Generated</span></p>
+                        <p *ngIf="data.offerletter == 1"><span class="label label-success">Generated</span></p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Document status</h5>
+                        <p *ngIf="data.documents == 0"><span class="label label-default">No Document</span></p>
+                        <p *ngIf="data.documents == 1"><span class="label label-success">Document Received</span></p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Remita status</h5>
+                        <p *ngIf="data.remita == 0"><span class="label label-default">No Remita</span></p>
+                        <p *ngIf="data.remita == 1"><span class="label label-success">Remita Received</span></p>
+                    </div>
+                </div>
+                <hr *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'">
+                <div class="row" *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'">
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Loan ID</h5>
+                        <p>{{data.loanid}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Approved Loan</h5>
+                        <p>{{data.loan_amount | currency:'₦': 3}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Monthly repayment</h5>
+                        <p>{{data.monthly_repayment | currency:'₦': 3}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Monthly interest</h5>
+                        <p>{{data.monthly_interest | currency:'₦': 3}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Released date</h5>
+                        <p>{{data.loanreleaseddate}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Interest start date</h5>
+                        <p>{{data.intereststartdate}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>First repayment date</h5>
+                        <p>{{data.firstrepaymentdate}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Override maturity date</h5>
+                        <p>{{data.overridematuritydate}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Interest period</h5>
+                        <p>{{data.loaninterestperiod}}</p>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Duration period</h5>
+                        <p>{{data.loandurationperiod}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Repayment cycle</h5>
+                        <p>{{data.repaymentcycle}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Overide each repayment</h5>
+                        <p>{{data.overrideeachrepayment}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>Admin fees schedule</h5>
+                        <p>{{data.adminfeeschedule}}</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <h5>How should loan be charged as per loan schedule</h5>
+                        <p>{{data.howshouldloaninterestbechargedasperloanschedule}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+    <div class="modal fade" id="modal-default" *ngIf="offerLetterData">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h5 class="modal-title">Generate Offer Letter</h5>
+            </div>
+            <div class="modal-body">
+              <form role="form" novalidate>
+                <div class="form-group">
+                  <p>Loan Amount</p>
+                  <input class="textBoxDesign " type="text" name="loan_amount" [(ngModel)]="offerLetterData.amount" required="">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p>Tenor</p>
+                            <input class="textBoxDesign " type="number" name="tenure" [(ngModel)]="offerLetterData.tenor" required="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p>Place of work</p>
+                            <input class="textBoxDesign " type="text" name="place_of_work" [(ngModel)]="offerLetterData.place_of_work" required="" readonly="">
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="generateOfferLetter()">Generate</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="modal-awaitingdisbursement" *ngIf="awaitingDisbursementData">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h5 class="modal-title">Send to awaiting disbursement</h5>
+            </div>
+            <div class="modal-body">
+              <form role="form" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p>Preferred account number</p>
+                            <input class="textBoxDesign " type="text" name="preferred_accountnumber" [(ngModel)]="awaitingDisbursementData.preferred_accountnumber" required="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p>Preferred bank name</p>
+                            <input class="textBoxDesign " type="text" name="preferred_bankname" [(ngModel)]="awaitingDisbursementData.preferred_bankname" required="">
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="sendToAwaitingDisbursement()">Send</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div> 

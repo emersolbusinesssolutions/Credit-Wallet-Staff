@@ -1,0 +1,152 @@
+<div class = "container-fluid spaceUp" style="margin-top: 0 !important;">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+      <div class = " authDiv no-radius2" *ngIf="data">
+
+
+          <table class="table table-striped table-hover table-bordered">
+              
+              <tbody>
+                  <tr>
+                      <td><p>Disburse Loan Automatically</p> </td>
+                      <td>  <label class="switch">
+                          <input type="checkbox" (change)="onDisburseAutomatically($event)">
+                          <span class="slider round"></span>
+                        </label>  
+                      </td>
+                    </tr>
+
+                    </tbody>
+
+                    </table>
+       
+
+        <div class = "row">
+          <div class = "col-lg-12">
+              <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Disburse Mode
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a (click)="showRecurring()" >Disburse with Recurring Set up</a></li>
+                    <li class = "divider"></li>
+                    <li><a (click)="showRSP()">Disburse with One-Time RSP Setup</a></li>
+                    <li class = "divider"></li>
+                    <li><a (click)="disburseNon()">Disburse without RSP</a></li>
+                  </ul>
+                </div>
+
+                <hr/>
+
+                <button *ngIf = "disburse" class = "btn btn-primary" (click) = "disburseNon()">Disburse Loan</button>
+                    
+
+                <div class = "row">
+                  <div class = "col-lg-5">
+
+                    <div *ngIf = "onetime">
+
+                      <h3><b>Disburse Loan and Set up RSP - One Time</b></h3>
+                      <hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <p>Loan ID</p>
+                                <input class="textBoxDesign " type="text" name="loanid" [(ngModel)]="loanid" >
+                            </div>
+                                <div class="form-group" >
+                                    <p>Amount</p>
+                                    <input class="textBoxDesign " type="number" name="amount" [(ngModel)]="amount" required="required">
+                                </div>
+                                <div class="form-group" >
+                                  <p>Start Date</p>
+                                  <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                  [(ngModel)]="startdate" required></my-date-picker></div> 
+                            </div>
+                            
+                        </div>
+    
+                        <button class = "btn btn-primary" (click) = "disburseOneTime()">Disburse Loan</button>
+                    </div>
+    
+    
+    
+                    <div *ngIf = "recurring">
+    
+                      <h3><b>Disburse Loan and Set up RSP - Recurring</b></h3>
+                      <hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <p>Loan ID</p>
+                                <input class="textBoxDesign " type="text" name="loanid" [(ngModel)]="loanid" >
+                            </div>
+                                <div class="form-group" >
+                                    <p>Amount</p>
+                                    <input class="textBoxDesign " type="number" name="amount" [(ngModel)]="amount" required="required">
+                                </div>
+                                <div class="form-group" >
+                                  <p>Number of Times</p>
+                                  <input class="textBoxDesign " type="number" name="duration" [(ngModel)]="duration" required="required">
+                              </div>
+                                <div class="form-group" >
+                                  <p>Start Date</p>
+                                  <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                  [(ngModel)]="startdate" required></my-date-picker></div> 
+                            </div>
+                            
+                        </div>
+    
+                        <button class = "btn btn-primary" (click) = "disburseRecurring()">Disburse Loan</button>
+                    </div>
+    
+                  </div>
+
+                  <div class="col-lg-7" *ngIf = "recurring  || onetime " >
+                      <table class="table table-striped table-bordered">
+
+                          <tr>
+                                  <th style="padding:15px" scope = "row"> NAME</th>
+                                  <td style="padding:15px">
+                                      {{data.remitaname | titlecase}}
+                                  </td>
+                                  <th style="padding:15px" scope = "row"> MDA</th>
+                                  <td style="padding:15px">{{data.remitamdaname | titlecase}}</td>
+                              </tr>
+                          </table>
+                    <table class="table table-striped table-bordered">
+                    
+                      <thead>
+                          <tr>
+                              <th style="padding:15px" scope = "row">S/NO</th>
+                              <th style="padding:15px" scope = "row">AMOUNT</th>
+                              <th style="padding:15px" scope = "row">PAYMENT DATE</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr  *ngFor="let payment of remita; let i = index " >
+                                  <td style="padding:15px">  {{i + 1}}
+                                      </td>
+                              <td style="padding:15px">  {{payment.amount | currency:'₦': 3}}
+                              </td>
+                              <td style="padding:15px">{{payment.paymentdate}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  </div>
+                </div>
+
+
+
+            
+
+
+             
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

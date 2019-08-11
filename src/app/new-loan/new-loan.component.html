@@ -1,0 +1,79 @@
+
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        
+        <div class  = "authDiv no-radius2">
+            <div class = "">
+                <h3 class = "heading"><strong>New Applications</strong> <!-- <div class="btn-group" style ="float:right">
+                    <button type="button" routerLink = "/createloan" class="btn btn-default">Create Property</button>
+                  </div> --></h3><hr/>
+          
+        
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                            <th>Options</th>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>IPPIS No</th>
+                            <th>Telephone</th>
+                            <th>Amount</th>
+                            <th>Tenor</th>
+                            <th>MDA Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                      
+                     
+                            <tr  *ngFor="let loan of loans; let i = index ">
+
+                                <td >
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                          <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
+                                        </ul>
+                                    </div>
+
+                                            
+                                           
+                                </td>
+                              <td >{{loan.loan.created_at | date:'dd/MM/yyyy h:mm a' }}</td>
+                              <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
+                              <td>{{loan.loan.email}}</td>
+                              <td>{{loan.loan.ippisnumber}}</td>
+                                <td>{{loan.loan.telephone}}</td>
+                              <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
+                              <td >{{loan.loan.tenor }} months</td>
+                              <td >{{loan.loan.place_of_work | titlecase}}</td>
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+                
+            </div>
+            
+        </div> 
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+
