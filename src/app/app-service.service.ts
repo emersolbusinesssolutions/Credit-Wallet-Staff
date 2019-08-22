@@ -88,6 +88,18 @@ export class AppServiceService {
         
         return this.http.post(this.path + 'deductions/stop/bulk', params, httpOptionsForSignedUser);
       }
+
+      deductionsbulk(params: any): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'deductions/bulk', params, httpOptionsForSignedUser);
+      }
+
       confirmpayment(json): any {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 

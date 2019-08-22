@@ -33,6 +33,8 @@ export class ViewloanComponent implements OnInit {
   comment: any;
   comments: any;
   remita: any;
+  existingrecord: any;
+  borrowerid: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -91,6 +93,8 @@ export class ViewloanComponent implements OnInit {
         this.result = data
         console.log(this.result)
         this.data = this.result.loan;
+        this.borrowerid = this.result.borrowerid;
+        this.existingrecord = this.result.existingrecord;
         this.uniquenumber = this.result.uniquenumber;
         this.comments = this.result.comments
         this.remita = this.result.remita

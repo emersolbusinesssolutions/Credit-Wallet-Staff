@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Kanit');
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 body{
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Kanit', sans-serif;
   background-color: #F3F5F8;
   font-size: 14px;
 }

@@ -7,7 +7,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { Transactions } from '../transactions';
 import { Chart } from 'angular-highcharts';
-import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import * as deepEqual from "deep-equal";
 import { ToastrService } from 'ngx-toastr';
 import { IMyDpOptions } from 'mydatepicker';
@@ -63,6 +62,27 @@ export class ProcessingLoanComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+
+  getAmount(){
+
+    let amount = 0;
+    for (let index = 0; index < this.loans.length; ++index) {
+      console.log(this.loans[index]);
+      amount  = amount + parseFloat(this.loans[index].loan.loan_amount);
+    }
+
+    return amount;
+  }
+
+  getCount(){
+    let number = 0;
+    for (let index = 0; index < this.loans.length; ++index) {
+      console.log(this.loans[index]);
+      number  = number + 1;
+    }
+    return number;
   }
 
 }

@@ -28,6 +28,7 @@ import { DeductionsonetimeComponent } from './deductionsonetime/deductionsonetim
 import { DisburseComponent } from './disburse/disburse.component';
 import { AuditlogComponent } from './auditlog/auditlog.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -104,6 +105,10 @@ const routes: Routes = [
       {
         path : 'suggestion',
         component : SuggestionComponent
+      },
+      {
+        path : 'payment/:id',
+        component : PaymentComponent
       },
       {
         path : 'loan/completed',

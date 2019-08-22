@@ -7,7 +7,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { Transactions } from '../transactions';
 import { Chart } from 'angular-highcharts';
-import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import * as deepEqual from "deep-equal";
 import { ToastrService } from 'ngx-toastr';
 @Component({

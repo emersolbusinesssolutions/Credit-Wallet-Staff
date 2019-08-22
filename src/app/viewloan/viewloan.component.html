@@ -4,6 +4,8 @@
     <div class = "col-lg-10 col-lg-offset-2">
         <div class = " authDiv no-radius2" *ngIf="data">
 
+            
+                
                 <h3 class = "heading"><strong>{{data.title}} {{data.firstname | titlecase}} {{data.lastname | titlecase}}</strong></h3> 
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary">Application Option</button>
@@ -51,6 +53,8 @@
                
             </div>
             <hr/>
+
+            
             <table class="table table-striped table-bordered">
                 <tbody>
 
@@ -191,6 +195,27 @@
                 </tbody>
             </table>
             <hr>
+
+            <div *ngIf = "existingrecord">
+
+                    <h4 class="heading"><b>EXISTING DETAILS</b></h4>
+                    <table class="table table-striped table-bordered">
+
+                            <tr class="danger">
+                                    <th style="padding:15px" scope = "row">IPPIS NUMBER</th>
+                                    <td style="padding:15px">
+                                        {{existingrecord.ippisnumber}}
+                                    </td>
+                                    <th style="padding:15px" scope = "row">Borrower ID</th>
+                                    <td style="padding:15px">{{borrowerid}}</td>
+                                    <th style="padding:15px" scope = "row">Last Loan ID</th>
+                                    <td style="padding:15px">{{existingrecord.loanid}}</td>
+                                </tr>
+                            </table>
+                            <hr/>
+            </div>
+
+           
             <div *ngIf = "verification">
                 <h4 style="padding:15px" class="heading"><b>LOAN DETAILS</b></h4>
                 <table class="table table-striped table-bordered">

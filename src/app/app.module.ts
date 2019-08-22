@@ -45,6 +45,7 @@ import { DeductionsonetimeComponent } from './deductionsonetime/deductionsonetim
 import { DisburseComponent } from './disburse/disburse.component';
 import { AuditlogComponent } from './auditlog/auditlog.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     DeductionsonetimeComponent,
     DisburseComponent,
     AuditlogComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
