@@ -23,6 +23,8 @@
                         <li *ngIf="data.status == '4'" class="divider"></li>
                         <li> <a  *ngIf="data.status == '7'"  routerLink = "/disburse/{{id}}">Disburse Loan</a></li>
                         <li *ngIf="data.status == '7'" class="divider"></li>
+                        <li> <a  *ngIf="data.status == '7'"  routerLink = "/otherlenders/{{id}}">Disburse Loan (PLAAS)</a></li>
+                        <li *ngIf="data.status == '7'" class="divider"></li>
                         <li> <a  *ngIf="data.status == '3'"  (click)="notifyFinance(data)">Send to Finance for Disbursement</a></li>
                         <li *ngIf="data.status == '3'" class="divider"></li>
                         <li> <a *ngIf="data.status == '2' && data.documents == 0"  (click)="confirmDocuments(data)">Confirm Document</a></li>

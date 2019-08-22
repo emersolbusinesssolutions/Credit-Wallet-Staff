@@ -29,6 +29,7 @@ import { DisburseComponent } from './disburse/disburse.component';
 import { AuditlogComponent } from './auditlog/auditlog.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { PaymentComponent } from './payment/payment.component';
+import { DisburselendersComponent } from './disburselenders/disburselenders.component';
 
 
 
@@ -145,6 +146,10 @@ const routes: Routes = [
       {
         path : 'newuser',
         component : NewuserComponent
+      },
+      {
+        path : 'otherlenders/:id',
+        component : DisburselendersComponent
       },
       
 

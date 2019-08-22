@@ -351,6 +351,19 @@ export class AppServiceService {
         
     }
 
+    disburseLoanLender(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'disburse/loan/lender', params, httpOptionsForSignedUser);
+        
+    }
+
     disburseLoanADD(params) {
      
         const httpOptionsForSignedUser = {

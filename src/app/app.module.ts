@@ -46,6 +46,7 @@ import { DisburseComponent } from './disburse/disburse.component';
 import { AuditlogComponent } from './auditlog/auditlog.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { PaymentComponent } from './payment/payment.component';
+import { DisburselendersComponent } from './disburselenders/disburselenders.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { PaymentComponent } from './payment/payment.component';
     DisburseComponent,
     AuditlogComponent,
     SuggestionComponent,
-    PaymentComponent
+    PaymentComponent,
+    DisburselendersComponent
   ],
   imports: [
     BrowserModule,
