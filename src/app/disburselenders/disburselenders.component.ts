@@ -281,39 +281,48 @@ export class DisburselendersComponent implements OnInit {
    }
 
    selectLender(value){
-     var json = {
-       id : this.id,
-       lenderid : value,
-       loanid : this.data.loanid,
-       accountnumber : this.data.preferred_accountnumber,
-       bankcode : this.data.preferred_bankname,
-       amount : this.amount
-     }
 
-     console.log(json)
 
-     this.loadingBar.start();
-       this.service.disburseLoanLender(json).subscribe(
-         data => {
-           let result: any = data;
-           console.log(data)
-           if(deepEqual(result.status,"success")){
-             this.toastr.success(result.message, '');
-             this.successfultransfer = true
-           }
-           else{
-             this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
-           }
-           this.loadingBar.complete();
-         },
-           error => {
-             console.log(error);
-             this.toastr.success("Network Related Error", '');
-             this.loadingBar.complete();
-           }
-       );
-
+    if (confirm('Are you sure you want to disburse this loan via this lender?')) {
+      var json = {
+        id : this.id,
+        lenderid : value,
+        loanid : this.data.loanid,
+        accountnumber : this.data.preferred_accountnumber,
+        bankcode : this.data.preferred_bankname,
+        amount : this.amount
+      }
+ 
+      console.log(json)
+ 
+ 
+ 
+     
+ 
+      this.loadingBar.start();
+        this.service.disburseLoanLender(json).subscribe(
+          data => {
+            let result: any = data;
+            console.log(data)
+            if(deepEqual(result.status,"success")){
+              this.toastr.success(result.message, '');
+              this.successfultransfer = true
+            }
+            else{
+              this.toastr.success(result.message, '');
+              //this._router.navigate(['/login']);
+            }
+            this.loadingBar.complete();
+          },
+            error => {
+              console.log(error);
+              this.toastr.success("Network Related Error", '');
+              this.loadingBar.complete();
+            }
+        );
+ 
+   }
+     
      
    }
 
