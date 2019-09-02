@@ -100,6 +100,17 @@ export class AppServiceService {
         return this.http.post(this.path + 'deductions/bulk', params, httpOptionsForSignedUser);
       }
 
+      sendmail(params: any): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'email/send/automatic', params, httpOptionsForSignedUser);
+      }
+
       confirmpayment(json): any {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
@@ -223,16 +234,6 @@ export class AppServiceService {
 
 
 
-    addItem(params) {
-        const httpOptionsForSignedUser = {
-            headers: new HttpHeaders({ 
-                'Content-Type': 'application/json',
-                'Authorization' : sessionStorage.getItem("currentUser")
-            })
-          };
-        let body = JSON.stringify(params);
-        return this.http.post(this.path + 'new-item', body, httpOptionsForSignedUser);
-    }
 
     getLoans(params) {
      
@@ -246,6 +247,19 @@ export class AppServiceService {
         return this.http.post(this.path + 'loans/list', params, httpOptionsForSignedUser);
 
     }
+
+    
+    mandatelist() {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.get(this.path + 'mandate/list',httpOptionsForSignedUser);
+    }
+
+    
 
     suggestionstart(params) {
      

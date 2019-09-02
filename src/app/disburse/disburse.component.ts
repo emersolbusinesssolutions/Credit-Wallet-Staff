@@ -147,7 +147,7 @@ export class DisburseComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
            this.loadingBar.complete();
          },
@@ -214,7 +214,7 @@ export class DisburseComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
            this.loadingBar.complete();
          },
@@ -249,7 +249,7 @@ export class DisburseComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
          },
            error => {
@@ -284,7 +284,7 @@ export class DisburseComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
            this.loadingBar.complete();
          },

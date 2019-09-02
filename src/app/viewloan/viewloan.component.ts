@@ -35,6 +35,7 @@ export class ViewloanComponent implements OnInit {
   remita: any;
   existingrecord: any;
   borrowerid: any;
+  remitaloanhistory: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -99,6 +100,7 @@ export class ViewloanComponent implements OnInit {
         this.comments = this.result.comments
         this.remita = this.result.remita
         this.verification = this.result.verification;
+        this.remitaloanhistory = this.result.remitaloanhistory;
         this.offerLetterData = {id: this.data.id, amount: this.data.loan_amount, tenor: this.data.tenor, place_of_work: this.data.place_of_work};
         this.awaitingDisbursementData = {id: this.data.id, preferred_accountnumber: this.data.salary_bank_account, preferred_bankname: this.data.salary_bank_name};
         this.loadingBar.complete();
@@ -152,7 +154,7 @@ export class ViewloanComponent implements OnInit {
          }
          else{
            this.toastr.success(result.message, '');
-           //this._router.navigate(['/login']);
+           //this._router.navigate(['']);
          }
          this.loadingBar.complete();
        },
@@ -187,7 +189,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -221,7 +223,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -249,7 +251,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -277,7 +279,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -306,7 +308,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -334,7 +336,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -362,7 +364,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -389,7 +391,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -417,7 +419,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },
@@ -444,7 +446,7 @@ export class ViewloanComponent implements OnInit {
           }
           else{
             this.toastr.success(result.message, '');
-            //this._router.navigate(['/login']);
+            //this._router.navigate(['']);
           }
           this.loadingBar.complete();
         },
@@ -470,7 +472,7 @@ export class ViewloanComponent implements OnInit {
          }
          else{
            this.toastr.success(result.message, '');
-           //this._router.navigate(['/login']);
+           //this._router.navigate(['']);
          }
          this.loadingBar.complete();
        },
@@ -504,7 +506,7 @@ export class ViewloanComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },

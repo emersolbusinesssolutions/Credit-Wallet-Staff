@@ -1,0 +1,30 @@
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        <div class  = "authDiv no-radius2">
+            <h3 class = "heading"><strong>Not Found RRR</strong> <!-- <div class="btn-group" style ="float:right">
+                <button type="button" routerLink = "/createloan" class="btn btn-default">Create Property</button>
+              </div> --></h3><hr/>
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                    <th>Mandate Reference</th>
+                    <th>Amount</th>
+                    <th>Times</th>
+                    </tr>
+                </thead>
+                <tbody>
+              
+             
+                    <tr  *ngFor="let loan of loans; let i = index ">
+                      <td>{{loan.mandatereference}}</td>
+                      <td >{{loan.received | currency:'₦': 3}}</td> 
+                      <td >{{getCount(loan.times)}}</td>
+                    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>

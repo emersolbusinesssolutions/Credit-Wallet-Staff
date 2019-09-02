@@ -110,6 +110,10 @@ export class PaymentComponent implements OnInit {
 
     this.data = []
     for (let index = 0; index < this.found.length; ++index) {
+      let ippisnumber = ""
+      if(this.found[index].loan != null ){
+        ippisnumber = this.found[index].loan.ippisnumber
+      }
       let json = {
         loanid : this.found[index].loanid,
         amount : this.found[index].received,
@@ -117,7 +121,7 @@ export class PaymentComponent implements OnInit {
         date  : collectiondate,
         by : "Remita Bacs Payment (RSP)",
         description : "Part Loan Repayment",
-        ippisno : this.found[index].loan.ippisnumber
+        ippisno : ippisnumber
       }
       this.data[index] = json
     }

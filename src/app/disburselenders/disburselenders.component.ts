@@ -146,7 +146,7 @@ export class DisburselendersComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
            this.loadingBar.complete();
          },
@@ -209,7 +209,7 @@ export class DisburselendersComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
            this.loadingBar.complete();
          },
@@ -240,7 +240,7 @@ export class DisburselendersComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
          },
            error => {
@@ -268,7 +268,7 @@ export class DisburselendersComponent implements OnInit {
            }
            else{
              this.toastr.success(result.message, '');
-             //this._router.navigate(['/login']);
+             //this._router.navigate(['']);
            }
            this.loadingBar.complete();
          },
@@ -310,7 +310,7 @@ export class DisburselendersComponent implements OnInit {
             }
             else{
               this.toastr.success(result.message, '');
-              //this._router.navigate(['/login']);
+              //this._router.navigate(['']);
             }
             this.loadingBar.complete();
           },

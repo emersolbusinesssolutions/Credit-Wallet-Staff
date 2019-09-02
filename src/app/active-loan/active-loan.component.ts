@@ -48,7 +48,7 @@ export class ActiveLoanComponent implements OnInit {
         }
         else{
           this.toastr.success(this.result.message, '');
-          this._router.navigate(['/login']);
+          this._router.navigate(['']);
         }
         this.loadingBar.complete();
       },

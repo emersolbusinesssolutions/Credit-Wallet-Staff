@@ -1,35 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LogincomponentComponent } from './logincomponent/logincomponent.component';
-import { UploadverificationdataComponent } from './uploadverificationdata/uploadverificationdata.component';
-import { ViewverificationComponent } from './viewverification/viewverification.component';
-import { ContactmanagementComponent } from './contactmanagement/contactmanagement.component';
-import { NewcontactComponent } from './newcontact/newcontact.component';
-import { NewLoanComponent } from './new-loan/new-loan.component';
-import { ViewloanComponent } from './viewloan/viewloan.component';
-import { ProcessingLoanComponent } from './processing-loan/processing-loan.component';
-import { RejectedLoanComponent } from './rejected-loan/rejected-loan.component';
-import { AwaitingDisbursementLoanComponent } from './awaiting-disbursement-loan/awaiting-disbursement-loan.component';
-import { ActiveLoanComponent } from './active-loan/active-loan.component';
-import { CompleteLoanComponent } from './complete-loan/complete-loan.component';
-import { ReadyForDisbursementLoanComponent } from './ready-for-disbursement-loan/ready-for-disbursement-loan.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UsermanagementComponent } from './usermanagement/usermanagement.component';
-import { NewuserComponent } from './newuser/newuser.component';
-import { ChangepasswordComponent } from './changepassword/changepassword.component';
-import { CancelloanComponent } from './cancelloan/cancelloan.component';
-import { DeductionsComponent } from './deductions/deductions.component';
-import { NewdeductionsComponent } from './newdeductions/newdeductions.component';
-import { DeductionspaidComponent } from './deductionspaid/deductionspaid.component';
-import { DeductionsonetimeComponent } from './deductionsonetime/deductionsonetime.component';
-import { DisburseComponent } from './disburse/disburse.component';
-import { AuditlogComponent } from './auditlog/auditlog.component';
-import { SuggestionComponent } from './suggestion/suggestion.component';
-import { PaymentComponent } from './payment/payment.component';
-import { DisburselendersComponent } from './disburselenders/disburselenders.component';
 
 
 
@@ -38,7 +9,7 @@ const routes: Routes = [
 
   {
     path : '',
-    component : LogincomponentComponent
+    loadChildren: './logincomponent/logincomponent.module#LogincomponentModule'
   },
   
   {
@@ -48,110 +19,117 @@ const routes: Routes = [
     children: [
       {
         path : 'deductions/paid',
-        component : DeductionspaidComponent
+        loadChildren: './deductionspaid/deductionspaid.module#DeductionspaidModule'
       },
       {
         path : 'disburse/:id',
-        component : DisburseComponent
+        loadChildren: './disburse/disburse.module#DisburseModule'
       },
       {
         path : 'dashboard',
-        component : DashboardComponent
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path : 'deductions/onetime',
-        component : DeductionsonetimeComponent
+        loadChildren: './deductionsonetime/deductionsonetime.module#DeductionsonetimeModule'
       },
       {
         path : 'deductions',
-        component : DeductionsComponent
+        loadChildren: './deductions/deductions.module#DeductionsModule'
       },
       {
         path : 'newdeductions',
-        component : NewdeductionsComponent
+        loadChildren: './newdeductions/newdeductions.module#NewdeductionsModule'
       },
-  
       {
         path : 'changepassword',
-        component : ChangepasswordComponent
+        loadChildren: './changepassword/changepassword.module#ChangepasswordModule'
       },
       {
         path : 'loan/new',
-        component : NewLoanComponent
+        loadChildren: './new-loan/new-loan.module#NewLoanModule'
       },
       {
         path : 'users',
-        component : UsermanagementComponent
+        loadChildren: './usermanagement/usermanagement.module#UsermanagementModule'
+      },
+      {
+        path : 'mail',
+        loadChildren: './electronicmail/electronicmail.module#ElectronicmailModule'
       },
       {
         path : 'loan/rejected',
-        component : RejectedLoanComponent
+        loadChildren: './rejected-loan/rejected-loan.module#RejectedLoanModule'
       },
       {
         path : 'loan/cancel',
-        component : CancelloanComponent
+        loadChildren: './cancelloan/cancelloan.module#CancelloanModule'
       },
       {
         path : 'loan/processing',
-        component : ProcessingLoanComponent
+        loadChildren: './processing-loan/processing-loan.module#ProcessingLoanModule'
       },
       {
         path : 'loan/awaitingdisbursement',
-        component : AwaitingDisbursementLoanComponent
+        loadChildren: './awaiting-disbursement-loan/awaiting-disbursement-loan.module#AwaitingDisbursementLoanModule'
       },
       {
         path : 'loan/active',
-        component : ActiveLoanComponent
+        loadChildren: './active-loan/active-loan.module#ActiveLoanModule'
       },
       {
         path : 'suggestion',
-        component : SuggestionComponent
+        loadChildren: './suggestion/suggestion.module#SuggestionModule'
       },
       {
         path : 'payment/:id',
-        component : PaymentComponent
+        loadChildren: './payment/payment.module#PaymentModule'
       },
       {
         path : 'loan/completed',
-        component : CompleteLoanComponent
+        loadChildren: './complete-loan/complete-loan.module#CompleteLoanModule'
       },
       {
         path : 'loan/ready',
-        component : ReadyForDisbursementLoanComponent
+        loadChildren: './ready-for-disbursement-loan/ready-for-disbursement-loan.module#ReadyForDisbursementLoanModule'
       },
       {
         path : 'auditlog',
-        component : AuditlogComponent
+        loadChildren: './auditlog/auditlog.module#AuditlogModule'
       },
       {
         path : 'loan/:id',
-        component : ViewloanComponent
+        loadChildren: './viewloan/viewloan.module#ViewloanModule'
       },
       {
         path : 'uploadverificationdata',
-        component : UploadverificationdataComponent
+        loadChildren: './uploadverificationdata/uploadverificationdata.module#UploadverificationdataModule'
       },
       {
         path : 'contactmanagement',
-        component : ContactmanagementComponent
+        loadChildren: './contactmanagement/contactmanagement.module#ContactmanagementModule'
       },
       {
         path : 'newcontact',
-        component : NewcontactComponent
+        loadChildren: './contactmanagement/contactmanagement.module#ContactmanagementModule'
       },
       {
         path : 'getverificationresult',
-        component : ViewverificationComponent
+        loadChildren: './viewverification/viewverification.module#ViewverificationModule'
       },
       {
         path : 'newuser',
-        component : NewuserComponent
+        loadChildren: './newuser/newuser.module#NewuserModule'
       },
       {
         path : 'otherlenders/:id',
-        component : DisburselendersComponent
+        loadChildren: './disburselenders/disburselenders.module#DisburselendersModule'
       },
-      
+
+      {
+        path : 'notfoundrrr',
+        loadChildren: './notfoundrrr/notfoundrrr.module#NotfoundrrrModule'
+      },
 
       
       

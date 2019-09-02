@@ -4,9 +4,7 @@ import {AppServiceService} from '../app-service.service';
 import {Result} from '../result';
 import {Observable} from 'rxjs/Rx';
 import {Router, ActivatedRoute} from '@angular/router';
-import { AsyncLocalStorage } from 'angular-async-local-storage';
-import { Transactions } from '../transactions';
-import { Chart } from 'angular-highcharts';
+
 import * as deepEqual from "deep-equal";
 import { ToastrService } from 'ngx-toastr';
 import { IMyDpOptions } from 'mydatepicker';
@@ -70,7 +68,7 @@ export class AwaitingDisbursementLoanComponent implements OnInit {
         }
         else{
           this.toastr.success(this.result.message, '');
-          this._router.navigate(['/login']);
+          this._router.navigate(['']);
         }
         this.loadingBar.complete();
       },
