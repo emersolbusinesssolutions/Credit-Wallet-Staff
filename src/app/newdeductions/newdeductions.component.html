@@ -35,40 +35,88 @@
              </div>
               </div>
               <br/>
+
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Remita Basic Details</a></li>
+                <li><a data-toggle="tab" href="#menu1">Salary Details</a></li>
+                <li><a data-toggle="tab" href="#menu2">Loan Details</a></li>
+              </ul>
+              
+              <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                 <br/>
+                 <table class="table table-striped table-bordered" *ngIf = "salary">
+
+                  <tr>
+                          <th style="padding:15px" scope = "row">REMITA NAME</th>
+                          <td style="padding:15px">
+                              {{name | titlecase}}
+                          </td>
+                          <th style="padding:15px" scope = "row">REMITA MDA</th>
+                          <td style="padding:15px">{{companyName | titlecase}}</td>
+                      </tr>
+                  </table>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                  <br/>
+                  <table class="table table-striped table-bordered" *ngIf = "salary">
+                  
+                    <thead>
+                        <tr>
+                            <th style="padding:15px" scope = "row">S/NO</th>
+                            <th style="padding:15px" scope = "row">AMOUNT</th>
+                            <th style="padding:15px" scope = "row">PAYMENT DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let payment of salary; let i = index " >
+                                <td style="padding:15px">  {{i + 1}}
+                                    </td>
+                            <td style="padding:15px">  {{payment.amount | currency:'₦': 3}}
+                            </td>
+                            <td style="padding:15px">{{payment.paymentdate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                  <br/>
+
+                  <table class="table table-striped table-bordered" *ngIf = "loan">
+                  
+                    <thead>
+                        <tr>
+                            <th style="padding:15px" scope = "row">STATUS</th>
+                            <th style="padding:15px" scope = "row">S/NO</th>
+                            <th style="padding:15px" scope = "row">LOAN AMOUNT</th>
+                            <th style="padding:15px" scope = "row">LOAN DISBURSEMENT DATE</th>
+                            <th style="padding:15px" scope = "row">LOAN PROVIDER</th>
+                            <th style="padding:15px" scope = "row">OUTSTANDING AMOUNT</th>
+                            <th style="padding:15px" scope = "row">REPAYMENT AMOUNT</th>
+                            <th style="padding:15px" scope = "row">REPAYMENT FREQUENCY</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let payment of salary; let i = index " >
+                                <td style="padding:15px">  {{i + 1}}
+                                    </td>
+                                    <td style="padding:15px">{{payment.status}}</td>
+                                    <td style="padding:15px">{{payment.loanProvider | titlecase}}</td>
+                                    <td style="padding:15px">{{payment.outstandingAmount | currency:'₦ ' }}</td>
+                                    <td style="padding:15px">{{payment.loanDisbursementDate }}</td>
+                                    <td style="padding:15px">{{payment.repaymentAmount | currency:'₦ '  }}</td>
+                                    <td style="padding:15px">{{payment.repaymentFreq }}</td>
+                                    <td style="padding:15px">{{payment.loanAmount | currency:'₦ ' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+               
+              </div>
            					
 
-                           
-              <h4 *ngIf = "salary" style="padding:15px" class="heading"><b>SALARY DETAILS</b></h4>
-              <table class="table table-striped table-bordered" *ngIf = "salary">
-
-                <tr>
-                        <th style="padding:15px" scope = "row">REMITA NAME</th>
-                        <td style="padding:15px">
-                            {{name | titlecase}}
-                        </td>
-                        <th style="padding:15px" scope = "row">REMITA MDA</th>
-                        <td style="padding:15px">{{companyName | titlecase}}</td>
-                    </tr>
-                </table>
-              <table class="table table-striped table-bordered" *ngIf = "salary">
-                  
-                  <thead>
-                      <tr>
-                          <th style="padding:15px" scope = "row">S/NO</th>
-                          <th style="padding:15px" scope = "row">AMOUNT</th>
-                          <th style="padding:15px" scope = "row">PAYMENT DATE</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr  *ngFor="let payment of salary; let i = index " >
-                              <td style="padding:15px">  {{i + 1}}
-                                  </td>
-                          <td style="padding:15px">  {{payment.amount | currency:'₦': 3}}
-                          </td>
-                          <td style="padding:15px">{{payment.paymentdate}}</td>
-                      </tr>
-                  </tbody>
-              </table>
+        
           
         </div>
         

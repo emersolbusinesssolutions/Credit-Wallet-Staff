@@ -25,26 +25,35 @@ export class ActiveLoanComponent implements OnInit {
   result : any;
   loans : any;
   report : any[]
+  status = 4
+  pagenumber = 1;
+  searchtext = ""
   reportorders : any[];
   dataTable :any;
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService,private chRef: ChangeDetectorRef) {
             
-     this.getLoans("4");
+     this.getLoans();
    }
 
-   getLoans(status){
+   getLoans(){
+
+    
+
+    var json = {
+      searchtext : this.searchtext,
+      status : this.status,
+      pagenumber : this.pagenumber
+    }
     this.loadingBar.start();
-    this.service.getLoans({status: status}).subscribe(
+    this.service.getLoansNew(json).subscribe(
       data => {
         this.result = data;
         this.loans = this.result.data
-      
+        console.log(data)
         if(deepEqual(this.result.status,"success")){
-          this.chRef.detectChanges();
-          const table: any = $('table');
-          this.dataTable = table.DataTable();
+      
         }
         else{
           this.toastr.success(this.result.message, '');
@@ -62,5 +71,27 @@ export class ActiveLoanComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+  next(){
+    this.pagenumber = this.pagenumber + 1
+    this.getLoans();
+  }
+
+  previous(){
+    if(this.pagenumber == 1){
+      this.toastr.success("You are on the first page", '');
+      return;
+    }
+    this.pagenumber = this.pagenumber - 1
+    this.getLoans();
+  }
+
+
+  search(){
+    this.pagenumber = 1;
+    this.getLoans();
+  }
+
 
 }

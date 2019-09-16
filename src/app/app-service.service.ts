@@ -246,7 +246,25 @@ export class AppServiceService {
         
         return this.http.post(this.path + 'loans/list', params, httpOptionsForSignedUser);
 
+
     }
+
+    getLoansNew(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'loans/list/new', params, httpOptionsForSignedUser);
+
+
+    }
+
+
+    
 
     
     mandatelist() {

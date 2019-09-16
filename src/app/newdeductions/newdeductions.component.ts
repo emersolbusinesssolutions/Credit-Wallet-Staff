@@ -32,6 +32,7 @@ export class NewdeductionsComponent implements OnInit {
   };
   startdate;to;
   tenor: any;
+  loan: any;
 
   constructor( private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -59,6 +60,7 @@ export class NewdeductionsComponent implements OnInit {
 
    
           this.salary = this.result.response.salary;
+          this.loan = this.result.response.loan;
        
           if(deepEqual(this.result.response.customerId,null)){
 
