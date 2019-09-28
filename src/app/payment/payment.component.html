@@ -17,18 +17,28 @@
                 <p *ngIf = "id == 'rsp'" style="color:gray; font-size:12px" >Reconcile RSP Payment</p>
               </h3><hr/>
 
-              <div *ngIf = "found" >
-                  <button class = "btn btn-success" (click)="export()" >Download Repayment File</button>
-                  <br/>
-                  <br/>
+        
+
+              <div class="btn-group" *ngIf = "found">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Download Repayment File <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a (click)="export()" >Download Credit Wallet Repayment File</a></li>
+                  <li class = "divider"></li>
+                  <li><a (click)="exportcreditalert()" >Download Credit Alert Repayment File</a></li>
+                </ul>
               </div>
+
+              <br/>
+                  <br/>
 
             
 
 
 
               <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#home">Found</a></li>
+                  <li class="active"><a data-toggle="tab" href="#home">Credit Wallet</a></li>
+                  <li><a data-toggle="tab" href="#menu2">Credit Alert</a></li>
                   <li><a data-toggle="tab" href="#menu1">Not Found</a></li>
                 </ul>
                 
@@ -110,6 +120,58 @@
                           </tbody>
                       </table>
                   </div>
+                  <div id="menu2" class="tab-pane fade in">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                            <th>Options</th>
+                            <th>Mandate Reference</th>
+                            <th>Loan ID</th>
+                            <th>Received</th>
+                            <th>Actual Payment</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                      
+                     
+                            <tr  *ngFor="let payment of creditalert; let i = index ">
+        
+                                <td >
+        
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                          <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
+                                          <li> <a (click)="confirmpayment(payment)">View</a></li>
+                                          <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
+                                          <li class="divider" *ngIf = "loan.loan.status == 0"></li>
+                                          <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
+        
+                                        </ul>
+                                    </div>
+        
+                                            
+                                           
+                              </td>
+                              <td >{{payment.mandatereference }}</td>
+                              <td>{{payment.loanid}}</td>
+                              <td>{{payment.received | currency:'₦ ': 2}}</td>
+                              <td>{{payment.actualpayment | currency:'₦ ': 2}}</td>
+                              <td>{{payment.type}}</td>
+                              <td >
+                                  <span class = "label label-warning" *ngIf =  " payment.received > payment.actualpayment">Over Payment</span>
+                                  <span class = "label label-success" *ngIf =  " payment.received == payment.actualpayment">Actual Payment</span>
+                                  <span class = "label label-danger" *ngIf =  " payment.received < payment.actualpayment">Less Payment</span>
+                              </td> 
+                           
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 </div>
             
 

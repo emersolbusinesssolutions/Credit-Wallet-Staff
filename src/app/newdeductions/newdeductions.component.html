@@ -86,8 +86,9 @@
                   
                     <thead>
                         <tr>
-                            <th style="padding:15px" scope = "row">STATUS</th>
+                           
                             <th style="padding:15px" scope = "row">S/NO</th>
+                            <th style="padding:15px" scope = "row">STATUS</th>
                             <th style="padding:15px" scope = "row">LOAN AMOUNT</th>
                             <th style="padding:15px" scope = "row">LOAN DISBURSEMENT DATE</th>
                             <th style="padding:15px" scope = "row">LOAN PROVIDER</th>
@@ -102,12 +103,13 @@
                                 <td style="padding:15px">  {{i + 1}}
                                     </td>
                                     <td style="padding:15px">{{payment.status}}</td>
+                                    <td style="padding:15px">{{payment.loanAmount | currency:'₦ ' }}</td>
+                                    <td style="padding:15px">{{payment.loanDisbursementDate }}</td>
                                     <td style="padding:15px">{{payment.loanProvider | titlecase}}</td>
                                     <td style="padding:15px">{{payment.outstandingAmount | currency:'₦ ' }}</td>
-                                    <td style="padding:15px">{{payment.loanDisbursementDate }}</td>
                                     <td style="padding:15px">{{payment.repaymentAmount | currency:'₦ '  }}</td>
                                     <td style="padding:15px">{{payment.repaymentFreq }}</td>
-                                    <td style="padding:15px">{{payment.loanAmount | currency:'₦ ' }}</td>
+                                    
                         </tr>
                     </tbody>
                 </table>

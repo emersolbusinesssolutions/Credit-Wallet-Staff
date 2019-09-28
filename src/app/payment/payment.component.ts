@@ -19,6 +19,7 @@ export class PaymentComponent implements OnInit {
   found: any;
   notfound: any;
   dd: any;
+  creditalert: any;
 
   
 
@@ -68,6 +69,7 @@ export class PaymentComponent implements OnInit {
                 $('#import').modal('hide'); 
                 this.found = data["found"]
                 this.notfound = data["notfound"]
+                this.creditalert = data["creditalert"]
                 
               },
               error => {
@@ -121,13 +123,57 @@ export class PaymentComponent implements OnInit {
         date  : collectiondate,
         by : "Remita Bacs Payment (RSP)",
         description : "Part Loan Repayment",
-        ippisno : ippisnumber
+        ippisno : ippisnumber,
+        mandatereference : this.found[index].mandatereference
       }
       this.data[index] = json
     }
 
     new Angular5Csv(this.data, "Repayment File" + today, options);
   }
+
+  exportcreditalert(){
+
+    var today = new Date(); 
+    this.dd = today.getDate(); 
+    this.mm = today.getMonth() + 1; 
+  
+    var yyyy = today.getFullYear(); 
+    if (this.dd < 10) { 
+        this.dd = '0' + this.dd; 
+    } 
+    if (this.mm < 10) { 
+        this.mm = '0' + this.mm; 
+    } 
+    var collectiondate = this.dd + '/' + this.mm + '/' + yyyy; 
+      var options = { 
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true, 
+        showTitle: false,
+        useBom: true,
+        headers: ["Loan #", "Amount", "Method", "Collection Date", "Collection By","Description","Mandate Reference"]
+      };
+  
+  
+      this.data = []
+      for (let index = 0; index < this.found.length; ++index) {
+      
+        let json = {
+          loanid : this.found[index].loanid,
+          amount : this.found[index].received,
+          method : "Remita Salary Platform (RSP)",
+          date  : collectiondate,
+          by : "Remita Bacs Payment (RSP)",
+          description : "Part Loan Repayment",
+          mandatereference : this.found[index].mandatereference
+        }
+        this.data[index] = json
+      }
+  
+      new Angular5Csv(this.data, "Repayment File For Credit Alert" + today, options);
+    }
 
 
 
