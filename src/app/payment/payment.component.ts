@@ -106,7 +106,7 @@ export class PaymentComponent implements OnInit {
       showLabels: true, 
       showTitle: false,
       useBom: true,
-      headers: ["Loan #", "Amount", "Method", "Collection Date", "Collection By","Description","IPPIS NO"]
+      headers: ["Loan #", "Amount", "Method", "Collection Date", "Collection By","Description","IPPIS NO","Mandate Reference"]
     };
 
 
@@ -158,7 +158,7 @@ export class PaymentComponent implements OnInit {
   
   
       this.data = []
-      for (let index = 0; index < this.found.length; ++index) {
+      for (let index = 0; index < this.creditalert.length; ++index) {
       
         let json = {
           loanid : this.found[index].loanid,

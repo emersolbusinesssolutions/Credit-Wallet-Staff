@@ -84,7 +84,7 @@ export class ViewloanComponent implements OnInit {
   }
 
   getAdminFees(amount){
-    return ((amount * 0.025) + 750)
+    return ((amount * 0.03) + 1250)
   }
 
   getLoan() {
