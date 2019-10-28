@@ -25,7 +25,7 @@ export class ViewloanComponent implements OnInit {
   data: any;
   offerLetterData: any;
   awaitingDisbursementData: any;
-  verification: any;
+  verification: any = [];
   reason : any;
   uniquenumber : any
   otherreason: boolean;
@@ -36,6 +36,9 @@ export class ViewloanComponent implements OnInit {
   existingrecord: any;
   borrowerid: any;
   remitaloanhistory: any;
+  rspverification: any;
+  availablebalance: any;
+  existingloandiskdetails: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -92,14 +95,23 @@ export class ViewloanComponent implements OnInit {
     this.service.listoneloan({id: this.id}).subscribe(
       data => {
         this.result = data
-        console.log(this.result)
         this.data = this.result.loan;
         this.borrowerid = this.result.borrowerid;
         this.existingrecord = this.result.existingrecord;
         this.uniquenumber = this.result.uniquenumber;
         this.comments = this.result.comments
         this.remita = this.result.remita
+        this.existingloandiskdetails = this.result.existingloandiskdetails
+        console.log(this.existingloandiskdetails)
+
+        if (this.remita === undefined || this.remita.length == 0) {
+         
+        }else{
+          this.availablebalance = this.remita[0].amount;
+        }
+        
         this.verification = this.result.verification;
+        this.rspverification = this.result.rspverification;
         this.remitaloanhistory = this.result.remitaloanhistory;
         this.offerLetterData = {id: this.data.id, amount: this.data.loan_amount, tenor: this.data.tenor, place_of_work: this.data.place_of_work};
         this.awaitingDisbursementData = {id: this.data.id, preferred_accountnumber: this.data.salary_bank_account, preferred_bankname: this.data.salary_bank_name};

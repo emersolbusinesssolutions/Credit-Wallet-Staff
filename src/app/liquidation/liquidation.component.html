@@ -1,0 +1,94 @@
+
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        
+        <div class  = "authDiv no-radius2">
+            <div class = "">
+                <h3 class = "heading"><strong>Liquidation Calculator</strong> 
+                <p style="font-size:12px">Calculate Customers Outstanding Balance using Monthly Repayment, Princpal Balance, Monthly Repayment and Number of Missed Payments</p>
+                  
+            
+                
+              </h3><hr/>
+
+              <div class = "row">
+                <div class = "col-lg-6">
+                  <div class = "form-group">
+                    <p>Loan Released Date</p>
+                    <input type="date"
+                    class="textBoxDesign " id="loanreleaseddate" name="loanreleaseddate" [(ngModel)]="loanreleaseddate" >  
+                  </div>
+              
+              
+                  <div class = "form-group">
+                    <p>Proposed Liquidation Date</p>
+                    <input type="date"
+                    class="textBoxDesign " id="proposedliquidationdate" name="proposedliquidationdate" [(ngModel)]="proposedliquidationdate" >  
+                 
+                  </div>
+
+                  <div class = "form-group">
+                    <p>Loan Amount</p>
+                    <input type="number"
+                    class="textBoxDesign " id="loanamount" name="loanamount" [(ngModel)]="loanamount" >  
+                 
+                  </div>
+
+                  <div class = "form-group">
+                    <p>Total Paid</p>
+                    <input type="number"
+                    class="textBoxDesign" id="totalpaid" name="totalpaid" [(ngModel)]="totalpaid" >  
+                 
+                  </div>
+
+                
+              
+              
+            
+                  <button class = "btn btn-default" (click)="send()">Calculate Balance</button>
+                </div>
+
+                <div class = "col-lg-6" *ngIf = "balance">
+        
+                
+                  <div class  = "authDiv no-radius2">
+  
+                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ balance | currency:'₦ ': 2  }}</strong></p>
+                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                          <div class ="row">
+                              <div class = "col-lg-12">
+                                      <p style = "font-size:15px;" class = "gray"> Liquidation Balance</p>
+                              </div>
+                          </div>
+                          </div>
+                    </div> 
+              </div>
+              </div>
+      
+    
+                
+            </div>
+            
+        </div> 
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+
+
+

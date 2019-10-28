@@ -21,6 +21,7 @@ const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable()
 export class AppServiceService {
+ 
   
 
   
@@ -65,6 +66,18 @@ export class AppServiceService {
           };
         
         return this.http.post(this.path + 'loan/offerletter/new', params, httpOptionsForSignedUser);
+      }
+
+
+      dashboard() {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.get(this.path + 'creditwallet/dashboard', httpOptionsForSignedUser);
       }
 
       verifyAccountNumber(json) {
@@ -189,6 +202,17 @@ export class AppServiceService {
           };
         let body = JSON.stringify(params);
         return this.http.post(this.path + 'loan/cancel', body, httpOptionsForSignedUser);
+      }
+
+      salesreport(params): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        let body = JSON.stringify(params);
+        return this.http.post(this.path + 'report/sales', body, httpOptionsForSignedUser);
       }
       
 

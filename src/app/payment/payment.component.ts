@@ -21,6 +21,15 @@ export class PaymentComponent implements OnInit {
   dd: any;
   creditalert: any;
 
+  creditwalletcount =0;
+  creditwalletamount = 0;
+  creditalertcount =0;
+  creditalertamount =0;
+  notfoundamount = 0;
+  notfoundcount = 0;
+  totalamount: any;
+  totalcount: any;
+
   
 
   constructor(private loadingBar: LoadingBarService,
@@ -70,6 +79,25 @@ export class PaymentComponent implements OnInit {
                 this.found = data["found"]
                 this.notfound = data["notfound"]
                 this.creditalert = data["creditalert"]
+                for (let index = 0; index < this.creditalert.length; ++index) {
+                  this.creditalertamount = this.creditalertamount + this.creditalert[index].received;
+                  this.creditalertcount = this.creditalertcount + 1;
+                }
+
+                for (let index = 0; index < this.found.length; ++index) {
+                  this.creditwalletamount= this.creditwalletamount + this.found[index].received;
+                  this.creditwalletcount = this.creditwalletcount + 1;
+                }
+
+                for (let index = 0; index < this.notfound.length; ++index) {
+                  this.notfoundamount = this.notfoundamount + this.notfound[index].received;
+                  this.notfoundcount= this.notfoundcount + 1;
+                }
+
+                this.totalamount = this.notfoundamount + this.creditwalletamount + this.creditalertamount;
+                this.totalcount = this.creditalertcount + this.creditwalletcount + this.notfoundcount;
+
+                console.log(this.totalamount)
                 
               },
               error => {
@@ -120,7 +148,7 @@ export class PaymentComponent implements OnInit {
         loanid : this.found[index].loanid,
         amount : this.found[index].received,
         method : "Remita Salary Platform (RSP)",
-        date  : collectiondate,
+        date  : this.found[index].date,
         by : "Remita Bacs Payment (RSP)",
         description : "Part Loan Repayment",
         ippisno : ippisnumber,
@@ -161,13 +189,13 @@ export class PaymentComponent implements OnInit {
       for (let index = 0; index < this.creditalert.length; ++index) {
       
         let json = {
-          loanid : this.found[index].loanid,
-          amount : this.found[index].received,
+          loanid : this.creditalert[index].loanid,
+          amount : this.creditalert[index].received,
           method : "Remita Salary Platform (RSP)",
-          date  : collectiondate,
+          date  : this.creditalert[index].date,
           by : "Remita Bacs Payment (RSP)",
           description : "Part Loan Repayment",
-          mandatereference : this.found[index].mandatereference
+          mandatereference : this.creditalert[index].mandatereference
         }
         this.data[index] = json
       }

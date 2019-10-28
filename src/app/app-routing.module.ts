@@ -62,6 +62,14 @@ const routes: Routes = [
         loadChildren: './rejected-loan/rejected-loan.module#RejectedLoanModule'
       },
       {
+        path : 'salesreport',
+        loadChildren: './salesreport/salesreport.module#SalesreportModule'
+      },
+      {
+        path : 'liquidation',
+        loadChildren: './liquidation/liquidation.module#LiquidationModule'
+      },
+      {
         path : 'loan/cancel',
         loadChildren: './cancelloan/cancelloan.module#CancelloanModule'
       },

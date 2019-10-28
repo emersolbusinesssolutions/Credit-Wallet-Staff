@@ -23,14 +23,27 @@ export class DashboardComponent implements OnInit {
   reportorders : any[];
   barchart; linechart;
   balance;totalsalesthismonth;processedorders;neworders
+  activeloans: any;
+  processing: any;
+  newapplications: any;
+  readyfordisbursement: any;
+  awaitingdisbursement: any;
+  salesreport: any;
+  myDate ;
+  totalcustomers: any = 0;
+  loanamount: any =0;
+  totalcommission: any;
+  amountgotten: any;
+  target: any;
+  targetamount: any;
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService) {
       
-
+    this.myDate = new Date();
     this.balance = this.totalsalesthismonth = this.processedorders = this.neworders = 0;
-    //this.dashboarsumarry()
-    this.plotGraph()
+    this.dashboarsumarry()
+
       
       
      
@@ -41,51 +54,89 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  // dashboarsumarry(){
-  //   this.loadingBar.start();
-  //   this.service.getDashboardSummary().subscribe(
-  //     data => {
-  //       this.result = <Result>data;
-  //       this.report = this.result.report
-  //       this.reportorders = this.result.reportorders
-  //       console.log(this.result)
-  //       if(deepEqual(this.result.status,"error")){
-  //         this.toastr.success(this.result.message, '');
-  //        this._router.navigate(['/']);
-  //       }
-  //       else{
-  //         //this.plotGraph()
-  //         this.processedorders = this.result.processedorders;
-  //         this.balance = this.result.balance;
-  //         this.neworders =  this.result.neworders;
-  //         this.totalsalesthismonth =  this.result.totalsalesthismonth
-  //         this.loadingBar.complete();
-  //       }
-  //       this.loadingBar.complete();
-        
-  //     },
-  //       error => {
-  //         console.log(error);
-  //         this.loadingBar.complete();
-  //         //this._router.navigate(['/']);
-  //       }
-  //   );
-  // }
+ dashboarsumarry(){
+  this.loadingBar.start();
+  this.service.dashboard()
+  .subscribe( (data) => {
+    this.loadingBar.complete()
+   
+    if(data['status'] == 'success') {
+      this.processing = data["processing"]
+      this.newapplications = data["newapplications"]
+      this.readyfordisbursement = data["readyfordisbursement"]
+      this.awaitingdisbursement = data["awaitingdisbursement"]
+      this.salesreport = data["salesreport"]
+
+      this.amountgotten = data["amountgotten"]
+      this.target = data["target"]
+      this.targetamount = parseFloat(this.target.target)
+      console.log(this.target.target)
+      this.getSalesReport()
+      this.plotGraph(data["graph"])
+      this.targetGraph()
+    }else{
+
+    }
+  },
+  (error) =>{
+    this.loadingBar.complete()
+    console.log(error)
+    this.toastr.success('Network error. Please try again')
+  }  
+  )    
+  }
+
+  getAmount(loans){
+
+    let amount = 0;
+    for (let index = 0; index < loans.length; ++index) {
+     
+      amount  = amount + parseFloat(loans[index].loan_amount);
+    }
+
+    return amount;
+  }
 
 
-  plotGraph(){
+  getCount(loans){
+
+    let count = 0;
+    for (let index = 0; index < loans.length; ++index) {
+ 
+      count  = count + 1;
+    }
+
+    return count;
+  }
+
+  
+  getSalesReport(){
+
+    let count = 0;
+    for (let index = 0; index < this.salesreport.length; ++index) {
+ 
+     this.totalcustomers = this.totalcustomers + this.salesreport[index].numberofloans
+     this.loanamount = this.loanamount + this.salesreport[index].loanamount
+  
+    }
+
+    return count;
+  }
+
+
+  plotGraph(data){
     this.linechart = new Chart({
       chart: {
         type: 'column'
       },
       title: {
-        text: 'Requests Analytics'
+        text: 'Disbursement Chart'
       },
       subtitle: {
-        text: 'Rejected and Processed Loans'
+        text: 'Loan Disbursed for the Past 30 days'
       },
       tooltip: {
-        valueSuffix: ' Orders'
+        valueSuffix: ' Loans'
       },
       legend: {
         layout: 'horizontal',
@@ -99,29 +150,53 @@ export class DashboardComponent implements OnInit {
       credits: {
         enabled: false
       },
-      xAxis: [{
-        categories: ["May-2018","Jun-2018", "Jul-2018", "Aug-2018","Sep-2018" ]
-      }],
+      xAxis: {
+        categories: [data[0].date, data[1].date, data[2].date, data[3].date, data[4].date, data[5].date, data[6].date, data[7].date, data[8].date, data[9].date,
+        data[10].date, data[11].date, data[12].date, data[13].date, data[14].date, data[15].date, data[16].date, data[17].date, data[18].date, data[19].date,
+        data[20].date, data[21].date, data[22].date, data[23].date, data[24].date, data[25].date, data[26].date, data[27].date, data[28].date, data[29].date
+      ]
+    },
       
       series: [{
-      
-        name: "Requested", data: [1,2,3,4,5], color: '#1B4E63'
-      },
-      {
-        name: "Processed", data: [1,2,3,4,5], color: '#700156'
+        type: 'area',
+        name: 'Date of Disbursement',
+        data: [data[0].count, data[1].count, data[2].count, data[3].count, data[4].count, data[5].count, data[6].count, data[7].count, data[8].count, data[9].count,
+        data[10].count, data[11].count, data[12].count, data[13].count, data[14].count, data[15].count, data[16].count, data[17].count, data[18].count, data[19].count,
+        data[20].count, data[21].count, data[22].count, data[23].count, data[24].count, data[25].count, data[26].count, data[27].count, data[28].count, data[29].count],
+        color: '#F0AD4E'
       }
     ]
     });
 
+   
+   
+  }
+
+  targetGraph(){
+    
+
+    let month = "";
+
+    if(this.target.month == "10"){
+      month = "October"
+    }
+
+    if(this.target.month == "11"){
+      month = "November"
+    }
+
+    if(this.target.month == "12"){
+      month = "December"
+    }
+
+
+    
     this.barchart = new Chart({
       chart: {
-        type: 'area'
+        type: 'bar'
       },
       title: {
-        text: 'Sales Analytics'
-      },
-      subtitle: {
-        text: 'Total Monthly Sales'
+        text: 'Target Position for ' + month + ", " + this.target.year
       },
       tooltip: {
         valueSuffix: ' Naira'
@@ -139,14 +214,16 @@ export class DashboardComponent implements OnInit {
         enabled: false
       },
       xAxis: [{
-        categories: ["May-2018","Jun-2018", "Jul-2018", "Aug-2018","Sep-2018" ]
+        categories: ["Amount"]
       }],
       series: [{
-        name: "Sales", data: [45000, 50000, 55000,60000,65000], color: '#1B4E63'
-      }]
+        name: "Target Amount", data: [this.targetamount], color: '#1B4E63'
+      },
+      {
+        name: "Loan Disbursed", data: [this.amountgotten], color: '#F0AD4E'
+      }
+    ]
     });
-   
-   
   }
 
 
