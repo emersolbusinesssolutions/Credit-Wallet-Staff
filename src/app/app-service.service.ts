@@ -21,16 +21,7 @@ const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable()
 export class AppServiceService {
- 
   
-
-  
-  
-  
-   
- 
- 
-
 
     path = "https://creditwallet.ng/api/public/";
     httpOptionsForSignedUser;
@@ -57,7 +48,19 @@ export class AppServiceService {
           };
         return this.http.get(this.path + 'deductions/paid', httpOptionsForSignedUser);
       }
-      generateOfferLetterNew(params: any): any {
+
+    listsavings() {
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.get(this.path + 'savings/list', httpOptionsForSignedUser);
+    }
+    generateOfferLetterNew(params: any): any {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
                 'Content-Type': 'application/json',
@@ -66,7 +69,7 @@ export class AppServiceService {
           };
         
         return this.http.post(this.path + 'loan/offerletter/new', params, httpOptionsForSignedUser);
-      }
+    }
 
 
       dashboard() {
@@ -124,6 +127,17 @@ export class AppServiceService {
         return this.http.post(this.path + 'email/send/automatic', params, httpOptionsForSignedUser);
       }
 
+      interestpaymentemail(params: any): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'email/payment/interest', params, httpOptionsForSignedUser);
+      }
+
       confirmpayment(json): any {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
@@ -172,6 +186,17 @@ export class AppServiceService {
           };
         let body = JSON.stringify(json);
         return this.http.post(this.path + 'user/create', body, httpOptionsForSignedUser);
+      }
+
+      editadminuser(json): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        let body = JSON.stringify(json);
+        return this.http.post(this.path + 'user/edit', body, httpOptionsForSignedUser);
       }
       editLoan(data: any): any {
         const httpOptionsForSignedUser = {
@@ -255,9 +280,21 @@ export class AppServiceService {
         return this.http.post(this.path + 'loandisk/add/borrower', body, httpOptionsForSignedUser);
     }
 
+    deductionsapproval(params) {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        let body = JSON.stringify(params);
+        return this.http.post(this.path + 'loan/approval/deductions', body, httpOptionsForSignedUser);
+    }
+
+ 
 
 
-
+    
 
     getLoans(params) {
      
@@ -272,6 +309,82 @@ export class AppServiceService {
 
 
     }
+
+    createcomplaints(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'complaints/create', params, httpOptionsForSignedUser);
+
+
+    }
+
+    listcomplaints(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'complaints/list', params, httpOptionsForSignedUser);
+
+
+    }
+
+    onecomplaints(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'complaints/one', params, httpOptionsForSignedUser);
+
+
+    }
+
+    solvecomplaints(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'complaints/solve', params, httpOptionsForSignedUser);
+
+
+    }
+
+    addcomplaints(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'complaints/comment', params, httpOptionsForSignedUser);
+
+
+    }
+
+
+    
+
+
+    
 
     getLoansNew(params) {
      
@@ -316,7 +429,7 @@ export class AppServiceService {
 
     }
 
-    auditlog() {
+    auditlog(param) {
      
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
@@ -325,7 +438,7 @@ export class AppServiceService {
             })
           };
         
-        return this.http.get(this.path + 'audit/view', httpOptionsForSignedUser);
+        return this.http.post(this.path + 'audit/view',param , httpOptionsForSignedUser);
 
     }
 
@@ -406,6 +519,21 @@ export class AppServiceService {
         return this.http.post(this.path + 'loan/disburse/giro', params, httpOptionsForSignedUser);
         
     }
+
+    listoneuser(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'users/list/one', params, httpOptionsForSignedUser);
+        
+    }
+
+    
 
     disburseLoanLender(params) {
      

@@ -1,198 +1,256 @@
 
-<form #form="ngForm" (ngSubmit)="createuser(form)"> 
-  <div class="container-fluid spaceUp">
-    <div class="row">
-      <div class="col-lg-10 col-lg-offset-2">
-      <div class="authDiv">
-        <h3 class = "heading"><strong>New User</strong></h3><hr/>
-      
-        <div class = "row">
-            <div class = "col-lg-6">
-              <div class = "form-group">
-                <p>Firstname</p>
-                <input type="text"
-                   class="textBoxDesign " id="text" name="firstname" text required ngModel #firstname="ngModel">  
-                   <span class="red" *ngIf="firstname.touched && !firstname.valid " >Please provide firstname</span>
+    <div class="container-fluid spaceUp">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-2">
+          <div class="authDiv">
+            <h3 class = "heading"><strong>New User</strong>
+              <button type="submit"
+              id="register" (click) = "createuser()"  class="btn btn-default" style = "float:right">Create User</button> 
+            </h3><hr/>
+          
+            <div class = "row">
+                <div class = "col-lg-6">
+                  <div class = "form-group">
+                    <p>Firstname</p>
+                    <input type="text"
+                       class="textBoxDesign " id="text" name="firstname"  [(ngModel)]="firstname">
+                  </div>
+                  <div class = "form-group">
+                     <p>Email</p>
+                     <input type="text"
+                       class="textBoxDesign " id="text" name="email" [(ngModel)]="email">  
+                   </div>
+    
+                </div>
+                <div class = "col-lg-6">
+                   <div class = "form-group">
+                     <p>Lastname</p>
+                     <input type="text"
+                       class="textBoxDesign " id="text" name="lastname" [(ngModel)]="lastname">  
+                   </div>
+                   <div class = "form-group" >
+                     <p>Department</p> 
+                     <select class = "textBoxDesign" name = "department"  [(ngModel)]="department">
+                      <option value = "Finance">Finance and Internal Control</option>
+                      <option value = "IT">Information Technology</option>
+                      <option value = "Operations">Operations</option>
+                      <option value = "Marketing">Marketing</option>
+                    </select>
+                   </div>
+                 </div>
               </div>
-              <div class = "form-group">
-                 <p>Email</p>
-                 <input type="text"
-                   class="textBoxDesign " id="text" name="email" text required ngModel #email="ngModel">  
-                   <span class="red" *ngIf="email.touched && !email.valid " >Please provide email address</span>
-               </div>
-
-            </div>
-            <div class = "col-lg-6">
-               <div class = "form-group">
-                 <p>Lastname</p>
-                 <input type="text"
-                   class="textBoxDesign " id="text" name="lastname" text required ngModel #lastname="ngModel">  
-                   <span class="red" *ngIf="lastname.touched && !lastname.valid " >Please provide lastname</span>
-               </div>
-               <div class = "form-group">
-                 <p>Department</p> 
-                 <select class = "textBoxDesign" name = "department" ngModel id = "department" #department="ngModel">
-                  <option value = "Finance">Finance and Internal Control</option>
-                  <option value = "IT">Information Technology</option>
-                  <option value = "Operations">Operations</option>
-                </select>
+    
+              <h4 class = "heading">Set User System Permission</h4>
+    
+              <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#loans">Loans</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#verification">Verification</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#contact">Contact Management</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#customers">Customers</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#report">Report</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#users">Users Management</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#operations">Operation Logs</a></li>
+                </ul>
                 
-                   <span class="red" *ngIf="department.touched && !department.valid " >Please select department</span>
-               </div>
-             </div>
-          </div>
-
-          <h4 class = "heading">Set User System Permission</h4>
-
-          <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#loans">Loans</a></li>
-              <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#verification">Verification</a></li>
-              <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#contact">Contact Management</a></li>
-              <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#customers">Customers</a></li>
-              <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#report">Report</a></li>
-              <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#users">Users Management</a></li>
-              <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#operations">Operation Logs</a></li>
-            </ul>
-            
-            <div class="tab-content">
-              <div id="loans" class="tab-pane fade in active">
-                  <table class="table table-striped table-hover">
-                      <thead class="thead-light addNav">
-                        <tr>
-                          <th scope="col">Permissions</th>
-                          <th scope="col">Action</th>
-                          <th scope="col">Permissions</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td><p>List All Loans</p> </td>
-                              <td> <label class="switch">
-                                  <input type="checkbox" (change)="onListAllApplication($event)">
-                                  <span class="slider round"></span>
-                                </label> 
-                              </td>
-                              <td><p>Generate Offer Letter</p> </td>
-                              <td> <label class="switch">
-                                  <input type="checkbox" (change)="OnGenerateOfferLetter($event)">
-                                  <span class="slider round"></span>
-                                </label>   
-                              </td>
-                            </tr>
+                <div class="tab-content">
+                  <div id="loans" class="tab-pane fade in active">
+                      <table class="table table-striped table-hover">
+                          <thead class="thead-light addNav">
                             <tr>
-                                <td><p>Cancel Loan Application</p> </td>
-                                <td> <label class="switch">
-                                    <input type="checkbox" (change)="onCancelLoanApplications($event)">
-                                    <span class="slider round"></span>
-                                  </label> 
-                                </td>
-                                <td><p>Reject Loan Application</p> </td>
-                                <td> <label class="switch">
-                                    <input type="checkbox" (change)="onRejectLoanApplication($event)">
-                                    <span class="slider round"></span>
-                                  </label> 
-                                </td>
-                              </tr>
+                              <th scope="col">Permissions</th>
+                              <th scope="col">Action</th>
+                              <th scope="col">Permissions</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
                               <tr>
-                                  <td><p>Edit Loan Application</p> </td>
+                                  <td><p>List Processing Stage Loans</p> </td>
                                   <td> <label class="switch">
-                                      <input type="checkbox" (change)="onEditLoanApplication($event)">
+                                      <input type="checkbox" (change)="setPermission($event,'loans/list')">
                                       <span class="slider round"></span>
                                     </label> 
                                   </td>
-                                  <td><p>Confirm Remita</p> </td>
+                                  <td><p>List Active, Rejected and Cancelled Loans</p> </td>
                                   <td> <label class="switch">
-                                      <input type="checkbox" (change)="onConfirmRemita($event)">
+                                      <input type="checkbox" (change)="setPermission($event,'loans/list/new')">
                                       <span class="slider round"></span>
                                     </label>   
                                   </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Confirm Documents</p> </td>
+                                    <td><p>Cancel Loan Application</p> </td>
                                     <td> <label class="switch">
-                                        <input type="checkbox" (change)="onConfirmDocuments($event)">
+                                        <input type="checkbox" (change)="setPermission($event,'loan/cancel')">
                                         <span class="slider round"></span>
                                       </label> 
                                     </td>
-                                    <td><p>Move loan to awaiting disbursement</p> </td>
+                                    <td><p>Reject Loan Application</p> </td>
                                     <td> <label class="switch">
-                                        <input type="checkbox" (change)="onMovetoAwaitingDisbursement($event)">
+                                        <input type="checkbox" (change)="setPermission($event,'loan/reject')">
                                         <span class="slider round"></span>
-                                      </label>   
+                                      </label> 
                                     </td>
                                   </tr>
                                   <tr>
-                                      <td><p>Move Loan to Finance</p> </td>
+                                      <td><p>Edit Loan Application</p> </td>
                                       <td> <label class="switch">
-                                          <input type="checkbox" (change)="onMovetoFinance($event)">
+                                          <input type="checkbox" (change)="setPermission($event,'loan/edit')">
                                           <span class="slider round"></span>
                                         </label> 
                                       </td>
-                                      <td><p>Disburse Loan</p> </td>
-                                      <td> <label class="switch">
-                                          <input type="checkbox" (change)="onDisburseLoan($event)">
+                                      <td><p>Generate Offer Letter</p> </td>
+                                      <td><label class="switch">
+                                          <input type="checkbox"  (change)="setPermission($event,'loan/offerletter/new')">
                                           <span class="slider round"></span>
                                         </label>   
                                       </td>
                                     </tr>
                                     <tr>
-                                        <td><p>Complete Loan</p> </td>
+                                        <td><p>Add Comment</p> </td>
                                         <td> <label class="switch">
-                                            <input type="checkbox" (change)="onCompleteLoan($event)">
+                                            <input type="checkbox" (change)="setPermission($event,'comment/add')">
                                             <span class="slider round"></span>
                                           </label> 
                                         </td>
-
-                                        <td><p>Add Loan Comment</p> </td>
+                                        <td><p>Upload to Loan Disk</p> </td>
                                         <td> <label class="switch">
-                                            <input type="checkbox" (change)="onLoanComment($event)">
+                                            <input type="checkbox" (change)="setPermission($event,'loandisk/add/borrower')">
                                             <span class="slider round"></span>
-                                          </label> 
+                                          </label>   
                                         </td>
-                                       
                                       </tr>
-
-                                    
-                        </tbody>
-                        </table>
-              </div>
-              <div id ="verification" class="tab-pane fade in">
-          
-              </div>
-
-              <div id = "contact" class="tab-pane fade in" >
+                                      <tr>
+                                          <td><p>Move Loan to Finance</p> </td>
+                                          <td> <label class="switch">
+                                              <input type="checkbox" (change)="setPermission($event,'loan/ready')">
+                                              <span class="slider round"></span>
+                                            </label> 
+                                          </td>
+                                          <td><p>Send for Deductions</p> </td>
+                                          <td> <label class="switch">
+                                              <input type="checkbox"  (change)="setPermission($event,'loan/approval/deductions')">
+                                              <span class="slider round"></span>
+                                            </label>   
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>Disburse Loan with One Time RSP Set Up</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox"  (change)="setPermission($event,'deductions/start/disburse')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+    
+                                            <td><p>Disburse Loan with Recurring RSP Set Up</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox" (change)="setPermission($event,'deductions/start/recurring/disburse')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+                                           
+                                          </tr>
+  
+                                          <tr>
+                                              <td><p>Disburse Loan</p> </td>
+                                              <td> <label class="switch">
+                                                  <input type="checkbox" (change)="setPermission($event,'loan/disburse')">
+                                                  <span class="slider round"></span>
+                                                </label> 
+                                              </td>
+      
+                                              <td><p>Auto Payment</p> </td>
+                                              <td> <label class="switch">
+                                                  <input type="checkbox"  (change)="setPermission($event,'loan/disburse/giro')">
+                                                  <span class="slider round"></span>
+                                                </label> 
+                                              </td>
+                                             
+                                            </tr>
+    
+                                        
+                            </tbody>
+                            </table>
+                  </div>
+                  <div id ="verification" class="tab-pane fade in">
+              
+                  </div>
+    
+                  <div id = "contact" class="tab-pane fade in" >
+                     
+                  </div>
+    
+                  <div id = "customers" class="tab-pane fade in" >
+                
+                  </div>
+    
+                  <div id = "report" class="tab-pane fade in" >
+              
+                  </div>
+    
+                  <div id = "users" class="tab-pane fade in" >
+                      <table class="table table-striped table-hover">
+                          <thead class="thead-light addNav">
+                            <tr>
+                              <th scope="col">Permissions</th>
+                              <th scope="col">Action</th>
+                              <th scope="col">Permissions</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              
+                                            <td><p>List Users</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox"  (change)="setPermission($event,'users/all')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+    
+                                            <td><p>Create Users</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox" (change)="setPermission($event,'user/create')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+                                           
+                                          </tr>
+  
+                                          <tr>
+                                              <td><p>Edit Users</p> </td>
+                                              <td> <label class="switch">
+                                                  <input type="checkbox" (change)="setPermission($event,'user/edit')">
+                                                  <span class="slider round"></span>
+                                                </label> 
+                                              </td>
+      
+                                              <td><p>Delete Users</p> </td>
+                                              <td> <label class="switch">
+                                                  <input type="checkbox"  (change)="setPermission($event,'user/delete')">
+                                                  <span class="slider round"></span>
+                                                </label> 
+                                              </td>
+                                             
+                                            </tr>
+    
+                                        
+                            </tbody>
+                            </table>
+                  </div>
+                  <div id = "operations" class="tab-pane fade in" >
+                   
+                  </div>
+    
+    
                  
-              </div>
-
-              <div id = "customers" class="tab-pane fade in" >
-            
-              </div>
-
-              <div id = "report" class="tab-pane fade in" >
-          
-              </div>
-
-              <div id = "users" class="tab-pane fade in" >
-
-              </div>
-              <div id = "operations" class="tab-pane fade in" >
-               
-              </div>
-
-
-             
-            </div>
-            <br/><br/>
-            <button type="submit"
-            id="register" [disabled]="!form.valid"  class="btn btn-default btn-lg" style = "float:right">Create User</button> 
-           
-            <br/><br/><br/>
+                </div>
+                <br/><br/>
+          </div>
+    
+    
+        </div>
       </div>
-
-
     </div>
-  </div>
-</div>
-<br/>
-</form>
+  
+    

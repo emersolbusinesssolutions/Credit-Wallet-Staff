@@ -4,9 +4,49 @@
       <div class = " authDiv no-radius2" *ngIf="data">
 
 
+
+          <table class="table table-striped table-bordered" *ngIf = "accountverificationgiro">
+                    
+              <tbody>
+                  
+                  <tr style="padding:15px" *ngIf = " data.bvn == accountverificationgiro.bvn " class = "success">
+                      <th style="padding:15px" scope="row">Account Name</th> 
+                      <td style="padding:15px">{{accountverificationgiro.account_name | titlecase}}</td>
+                      <th style="padding:15px" scope="row">Bank Verification Number</th>
+                      <td style="padding:15px">{{accountverificationgiro.bvn}}</td>
+                      <th style="padding:15px"  scope="row">BVN From Remita</th>
+                      <td style="padding:15px">{{data.bvn}}</td>
+                  </tr>
+                  <tr style="padding:15px" *ngIf = " data.bvn != accountverificationgiro.bvn " class = "danger">
+                          <th style="padding:15px" scope="row">Account Name</th> 
+                          <td style="padding:15px">{{accountverificationgiro.account_name | titlecase}}</td>
+                          <th style="padding:15px" scope="row">Bank Verification Number</th>
+                          <td style="padding:15px">{{accountverificationgiro.bvn}}</td>
+                          <th style="padding:15px"  scope="row">BVN From Remita</th>
+                          <td style="padding:15px">{{data.bvn}}</td>
+                      </tr>
+              </tbody>
+          </table>
+
           <table class="table table-striped table-hover table-bordered">
               
               <tbody>
+                 
+                    <tr *ngIf = "month > 15" class="danger" >
+                        <td><p>Transaction Date</p> </td>
+                        <td> {{today | date}}
+                        </td>
+                      </tr>
+                      <tr *ngIf = "month < 16" class="success" >
+                          <td><p>Transaction Date</p> </td>
+                          <td> {{today | date}}
+                          </td>
+                        </tr>
+                        <tr>
+                            <td><p>IPPIS Number</p> </td>
+                            <td> {{data.ippisnumber}}
+                            </td>
+                          </tr>
                   <tr>
                       <td><p>Disburse Loan Automatically</p> </td>
                       <td>  <label class="switch">

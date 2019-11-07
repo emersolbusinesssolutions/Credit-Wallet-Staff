@@ -1,0 +1,87 @@
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        
+        <div class  = "authDiv no-radius2">
+            
+            <h3 class = "heading"><strong>Tickets</strong> <div class = "row" style="float:right">
+                <div class = "col-lg-12">
+                  <input class = "form-control" placeholder="Search"  name="searchtext" [(ngModel)]="searchtext" (ngModelChange)="search()"  >
+                </div>
+              </div></h3><hr/>
+
+            
+      
+    
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Action</th>
+                          <th>Date Created</th>
+                          <th>Ticket ID</th>
+                          <th>Status</th>
+                          <th>Type</th>
+                          <th>Customer's Name</th>
+                          <th>Telephone</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                  
+                 
+                        <tr  *ngFor="let complaint of complaints; let i = index ">
+                            <td >{{i + 1}}</td>
+                            <td >
+
+                                <button class="btn btn-default" type="button" routerLink = "/viewcomplaint/{{complaint.id}}">View
+                                </button>
+                              
+                           
+
+                                      
+                                     
+                          </td>
+                          <td >{{complaint.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}</td> 
+                          <td >#{{complaint.id}}</td> 
+                          <td>
+                            <span class="label label-danger" *ngIf="complaint.status == '0'">New</span>
+                            <span class="label label-warning" *ngIf="complaint.status == '1'">Processing</span>
+                            <span class="label label-success" *ngIf="complaint.status == '2'">solved</span></td>
+                          <td > <span class="label label-primary">{{complaint.type}} </span> </td> 
+
+                          <td >{{complaint.customersname | titlecase }}</td>
+                          <td >{{complaint.phonenumber | titlecase}}</td>
+                          
+                          
+                       
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-group" style="float:right" *ngIf = "complaints">
+                    <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
+                    <button type="button" (click)="next()" class="btn btn-default">Next</button>
+                  </div>
+                  <br/>
+            
+            
+        </div> 
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+

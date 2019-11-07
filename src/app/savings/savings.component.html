@@ -1,0 +1,71 @@
+
+
+
+<div class = "container-fluid spaceUp" >
+
+    <div class = "row" >
+        <div class = "col-lg-10 col-lg-offset-2">
+           
+            <div class = "authDiv">
+                <h3 class = "heading"><strong>Savings</strong> 
+                  <p style="color:gray; font-size:12px" >List of Savings Account</p>
+                </h3><hr/>
+
+                        <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                <th>Options</th>
+                                <th>Name</th>
+                                <th>Account #</th>
+                                <th>Savings Balance</th>
+                                <th>Last Transaction</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                          
+                         
+                                <tr  *ngFor="let saving of savings; let i = index ">
+            
+                                    <td >
+            
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                          <li> <a (click)="confirmpayment(saving)">View Transactions</a></li>
+                                            </ul>
+                                        </div>
+            
+                                                
+                                               
+                                  </td>
+                                  <td >{{saving.savings.savings_account_number }}</td>
+                                  <td >{{saving.borrower.borrower_firstname}} {{saving.borrower.borrower_lastname}}</td>
+                                  <td >{{saving.savings.savings_balance}}</td>
+                                  <td >{{saving.savings.custom_field_1176 }}</td>
+                                
+                                 
+                               
+                                </tr>
+                            </tbody>
+                        </table>
+                      
+                   
+
+             
+            
+          </div>
+          
+    </div>
+    
+  </div>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  
+
+  
+  

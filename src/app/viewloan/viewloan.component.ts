@@ -39,6 +39,8 @@ export class ViewloanComponent implements OnInit {
   rspverification: any;
   availablebalance: any;
   existingloandiskdetails: any;
+  admindetails: any;
+  accountverificationgiro: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -86,6 +88,28 @@ export class ViewloanComponent implements OnInit {
     );
   }
 
+  sendtoreadyfordeductions(object){
+    this.loadingBar.start();
+    this.service.deductionsapproval(object).subscribe(
+      data => {
+        this.result = data;
+        console.log(this.result)
+        if(deepEqual(this.result.status,"success")){
+          this.toastr.success(this.result.message, '');
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.loadingBar.complete();
+          this.toastr.error("Network Error, please try again", '');
+        }
+    );
+  }
+
   getAdminFees(amount){
     return ((amount * 0.03) + 1250)
   }
@@ -95,7 +119,10 @@ export class ViewloanComponent implements OnInit {
     this.service.listoneloan({id: this.id}).subscribe(
       data => {
         this.result = data
+        console.log(data)
         this.data = this.result.loan;
+        this.accountverificationgiro = this.result.accountverificationgiro.data;
+        this.admindetails = this.result.admindetails;
         this.borrowerid = this.result.borrowerid;
         this.existingrecord = this.result.existingrecord;
         this.uniquenumber = this.result.uniquenumber;

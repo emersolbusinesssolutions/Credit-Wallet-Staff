@@ -1,0 +1,93 @@
+
+
+<div class = "container-fluid spaceUp">
+    <div class = "row">
+      <div class = "col-lg-10 col-lg-offset-2">
+          
+          <div class  = "authDiv no-radius2">
+              <div class = "">
+                  <h3 class = "heading"><strong>Interest Payment Email</strong> 
+                    
+              
+                  
+                </h3><hr/>
+                <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                       
+  
+                
+      <div class = "form-group">
+        <p>Subject</p>
+        <input type="text"
+        class="textBoxDesign " id="subject" name="subject" [(ngModel)]="subject" >  
+     
+      </div>
+  
+      <div class = "form-group">
+        <p>Add Receipents</p>
+       <button class = "btn btn-default" (click)="select()">Upload CSV</button>
+       <br/>
+       <table class="table table-striped " *ngIf = "invites">
+        <thead>
+            <tr>
+          
+            <th>S/NO</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+      
+     
+            <tr  *ngFor="let invite of invites; let i = index ">
+  
+              
+              <td >{{i + 1 }}</td>
+              <td>{{invite.name}}</td>
+              <td>{{invite.email}}</td>
+           
+            </tr>
+        </tbody>
+    </table>
+  
+     
+      </div>
+  
+      <div class = "form-group">
+        <p>Sender Email</p>
+        <input type="email"
+        class="textBoxDesign " id="sender" name="sender" [(ngModel)]="sender" >  
+     
+      </div>
+  
+  
+     
+  
+      <br/>
+      <br/>
+      <button class = "btn btn-default" (click)="send()">Send Message</button>
+                  
+              </div>
+              
+          </div> 
+      </div>
+    </div>
+    
+        <div class = "row">
+        
+    
+      </div>
+  
+      <br/><br/>
+      <br/> <br/><br/>
+      <br/> <br/><br/>
+      <br/>
+  
+  
+  </div> 
+  
+  
+  
+  
+  
+  

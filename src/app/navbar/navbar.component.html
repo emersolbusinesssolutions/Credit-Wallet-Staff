@@ -66,13 +66,15 @@
                         <ul  [ngClass]="'sub-menu collapse'"  id="orders">
                             <li style="font-size:12px"><a  [routerLink]="['/loan/new']"  [queryParams]="{}">New Applications</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/rejected']"  [queryParams]="{}">Rejected Loans</a></li>
+                            <li style="font-size:12px"><a [routerLink]="['/loan/cancel']"  [queryParams]="{}">Cancelled Loans</a></li>
+                            
                             <li style="font-size:12px"><a [routerLink]="['/loan/processing']"  [queryParams]="{}">Processing</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/awaitingdisbursement']"  [queryParams]="{}">Awaiting Disbursement</a></li>
+                            <li style="font-size:12px"><a [routerLink]="['/readyfordeductions']"  [queryParams]="{}">Ready for Deductions</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/ready']"  [queryParams]="{}">Ready for Disbursement</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/active']"  [queryParams]="{}">Active Loans</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/completed']"  [queryParams]="{}">Completed Loans</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/loan/cancel']"  [queryParams]="{}">Cancelled Loans</a></li>
-                           
+                            
                         </ul>
         
         
@@ -99,6 +101,18 @@
                           
                         </ul>
 
+                        <li data-toggle="collapse" data-target="#complaint" class="collapsed">
+                          <a><i class="glyphicon glyphicon-th-list"></i> Tickets <span class="arrow"></span></a>
+                        </li>
+                          
+                        <ul class="sub-menu collapse" id="complaint">
+                          <li routerLink = "/complaints/create">Create Ticket</li>
+                          <li routerLink = "/complaints/0">New</li>
+                          <li routerLink = "/complaints/1">Processing</li>
+                          <li routerLink = "/complaints/2">Solved</li>
+                          
+                        </ul>
+
 
                         <li data-toggle="collapse" data-target="#report" class="collapsed">
                             <a><i class="glyphicon glyphicon-th-list"></i> Reports <span class="arrow"></span></a>
@@ -107,6 +121,7 @@
                           <ul class="sub-menu collapse" id="report">
                             <li routerLink = "/salesreport">Sales Report</li>
                             <li routerLink = "/salesreport">Metrics</li>
+                            <li routerLink = "/auditlog">Audit Log</li>
                           </ul>
                         <li data-toggle="collapse" data-target="#reports" class="collapsed">
                           <a ><i class="glyphicon glyphicon-align-left"></i> Deductions<span class="arrow"></span></a>
@@ -125,31 +140,30 @@
 
                           <li >
                             <a style="font-size:12px" routerLink = "/notfoundrrr">Not Found Mandate</a>
-                        </li>
+                          </li>
+                          <li >
+                            <a style="font-size:12px" routerLink = "/autodeductions">Auto Deductions</a>
+                          </li>
                           
                       </ul>
                     
 
                        
-                      
-
-
-                          <li>
-                            <a  routerLink = "/auditlog">
-                            <i class="glyphicon glyphicon-th-list"></i> Audit Log
-                            </a>
-                          </li>
+                  
                           <li>
                             <a  routerLink = "/contactmanagement">
                             <i class="glyphicon glyphicon-th-list"></i> Contact Management
                             </a>
                           </li>
 
-                          <li>
-                            <a  routerLink = "/mail">
-                            <i class="glyphicon glyphicon-cog"></i> Electronic Mailing
-                            </a>
-                          </li>
+                          <li data-toggle="collapse" data-target="#mailing" class="collapsed">
+                              <a><i class="glyphicon glyphicon-th-list"></i> Mailing <span class="arrow"></span></a>
+                            </li>
+                              
+                            <ul class="sub-menu collapse" id="mailing">
+                              <li routerLink = "/mail">General</li>
+                              <li routerLink = "/interestpayment">Interest Payment</li>
+                            </ul>
         
         
     
@@ -158,6 +172,12 @@
                         <li>
                             <a  routerLink = "/users">
                             <i class="glyphicon glyphicon-user"></i> Users Management
+                            </a>
+                          </li>
+
+                          <li>
+                            <a  routerLink = "/savings">
+                            <i class="glyphicon glyphicon-briefcase"></i> Savings
                             </a>
                           </li>
                       

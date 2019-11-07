@@ -1,0 +1,71 @@
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+        
+        <div class  = "authDiv no-radius2">
+            <div class = "">
+                <h3 class = "heading"><strong>Create Ticket</strong> <!-- <div class="btn-group" style ="float:right">
+                    <button type="button" routerLink = "/createloan" class="btn btn-default">Create Property</button>
+                  </div> --></h3><hr/>
+
+                  <div class = "row">
+                    <div class = "col-lg-6">
+                      <div class = "form-group">
+                          <p>Customer's Name</p>
+                          <input type = "text" class="textBoxDesign" id="customername" name="customername" [(ngModel)]="customername">
+                      </div>
+                      
+                    </div>
+                    <div class = "col-lg-6">
+                        <div class = "form-group">
+                            <p>Telephone Number</p>
+                            <input type = "text" class="textBoxDesign" id="phonenumber" name="phonenumber" [(ngModel)]="phonenumber">
+                         
+                          </div>
+                 </div>
+                  </div>
+
+
+                  <div class = "form-group">
+                    <p>Type</p>
+                    <select  class="textBoxDesign" id="text" name="type" [(ngModel)]="type">
+                    
+                    <option value = "Disbursement">Disbursement</option>
+                    <option value = "Over Deductions and Refund">Over Deductions and Refund</option>
+                    <option value = "System and Technology">System and Technology</option>
+                    <option value = "Others">Others</option>
+                    </select>
+                  </div>
+
+                  <div class = "form-group">
+                    <p>Description (Describe the Complaint)</p>
+                    <textarea rows = "5" class="textBoxDesign" id="text" name="description" [(ngModel)]="description"></textarea>
+                  </div>
+
+                  <br/>
+                  <button class = "btn btn-default" (click)= "submit()">Submit Complaint</button>
+          
+        
+                  
+            </div>
+            
+        </div> 
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+

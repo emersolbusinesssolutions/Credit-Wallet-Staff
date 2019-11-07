@@ -21,11 +21,15 @@
                         <li *ngIf="data.status == '4'" class="divider"></li>
                         <li> <a  *ngIf="data.status == '4'"  (click)="completeLoanRemita(data)">Complete Loan - REMITA</a></li>
                         <li *ngIf="data.status == '4'" class="divider"></li>
-                        <li> <a  *ngIf="data.status == '7'"  routerLink = "/disburse/{{id}}">Disburse Loan</a></li>
+                        <li> <a  *ngIf="(data.status == '7' || data.status == '10')"  routerLink = "/disburse/{{id}}">Disburse Loan</a></li>
+                        <li *ngIf="(data.status == '7' || data.status == '10')" class="divider"></li>
                         <li *ngIf="data.status == '7'" class="divider"></li>
                         <li> <a  *ngIf="data.status == '7'"  routerLink = "/otherlenders/{{id}}">Disburse Loan (PLAAS)</a></li>
                         <li *ngIf="data.status == '7'" class="divider"></li>
                         <li> <a  *ngIf="data.status == '3'"  (click)="notifyFinance(data)">Send to Finance for Disbursement</a></li>
+                        <li *ngIf="data.status == '3'" class="divider"></li>
+                        
+                        <li> <a  *ngIf="data.status == '3'"  (click)="sendtoreadyfordeductions(data)">Send to Ready for Deductions</a></li>
                         <li *ngIf="data.status == '3'" class="divider"></li>
                         <li> <a *ngIf="data.status == '2' && data.documents == 0"  (click)="confirmDocuments(data)">Confirm Document</a></li>
                         <li *ngIf="data.status == '2' && data.documents == 0" class="divider"></li>
@@ -79,6 +83,7 @@
                             <span class="label label-success" *ngIf="data.status == '4'">Active</span>
                             <span class="label label-success" *ngIf="data.status == '5'">Completed</span>
                             <span class="label label-warning" *ngIf="data.status == '7'">Ready for Disbursement</span>
+                            <span class="label label-warning" *ngIf="data.status == '10'">Ready for Deductions</span>
                             <span class="label label-warning" *ngIf="data.status == '8'">Cancelled</span>
                         </td>
                         <th style="padding:15px" scope = "row">OFFER LETTER</th>
@@ -205,6 +210,8 @@
                 <li><a data-toggle="tab" href="#menu3" style="border-radius:0px; color:#1B4E63">Loan Disk</a></li>
                 <li><a data-toggle="tab" href="#menu4" style="border-radius:0px; color:#1B4E63">Loan Comments</a></li>
                 <li><a data-toggle="tab" href="#menu5" style="border-radius:0px; color:#1B4E63">Existing Loan Record</a></li>
+                <li><a data-toggle="tab" href="#menu6" style="border-radius:0px; color:#1B4E63">Disbursement Details</a></li>
+               <!-- <li><a data-toggle="tab" href="#menu7" style="border-radius:0px; color:#1B4E63">Reschedule</a></li> --> 
               </ul>
               
               <div class="tab-content">
@@ -521,7 +528,32 @@
                 </div>
 
                 <div id="menu3" class="tab-pane fade">
-                        <div *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'">
+
+<br/>
+<br/>
+                    <table class="table table-striped table-bordered" *ngIf = "accountverificationgiro">
+                    
+                        <tbody>
+                            
+                            <tr style="padding:15px" *ngIf = " data.bvn == accountverificationgiro.bvn " class = "success">
+                                <th style="padding:15px" scope="row">Payment Account Name</th> 
+                                <td style="padding:15px">{{accountverificationgiro.account_name | titlecase}}</td>
+                                <th style="padding:15px" scope="row">Payment Account BVN</th>
+                                <td style="padding:15px">{{accountverificationgiro.bvn}}</td>
+                                <th style="padding:15px"  scope="row">BVN From Remita</th>
+                                <td style="padding:15px">{{data.bvn}}</td>
+                            </tr>
+                            <tr style="padding:15px" *ngIf = " data.bvn != accountverificationgiro.bvn " class = "danger">
+                                    <th style="padding:15px" scope="row">Account Name</th> 
+                                    <td style="padding:15px">{{accountverificationgiro.account_name | titlecase}}</td>
+                                    <th style="padding:15px" scope="row">Bank Verification Number</th>
+                                    <td style="padding:15px">{{accountverificationgiro.bvn}}</td>
+                                    <th style="padding:15px"  scope="row">BVN From Remita</th>
+                                    <td style="padding:15px">{{data.bvn}}</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                        <div *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'  || data.status == '10'">
 
                                 <h4 style="padding:15px" class="heading"><b>LOAN DISK DETAILS</b> 
                                     
@@ -798,7 +830,7 @@
                             <div *ngIf = "comments">
                                     <div class = "panel panel-default" *ngFor = "let comment of comments">
                                         <div class = "panel-body">
-                                                <h4  class="heading"><b>{{comment.firstname | titlecase}} {{comment.lastname | titlecase}} </b><span style="font-size:11px;float:right">{{comment.datecreated}}<br/>{{comment.department}}</span></h4>
+                                                <h4  class="heading"><b>{{comment.firstname | titlecase}} {{comment.lastname | titlecase}} </b><span style="font-size:11px;float:right">{{comment.datecreated | date:'dd/MM/yyyy h:mm a'}}<br/>{{comment.department}}</span></h4>
                                                 <hr/>
                                                 
                                                 {{comment.comment | titlecase}}
@@ -835,6 +867,56 @@
                                 </tbody>
                             </table>
                 </div>
+                <div id="menu6" class="tab-pane fade">
+                    <table class="table table-striped table-bordered" *ngIf = "admindetails" >
+                        
+                            <thead>
+                                <tr>
+                                    <th style="padding:15px" scope = "row">DISBURSED BY</th>
+                                    <th style="padding:15px" scope = "row">DISBURSED ON</th>
+                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                        <td style="padding:15px">
+                                            {{admindetails.firstname | titlecase}}
+
+                                            {{admindetails.lastname | titlecase}}
+                                        </td>
+                                        
+                                        <td style="padding:15px">{{data.updated_at  | date:'dd/MM/yyyy h:mm a'}}</td>
+            
+                                        
+                                        </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <div id="menu7" class="tab-pane fade">
+                    <table class="table table-striped table-bordered" *ngIf = "status == 4"  >
+                        
+                            <thead>
+                                <tr>
+                                    <th style="padding:15px" scope = "row">Change Loan Amount</th>
+                                    <th style="padding:15px" scope = "row">Change Loan Tenor</th>
+                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                        <td style="padding:15px">
+                                            
+                                        </td>
+                                        
+                                        <td style="padding:15px">{{data.updated_at  | date:'dd/MM/yyyy h:mm a'}}</td>
+            
+                                        
+                                        </tr>
+                            </tbody>
+                        </table>
+            </div>
               </div>
 
 

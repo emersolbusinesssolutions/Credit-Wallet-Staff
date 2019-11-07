@@ -6,6 +6,31 @@
         <div class  = "authDiv no-radius2">
             <div class = "">
                 <h3 class = "heading"><strong>Audit Log</strong></h3><hr/>
+
+                <p>Get report between two days</p>
+
+                <div class = "row ">
+                        <div class = "col-lg-3">
+                          <div class = "form-group">
+                            <p>From <span style="color:red">*</span></p>
+                            <input class="form-control " type="date" name="from" [(ngModel)]="from" >
+                          </div>
+                        </div>
+                        <div class = "col-lg-3">
+            
+                            <div class = "form-group">
+                                <p>To <span style="color:red">*</span></p>
+                                <input class="form-control " type="date" name="to" [(ngModel)]="to" >
+                              </div>
+                    
+                          </div>
+                     
+                    
+                      </div>
+  
+                      <button class = "btn btn-primary" (click)="getReport()">Get Report</button>
+    
+                      <br/>  <br/>
           
         
                     <table class="table table-striped ">

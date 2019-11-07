@@ -39,6 +39,9 @@ export class DisburseComponent implements OnInit {
   disburse: boolean;
   duration: any;
   automaticdisbursement: boolean;
+  today: Date;
+  month: number;
+  accountverificationgiro: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -51,6 +54,8 @@ export class DisburseComponent implements OnInit {
 
 
   ngOnInit() {
+   this.today = new Date()
+   this.month = this.today.getDate() 
   }
 
 
@@ -61,6 +66,7 @@ export class DisburseComponent implements OnInit {
         this.result = data
         console.log(this.result)
         this.data = this.result.loan;
+        this.accountverificationgiro = this.result.accountverificationgiro.data;
         this.loanid =  this.data.loanid
         this.duration =  this.data.tenor
         this.amount = this.data.monthly_repayment

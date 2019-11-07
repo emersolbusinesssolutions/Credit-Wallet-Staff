@@ -22,6 +22,22 @@ const routes: Routes = [
         loadChildren: './deductionspaid/deductionspaid.module#DeductionspaidModule'
       },
       {
+        path : 'complaints/create',
+        loadChildren: './createcomplaints/createcomplaints.module#CreatecomplaintsModule'
+      },
+      {
+        path : 'complaints/:id',
+        loadChildren: './complaints/complaints.module#ComplaintsModule'
+      },
+      {
+        path : 'viewuser/:id',
+        loadChildren: './viewuser/viewuser.module#ViewuserModule'
+      },
+      {
+        path : 'viewcomplaint/:id',
+        loadChildren: './viewcomplaints/viewcomplaints.module#ViewcomplaintsModule'
+      },
+      {
         path : 'disburse/:id',
         loadChildren: './disburse/disburse.module#DisburseModule'
       },
@@ -46,6 +62,10 @@ const routes: Routes = [
         loadChildren: './changepassword/changepassword.module#ChangepasswordModule'
       },
       {
+        path : 'readyfordeductions',
+        loadChildren: './readyfordeductions/readyfordeductions.module#ReadyfordeductionsModule'
+      },
+      {
         path : 'loan/new',
         loadChildren: './new-loan/new-loan.module#NewLoanModule'
       },
@@ -56,6 +76,14 @@ const routes: Routes = [
       {
         path : 'mail',
         loadChildren: './electronicmail/electronicmail.module#ElectronicmailModule'
+      },
+      {
+        path : 'autodeductions',
+        loadChildren: './autodeductions/autodeductions.module#AutodeductionsModule'
+      },
+      {
+        path : 'interestpayment',
+        loadChildren: './interestpayment/interestpayment.module#InterestpaymentModule'
       },
       {
         path : 'loan/rejected',
@@ -100,6 +128,10 @@ const routes: Routes = [
       {
         path : 'loan/ready',
         loadChildren: './ready-for-disbursement-loan/ready-for-disbursement-loan.module#ReadyForDisbursementLoanModule'
+      },
+      {
+        path : 'savings',
+        loadChildren: './savings/savings.module#SavingsModule'
       },
       {
         path : 'auditlog',

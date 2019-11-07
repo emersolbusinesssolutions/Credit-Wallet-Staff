@@ -17,6 +17,8 @@ export class AuditlogComponent implements OnInit {
   result: any;
   auditlogs: any;
   dataTable: any;
+  from: any;
+  to: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -24,8 +26,46 @@ export class AuditlogComponent implements OnInit {
 
   ngOnInit() {
 
+    var json = 
+    {
+      type : 1
+    }
+
     this.loadingBar.start();
-    this.service.auditlog().subscribe(
+    this.service.auditlog(json).subscribe(
+      data => {
+        this.result = data;
+        this.auditlogs = this.result.audit
+      
+        if(deepEqual(this.result.status,"success")){
+          this.chRef.detectChanges();
+          const table: any = $('table');
+          this.dataTable = table.DataTable();
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+          this._router.navigate(['']);
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.toastr.success(error, '');
+          this.loadingBar.complete();
+        }
+    );
+  }
+
+  getReport(){
+    var json = 
+    {
+      type : 2,
+      from : this.from,
+      to : this.to
+    }
+
+    this.loadingBar.start();
+    this.service.auditlog(json).subscribe(
       data => {
         this.result = data;
         this.auditlogs = this.result.audit
