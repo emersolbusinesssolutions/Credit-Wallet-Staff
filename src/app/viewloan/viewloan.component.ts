@@ -114,6 +114,31 @@ export class ViewloanComponent implements OnInit {
     return ((amount * 0.03) + 1250)
   }
 
+
+  getAccountVerification(data){
+    this.loadingBar.start();
+    this.service.paymentmatch(data).subscribe(
+      data => {
+        this.result = data
+        console.log(data)
+        if(deepEqual(this.result.status,"success")){
+          this.toastr.success("Verification Successful", '');
+          this.accountverificationgiro = this.result.accountverificationgiro.data;
+          this.loadingBar.complete();
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+        }
+        
+      },
+        error => {
+          console.log(error);
+          this.loadingBar.complete();
+          this.toastr.error("Network Error, please try again", '');
+        }
+    );
+  }
+
   getLoan() {
     this.loadingBar.start();
     this.service.listoneloan({id: this.id}).subscribe(

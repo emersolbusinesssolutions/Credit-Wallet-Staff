@@ -49,11 +49,15 @@ export class SuggestionComponent implements OnInit {
       data => {
         this.result = data;
        
-      
+      console.log(data)
         if(deepEqual(this.result.status,"success")){
           this.verification = this.result.result
         }
-        else{
+
+        else if (deepEqual(this.result.status,"err")){
+
+        }
+        else if (deepEqual(this.result.status,"error")){
           this.toastr.success(this.result.message, '');
           this._router.navigate(['']);
         }

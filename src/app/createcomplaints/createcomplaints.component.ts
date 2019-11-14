@@ -44,7 +44,7 @@ export class CreatecomplaintsComponent implements OnInit {
         this.result = data;
         if(deepEqual(this.result.status,"success")){
           this.toastr.success(this.result.message, '');
-          this._router.navigate(['/complaints']);
+         location.reload()
         }
         else{
           this.toastr.success(this.result.message, '');

@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { IMyDpOptions } from 'mydatepicker';
+import * as deepEqual from "deep-equal";
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AppServiceService } from '../app-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
-import { IMyDpOptions } from 'mydatepicker';
-import * as deepEqual from "deep-equal";
-
 @Component({
-  selector: 'app-disburse',
-  templateUrl: './disburse.component.html',
-  styleUrls: ['./disburse.component.css']
+  selector: 'app-disbursepaystack',
+  templateUrl: './disbursepaystack.component.html',
+  styleUrls: ['./disbursepaystack.component.css']
 })
-export class DisburseComponent implements OnInit {
-
+export class DisbursepaystackComponent implements OnInit {
   result : any;
   id : string;
   data: any;
@@ -42,7 +40,7 @@ export class DisburseComponent implements OnInit {
   today: Date;
   month: number;
   accountverificationgiro: any;
-
+  notyetdisbursed = 1;
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService, private titleService: Title){
@@ -84,6 +82,32 @@ export class DisburseComponent implements OnInit {
           this.toastr.error("Network Error, please try again", '');
         }
     );
+  }
+
+  onItemChange(event){
+    if(event.target.value == "giro"){
+      if(confirm("Are you sure you want to disburse this loan with Giro?")){
+        this.disburseAutomatic()
+        this.notyetdisbursed = 0;
+      }
+    }
+
+    if(event.target.value == "paystack"){
+      if(confirm("Are you sure you want to disburse this loan with Paystack?")){
+        this.disbursePaystack()
+        this.notyetdisbursed = 0;
+      }
+      
+    }
+
+    if(event.target.value == "bank"){
+      if(confirm("Are you sure you want to disburse this loan with Bank Transfer?")){
+        this.notyetdisbursed = 0;
+      }
+      
+    }
+
+
   }
 
 
@@ -144,14 +168,8 @@ export class DisburseComponent implements OnInit {
            let result: any = data;
            console.log(data)
            if(deepEqual(result.status,"success")){
-            
-             if(this.automaticdisbursement == true){
-              this.toastr.success("Loan Disbursed, please wait for payment", '');
-               this.disburseAutomatic()
-             }else{
-              this.toastr.success("Loan Disbursed", '');
-              this._router.navigate(['loan/ready']);
-             }
+             this.toastr.success(result.message, '');
+             this._router.navigate(['loan/ready']);
            }
            else{
              this.toastr.success(result.message, '');
@@ -214,11 +232,7 @@ export class DisburseComponent implements OnInit {
            console.log(data)
            if(deepEqual(result.status,"success")){
              this.toastr.success(result.message, '');
-             if(this.automaticdisbursement == true){
-              this.disburseAutomatic()
-            }else{
              this._router.navigate(['loan/ready']);
-            }
            }
            else{
              this.toastr.success(result.message, '');
@@ -249,11 +263,7 @@ export class DisburseComponent implements OnInit {
            console.log(data)
            if(deepEqual(result.status,"success")){
              this.toastr.success(result.message, '');
-             if(this.automaticdisbursement == true){
-              this.disburseAutomatic()
-            }else{
              this._router.navigate(['loan/ready']);
-            }
            }
            else{
              this.toastr.success(result.message, '');
@@ -286,7 +296,9 @@ export class DisburseComponent implements OnInit {
          data => {
            let result: any = data;
            console.log(data)
+           this.notyetdisbursed = result.notyetdisbursed
            if(deepEqual(result.status,"success")){
+
              this.toastr.success(result.message, '');
              this._router.navigate(['loan/ready']);
            }
@@ -303,7 +315,31 @@ export class DisburseComponent implements OnInit {
            }
        );
    }
-  }
 
+   disbursePaystack(){
+   
+    this.loadingBar.start();
+     this.service.disbursePaystack({id: this.id}).subscribe(
+       data => {
+         let result: any = data;
+         console.log(data)
+         this.notyetdisbursed = result.notyetdisbursed
+         if(deepEqual(result.status,"success")){
+           this.toastr.success(result.message, '');
+           this._router.navigate(['loan/ready']);
+         }
+         else{
+           this.toastr.success(result.message, '');
+           //this._router.navigate(['']);
+         }
+         this.loadingBar.complete();
+       },
+         error => {
+           console.log(error);
+           this.toastr.success("Network Related Error", '');
+           this.loadingBar.complete();
+         }
+     );
+ }
 
-
+}

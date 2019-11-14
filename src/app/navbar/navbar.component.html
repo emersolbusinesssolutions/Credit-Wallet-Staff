@@ -61,7 +61,7 @@
                         
     
                         <li  data-toggle="collapse" data-target="#orders" class="collapsed">
-                            <a ><i class="glyphicon glyphicon-shopping-cart"></i> Loan  <span class="arrow"></span></a>
+                            <a ><i class="glyphicon glyphicon-shopping-cart"></i> Loans  <span class="arrow"></span></a>
                         </li>
                         <ul  [ngClass]="'sub-menu collapse'"  id="orders">
                             <li style="font-size:12px"><a  [routerLink]="['/loan/new']"  [queryParams]="{}">New Applications</a></li>
@@ -155,6 +155,12 @@
                             <i class="glyphicon glyphicon-th-list"></i> Contact Management
                             </a>
                           </li>
+
+                          <li>
+                              <a  routerLink = "/recovery">
+                              <i class="glyphicon glyphicon-th-list"></i> Recovery
+                              </a>
+                            </li>
 
                           <li data-toggle="collapse" data-target="#mailing" class="collapsed">
                               <a><i class="glyphicon glyphicon-th-list"></i> Mailing <span class="arrow"></span></a>

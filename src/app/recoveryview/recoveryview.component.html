@@ -1,42 +1,65 @@
 
 
-<div class = "container-fluid spaceUp" *ngIf = "complaints">
+<div class = "container-fluid spaceUp" *ngIf = "loanrecovery">
     <div class = "row">
       <div class = "col-lg-10 col-lg-offset-2">
           
           <div class  = "authDiv no-radius2">
               <div class = "">
-                  <h3 class = "heading"><strong>{{complaints.customersname}}</strong> <span style="font-size:12px"> 
-                      <span class="label label-danger" *ngIf="complaints.status == '0'">New</span>
-                      <span class="label label-warning" *ngIf="complaints.status == '1'">Processing</span>
-                      <span class="label label-success" *ngIf="complaints.status == '2'">solved</span>
+                  <h3 class = "heading"><strong>{{loanrecovery.name}}</strong> <span style="font-size:12px"> 
+                      <span *ngIf="loanrecovery.category == 0" class="label label-danger">Urgent/Loss</span>
+                      <span *ngIf="loanrecovery.category == 1" class="label label-warning">Performing</span>
+                      <span *ngIf="loanrecovery.category == 2" class="label label-success">Paid</span>
                   </span>  <div class="btn-group" style ="float:right">
                       <button type="button" data-toggle="modal" data-target="#modal-comment" class="btn btn-default" >Add Comment</button>
-                      <button type="button" *ngIf="complaints.status == '1'" class="btn btn-success" (click)="solved()">Mark as Solved</button>
+                      <button type="button" class="btn btn-warning" (click)="solved(1)">Mark as Performing</button>
+                      <button type="button" class="btn btn-success" (click)="solved(2)">Mark as Paid</button>
+                      <button type="button" class="btn btn-danger" (click)="solved(0)">Mark as Urgent/Loss</button>
                     </div> </h3>
 
                     <br/>
   
-                   
                     <table class="table table-stripped">
                 
                         <tbody>
                           <tr>
                             <th  style = "padding:20px">Phone Number</th>
-                            <td  style = "padding:20px">{{complaints.phonenumber}}</td>
+                            <td  style = "padding:20px">
+                            
+                                {{startWith(loanrecovery.phoneno)}}</td>
+                            <th  style = "padding:20px">Loan Released Date</th>
+                            <td  style = "padding:20px">{{loanrecovery.loanreleaseddate}}</td>
                           </tr>
                           <tr>
-                              <th  style = "padding:20px">Date Created</th>
-                              <td  style = "padding:20px">{{complaints.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}</td>
+                              <th  style = "padding:20px">Last Payment Date</th>
+                              <td  style = "padding:20px">{{loanrecovery.lastpayment}}</td>
+                              <th  style = "padding:20px">IPPIS No</th>
+                              <td  style = "padding:20px">{{loanrecovery.ippisno}}</td>
                             </tr>
                           <tr>
-                            <th  style = "padding:20px">Created By</th>
-                            <td  style = "padding:20px">{{result.admin.firstname | titlecase}} {{result.admin.lastname | titlecase}}</td>
+                            <th  style = "padding:20px">MDA Name</th>
+                            <td  style = "padding:20px">{{loanrecovery.business}}</td>
+                            <th  style = "padding:20px">Loan ID</th>
+                            <td  style = "padding:20px">{{loanrecovery.loanid}}</td>
                           </tr>
                           <tr>
-                              <th  style = "padding:20px">Description</th>
-                              <td  style = "padding:20px">{{complaints.description}}</td>
+                              <th  style = "padding:20px">Loan Amount</th>
+                              <td  style = "padding:20px">{{loanrecovery.principal | currency:'₦': 3}}</td>
+                              <th  style = "padding:20px">Due Amount</th>
+                              <td  style = "padding:20px">{{loanrecovery.due | currency:'₦': 3}}</td>
                             </tr>
+                            <tr>
+                                <th  style = "padding:20px">Paid</th>
+                                <td  style = "padding:20px">{{loanrecovery.paid | currency:'₦': 3}}</td>
+                                <th  style = "padding:20px">Balance</th>
+                                <td  style = "padding:20px">{{loanrecovery.balance | currency:'₦': 3}}</td>
+                              </tr>
+                              <tr>
+                                  <th  style = "padding:20px">Duration</th>
+                                  <td  style = "padding:20px">{{loanrecovery.duration}}</td>
+                                  <th  style = "padding:20px">Loan Status</th>
+                                  <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
+                                </tr>
                         </tbody>
                       </table>
 

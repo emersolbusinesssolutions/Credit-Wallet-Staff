@@ -23,6 +23,8 @@
                         <li *ngIf="data.status == '4'" class="divider"></li>
                         <li> <a  *ngIf="(data.status == '7' || data.status == '10')"  routerLink = "/disburse/{{id}}">Disburse Loan</a></li>
                         <li *ngIf="(data.status == '7' || data.status == '10')" class="divider"></li>
+                        <li> <a  *ngIf="(data.status == '7' || data.status == '10')"  routerLink = "/disbursepaystack/{{id}}">Disburse Loan with Paystack</a></li>
+                        <li *ngIf="(data.status == '7' || data.status == '10')" class="divider"></li>
                         <li *ngIf="data.status == '7'" class="divider"></li>
                         <li> <a  *ngIf="data.status == '7'"  routerLink = "/otherlenders/{{id}}">Disburse Loan (PLAAS)</a></li>
                         <li *ngIf="data.status == '7'" class="divider"></li>
@@ -530,7 +532,16 @@
                 <div id="menu3" class="tab-pane fade">
 
 <br/>
-<br/>
+<br/> 
+
+<div *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'  || data.status == '10'"
+    class="btn-group">
+    <button type="button" (click)="verifyaccountnumber()" class="btn btn-primary">Verify Account Number</button>
+    <button type="button"  (click)="moveToLoanDisk()" class="btn btn-primary">Upload to Loan Disk</button>
+    <button type="button" (click)="getAccountVerification(data)" class="btn btn-primary">Get Payment Verification</button>
+   
+  </div>
+  <br/>
                     <table class="table table-striped table-bordered" *ngIf = "accountverificationgiro">
                     
                         <tbody>
@@ -557,15 +568,7 @@
 
                                 <h4 style="padding:15px" class="heading"><b>LOAN DISK DETAILS</b> 
                                     
-                                    <div class="dropdown" style = "float:right">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Loan Disk Option
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                          <li><a (click)="moveToLoanDisk()" >Upload</a></li>
-                                          <li class = "divider"></li>
-                                          <li><a (click)="verifyaccountnumber()">Verify Account Number</a></li>
-                                        </ul>
-                                      </div></h4>
+                                    </h4>
             
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#home1">BORROWER  DETAILS</a></li>

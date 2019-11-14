@@ -39,7 +39,7 @@ login(regForm:NgForm){
   this.service.login(regForm.form.value).subscribe(
     data => {
       this.result = <Result>data;
-
+      console.log(this.result)
       if(deepEqual(this.result.status,"success")){
         sessionStorage.setItem('currentUser', this.result.token);
         sessionStorage.setItem('firstname', this.result.user.firstname);

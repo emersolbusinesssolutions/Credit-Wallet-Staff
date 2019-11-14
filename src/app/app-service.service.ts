@@ -455,6 +455,19 @@ export class AppServiceService {
         
     }
 
+    paymentmatch(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'payment/match', params, httpOptionsForSignedUser);
+        
+    }
+
     rejectLoan(params) {
      
         const httpOptionsForSignedUser = {
@@ -573,6 +586,22 @@ export class AppServiceService {
         return this.http.post(this.path + 'deductions/start/disburse', params, httpOptionsForSignedUser);
         
     }
+
+    disbursePaystack(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'loan/disburse/paystack', params, httpOptionsForSignedUser);
+        
+    }
+
+
+    
 
     disburseLoanRecurring(params) {
      
@@ -737,6 +766,8 @@ export class AppServiceService {
         return this.http.post(this.path + 'staff-get-verification-result', body, httpOptionsForSignedUser);
     }
 
+    
+
     deductionsinitiate(params) {
      
 
@@ -749,6 +780,69 @@ export class AppServiceService {
         let body = JSON.stringify(params);
         return this.http.post(this.path + 'deductions/initiate', body, httpOptionsForSignedUser);
     }
+
+    recoveryupload(params) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        let body = JSON.stringify(params);
+        return this.http.post(this.path + 'recovery/upload', body, httpOptionsForSignedUser);
+    }
+
+    recoverylist() {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.get(this.path + 'recovery/list', httpOptionsForSignedUser);
+    }
+
+    recoveryone(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'recovery/one', param, httpOptionsForSignedUser);
+    }
+
+    recoverycomment(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'recovery/comment', param, httpOptionsForSignedUser);
+    }
+
+    recoverysolve(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'recovery/solve', param, httpOptionsForSignedUser);
+    }
+
+    
 
     deductionsstart(params) {
      

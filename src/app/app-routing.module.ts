@@ -22,6 +22,19 @@ const routes: Routes = [
         loadChildren: './deductionspaid/deductionspaid.module#DeductionspaidModule'
       },
       {
+        path : 'disbursepaystack/:id',
+        loadChildren: './disbursepaystack/disbursepaystack.module#DisbursepaystackModule'
+      },
+      {
+        path : 'recovery',
+        loadChildren: './recovery/recovery.module#RecoveryModule'
+      },
+
+      {
+        path : 'recovery/:id',
+        loadChildren: './recoveryview/recoveryview.module#RecoveryviewModule'
+      },
+      {
         path : 'complaints/create',
         loadChildren: './createcomplaints/createcomplaints.module#CreatecomplaintsModule'
       },

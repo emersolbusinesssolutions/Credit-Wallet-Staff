@@ -189,7 +189,54 @@
                 </div>
   
                 <div id = "users" class="tab-pane fade in" >
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-light addNav">
+                          <tr>
+                            <th scope="col">Permissions</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Permissions</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            
+                                          <td><p>List Users</p> </td>
+                                          <td> <label class="switch">
+                                              <input type="checkbox" [checked]="getStatus('users/all')"  (change)="setPermission($event,'users/all')">
+                                              <span class="slider round"></span>
+                                            </label> 
+                                          </td>
   
+                                          <td><p>Create Users</p> </td>
+                                          <td> <label class="switch">
+                                              <input type="checkbox" [checked]="getStatus('user/create')" (change)="setPermission($event,'user/create')">
+                                              <span class="slider round"></span>
+                                            </label> 
+                                          </td>
+                                         
+                                        </tr>
+
+                                        <tr>
+                                            <td><p>Edit Users</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox" [checked]="getStatus('user/edit')" (change)="setPermission($event,'user/edit')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+    
+                                            <td><p>Delete Users</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox"  [checked]="getStatus('user/delete')"  (change)="setPermission($event,'user/delete')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+                                           
+                                          </tr>
+  
+                                      
+                          </tbody>
+                          </table>
                 </div>
                 <div id = "operations" class="tab-pane fade in" >
                  
