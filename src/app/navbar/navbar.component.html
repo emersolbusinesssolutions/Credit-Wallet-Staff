@@ -71,6 +71,7 @@
                             <li style="font-size:12px"><a [routerLink]="['/loan/processing']"  [queryParams]="{}">Processing</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/awaitingdisbursement']"  [queryParams]="{}">Awaiting Disbursement</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/readyfordeductions']"  [queryParams]="{}">Ready for Deductions</a></li>
+                            <li style="font-size:12px"><a [routerLink]="['/loan/ready']"  [queryParams]="{}">PLAAS Queue</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/ready']"  [queryParams]="{}">Ready for Disbursement</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/active']"  [queryParams]="{}">Active Loans</a></li>
                             <li style="font-size:12px"><a [routerLink]="['/loan/completed']"  [queryParams]="{}">Completed Loans</a></li>
@@ -98,6 +99,7 @@
                           <li routerLink = "/payment/ippis">IPPIS</li>
                           <li routerLink = "/payment/rsp">RSP</li>
                           <li routerLink = "/liquidation">Liquidation Calculator</li>
+                          <li routerLink = "/loancalculator">Loan Calculator</li>
                           
                         </ul>
 
@@ -111,6 +113,16 @@
                           <li routerLink = "/complaints/1">Processing</li>
                           <li routerLink = "/complaints/2">Solved</li>
                           
+                        </ul>
+
+                        <li data-toggle="collapse" data-target="#lenders" class="collapsed">
+                          <a><i class="glyphicon glyphicon-th-list"></i> PLAAS <span class="arrow"></span></a>
+                        </li>
+                          
+                        <ul class="sub-menu collapse" id="lenders">
+                          <li routerLink = "/lenders">Processing</li>
+                          <li routerLink = "/lenders">Lenders</li>
+                          <li routerLink = "/lenders/reconciliation">Reconciliation</li>
                         </ul>
 
 
@@ -156,11 +168,16 @@
                             </a>
                           </li>
 
-                          <li>
-                              <a  routerLink = "/recovery">
-                              <i class="glyphicon glyphicon-th-list"></i> Recovery
-                              </a>
+                  
+
+                            <li data-toggle="collapse" data-target="#recovery" class="collapsed">
+                              <a><i class="glyphicon glyphicon-th-list"></i> Recovery <span class="arrow"></span></a>
                             </li>
+                              
+                            <ul class="sub-menu collapse" id="recovery">
+                              <li routerLink = "/recoveryoverview">Overview</li>
+                              <li routerLink = "/recovery">Customer List</li>
+                            </ul>
 
                           <li data-toggle="collapse" data-target="#mailing" class="collapsed">
                               <a><i class="glyphicon glyphicon-th-list"></i> Mailing <span class="arrow"></span></a>

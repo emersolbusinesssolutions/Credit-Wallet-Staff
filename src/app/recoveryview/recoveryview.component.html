@@ -10,14 +10,18 @@
                       <span *ngIf="loanrecovery.category == 0" class="label label-danger">Urgent/Loss</span>
                       <span *ngIf="loanrecovery.category == 1" class="label label-warning">Performing</span>
                       <span *ngIf="loanrecovery.category == 2" class="label label-success">Paid</span>
-                  </span>  <div class="btn-group" style ="float:right">
-                      <button type="button" data-toggle="modal" data-target="#modal-comment" class="btn btn-default" >Add Comment</button>
-                      <button type="button" class="btn btn-warning" (click)="solved(1)">Mark as Performing</button>
-                      <button type="button" class="btn btn-success" (click)="solved(2)">Mark as Paid</button>
-                      <button type="button" class="btn btn-danger" (click)="solved(0)">Mark as Urgent/Loss</button>
-                    </div> </h3>
+                  </span> </h3>
 
                     <br/>
+
+                    <div class="btn-group btn-group-justified">
+                        <a data-toggle="modal" data-target="#modal-comment" class="btn btn-default" class="btn btn-default">Add Comment</a>
+                        
+                        <a class="btn btn-default" data-toggle="modal" data-target="#modal-payment"  (click)="setpaymentdate">Set Payment Date</a>
+                        <a class="btn btn-warning" (click)="solved(1)">Mark as Performing</a>
+                        <a class="btn btn-success" (click)="solved(2)">Mark as Paid</a>
+                        <a class="btn btn-danger" (click)="solved(0)">Mark as Urgent/Loss</a>
+                      </div>
   
                     <table class="table table-stripped">
                 
@@ -60,6 +64,17 @@
                                   <th  style = "padding:20px">Loan Status</th>
                                   <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
                                 </tr>
+                                <tr>
+                                    <th  style = "padding:20px">Duration</th>
+                                    <td  style = "padding:20px">{{loanrecovery.duration}}</td>
+                                    <th  style = "padding:20px">Loan Status</th>
+                                    <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th  style = "padding:20px">Preferred Payment Date</th>
+                                      <td colspan="3" style = "padding:20px">{{loanrecovery.paymentdate | date}}</td>
+                                     
+                                    </tr>
                         </tbody>
                       </table>
 
@@ -127,6 +142,39 @@
       <!-- /.modal-dialog -->
   </div>
   
+
+  <div class="modal fade" id="modal-payment" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title">Set Payment Date</h5>
+          </div>
+          <div class="modal-body">
+            <form role="form" novalidate>
+              <div class="row">
+                  <div class="col-md-12">
+                      
+                      <div class="form-group">
+                          <p>Set desired payment date from Customer</p>
+                          <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                  [(ngModel)]="paymentdate" required></my-date-picker>
+                      </div>
+                  </div>
+                 
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addpayment()">Set Payment</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  </div>
   
   
   

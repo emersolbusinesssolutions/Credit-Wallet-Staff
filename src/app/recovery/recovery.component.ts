@@ -51,6 +51,9 @@ export class RecoveryComponent implements OnInit {
                   this.chRef.detectChanges();
                   const table: any = $('table');
                   this.dataTable = table.DataTable();
+                }else{
+                  this.toastr.success(data["message"], '');
+                  this._router.navigate(['']);
                 }
                console.log(data)
                 

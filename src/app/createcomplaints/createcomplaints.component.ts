@@ -18,15 +18,18 @@ export class CreatecomplaintsComponent implements OnInit {
   dataTable: any;
   phonenumber: any;
   customername: any;
+  users: any;
+  assignedto  = "0"
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
-    private _router: Router,private router:ActivatedRoute,private toastr: ToastrService,private chRef: ChangeDetectorRef) {
+    private route: Router,private router:ActivatedRoute,private toastr: ToastrService,private chRef: ChangeDetectorRef) {
           
      
    }
 
   ngOnInit() {
+    this.getUsers()
   }
 
   submit(){
@@ -34,9 +37,12 @@ export class CreatecomplaintsComponent implements OnInit {
       type : this.type,
       phonenumber : this.phonenumber,
       customersname : this.customername,
-      description : this.description
+      description : this.description,
+      assignedto : this.assignedto
     }
-   
+
+    console.log(json)
+
     this.loadingBar.start();
     this.service.createcomplaints(json).subscribe(
       data => {
@@ -44,13 +50,36 @@ export class CreatecomplaintsComponent implements OnInit {
         this.result = data;
         if(deepEqual(this.result.status,"success")){
           this.toastr.success(this.result.message, '');
-         location.reload()
+          this.route.navigate(['complaints/0'])
         }
         else{
           this.toastr.success(this.result.message, '');
-          this._router.navigate(['']);
+          this.route.navigate(['']);
         }
    
+      },
+        error => {
+          console.log(error);
+          this.toastr.success(error, '');
+          this.loadingBar.complete();
+        }
+    );
+  }
+
+  getUsers(){
+    this.loadingBar.start();
+    this.service.usersall().subscribe(
+      data => {
+        this.result = data;
+        this.users = this.result.users;
+        this.loadingBar.complete();
+        if(deepEqual(this.result.status,"success")){
+          
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+          this.route.navigate(['']);
+        }
       },
         error => {
           console.log(error);

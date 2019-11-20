@@ -37,6 +37,11 @@ export class ActiveLoanComponent implements OnInit {
      this.getLoans();
    }
 
+   public myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+  };
+  from;to;
+
    getLoans(){
 
     
@@ -91,6 +96,37 @@ export class ActiveLoanComponent implements OnInit {
   search(){
     this.pagenumber = 1;
     this.getLoans();
+  }
+
+  submit(){
+    var json = {
+      status : this.status,
+      pagenumber : this.pagenumber,
+      from : this.from.formatted,
+      to : this.to.formatted
+    }
+
+    this.loadingBar.start();
+    this.service.loansadvancedsearch(json).subscribe(
+      data => {
+        this.result = data;
+        this.loans = this.result.data
+        console.log(data)
+        if(deepEqual(this.result.status,"success")){
+      
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+          this._router.navigate(['']);
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.toastr.success(error, '');
+          this.loadingBar.complete();
+        }
+    );
   }
 
 

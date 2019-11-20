@@ -213,7 +213,7 @@ export class DisburseComponent implements OnInit {
            let result: any = data;
            console.log(data)
            if(deepEqual(result.status,"success")){
-             this.toastr.success(result.message, '');
+            this.toastr.success("Loan Disbursed, please wait for payment", '');
              if(this.automaticdisbursement == true){
               this.disburseAutomatic()
             }else{

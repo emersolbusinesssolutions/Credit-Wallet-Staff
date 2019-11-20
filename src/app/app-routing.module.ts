@@ -29,10 +29,19 @@ const routes: Routes = [
         path : 'recovery',
         loadChildren: './recovery/recovery.module#RecoveryModule'
       },
+      {
+        path : 'recoveryoverview',
+        loadChildren: './recoveryoverview/recoveryoverview.module#RecoveryoverviewModule'
+      },
+
 
       {
         path : 'recovery/:id',
         loadChildren: './recoveryview/recoveryview.module#RecoveryviewModule'
+      },
+      {
+        path : 'loancalculator',
+        loadChildren: './loancalculator/loancalculator.module#LoancalculatorModule'
       },
       {
         path : 'complaints/create',
@@ -45,6 +54,11 @@ const routes: Routes = [
       {
         path : 'viewuser/:id',
         loadChildren: './viewuser/viewuser.module#ViewuserModule'
+      },
+
+      {
+        path : 'lenders',
+        loadChildren: './lenders/lenders.module#LendersModule'
       },
       {
         path : 'viewcomplaint/:id',

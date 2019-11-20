@@ -1,5 +1,5 @@
 
-<div class = "container-fluid spaceUp">
+<div class = "container-fluid spaceUp" *ngIf = "users">
   <div class = "row">
     <div class = "col-lg-10 col-lg-offset-2">
         
@@ -27,16 +27,33 @@
                   </div>
 
 
-                  <div class = "form-group">
-                    <p>Type</p>
-                    <select  class="textBoxDesign" id="text" name="type" [(ngModel)]="type">
-                    
-                    <option value = "Disbursement">Disbursement</option>
-                    <option value = "Over Deductions and Refund">Over Deductions and Refund</option>
-                    <option value = "System and Technology">System and Technology</option>
-                    <option value = "Others">Others</option>
-                    </select>
+                  <div class="row">
+                    <div class="col-lg-6">
+                        <div class = "form-group">
+                            <p>Type</p>
+                            <select  class="textBoxDesign" id="text" name="type" [(ngModel)]="type">
+                            
+                            <option value = "Disbursement">Disbursement</option>
+                            <option value = "Over Deductions and Refund">Over Deductions and Refund</option>
+                            <option value = "System and Technology">System and Technology</option>
+                            <option value = "Others">Others</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class = "form-group">
+                            <p>Assigned to:</p>
+                            <select  class="textBoxDesign" id="text" name="assignedto" [(ngModel)]="assignedto">
+                            
+                            <option value = "0"></option>
+                            <option value = "{{user.authid}}" *ngFor = "let user of users">{{user.firstname}} {{user.lastname}}</option>
+                            </select>
+                          </div>
+                    </div>
                   </div>
+
+
+                  
 
                   <div class = "form-group">
                     <p>Description (Describe the Complaint)</p>

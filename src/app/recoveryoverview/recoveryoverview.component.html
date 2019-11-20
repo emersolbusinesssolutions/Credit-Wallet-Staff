@@ -1,0 +1,216 @@
+
+<div class = "container-fluid spaceUp">
+  <div class = "row">
+    <div class = "col-lg-10 col-lg-offset-2">
+
+        <h3 class = "heading"><strong>Recovery Overiew</strong> 
+          <p class = "gray" style="font-size:12px">Summary of Recovery Activity</p> </h3><hr/>
+        <div class = "row ">
+            <div class = "col-lg-3" >
+
+        
+             
+
+                <div class  = "authDiv no-radius2">
+                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                    <div class ="row">
+                        <div class = "col-lg-12">
+                                <p style = "font-size:15px;" class = "gray">  Total Customers</p>
+                        </div>
+                    </div>
+                    </div>
+                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ total }}</strong></p>
+                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                          <div class ="row">
+                              <div class = "col-lg-12">
+                                      <p style = "font-size:15px;" class = "gray"> Customers</p>
+                              </div>
+                          </div>
+                          </div>
+                    </div> 
+            </div>
+            <div class = "col-lg-3" >
+
+        
+             
+
+              <div class  = "authDiv no-radius2">
+                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                  <div class ="row">
+                      <div class = "col-lg-12">
+                              <p style = "font-size:15px;" class = "gray">  Paid</p>
+                      </div>
+                  </div>
+                  </div>
+                  <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ paid }}</strong></p>
+                      <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                        <div class ="row">
+                            <div class = "col-lg-12">
+                                    <p style = "font-size:15px;" class = "gray"> Customers</p>
+                            </div>
+                        </div>
+                        </div>
+                  </div> 
+          </div>
+          <div class = "col-lg-3" >
+
+        
+             
+
+            <div class  = "authDiv no-radius2">
+              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                <div class ="row">
+                    <div class = "col-lg-12">
+                            <p style = "font-size:15px;" class = "gray">  Performing</p>
+                    </div>
+                </div>
+                </div>
+                <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ performing }}</strong></p>
+                    <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                      <div class ="row">
+                          <div class = "col-lg-12">
+                                  <p style = "font-size:15px;" class = "gray"> Customers</p>
+                          </div>
+                      </div>
+                      </div>
+                </div> 
+        </div>
+        <div class = "col-lg-3" >
+
+        
+             
+
+          <div class  = "authDiv no-radius2">
+            <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+              <div class ="row">
+                  <div class = "col-lg-12">
+                          <p style = "font-size:15px;" class = "gray">  Loss/Urgent</p>
+                  </div>
+              </div>
+              </div>
+              <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{urgent }}</strong></p>
+                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                    <div class ="row">
+                        <div class = "col-lg-12">
+                                <p style = "font-size:15px;" class = "gray"> Customers</p>
+                        </div>
+                    </div>
+                    </div>
+              </div> 
+      </div>
+        
+          </div>
+        <br/>
+
+        <div class = "row">
+          <div class = "col-lg-12">
+            <div class = "panel panel-default">
+              <div class = "panel-body">
+
+             
+
+                <div [chart]="barchart"></div>
+                 
+              </div>
+            </div>
+          </div>
+
+        </div>
+   
+
+        <div class = "row" *ngIf = "loanrecovery" >
+          <div class = "col-lg-12">
+            <div class = "panel panel-default">
+              <div class = "panel-body">
+                  <h4 class = "gray">Customers to Make  Payment today</h4>
+                  <hr/>
+                <div class = "alert alert-success" *ngIf = "payment == 0">
+                  <p>There is no customer due for payment today</p>
+                </div>
+
+               
+                <table class="table table-striped " *ngIf = "payment != 0">
+                    <thead>
+                        <tr>
+                          
+                        <th>S/No</th>
+                        <th>Category</th>
+                        <th>Options</th>
+                        <th>Loan ID</th>
+                        <th>Loan Released Date</th>
+                        <th>Name</th>
+                        <th>Telephone</th>
+                        <th>Balance</th>
+                        <th>Last Payment Date</th>
+                        <th>Status</th>
+                        <!-- <th>Bank Account</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                  
+                 
+                        <tr  *ngFor="let loan of currentpayment; let i = index ">
+                            <td>
+                               {{i + 1}}
+                              </td>
+                          <td>
+                            <span *ngIf="loan.category == 0" class="label label-danger">Urgent/Loss</span>
+                            <span *ngIf="loan.category == 1" class="label label-warning">Performing</span>
+                            <span *ngIf="loan.category == 2" class="label label-success">Paid</span>
+                          </td>
+                            <td >
+
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                      <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
+                                      <li> <a routerLink = "/recovery/{{loan.id}}">View</a></li>
+                                      <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
+                                      <li class="divider" *ngIf = "loan.loan.status == 0"></li>
+                                      <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
+
+                                    </ul>
+                                </div>        
+                                       
+                            </td>
+                            <td >{{loan.loanid  }}</td>
+                          <td >{{loan.loanreleaseddate  }}</td>
+                          <td>{{loan.name}}</td>
+                    
+                          <td>{{startWith(loan.phoneno)}}</td>
+                          <td >{{loan.balance | currency:'₦': 3}}</td> 
+                          <td>{{loan.lastpayment}}</td>
+                  
+                          <td>
+                            <span class="label label-success">{{loan.loanstatus}}</span>
+                          </td>
+                       
+                       
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+          
+    </div>
+  </div>
+  
+      <div class = "row">
+      
+  
+    </div>
+
+    <br/><br/>
+    <br/> <br/><br/>
+    <br/> <br/><br/>
+    <br/>
+
+
+</div> 
+
+
+

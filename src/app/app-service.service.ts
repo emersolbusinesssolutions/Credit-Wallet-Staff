@@ -400,6 +400,21 @@ export class AppServiceService {
 
     }
 
+    loansadvancedsearch(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'advanced/list/loans', params, httpOptionsForSignedUser);
+
+
+    }
+
+
 
     
 
@@ -840,6 +855,45 @@ export class AppServiceService {
             })
           };
         return this.http.post(this.path + 'recovery/solve', param, httpOptionsForSignedUser);
+    }
+
+    calculator(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'loan/calculator', param, httpOptionsForSignedUser);
+    }
+
+    calculatortwo(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'loan/calculator/two', param, httpOptionsForSignedUser);
+    }
+
+    
+
+    
+    recoverypayment(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'recovery/payment/set', param, httpOptionsForSignedUser);
     }
 
     

@@ -4,6 +4,7 @@ import { AppServiceService } from '../app-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
   selector: 'app-recoveryview',
@@ -15,7 +16,10 @@ export class RecoveryviewComponent implements OnInit {
   id: any;
   comment: any;
   comments: any;
-
+  public myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+  };
+  paymentdate;to;
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService, private titleService: Title,private chRef: ChangeDetectorRef){
@@ -114,6 +118,31 @@ export class RecoveryviewComponent implements OnInit {
           this.loadingBar.complete();
         }
       );
+  }
+
+  addpayment(){
+    var json = {
+      id : this.id,
+      paymentdate :  this.paymentdate.formatted
+    }
+    this.loadingBar.start();
+      this.service.recoverypayment(json).subscribe(
+        data => 
+        {
+          this.loadingBar.complete();
+          if(data["status"] == "success"){
+            location.reload()
+          }
+         console.log(data)
+          
+        },
+        error => {
+          console.log(error);
+          this.toastr.success("Service Related Error", '');
+          this.loadingBar.complete();
+        }
+      );
+   
   }
 
 }
