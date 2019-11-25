@@ -27,6 +27,12 @@ export class LoancalculatorComponent implements OnInit {
     
   }
 
+  calculateFees(){
+    let insurance = 0.03 * parseFloat(this.amount);
+    let disbursementfees = 1250;
+    return (insurance + disbursementfees)
+  }
+
 
   calculator(){
     this.loadingBar.start();

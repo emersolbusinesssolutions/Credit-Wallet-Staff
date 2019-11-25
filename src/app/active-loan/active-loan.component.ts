@@ -30,6 +30,8 @@ export class ActiveLoanComponent implements OnInit {
   searchtext = ""
   reportorders : any[];
   dataTable :any;
+
+  advanced = false;
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService,private chRef: ChangeDetectorRef) {
@@ -77,10 +79,34 @@ export class ActiveLoanComponent implements OnInit {
   ngOnInit() {
   }
 
+  returnStart(){
+    let current = (this.pagenumber - 1) * 10
+    return 1 + current;
+  }
+
+  returnEnd(){
+
+
+    let current  = this.pagenumber * 10
+    if( current > this.result.total_size){
+      return this.result.total_size;
+    }
+
+    return current;
+  }
+
 
   next(){
-    this.pagenumber = this.pagenumber + 1
-    this.getLoans();
+    if(this.advanced == false){
+      this.pagenumber = this.pagenumber + 1
+      this.returnEnd()
+      this.getLoans();
+    }else{
+      this.pagenumber = this.pagenumber + 1
+      this.returnEnd()
+      this.submit();
+    }
+    
   }
 
   previous(){
@@ -88,14 +114,32 @@ export class ActiveLoanComponent implements OnInit {
       this.toastr.success("You are on the first page", '');
       return;
     }
-    this.pagenumber = this.pagenumber - 1
-    this.getLoans();
+
+    if(this.advanced == false){
+      this.pagenumber = this.pagenumber - 1
+      this.returnEnd()
+      this.getLoans();
+    }else{
+      this.pagenumber = this.pagenumber - 1
+      this.returnEnd()
+      this.submit();
+    }
   }
 
 
   search(){
-    this.pagenumber = 1;
-    this.getLoans();
+    console.log(this.advanced)
+    if(this.advanced == false){
+      this.pagenumber = 1
+      this.returnEnd()
+      this.getLoans();
+    }else{
+      this.pagenumber =  1
+      this.returnEnd()
+      this.submit();
+    }
+
+    
   }
 
   submit(){
@@ -103,7 +147,8 @@ export class ActiveLoanComponent implements OnInit {
       status : this.status,
       pagenumber : this.pagenumber,
       from : this.from.formatted,
-      to : this.to.formatted
+      to : this.to.formatted,
+      searchtext : this.searchtext,
     }
 
     this.loadingBar.start();
@@ -113,7 +158,7 @@ export class ActiveLoanComponent implements OnInit {
         this.loans = this.result.data
         console.log(data)
         if(deepEqual(this.result.status,"success")){
-      
+          this.advanced = true
         }
         else{
           this.toastr.success(this.result.message, '');

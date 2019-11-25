@@ -91,10 +91,16 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="btn-group" style="float:right" *ngIf = "loans">
-                        <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
-                        <button type="button" (click)="next()" class="btn btn-default">Next</button>
-                      </div>
+
+
+                    <h5> 
+                        Showing {{returnStart()}} to {{returnEnd()}} of {{result.total_size}} entries
+                        <div class="btn-group" style="float:right" *ngIf = "loans">
+                            <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
+                            <button type="button" (click)="next()" class="btn btn-default">Next</button>
+                          </div>
+                        </h5>
+       
                       <br/>
                 
             </div>

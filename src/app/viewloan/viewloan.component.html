@@ -8,53 +8,71 @@
                 
                 <h3 class = "heading"><strong>{{data.title}} {{data.firstname | titlecase}} {{data.lastname | titlecase}}</strong></h3> 
 <hr/>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Application Option</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li *ngIf="data.status != '1'"> <a data-toggle="modal" data-target="#modal-cancel">Cancel Loan</a></li>
-                        <li *ngIf="data.status != '1'" class="divider"></li>
-                        <li *ngIf="data.status != '1'"> <a  data-toggle="modal" data-target="#editapplicationform">Edit Application Form</a></li>
-                        <li *ngIf="data.status != '1'" class="divider"></li>
-                        <li> <a  *ngIf="data.status == '4'"  (click)="completeLoan(data)">Complete Loan - IPPIS</a></li>
-                        <li *ngIf="data.status == '4'" class="divider"></li>
-                        <li> <a  *ngIf="data.status == '4'"  (click)="completeLoanRemita(data)">Complete Loan - REMITA</a></li>
-                        <li *ngIf="data.status == '4'" class="divider"></li>
-                        <li> <a  *ngIf="(data.status == '7' || data.status == '10')"  routerLink = "/disburse/{{id}}">Disburse Loan</a></li>
-                        <li *ngIf="(data.status == '7' || data.status == '10')" class="divider"></li>
-                        <li> <a  *ngIf="(data.status == '7' || data.status == '10')"  routerLink = "/disbursepaystack/{{id}}">Disburse Loan with Paystack</a></li>
-                        <li *ngIf="(data.status == '7' || data.status == '10')" class="divider"></li>
-                        <li *ngIf="data.status == '7'" class="divider"></li>
-                        <li> <a  *ngIf="data.status == '7'"  routerLink = "/otherlenders/{{id}}">Disburse Loan (PLAAS)</a></li>
-                        <li *ngIf="data.status == '7'" class="divider"></li>
-                        <li> <a  *ngIf="data.status == '3'"  (click)="notifyFinance(data)">Send to Finance for Disbursement</a></li>
-                        <li *ngIf="data.status == '3'" class="divider"></li>
-                        
-                        <li> <a  *ngIf="data.status == '3'"  (click)="sendtoreadyfordeductions(data)">Send to Ready for Deductions</a></li>
-                        <li *ngIf="data.status == '3'" class="divider"></li>
-                        <li> <a *ngIf="data.status == '2' && data.documents == 0"  (click)="confirmDocuments(data)">Confirm Document</a></li>
-                        <li *ngIf="data.status == '2' && data.documents == 0" class="divider"></li>
-                        <li *ngIf="(data.status == '2' || data.status == '3') && data.remita == 0" > <a (click)="confirmRemita(data)">Confirm Remita</a></li>
-                        <li *ngIf="(data.status == '2' || data.status == '3') && data.remita == 0"  class="divider"></li>
-                        <li *ngIf="data.status == '2' && data.documents == 1" > <a  data-toggle="modal" data-target="#modal-awaitingdisbursement">Send to Awaiting isbursement</a></li>
-                        <li  *ngIf="data.status == '2' && data.documents == 1"  class="divider"></li>
-                        <li  > <a   data-toggle="modal" data-target="#modal-default">Generate offer letter</a></li>
-                        <li class="divider"></li>
-                        <li  > <a   data-toggle="modal" data-target="#modal-electronic">Generate offer letter - Electronic Processing</a></li>
-                        <li class="divider"></li>
-                        <li *ngIf="(data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7')" > <a target = "blank" href = "https://test.creditwallet.ng/TestPDF/{{data.offerletterdoc}}">View Offer Letter</a></li>
-                        <li *ngIf="(data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7')" class="divider"></li>
-                        <li  *ngIf="(data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7')" > <a target = "blank" href = "https://creditwallet.ng/api/public/uploads/{{data.passport}}">View Passport</a></li>
-                        <li *ngIf="(data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7')" class="divider"></li>
-                        <li  *ngIf="(data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7')" > <a target = "blank" href = "https://creditwallet.ng/api/public/uploads/{{data.idcard}}">View ID Card</a></li>
-                        <li *ngIf="(data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7')"  class="divider"></li>
-                        <li *ngIf="data.status == '0'" > <a   data-toggle="modal" data-target="#modal-reject">Reject</a></li>
-                        <li  *ngIf="data.status == '0'"  class="divider"></li>
-                        <li > <a   data-toggle="modal" data-target="#modal-comment">Add Comment</a></li> 
-                    </ul>
-                  </div>
+
+<!--- New Application -->
+<div *ngIf = "data.status == '0'">
+    <a class="btn btn-danger"  data-toggle="modal" data-target="#modal-reject">Reject</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-electronic">Generate Offer Letter</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+</div>
+
+<!--- Processing -->
+<div *ngIf = "data.status == '2'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-electronic">Generate Offer Letter</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+</div>
+
+
+<!--- Awaiting Disbursement -->
+<div *ngIf = "data.status == '3'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+    <a class="btn btn-default" (click)="notifyFinance(data)">Send to Finance</a>
+    <a class="btn btn-default" (click)="sendtoreadyfordeductions(data)">Send to Deductions</a>
+</div>
+
+<div *ngIf = "data.status == '7'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+    <a class="btn btn-default" routerLink = "/disburse/{{id}}">Disburse</a>
+</div>
+
+<div *ngIf = "data.status == '10'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+    <a class="btn btn-default" routerLink = "/disburse/{{id}}">Disburse</a>
+</div>
+
+<div *ngIf = "data.status == '4'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+    <a class="btn btn-default" (click) = "complete(data)" data-target="#modal-comment">Complete</a>
+</div>
+
+<div *ngIf = "data.status == '8'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-electronic">Generate Offer Letter</a>
+</div>
+
+<div *ngIf = "data.status == '1'">
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-electronic">Generate Offer Letter</a>
+</div>
+
+
+
+
+
+
+
+
+            
              
                
             <div>
@@ -537,6 +555,9 @@
 
 <div *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'  || data.status == '10'"
     class="btn-group">
+    <a type="button" href = "https://creditwallet.ng/api/public/uploads/{{data.idcard}}"  target = "blank" class="btn btn-primary">ID Card</a>
+    <a type="button"  href = "https://creditwallet.ng/api/public/uploads/{{data.passport}}"  target = "blank" class="btn btn-primary">Passport</a>
+    <a type="button"  class="btn btn-primary"  target = "blank"  href = "https://test.creditwallet.ng/TestPDF/{{data.offerletterdoc}}">Offer Letter</a>
     <button type="button" (click)="verifyaccountnumber()" class="btn btn-primary">Verify Account Number</button>
     <button type="button"  (click)="moveToLoanDisk()" class="btn btn-primary">Upload to Loan Disk</button>
     <button type="button" (click)="getAccountVerification(data)" class="btn btn-primary">Get Payment Verification</button>

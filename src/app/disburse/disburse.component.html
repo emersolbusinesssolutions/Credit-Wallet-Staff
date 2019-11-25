@@ -23,7 +23,7 @@
                             <td> {{data.ippisnumber}}
                             </td>
                           </tr>
-                  <tr>
+                  <tr *ngIf = "data.status != 10">
                       <td><p>Disburse Loan Automatically</p> </td>
                       <td>  <label class="switch">
                           <input type="checkbox" (change)="onDisburseAutomatically($event)">

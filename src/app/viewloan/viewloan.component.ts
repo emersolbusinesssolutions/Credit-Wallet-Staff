@@ -110,6 +110,28 @@ export class ViewloanComponent implements OnInit {
     );
   }
 
+  complete(data){
+    this.loadingBar.start();
+    this.service.deductionsapproval(data).subscribe(
+      data => {
+        this.result = data;
+        console.log(this.result)
+        if(deepEqual(this.result.status,"success")){
+          this.toastr.success(this.result.message, '');
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.loadingBar.complete();
+          this.toastr.error("Network Error, please try again", '');
+        }
+    );
+  }
+
   getAdminFees(amount){
     return ((amount * 0.03) + 1250)
   }

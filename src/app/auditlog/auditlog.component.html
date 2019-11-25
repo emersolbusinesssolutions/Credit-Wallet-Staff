@@ -54,7 +54,7 @@
                                             
                                            
                                 </td>
-                              <td >{{audit.datecreated }}</td>
+                              <td >{{audit.datecreated   | date : 'MMM d, y, h:mm:ss a' }}</td>
                               <td >{{audit.firstname  | titlecase  }} {{audit.lastname  | titlecase  }}</td>
                               <td>{{audit.description}}</td>
                              

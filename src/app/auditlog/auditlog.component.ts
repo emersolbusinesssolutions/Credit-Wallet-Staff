@@ -57,12 +57,16 @@ export class AuditlogComponent implements OnInit {
   }
 
   getReport(){
+
+  
     var json = 
     {
       type : 2,
       from : this.from,
       to : this.to
     }
+
+    console.log(json)
 
     this.loadingBar.start();
     this.service.auditlog(json).subscribe(
@@ -71,6 +75,7 @@ export class AuditlogComponent implements OnInit {
         this.auditlogs = this.result.audit
       
         if(deepEqual(this.result.status,"success")){
+          this.dataTable.destroy()
           this.chRef.detectChanges();
           const table: any = $('table');
           this.dataTable = table.DataTable();

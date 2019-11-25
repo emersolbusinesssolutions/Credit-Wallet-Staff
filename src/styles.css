@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lexend+Deca');
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import url('https://fonts.googleapis.com/css?family=Mitr&display=swap');
 body{
   font-family: 'Lexend Deca', sans-serif;
   background-color: #F3F5F8;
@@ -8,6 +9,10 @@ body{
 .outstandingHeading{
   font-size: 50px;
   color:#F0AD4E
+}
+
+.logoFont{
+  font-family: 'Mitr', sans-serif;
 }
 
 
