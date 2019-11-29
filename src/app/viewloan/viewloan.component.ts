@@ -53,7 +53,7 @@ export class ViewloanComponent implements OnInit {
 
   cancelloan(){
 
-
+   if(confirm("Are you sure")){
     this.loadingBar.start();
     if(this.reason == 1){
       this.reason = this.otherreasonvalue
@@ -86,50 +86,62 @@ export class ViewloanComponent implements OnInit {
           this.toastr.error("Network Error, please try again", '');
         }
     );
+   }
+
+
+   
   }
 
   sendtoreadyfordeductions(object){
-    this.loadingBar.start();
-    this.service.deductionsapproval(object).subscribe(
-      data => {
-        this.result = data;
-        console.log(this.result)
-        if(deepEqual(this.result.status,"success")){
-          this.toastr.success(this.result.message, '');
-        }
-        else{
-          this.toastr.success(this.result.message, '');
-        }
-        this.loadingBar.complete();
-      },
-        error => {
-          console.log(error);
+
+    if(confirm("Are you sure?")){
+      this.loadingBar.start();
+      this.service.deductionsapproval(object).subscribe(
+        data => {
+          this.result = data;
+          console.log(this.result)
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success(this.result.message, '');
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
           this.loadingBar.complete();
-          this.toastr.error("Network Error, please try again", '');
-        }
-    );
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+    }
+    
   }
 
   complete(data){
-    this.loadingBar.start();
-    this.service.deductionsapproval(data).subscribe(
-      data => {
-        this.result = data;
-        console.log(this.result)
-        if(deepEqual(this.result.status,"success")){
-          this.toastr.success(this.result.message, '');
-        }
-        else{
-          this.toastr.success(this.result.message, '');
-        }
-        this.loadingBar.complete();
-      },
-        error => {
-          console.log(error);
+
+    if(confirm("Are you sure")){
+      this.loadingBar.start();
+      this.service.deductionsapproval(data).subscribe(
+        data => {
+          this.result = data;
+          console.log(this.result)
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success(this.result.message, '');
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
           this.loadingBar.complete();
-          this.toastr.error("Network Error, please try again", '');
-        }
-    );
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+    }
+    
   }
 
   getAdminFees(amount){
@@ -138,27 +150,31 @@ export class ViewloanComponent implements OnInit {
 
 
   getAccountVerification(data){
-    this.loadingBar.start();
-    this.service.paymentmatch(data).subscribe(
-      data => {
-        this.result = data
-        console.log(data)
-        if(deepEqual(this.result.status,"success")){
-          this.toastr.success("Verification Successful", '');
-          this.accountverificationgiro = this.result.accountverificationgiro.data;
-          this.loadingBar.complete();
-        }
-        else{
-          this.toastr.success(this.result.message, '');
-        }
-        
-      },
-        error => {
-          console.log(error);
-          this.loadingBar.complete();
-          this.toastr.error("Network Error, please try again", '');
-        }
-    );
+
+    if(confirm("Are you sure")){
+      this.loadingBar.start();
+      this.service.paymentmatch(data).subscribe(
+        data => {
+          this.result = data
+          console.log(data)
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success("Verification Successful", '');
+            this.accountverificationgiro = this.result.accountverificationgiro.data;
+            this.loadingBar.complete();
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
+          
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+    }
+   
   }
 
   getLoan() {
@@ -200,25 +216,28 @@ export class ViewloanComponent implements OnInit {
   }
 
   moveToLoanDisk() {
-    this.loadingBar.start();
-    this.service.addToLoanDisk({id: this.id}).subscribe(
-      data => {
-        this.result = data;
-        console.log(this.result)
-        if(deepEqual(this.result.status,"success")){
-          this.toastr.success(this.result.message, '');
-        }
-        else{
-          this.toastr.success(this.result.message, '');
-        }
-        this.loadingBar.complete();
-      },
-        error => {
-          console.log(error);
+    if(confirm("Are you sure")){
+      this.loadingBar.start();
+      this.service.addToLoanDisk({id: this.id}).subscribe(
+        data => {
+          this.result = data;
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success(this.result.message, '');
+            //window.open('http://test.creditwallet.ng/TestPDF/index.php?id='+this.id, '_blank');
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
           this.loadingBar.complete();
-          this.toastr.error("Network Error, please try again", '');
-        }
-    );
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+    }
+    
   }
 
   setReasonType(value){
@@ -519,7 +538,10 @@ export class ViewloanComponent implements OnInit {
   }
 
   notifyFinance(loan){
-     this.loadingBar.start();
+
+
+    if(confirm("Are you sure")){
+      this.loadingBar.start();
      
 
       this.service.notifyFinance({id: loan.id}).subscribe(
@@ -542,6 +564,8 @@ export class ViewloanComponent implements OnInit {
             this.loadingBar.complete();
           }
       );
+    }
+     
   }
 
   generateOfferLetter(){

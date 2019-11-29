@@ -64,7 +64,7 @@ export class CancelloanComponent implements OnInit {
       },
         error => {
           console.log(error);
-          this.toastr.success(error, '');
+          this.toastr.success("Something went wrong, please try again", '');
           this.loadingBar.complete();
         }
     );

@@ -77,6 +77,16 @@
                             <li style="font-size:12px"><a [routerLink]="['/loan/completed']"  [queryParams]="{}">Completed Loans</a></li>
                             
                         </ul>
+
+                        <li data-toggle="collapse" data-target="#Investment" class="collapsed">
+                            <a><i class="glyphicon glyphicon-th-list"></i> Investment <span class="arrow"></span></a>
+                          </li>
+                            
+                          <ul class="sub-menu collapse" id="Investment">
+                            <li routerLink = "/referralcode">Referral Code</li>
+                            <li routerLink = "/investment/0">New</li>
+                            <li routerLink = "/investment/1">Processing</li>
+                          </ul>
         
         
                         <li data-toggle="collapse" data-target="#service" class="collapsed">
@@ -187,6 +197,8 @@
                               <li routerLink = "/mail">General</li>
                               <li routerLink = "/interestpayment">Interest Payment</li>
                             </ul>
+
+                           
         
         
     
@@ -198,11 +210,7 @@
                             </a>
                           </li>
 
-                          <li>
-                            <a  routerLink = "/savings">
-                            <i class="glyphicon glyphicon-briefcase"></i> Savings
-                            </a>
-                          </li>
+                        
                       
         
         

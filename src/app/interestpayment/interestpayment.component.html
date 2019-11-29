@@ -21,6 +21,26 @@
         class="textBoxDesign " id="subject" name="subject" [(ngModel)]="subject" >  
      
       </div>
+
+
+      <div class = "row">
+        <div class="col-lg-6">
+          <div class = "form-group">
+            <p>Month</p>
+            <input type="text"
+            class="textBoxDesign " id="month" name="month" [(ngModel)]="month" >  
+         
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class = "form-group">
+            <p>Year</p>
+            <input type="text"
+            class="textBoxDesign " id="year" name="year" [(ngModel)]="year" >  
+         
+          </div>
+        </div>
+      </div>
   
       <div class = "form-group">
         <p>Add Receipents</p>
@@ -53,18 +73,8 @@
      
       </div>
   
-      <div class = "form-group">
-        <p>Sender Email</p>
-        <input type="email"
-        class="textBoxDesign " id="sender" name="sender" [(ngModel)]="sender" >  
-     
-      </div>
   
-  
-     
-  
-      <br/>
-      <br/>
+ <hr/>
       <button class = "btn btn-default" (click)="send()">Send Message</button>
                   
               </div>

@@ -47,7 +47,7 @@ export class AppServiceService {
             })
           };
         return this.http.get(this.path + 'deductions/paid', httpOptionsForSignedUser);
-      }
+    }
 
     listsavings() {
 
@@ -59,6 +59,18 @@ export class AppServiceService {
           };
         
         return this.http.get(this.path + 'savings/list', httpOptionsForSignedUser);
+    }
+
+    listinvestment(params) {
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'investment/list',params, httpOptionsForSignedUser);
     }
     generateOfferLetterNew(params: any): any {
         const httpOptionsForSignedUser = {
@@ -819,6 +831,80 @@ export class AppServiceService {
             })
           };
         return this.http.get(this.path + 'recovery/list', httpOptionsForSignedUser);
+    }
+
+    referralcodelist() {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.get(this.path + 'referralcode/list', httpOptionsForSignedUser);
+    }
+
+    referralcodecreate(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'referralcode/create', param, httpOptionsForSignedUser);
+    }
+
+    referralcodeedit(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'referralcode/edit', param, httpOptionsForSignedUser);
+    }
+
+    investmentone(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/one', param, httpOptionsForSignedUser);
+    }
+
+    investmentprocess(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/process', param, httpOptionsForSignedUser);
+    }
+
+    
+
+    referralcodedelete(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'referralcode/delete', param, httpOptionsForSignedUser);
     }
 
     recoveryone(param) {

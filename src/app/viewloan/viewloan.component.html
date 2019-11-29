@@ -32,6 +32,7 @@
     <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
     <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
     <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+    <a class="btn btn-default" data-toggle="modal" data-target="#modal-electronic">Generate Offer Letter</a>
     <a class="btn btn-default" (click)="notifyFinance(data)">Send to Finance</a>
     <a class="btn btn-default" (click)="sendtoreadyfordeductions(data)">Send to Deductions</a>
 </div>
@@ -206,7 +207,7 @@
                             <span *ngIf="data.salary_bank_name == '301'">JAIZ BANK</span>
                             <span *ngIf="data.salary_bank_name == '082'">KEYSTONE BANK</span>
                             <span *ngIf="data.salary_bank_name == '076'">SKYE BANK PLC</span>
-                            <span *ngIf="data.salary_bank_name == '039'">STANBIC-IBTC BANK PLC</span>
+                            <span *ngIf="data.salary_bank_name == '221'">STANBIC-IBTC BANK PLC</span>
                             <span *ngIf="data.salary_bank_name == '068'">STANDARD CHARTERED</span>
                             <span *ngIf="data.salary_bank_name == '232'">STERLING BANK PLC</span>
                             <span *ngIf="data.salary_bank_name == '100'">SUNTRUST BANK</span>
@@ -467,7 +468,7 @@
                                     <span *ngIf="data.remita_salary_bank_name == '301'">JAIZ BANK</span>
                                     <span *ngIf="data.remita_salary_bank_name == '082'">KEYSTONE BANK</span>
                                     <span *ngIf="data.remita_salary_bank_name == '076'">SKYE BANK PLC</span>
-                                    <span *ngIf="data.remita_salary_bank_name == '039'">STANBIC-IBTC BANK PLC</span>
+                                    <span *ngIf="data.remita_salary_bank_name == '221'">STANBIC-IBTC BANK PLC</span>
                                     <span *ngIf="data.remita_salary_bank_name == '232'">STERLING BANK PLC</span>
                                     <span *ngIf="data.remita_salary_bank_name == '100'">SUNTRUST BANK</span>
                                     <span *ngIf="data.remita_salary_bank_name == '032'">UNION BANK OF NIGERIA PLC</span>
@@ -554,13 +555,15 @@
 <br/> 
 
 <div *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'  || data.status == '10'"
-    class="btn-group">
-    <a type="button" href = "https://creditwallet.ng/api/public/uploads/{{data.idcard}}"  target = "blank" class="btn btn-primary">ID Card</a>
-    <a type="button"  href = "https://creditwallet.ng/api/public/uploads/{{data.passport}}"  target = "blank" class="btn btn-primary">Passport</a>
-    <a type="button"  class="btn btn-primary"  target = "blank"  href = "https://test.creditwallet.ng/TestPDF/{{data.offerletterdoc}}">Offer Letter</a>
-    <button type="button" (click)="verifyaccountnumber()" class="btn btn-primary">Verify Account Number</button>
-    <button type="button"  (click)="moveToLoanDisk()" class="btn btn-primary">Upload to Loan Disk</button>
-    <button type="button" (click)="getAccountVerification(data)" class="btn btn-primary">Get Payment Verification</button>
+   >
+    <a type="button" href = "https://creditwallet.ng/api/public/uploads/{{data.idcard}}"  target = "blank" class="btn btn-default">ID Card</a>
+    <a type="button"  href = "https://creditwallet.ng/api/public/uploads/{{data.passport}}"  target = "blank" class="btn btn-default">Passport</a>
+    <a type="button"  class="btn btn-default"  target = "blank"  href = "https://test.creditwallet.ng/TestPDF/{{data.offerletterdoc}}">Offer Letter</a>
+    <button type="button" (click)="verifyaccountnumber()" class="btn btn-default">Verify Account Number</button>
+    <button type="button"  (click)="moveToLoanDisk()" class="btn btn-default">Upload to Loan Disk</button>
+    <button type="button" (click)="getAccountVerification(data)" class="btn btn-default">Get Payment Verification</button>
+    
+    <a *ngIf = "data.offerletterdoc  == ''" class="btn btn-default" href = "http://test.creditwallet.ng/TestPDF/index.php?id={{id}}" >Process Offer Letter</a>
    
   </div>
   <br/>
@@ -684,7 +687,7 @@
                                                                     <span *ngIf="data.preferred_bankname == '301'">JAIZ BANK</span>
                                                                     <span *ngIf="data.preferred_bankname == '082'">KEYSTONE BANK</span>
                                                                     <span *ngIf="data.preferred_bankname == '076'">SKYE BANK PLC</span>
-                                                                    <span *ngIf="data.preferred_bankname == '039'">STANBIC-IBTC BANK PLC</span>
+                                                                    <span *ngIf="data.preferred_bankname == '221'">STANBIC-IBTC BANK PLC</span>
                                                                     <span *ngIf="data.preferred_bankname == '232'">STERLING BANK PLC</span>
                                                                     <span *ngIf="data.preferred_bankname == '100'">SUNTRUST BANK</span>
                                                                     <span *ngIf="data.preferred_bankname == '032'">UNION BANK OF NIGERIA PLC</span>
@@ -1219,7 +1222,7 @@
         <!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="editapplicationform" >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1361,7 +1364,7 @@
                                          <option value = "082">KEYSTONE BANK</option>
                                          <option value = "101">PROVIDOUS BANK</option>
                                          <option value = "076">SKYE BANK PLC</option>
-                                         <option value = "039">STANBIC-IBTC BANK PLC</option>
+                                         <option value = "221">STANBIC-IBTC BANK PLC</option>
                                          <option value = "068">STANDARD CHARTERED</option>
                                          <option value = "232">STERLING BANK PLC</option>
                                          <option value = "100">SUNTRUST BANK</option>
@@ -1402,7 +1405,7 @@
                                          <option value = "082">KEYSTONE BANK</option>
                                          <option value = "101">PROVIDOUS BANK</option>
                                          <option value = "076">SKYE BANK PLC</option>
-                                         <option value = "039">STANBIC-IBTC BANK PLC</option>
+                                         <option value = "221">STANBIC-IBTC BANK PLC</option>
                                          <option value = "068">STANDARD CHARTERED</option>
                                          <option value = "232">STERLING BANK PLC</option>
                                          <option value = "100">SUNTRUST BANK</option>

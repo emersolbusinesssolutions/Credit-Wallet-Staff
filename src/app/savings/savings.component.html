@@ -7,46 +7,44 @@
         <div class = "col-lg-10 col-lg-offset-2">
            
             <div class = "authDiv">
-                <h3 class = "heading"><strong>Savings</strong> 
-                  <p style="color:gray; font-size:12px" >List of Savings Account</p>
+                <h3 class = "heading"><strong>Investments</strong> 
                 </h3><hr/>
 
+    
                         <table class="table table-striped ">
                             <thead>
                                 <tr>
-                                <th>Options</th>
+                                <th>S/No</th>
+                                <th>Date Created</th>
                                 <th>Name</th>
-                                <th>Account #</th>
-                                <th>Savings Balance</th>
-                                <th>Last Transaction</th>
-                                
+                                <th>Account</th>
+                                <th>Duration</th>
+                                <th>Interest Rate</th>
+                                <th>Referral Code</th>
+                                <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
                           
                          
-                                <tr  *ngFor="let saving of savings; let i = index ">
-            
-                                    <td >
-            
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                            <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                          <li> <a (click)="confirmpayment(saving)">View Transactions</a></li>
-                                            </ul>
-                                        </div>
-            
-                                                
-                                               
-                                  </td>
-                                  <td >{{saving.savings.savings_account_number }}</td>
-                                  <td >{{saving.borrower.borrower_firstname}} {{saving.borrower.borrower_lastname}}</td>
-                                  <td >{{saving.savings.savings_balance}}</td>
-                                  <td >{{saving.savings.custom_field_1176 }}</td>
-                                
+                                <tr  *ngFor="let savings of investments; let i = index ">
+                                        <td >{{i + 1}}</td>
+                                        <td >{{savings.datecreated   | date : 'MMM d, y, h:mm:ss a'  }}</td>
+                                    
                                  
-                               
+                                  <td >{{savings.firstname }} {{savings.lastname }}</td>
+                                  <td >{{savings.amount | currency:'₦': 3}}</td>
+                                  <td >{{savings.duration}} Months</td>
+                                  <td >{{savings.interestrate}}%</td>
+                                  <td >{{savings.code}}</td>
+                                  <td >
+            
+                                     
+            
+                                        <button class="btn btn-default" routerLink = "/investmentone/{{savings.id}}"><i class="glyphicon glyphicon-th-list"></i></button>        
+                                           
+                              </td>
+                              
                                 </tr>
                             </tbody>
                         </table>

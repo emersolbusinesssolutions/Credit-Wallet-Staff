@@ -47,7 +47,7 @@
                   <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#verification">Verification</a></li>
                   <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#contact">Contact Management</a></li>
                   <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#customers">Customers</a></li>
-                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#report">Report</a></li>
+                  <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#reporting">Report</a></li>
                   <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#users">Users Management</a></li>
                   <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#operations">Operation Logs</a></li>
                 </ul>
@@ -184,8 +184,49 @@
                 
                   </div>
     
-                  <div id = "report" class="tab-pane fade in" >
-              
+                  <div id = "reporting" class="tab-pane fade in" >
+                      <table class="table table-striped table-hover">
+                          <thead class="thead-light addNav">
+                            <tr>
+                              <th scope="col">Permissions</th>
+                              <th scope="col">Action</th>
+                              <th scope="col">Permissions</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              
+                                            <td><p>Sales</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox"  (change)="setPermission($event,'report/sales')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+    
+                                            <td><p>Audit Log</p> </td>
+                                            <td> <label class="switch">
+                                                <input type="checkbox" (change)="setPermission($event,'audit/view')">
+                                                <span class="slider round"></span>
+                                              </label> 
+                                            </td>
+                                           
+                                          </tr>
+  
+                                          <tr>
+                                              <td><p>Metrics</p> </td>
+                                              <td> <label class="switch">
+                                                  <input type="checkbox" (change)="setPermission($event,'report/metrics')">
+                                                  <span class="slider round"></span>
+                                                </label> 
+                                              </td>
+      
+                                             
+                                            </tr>
+    
+                                        
+                            </tbody>
+                            </table>
                   </div>
     
                   <div id = "users" class="tab-pane fade in" >

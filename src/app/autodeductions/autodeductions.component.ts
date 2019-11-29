@@ -134,7 +134,7 @@ export class AutodeductionsComponent implements OnInit {
       },
         error => {
           console.log(error);
-          this.toastr.success("Error connecting to server, please check your internet connection and try again", '');
+          this.toastr.success("Something went wrong, please try again", '');
           this.loadingBar.complete();
         }
     );
@@ -234,7 +234,7 @@ export class AutodeductionsComponent implements OnInit {
       },
         error => {
           console.log(error);
-          this.toastr.success("Error connecting to server, please check your internet connection and try again", '');
+          this.toastr.success("Something went wrong, please try again", '');
           this.loadingBar.complete();
         }
     );

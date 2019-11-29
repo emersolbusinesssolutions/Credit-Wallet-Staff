@@ -81,6 +81,10 @@ const routes: Routes = [
         loadChildren: './deductions/deductions.module#DeductionsModule'
       },
       {
+        path : 'referralcode',
+        loadChildren: './referralcode/referralcode.module#ReferralcodeModule'
+      },
+      {
         path : 'newdeductions',
         loadChildren: './newdeductions/newdeductions.module#NewdeductionsModule'
       },
@@ -157,8 +161,12 @@ const routes: Routes = [
         loadChildren: './ready-for-disbursement-loan/ready-for-disbursement-loan.module#ReadyForDisbursementLoanModule'
       },
       {
-        path : 'savings',
+        path : 'investment/:id',
         loadChildren: './savings/savings.module#SavingsModule'
+      },
+      {
+        path : 'investmentone/:id',
+        loadChildren: './investmentone/investmentone.module#InvestmentoneModule'
       },
       {
         path : 'auditlog',

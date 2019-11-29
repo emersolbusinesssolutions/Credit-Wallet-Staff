@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import * as XLSX from 'ts-xlsx'
+import * as deepEqual from "deep-equal";
 @Component({
   selector: 'app-interestpayment',
   templateUrl: './interestpayment.component.html',
@@ -23,6 +24,8 @@ export class InterestpaymentComponent implements OnInit {
   subject: any;
   body: any;
   sender: any;
+  month;
+  year;
 
   
 
@@ -79,7 +82,8 @@ export class InterestpaymentComponent implements OnInit {
     var param = {
       invites : this.invites,
       subject : this.subject,
-      sender : this.sender
+      month : this.month,
+      year : this.year
     }
 
     console.log(param)
@@ -91,8 +95,17 @@ export class InterestpaymentComponent implements OnInit {
         {
           console.log(data)
           this.loadingBar.complete();
-          this.toastr.success("Message Sent", '');
-          //location.reload()
+          if(deepEqual(data["status"],"success")){
+            
+            this.toastr.success(data["message"], '');
+            location.reload()
+          }
+          else{
+            this.toastr.success(data["message"], '');
+           
+          }
+          
+         
           
         },
         error => {

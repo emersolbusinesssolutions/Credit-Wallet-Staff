@@ -1,0 +1,107 @@
+
+
+
+<div class = "container-fluid spaceUp" >
+
+  <div class = "row" >
+      <div class = "col-lg-10 col-lg-offset-2">
+         
+          <div class = "authDiv">
+              <h3 class = "heading"><strong>Referral Code</strong> 
+                <button style="float:right" id = "modalButton" data-toggle="modal" data-target="#myModal" class = "btn btn-default">New Code</button>
+                <p style="color:gray; font-size:12px" >List, Create, edit and Delete Referral Codes</p>
+              </h3><hr/>
+
+                      <table class="table table-striped ">
+                          <thead>
+                              <tr>
+                              <th>S/NO</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                              <th>Interest Rate</th>
+                              <th>Code</th>
+                              <th></th>
+                              
+                              </tr>
+                          </thead>
+                          <tbody>
+                        
+                       
+                              <tr  *ngFor="let referralcode of referralcodes; let i = index ">
+          
+                                  <td >
+          
+                         {{i + 1}}
+          
+                                              
+                                             
+                                </td>
+                                <td >{{referralcode.name | titlecase }}</td>
+                                <td >{{referralcode.description | titlecase }}</td>
+                                <td >{{referralcode.interest | titlecase }}%</td>
+                                <td >{{referralcode.code }}</td>
+                              
+                                <td > <button class="btn btn-default" (click) = "edit(referralcode)">Edit</button> <button (click)="delete(referralcode)" class="btn btn-danger">Delete</button></td>
+                             
+                              </tr>
+                          </tbody>
+                      </table>
+                    
+                 
+
+           
+          
+        </div>
+        
+  </div>
+  
+</div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{optionMessage}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class = "form-group">
+         <p>Name</p>
+         <input type="text"
+         class="textBoxDesign " id="name" name="name" [(ngModel)]="name" >  
+        </div>
+        <div class = "form-group">
+          <p>Description</p>
+          <input type="text"
+          class="textBoxDesign " id="description" name="description" [(ngModel)]="description" >  
+         </div>
+         <div class = "form-group">
+          <p>Interest</p>
+          <input type="number"
+          class="textBoxDesign " id="interest" name="interest" [(ngModel)]="interest" >  
+         </div>
+         <div class = "form-group">
+          <p>Code</p>
+          <input type="text"
+          class="textBoxDesign " id="code" name="code" [(ngModel)]="code" >  
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button *ngIf = "buttonStatus == '0'" type="button" style="float:right" class="btn btn-success" data-dismiss="modal" (click)="create()">{{buttonMessage}}</button>
+        <button *ngIf = "buttonStatus == '1'" type="button" style="float:right" class="btn btn-success" data-dismiss="modal" (click)="editprocess()">{{buttonMessage}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
