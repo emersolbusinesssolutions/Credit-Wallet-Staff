@@ -1,108 +1,112 @@
 
 
-<div class = "container-fluid spaceUp" *ngIf = "complaints">
-    <div class = "row">
-      <div class = "col-lg-10 col-lg-offset-2">
-          
-          <div class  = "authDiv no-radius2">
-              <div class = "">
-                  <h3 class = "heading"><strong>{{complaints.customersname}}</strong> <span style="font-size:12px"> 
-                      <span class="label label-danger" *ngIf="complaints.status == '0'">New</span>
-                      <span class="label label-warning" *ngIf="complaints.status == '1'">Processing</span>
-                      <span class="label label-success" *ngIf="complaints.status == '2'">solved</span>
-                  </span>  <div class="btn-group" style ="float:right">
-                      <button type="button" data-toggle="modal" data-target="#modal-comment" class="btn btn-default" >Add Comment</button>
-                      <button type="button" *ngIf="complaints.status == '1'" class="btn btn-success" (click)="solved()">Mark as Solved</button>
-                    </div> </h3>
-
-                    <br/>
-  
-                   
-                    <table class="table table-stripped">
-                
-                        <tbody>
-                          <tr>
-                            <th  style = "padding:20px">Phone Number</th>
-                            <td  style = "padding:20px">{{complaints.phonenumber}}</td>
-                          </tr>
-                          <tr>
-                              <th  style = "padding:20px">Date Created</th>
-                              <td  style = "padding:20px">{{complaints.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}</td>
-                            </tr>
-                          <tr>
-                            <th  style = "padding:20px">Created By</th>
-                            <td  style = "padding:20px">{{result.admin.firstname | titlecase}} {{result.admin.lastname | titlecase}}</td>
-                          </tr>
-                          <tr>
-                              <th  style = "padding:20px">Description</th>
-                              <td  style = "padding:20px">{{complaints.description}}</td>
-                            </tr>
-                        </tbody>
-                      </table>
-
-                      <br/>
-                      <div *ngIf = "comments">
-                          <div class = "panel panel-default" *ngFor = "let comment of comments">
-                              <div class = "panel-body">
-                                      <h4  class="heading"><b>{{comment.firstname | titlecase}} {{comment.lastname | titlecase}} </b><span style="font-size:11px;float:right">{{comment.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}<br/>{{comment.department}}</span></h4>
-                                      <hr/>
-                                      
-                                      {{titleCaseWord(comment.comment)}}
+<div class = "main">
+    <div class = "container-fluid spaceUp" *ngIf = "complaints">
+        <div class = "row">
+          <div class = "col-lg-12">
+              
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>{{complaints.customersname}}</strong> <span style="font-size:12px"> 
+                          <span class="label label-danger" *ngIf="complaints.status == '0'">New</span>
+                          <span class="label label-warning" *ngIf="complaints.status == '1'">Processing</span>
+                          <span class="label label-success" *ngIf="complaints.status == '2'">solved</span>
+                      </span>  <div class="btn-group" style ="float:right">
+                          <button type="button" data-toggle="modal" data-target="#modal-comment" class="btn btn-default" >Add Comment</button>
+                          <button type="button" *ngIf="complaints.status == '1'" class="btn btn-success" (click)="solved()">Mark as Solved</button>
+                        </div> </h3>
+    
+                        <br/>
+      
+                       
+                        <table class="table table-stripped">
+                    
+                            <tbody>
+                              <tr>
+                                <th  style = "padding:20px">Phone Number</th>
+                                <td  style = "padding:20px">{{complaints.phonenumber}}</td>
+                              </tr>
+                              <tr>
+                                  <th  style = "padding:20px">Date Created</th>
+                                  <td  style = "padding:20px">{{complaints.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}</td>
+                                </tr>
+                              <tr>
+                                <th  style = "padding:20px">Created By</th>
+                                <td  style = "padding:20px">{{result.admin.firstname | titlecase}} {{result.admin.lastname | titlecase}}</td>
+                              </tr>
+                              <tr>
+                                  <th  style = "padding:20px">Description</th>
+                                  <td  style = "padding:20px">{{complaints.description}}</td>
+                                </tr>
+                            </tbody>
+                          </table>
+    
+                          <br/>
+                          <div *ngIf = "comments">
+                              <div class = "panel panel-default" *ngFor = "let comment of comments">
+                                  <div class = "panel-body">
+                                          <h4  class="heading"><b>{{comment.firstname | titlecase}} {{comment.lastname | titlecase}} </b><span style="font-size:11px;float:right">{{comment.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}<br/>{{comment.department}}</span></h4>
+                                          <hr/>
+                                          
+                                          {{titleCaseWord(comment.comment)}}
+                                  </div>
                               </div>
                           </div>
-                      </div>
-    
-                    
-              </div>
-              
-          </div> 
-      </div>
-    </div>
-    
-        <div class = "row">
         
-    
-      </div>
-  
-      <br/><br/>
-      <br/> <br/><br/>
-      <br/> <br/><br/>
-      <br/>
-  
-  
-  </div> 
-
-  <div class="modal fade" id="modal-comment" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h5 class="modal-title">Add Comment</h5>
-          </div>
-          <div class="modal-body">
-            <form role="form" novalidate>
-              <div class="row">
-                  <div class="col-md-12">
-                      
-                      <div class="form-group">
-                          <p>Comment</p>
-                          <input class="textBoxDesign " type="text" name="comment" [(ngModel)]="comment" required="required">
-                      </div>
+                        
                   </div>
-                 
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="addcomment()">Add Comment</button>
+                  
+              </div> 
           </div>
         </div>
-        <!-- /.modal-content -->
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+    
+      <div class="modal fade" id="modal-comment" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Add Comment</h5>
+              </div>
+              <div class="modal-body">
+                <form role="form" novalidate>
+                  <div class="row">
+                      <div class="col-md-12">
+                          
+                          <div class="form-group">
+                              <p>Comment</p>
+                              <input class="textBoxDesign " type="text" name="comment" [(ngModel)]="comment" required="required">
+                          </div>
+                      </div>
+                     
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addcomment()">Add Comment</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
       </div>
-      <!-- /.modal-dialog -->
-  </div>
+</div>
+
+
   
   
   

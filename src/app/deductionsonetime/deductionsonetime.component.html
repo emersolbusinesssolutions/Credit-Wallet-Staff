@@ -1,93 +1,95 @@
 
-
-<div class = "container-fluid spaceUp">
-  <div class = "row">
-    <div class = "col-lg-10 col-lg-offset-2">
-        
-        <div class  = "authDiv no-radius2">
-            <div class = "">
-                <h3 class = "heading"><strong>Pending Deductions - One Time</strong> 
-                  
-                  <div class="btn-group" style ="float:right">
-                  <div class="btn-group" *ngIf = "deductions">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    Export <span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a  (click)="export()">Excel Spreadsheet</a></li>
-                    </ul>
-                  </div>
-                    <button type="button" routerLink = "/newdeductions" class="btn btn-default">Create New Deductions</button>
-                    
-                  </div>
-                
-              </h3><hr/>
-
-
+<div class ="main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12">
               
-          
-        
-                    <table class="table table-striped" >
-                        <thead>
-                            <tr>
-                            <th>Options</th>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Telephone</th>
-                            <th>Amount</th>
-                            <th>Loan ID</th>
-                            <th>RRR - Mandate Reference</th>
-                            <th>MDA Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>Pending Deductions - One Time</strong> 
+                        
+                        <div class="btn-group" style ="float:right">
+                        <div class="btn-group" *ngIf = "deductions">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                          Export <span class="caret"></span></button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a  (click)="export()">Excel Spreadsheet</a></li>
+                          </ul>
+                        </div>
+                          <button type="button" routerLink = "/newdeductions" class="btn btn-default">Create New Deductions</button>
+                          
+                        </div>
                       
-                     
-                            <tr  *ngFor="let deduction of deductions; let i = index ">
-
-                                <td>
-
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                          <li> <a (click) = "confirmPayment(deduction)">Confirm Payment</a></li>
-                                        </ul>
-                                    </div>
-
-                                            
-                                           
-                                </td>
-                              <td >{{deduction.created_at | date:'dd/MM/yyyy h:mm a' }}</td>
-                              <td> {{deduction.firstname | titlecase}} {{deduction.lastname | titlecase}}</td>
-                                <td>{{deduction.telephone}}</td>
-                              <td >{{deduction.amount | currency:'₦': 3}}</td> 
-                              <td >{{deduction.loanid }} </td>
-                              <td >{{deduction.mandatereference }} </td>
-                              <td >{{deduction.place_of_work | titlecase}}</td>
-                              
-                            
-                            </tr>
-                        </tbody>
-                    </table>
-                
-            </div>
-            
-        </div> 
-    </div>
-  </div>
-  
-      <div class = "row">
+                    </h3><hr/>
       
-  
-    </div>
+      
+                    
+                
+              
+                          <table class="table table-striped" >
+                              <thead>
+                                  <tr>
+                                  <th>Options</th>
+                                  <th>Date</th>
+                                  <th>Name</th>
+                                  <th>Telephone</th>
+                                  <th>Amount</th>
+                                  <th>Loan ID</th>
+                                  <th>RRR - Mandate Reference</th>
+                                  <th>MDA Name</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                           
+                                  <tr  *ngFor="let deduction of deductions; let i = index ">
+      
+                                      <td>
+      
+                                          <div class="dropdown">
+                                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                              <span class="caret"></span></button>
+                                              <ul class="dropdown-menu">
+                                                <li> <a (click) = "confirmPayment(deduction)">Confirm Payment</a></li>
+                                              </ul>
+                                          </div>
+      
+                                                  
+                                                 
+                                      </td>
+                                    <td >{{deduction.created_at | date:'dd/MM/yyyy h:mm a' }}</td>
+                                    <td> {{deduction.firstname | titlecase}} {{deduction.lastname | titlecase}}</td>
+                                      <td>{{deduction.telephone}}</td>
+                                    <td >{{deduction.amount | currency:'₦': 3}}</td> 
+                                    <td >{{deduction.loanid }} </td>
+                                    <td >{{deduction.mandatereference }} </td>
+                                    <td >{{deduction.place_of_work | titlecase}}</td>
+                                    
+                                  
+                                  </tr>
+                              </tbody>
+                          </table>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+</div>
 
-    <br/><br/>
-    <br/> <br/><br/>
-    <br/> <br/><br/>
-    <br/>
-
-
-</div> 
 
 
 

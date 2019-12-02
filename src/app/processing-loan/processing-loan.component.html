@@ -1,131 +1,134 @@
 
-
-<div class = "container-fluid spaceUp" *ngIf = "loans">
-  <div class = "row">
-    <div class = "col-lg-10 col-lg-offset-2">
-        
-        <div class  = "authDiv no-radius2">
-            <div class = "">
-                <h3 class = "heading"><strong>Processing</strong> <!-- <div class="btn-group" style ="float:right">
-                    <button type="button" routerLink = "/createloan" class="btn btn-default">Create Property</button>
-                  </div> --></h3><hr/>
-          
-        
-                  <div class = "row ">
-                    <div class = "col-lg-3">
-        
+<div class = "main">
+    <div class = "container-fluid spaceUp" *ngIf = "loans">
+        <div class = "row">
+          <div class = "col-lg-12">
+              
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>Processing</strong> <!-- <div class="btn-group" style ="float:right">
+                          <button type="button" routerLink = "/createloan" class="btn btn-default">Create Property</button>
+                        </div> --></h3><hr/>
                 
-                        <div class  = "authDiv no-radius2">
-        
-                            <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getCount() }}</strong></p>
-                                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                                  <div class ="row">
-                                      <div class = "col-lg-12">
-                                              <p style = "font-size:15px;" class = "gray">  New Application Count</p>
-                                      </div>
-                                  </div>
-                                  </div>
-                            </div> 
-                    </div>
-                    <div class = "col-lg-3">
-        
-                            <div class  = "authDiv no-radius2">
-        
-                                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
-                                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                                          <div class ="row">
-                                              <div class = "col-lg-12">
-                                                      <p style = "font-size:15px;" class = "gray"> New Application Amount</p>
-                                              </div>
-                                          </div>
-                                          </div>
-                                    </div> 
-                
-                      </div>
-                
-                  </div>
-                  <br/><br/>
-                    <table class="table table-striped ">
-                        <thead>
-                            <tr>
-                            <th>Options</th>
-                            <th>Date</th>
-                            <!-- <th>Loan ID</th> -->
-                            <th>Name</th>
-                            <th>Telephone</th>
-                            <th>Amount</th>
-                            <th>Tenor</th>
-                            <th>MDA Name</th>
-                            <th>Document</th>
-                            <th>Remita</th>
-                            <!-- <th>Bank Account</th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
+              
+                        <div class = "row ">
+                          <div class = "col-lg-3">
+              
                       
-                     
-                            <tr  *ngFor="let loan of loans; let i = index ">
-
-                                <td >
-
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                          <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
-                                          <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
-                                          <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
-                                          <li class="divider" *ngIf = "loan.loan.status == 0"></li>
-                                          <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
-
-                                        </ul>
-                                    </div>
-
-                                            
-                                           
-                                </td>
-                              <td >{{loan.loan.updated_at | date:'dd/MM/yyyy'  }}</td>
-                              <!-- <td>{{loan.loan.loanid}}</td> -->
-                              <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
-                        
-                                <td>{{loan.loan.telephone}}</td>
-                              <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
-                              <td >{{loan.loan.tenor }} months</td>
-                              <td >{{loan.loan.place_of_work | titlecase}}</td>
-                              
+                              <div class  = "authDiv no-radius2">
+              
+                                  <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getCount() }}</strong></p>
+                                      <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                        <div class ="row">
+                                            <div class = "col-lg-12">
+                                                    <p style = "font-size:15px;" class = "gray">  New Application Count</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                  </div> 
+                          </div>
+                          <div class = "col-lg-3">
+              
+                                  <div class  = "authDiv no-radius2">
+              
+                                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
+                                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                                <div class ="row">
+                                                    <div class = "col-lg-12">
+                                                            <p style = "font-size:15px;" class = "gray"> New Application Amount</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                          </div> 
                       
-                              <td>
-                                <span *ngIf="loan.loan.documents == 0" class="label label-default">No Document</span>
-                                <span *ngIf="loan.loan.documents == 1" class="label label-success">Document Received</span>
-                              </td>
-                              <td>
-                                <span *ngIf="loan.loan.remita == 0" class="label label-default">No Remita</span>
-                                <span *ngIf="loan.loan.remita == 1" class="label label-success">Remita Received</span>
-                              </td>
-                              <!-- <td >{{loan.loan.salary_bank_account}}</td> -->
+                            </div>
+                      
+                        </div>
+                        <br/><br/>
+                          <table class="table table-striped ">
+                              <thead>
+                                  <tr>
+                                  <th>Options</th>
+                                  <th>Date</th>
+                                  <!-- <th>Loan ID</th> -->
+                                  <th>Name</th>
+                                  <th>Telephone</th>
+                                  <th>Amount</th>
+                                  <th>Tenor</th>
+                                  <th>MDA Name</th>
+                                  <th>Document</th>
+                                  <th>Remita</th>
+                                  <!-- <th>Bank Account</th> -->
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
                            
-                            </tr>
-                        </tbody>
-                    </table>
-                
-            </div>
-            
-        </div> 
-    </div>
-  </div>
-  
-      <div class = "row">
+                                  <tr  *ngFor="let loan of loans; let i = index ">
       
-  
-    </div>
+                                      <td >
+      
+                                          <div class="dropdown">
+                                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                              <span class="caret"></span></button>
+                                              <ul class="dropdown-menu">
+                                                <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
+                                                <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
+                                                <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
+                                                <li class="divider" *ngIf = "loan.loan.status == 0"></li>
+                                                <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
+      
+                                              </ul>
+                                          </div>
+      
+                                                  
+                                                 
+                                      </td>
+                                    <td >{{loan.loan.updated_at | date:'dd/MM/yyyy'  }}</td>
+                                    <!-- <td>{{loan.loan.loanid}}</td> -->
+                                    <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
+                              
+                                      <td>{{loan.loan.telephone}}</td>
+                                    <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
+                                    <td >{{loan.loan.tenor }} months</td>
+                                    <td >{{loan.loan.place_of_work | titlecase}}</td>
+                                    
+                            
+                                    <td>
+                                      <span *ngIf="loan.loan.documents == 0" class="label label-default">No Document</span>
+                                      <span *ngIf="loan.loan.documents == 1" class="label label-success">Document Received</span>
+                                    </td>
+                                    <td>
+                                      <span *ngIf="loan.loan.remita == 0" class="label label-default">No Remita</span>
+                                      <span *ngIf="loan.loan.remita == 1" class="label label-success">Remita Received</span>
+                                    </td>
+                                    <!-- <td >{{loan.loan.salary_bank_account}}</td> -->
+                                 
+                                  </tr>
+                              </tbody>
+                          </table>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+</div>
 
-    <br/><br/>
-    <br/> <br/><br/>
-    <br/> <br/><br/>
-    <br/>
 
-
-</div> 
 
 
 

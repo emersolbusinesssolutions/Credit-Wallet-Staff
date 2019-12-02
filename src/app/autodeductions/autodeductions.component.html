@@ -1,205 +1,207 @@
 
+<div class="main">
+    <div class = "container-fluid spaceUp" >
 
-<div class = "container-fluid spaceUp" >
-
-  <div class = "row" >
-      <div class = "col-lg-10 col-lg-offset-2">
-         
-          <div class = "authDiv">
-              <h3 class = "heading"><strong>Auto Deductions</strong> 
-                <div class="btn-group" style="float:right">
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                  Import Deductions <span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a data-toggle="modal" data-target="#import" >RSP</a></li>
-                  </ul>
-                </div>
+        <div class = "row" >
+            <div class = "col-lg-12">
+               
+                <div class = "authDiv">
+                    <h3 class = "heading"><strong>Auto Deductions</strong> 
+                      <div class="btn-group" style="float:right">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Import Deductions <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a data-toggle="modal" data-target="#import" >RSP</a></li>
+                        </ul>
+                      </div>
+                    
+                    </h3><hr/>
               
-              </h3><hr/>
-        
-
-        
-                      <table class="table table-striped ">
-                          <thead>
-                              <tr>
-                              <th>Options</th>
-                              <th>S/NO</th>
-                              <th>Loan ID</th>
-                              <th>Customer's Name</th>
-                              <th>Telephone Number</th>
-                              <th>Monthly Repayment</th>
-                              <th>Loan Amount</th>
+      
+              
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                    <th>Options</th>
+                                    <th>S/NO</th>
+                                    <th>Loan ID</th>
+                                    <th>Customer's Name</th>
+                                    <th>Telephone Number</th>
+                                    <th>Monthly Repayment</th>
+                                    <th>Loan Amount</th>
+                                    
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
                               
-                              
-                              </tr>
-                          </thead>
-                          <tbody>
-                        
-                       
-                              <tr  *ngFor="let payment of deductions; let i = index ">
-          
-                                  <td >
-          
-                                      <div class="dropdown">
-                                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                          <span class="caret"></span></button>
-                                          <ul class="dropdown-menu">
-                                            <li> <a  (click)="getSalaryDetails(payment)">Get Salary History</a></li>
-                                            <li class="divider"></li>
-                                            <li> <a data-toggle="modal" data-target="#onetimededuction">Set Up One-Time Deductions</a></li>
-                                            <li class="divider"></li>
-                                           <li> <a (click) = "disburseLoan(loan)">Set Up Recurring Deductions</a></li>
-                                           <li class="divider"></li>
-                                           <li> <a (click) = "disburseLoan(loan)">Complete Transaction</a></li>
-                                  
-                                  
-                                          </ul>
-                                      </div>
-          
-                                              
-                                             
-                                </td>
-                                <td >{{i + 1}}</td>
-                                <td >{{payment.loanid}}</td>
-                                <td>{{payment.customername}}</td>
-                                <td>{{payment.telephone}}</td>
-                                <td>{{payment.monthlyrepayment | currency:'₦ ': 2}}</td>
-                                <td>{{payment.loanamount | currency:'₦ ': 2}}</td>
-                              </tr>
-                          </tbody>
-                      </table>
+                             
+                                    <tr  *ngFor="let payment of deductions; let i = index ">
                 
-          
-        </div>
-        
-  </div>
-  
-</div>
-</div>
-<br/>
-<br/>
-<br/>
-<br/>
-
-<div class="modal fade" id="import">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title">Import Payment</h5>
-      </div>
-      <div class="modal-body">
-        <form role="form" novalidate>
-          <div class="row">
-              <div class="col-md-12">
-                    <div class = "well">
-                      <p style = "font-size: 50px;text-align: center"><span class = "glyphicon glyphicon-file"></span></p>
-                      <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                      <h3 style = "text-align: center"><a (click)="select()">{{filename}}</a></h3>
-                  </div>
-              </div>
-             
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="upload()">Upload Payment</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-
-<button type="button" style ="display: none;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#salaryhistory" id = "opensalarymodal">Open Modal</button>
-<div class="modal fade" id="salaryhistory">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h5 class="modal-title">Salary History</h5>
-        </div>
-        <div class="modal-body">
-
-            <table class="table table-striped table-bordered" *ngIf = "salary">
-
-                <tr>
-                        <th style="padding:15px" scope = "row">REMITA NAME</th>
-                        <td style="padding:15px">
-                            {{name | titlecase}}
-                        </td>
-                        <th style="padding:15px" scope = "row">REMITA MDA</th>
-                        <td style="padding:15px">{{companyName | titlecase}}</td>
-                    </tr>
-                </table>
-            <table class="table table-striped table-bordered" *ngIf = "salary">
-                  
-                <thead>
-                    <tr>
-                        <th style="padding:15px" scope = "row">S/NO</th>
-                        <th style="padding:15px" scope = "row">AMOUNT</th>
-                        <th style="padding:15px" scope = "row">PAYMENT DATE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr  *ngFor="let payment of salary; let i = index " >
-                            <td style="padding:15px">  {{i + 1}}
-                                </td>
-                        <td style="padding:15px">  {{payment.amount | currency:'₦': 3}}
-                        </td>
-                        <td style="padding:15px">{{payment.paymentdate}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br/>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary">Set up One Time Deductions</button>
-                <button type="button" class="btn btn-primary">Set up Recurring Deductions</button>
-              </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-
-
-  <div class="modal fade" id="onetimededuction">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h5 class="modal-title">One-Time Deductions</h5>
-          </div>
-          <div class="modal-body">
-  
-              <div class="form-group"> 
-                <p>Loan ID</p>
-                <input type="text"
-                class="textBoxDesign " id="text" name="loanid" [(ngModel)]="loanid">  
+                                        <td >
+                
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                                <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                  <li> <a  (click)="getSalaryDetails(payment)">Get Salary History</a></li>
+                                                  <li class="divider"></li>
+                                                  <li> <a data-toggle="modal" data-target="#onetimededuction">Set Up One-Time Deductions</a></li>
+                                                  <li class="divider"></li>
+                                                 <li> <a (click) = "disburseLoan(loan)">Set Up Recurring Deductions</a></li>
+                                                 <li class="divider"></li>
+                                                 <li> <a (click) = "disburseLoan(loan)">Complete Transaction</a></li>
+                                        
+                                        
+                                                </ul>
+                                            </div>
+                
+                                                    
+                                                   
+                                      </td>
+                                      <td >{{i + 1}}</td>
+                                      <td >{{payment.loanid}}</td>
+                                      <td>{{payment.customername}}</td>
+                                      <td>{{payment.telephone}}</td>
+                                      <td>{{payment.monthlyrepayment | currency:'₦ ': 2}}</td>
+                                      <td>{{payment.loanamount | currency:'₦ ': 2}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                      
                 
               </div>
-              <div class="form-group"> 
-                  <p>Monthly Repayment</p>
-                  <input type="text"
-                  class="textBoxDesign " id="text" name="monthlyrepayment" [(ngModel)]="monthlyrepayment">  
-                  
+              
+        </div>
+        
+      </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      
+      <div class="modal fade" id="import">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h5 class="modal-title">Import Payment</h5>
+            </div>
+            <div class="modal-body">
+              <form role="form" novalidate>
+                <div class="row">
+                    <div class="col-md-12">
+                          <div class = "well">
+                            <p style = "font-size: 50px;text-align: center"><span class = "glyphicon glyphicon-file"></span></p>
+                            <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            <h3 style = "text-align: center"><a (click)="select()">{{filename}}</a></h3>
+                        </div>
+                    </div>
+                   
                 </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="upload()">Upload Payment</button>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-right" (click)="setUpDeductions()">Close</button>
-          </div>
+          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
       </div>
-      <!-- /.modal-dialog -->
-    </div>
+      
+      
+      <button type="button" style ="display: none;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#salaryhistory" id = "opensalarymodal">Open Modal</button>
+      <div class="modal fade" id="salaryhistory">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Salary History</h5>
+              </div>
+              <div class="modal-body">
+      
+                  <table class="table table-striped table-bordered" *ngIf = "salary">
+      
+                      <tr>
+                              <th style="padding:15px" scope = "row">REMITA NAME</th>
+                              <td style="padding:15px">
+                                  {{name | titlecase}}
+                              </td>
+                              <th style="padding:15px" scope = "row">REMITA MDA</th>
+                              <td style="padding:15px">{{companyName | titlecase}}</td>
+                          </tr>
+                      </table>
+                  <table class="table table-striped table-bordered" *ngIf = "salary">
+                        
+                      <thead>
+                          <tr>
+                              <th style="padding:15px" scope = "row">S/NO</th>
+                              <th style="padding:15px" scope = "row">AMOUNT</th>
+                              <th style="padding:15px" scope = "row">PAYMENT DATE</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr  *ngFor="let payment of salary; let i = index " >
+                                  <td style="padding:15px">  {{i + 1}}
+                                      </td>
+                              <td style="padding:15px">  {{payment.amount | currency:'₦': 3}}
+                              </td>
+                              <td style="padding:15px">{{payment.paymentdate}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <br/>
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-primary">Set up One Time Deductions</button>
+                      <button type="button" class="btn btn-primary">Set up Recurring Deductions</button>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+      
+      
+        <div class="modal fade" id="onetimededuction">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h5 class="modal-title">One-Time Deductions</h5>
+                </div>
+                <div class="modal-body">
+        
+                    <div class="form-group"> 
+                      <p>Loan ID</p>
+                      <input type="text"
+                      class="textBoxDesign " id="text" name="loanid" [(ngModel)]="loanid">  
+                      
+                    </div>
+                    <div class="form-group"> 
+                        <p>Monthly Repayment</p>
+                        <input type="text"
+                        class="textBoxDesign " id="text" name="monthlyrepayment" [(ngModel)]="monthlyrepayment">  
+                        
+                      </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-right" (click)="setUpDeductions()">Close</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+</div>
+
 

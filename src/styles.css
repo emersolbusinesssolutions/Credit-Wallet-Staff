@@ -511,7 +511,7 @@ background: linear-gradient(90deg, rgba(126,2,74,1) 0%, rgba(243,1,78,1) 100%);
   background-color: #1B4E63;
   position: fixed;
   top: 0px;
-  width: 250px;
+  width: 270px;
   height: 100%;
   color: #fff;
   font-size : 14px;
@@ -546,6 +546,12 @@ background: linear-gradient(90deg, rgba(126,2,74,1) 0%, rgba(243,1,78,1) 100%);
             }
      }
 */
+}
+
+.main {
+
+  margin-left: 270px; 
+
 }
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {

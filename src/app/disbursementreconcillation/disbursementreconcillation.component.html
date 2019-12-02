@@ -1,0 +1,126 @@
+
+<div class = "main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12" >
+              
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>Disbursement Reconciliation</strong> <div class="btn-group" style ="float:right">
+                          <button type="button" data-toggle="modal" data-target="#myModal"  class="btn btn-default">Upload File</button>
+                        </div></h3><hr/>
+
+                        <div  *ngIf = "totaldisbursement">
+    
+    
+                            <table class="table table-stripped table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th  style = "padding:20px" class ="headFont">Total Disbursements</th>
+                                    <th  style = "padding:20px" class ="headFont">Total Disbursement Amount</th>
+                                    <th  style = "padding:20px" class ="headFont">Total Giro Payment</th>
+                                    <th  style = "padding:20px" class ="headFont">Total Giro Payment Amount</th>
+                                    <th  style = "padding:20px" class ="headFont">Total Bank Payment</th>
+                                    <th  style = "padding:20px" class ="headFont">Total Bank Payment Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td  style = "padding:20px">{{ totaldisbursement }}</td>
+                                    <td  style = "padding:20px">{{ totaldisbursementsum | currency:'₦ ': 2  }}</td>
+                                    <td  style = "padding:20px">{{girototal}}</td>
+                                    <td  style = "padding:20px">{{ girototalsum | currency:'₦ ': 2  }}</td>
+                                    <td  style = "padding:20px">{{ banktotal }}</td>
+                                    <td  style = "padding:20px">{{banktotalsum | currency:'₦ ': 2}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                        </div>
+
+      
+              
+                          <table class="table table-striped ">
+                              <thead>
+                                  <tr>
+                                  <th>S/No</th>
+                                  <th>Date of Disbursement</th>
+                                  <th>Name</th>
+                                  <th>Loan ID</th>
+                                  <th>Amount</th>
+                                  <th>Giro Payment</th>
+                                  <th>Bank Payment</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                           
+                                  <tr  *ngFor="let loan of reconciliation; let i = index ">
+      
+                                      <td style="padding-top:20px;padding-bottom:20px" >{{i  + 1 }}</td>
+                                    <td >{{loan.loandisk.date }}</td>
+                                    <td>{{loan.loandisk.name | titlecase}}</td>
+                                    <td>{{loan.loandisk.loanid }}</td>
+                                    <td >{{loan.loandisk.amount | currency:'₦': 3}}</td> 
+                                   
+                                    <td ><p style="color:#1B4E63; font-size:15px" ><span *ngIf = "loan.giro == 1" class = "glyphicon glyphicon-ok-sign"></span></p></td>
+                                    <td ><p style="color:#F0AD4E;font-size:15px"><span  *ngIf = "loan.bank == 1" class = "glyphicon glyphicon-ok-sign"></span></p></td>
+                                  
+                                  </tr>
+                              </tbody>
+                          </table>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+      
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Import Payment Files</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{loandiskfilename}}</p>
+            <input (change)="onLoanPayment($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <h3 style = "text-align: center"><a class = "btn btn-default" (click)="selectLoanFile()">Select Disbursement File</a></h3>
+
+            <hr/>
+            <p>{{bankfilename}}</p>
+            <input (change)="onBankPayment($event)" style = "display:none" type="file" #fileBank  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <h3 style = "text-align: center"><a class = "btn btn-default" (click)="selectBankFile()">Select Bank Payment File</a></h3>
+            <hr/>
+            <p>{{girofilename}}</p>
+            <input (change)="onGiroPayment($event)" style = "display:none" type="file" #fileGiro  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <h3 style = "text-align: center"><a class = "btn btn-default" (click)="selectGiroFile()">Select Giro Payment File</a></h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button  type="button" style="float:right" class="btn btn-success" (click)="upload()">Upload</button>
+     </div>
+      </div>
+  
+    </div>
+  </div>
+
+

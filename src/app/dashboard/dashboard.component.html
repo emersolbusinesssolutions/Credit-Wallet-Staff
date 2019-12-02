@@ -1,197 +1,199 @@
-
-<div class = "container-fluid spaceUp">
-  <div class = "row">
-    <div class = "col-lg-10 col-lg-offset-2">
-        <div class = "row ">
-            <div class = "col-lg-3"  *ngIf = "newapplications">
-
-        
-             
-
+<div class = "main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12">
+              <div class = "row ">
+                  <div class = "col-lg-3"  *ngIf = "newapplications">
+      
+              
+                   
+      
+                      <div class  = "authDiv no-radius2">
+                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                          <div class ="row">
+                              <div class = "col-lg-12">
+                                      <p style = "font-size:15px;" class = "gray">  New Applications</p>
+                              </div>
+                          </div>
+                          </div>
+                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(newapplications) | currency:'₦ ': 2 }}</strong></p>
+                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                <div class ="row">
+                                    <div class = "col-lg-12">
+                                            <p style = "font-size:15px;" class = "gray"> {{getCount(newapplications)}} Applications</p>
+                                    </div>
+                                </div>
+                                </div>
+                          </div> 
+                  </div>
+                  <div class = "col-lg-3"  *ngIf = "processing">
+      
+              
+                   
+      
+                    <div class  = "authDiv no-radius2">
+                      <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                        <div class ="row">
+                            <div class = "col-lg-12">
+                                    <p style = "font-size:15px;" class = "gray">  Processing</p>
+                            </div>
+                        </div>
+                        </div>
+                        <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(processing) | currency:'₦ ': 2 }}</strong></p>
+                            <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                              <div class ="row">
+                                  <div class = "col-lg-12">
+                                          <p style = "font-size:15px;" class = "gray"> {{getCount(processing)}} Applications</p>
+                                  </div>
+                              </div>
+                              </div>
+                        </div> 
+                </div>
+                <div class = "col-lg-3"  *ngIf = "awaitingdisbursement">
+      
+              
+                   
+      
+                  <div class  = "authDiv no-radius2">
+                    <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                      <div class ="row">
+                          <div class = "col-lg-12">
+                                  <p style = "font-size:15px;" class = "gray">  Awaiting Disbursement</p>
+                          </div>
+                      </div>
+                      </div>
+                      <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(awaitingdisbursement) | currency:'₦ ': 2 }}</strong></p>
+                          <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                            <div class ="row">
+                                <div class = "col-lg-12">
+                                        <p style = "font-size:15px;" class = "gray"> {{getCount(awaitingdisbursement)}} Applications</p>
+                                </div>
+                            </div>
+                            </div>
+                      </div> 
+              </div>
+              <div class = "col-lg-3"  *ngIf = "readyfordisbursement">
+      
+              
+                   
+      
                 <div class  = "authDiv no-radius2">
                   <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
                     <div class ="row">
                         <div class = "col-lg-12">
-                                <p style = "font-size:15px;" class = "gray">  New Applications</p>
+                                <p style = "font-size:15px;" class = "gray">  Ready for Disbursement</p>
                         </div>
                     </div>
                     </div>
-                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(newapplications) | currency:'₦ ': 2 }}</strong></p>
+                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(readyfordisbursement) | currency:'₦ ': 2 }}</strong></p>
                         <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
                           <div class ="row">
                               <div class = "col-lg-12">
-                                      <p style = "font-size:15px;" class = "gray"> {{getCount(newapplications)}} Applications</p>
+                                      <p style = "font-size:15px;" class = "gray"> {{getCount(readyfordisbursement)}} Applications</p>
                               </div>
                           </div>
                           </div>
                     </div> 
             </div>
-            <div class = "col-lg-3"  *ngIf = "processing">
-
-        
-             
-
-              <div class  = "authDiv no-radius2">
-                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                  <div class ="row">
-                      <div class = "col-lg-12">
-                              <p style = "font-size:15px;" class = "gray">  Processing</p>
-                      </div>
-                  </div>
-                  </div>
-                  <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(processing) | currency:'₦ ': 2 }}</strong></p>
-                      <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                        <div class ="row">
-                            <div class = "col-lg-12">
-                                    <p style = "font-size:15px;" class = "gray"> {{getCount(processing)}} Applications</p>
-                            </div>
-                        </div>
-                        </div>
-                  </div> 
-          </div>
-          <div class = "col-lg-3"  *ngIf = "awaitingdisbursement">
-
-        
-             
-
-            <div class  = "authDiv no-radius2">
-              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                <div class ="row">
-                    <div class = "col-lg-12">
-                            <p style = "font-size:15px;" class = "gray">  Awaiting Disbursement</p>
-                    </div>
+              
                 </div>
-                </div>
-                <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(awaitingdisbursement) | currency:'₦ ': 2 }}</strong></p>
-                    <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                      <div class ="row">
-                          <div class = "col-lg-12">
-                                  <p style = "font-size:15px;" class = "gray"> {{getCount(awaitingdisbursement)}} Applications</p>
-                          </div>
-                      </div>
-                      </div>
-                </div> 
-        </div>
-        <div class = "col-lg-3"  *ngIf = "readyfordisbursement">
-
-        
-             
-
-          <div class  = "authDiv no-radius2">
-            <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-              <div class ="row">
-                  <div class = "col-lg-12">
-                          <p style = "font-size:15px;" class = "gray">  Ready for Disbursement</p>
-                  </div>
-              </div>
-              </div>
-              <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount(readyfordisbursement) | currency:'₦ ': 2 }}</strong></p>
-                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                    <div class ="row">
-                        <div class = "col-lg-12">
-                                <p style = "font-size:15px;" class = "gray"> {{getCount(readyfordisbursement)}} Applications</p>
-                        </div>
-                    </div>
-                    </div>
-              </div> 
-      </div>
-        
-          </div>
-        <br/>
-
-        <div class = "row" *ngIf = "target">
-          <div class = "col-lg-12">
-            <div class = "panel panel-default">
-              <div class = "panel-body">
-
-             
-
-                <div [chart]="barchart"></div>
-                 
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class = "row ">
-            <div class = "col-lg-12" >
-                <div class = "panel panel-default no-radius2">
-                  <div class = "panel-body">
-                      <div [chart]="linechart"></div>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-        <div class = "row">
-          <div class = "col-lg-12">
-            <div class = "panel panel-default">
-              <div class = "panel-body">
-
-                <h4 class = "gray">Sales Report for {{myDate | date}}</h4>
-                  <table class="table table-striped ">
-                      <thead>
-                          <tr>
-                          <th>Number of Loans</th>
-                          <th>Loan Amount</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                    
-                   
-                        <!--
-
- <tr  *ngFor="let loan of salesreport; let i = index ">
-
-                           
-                            <td><span *ngIf = "loan.marketer == 'Credit Wallet'">Credit Wallet</span>
-                              <span *ngIf = "loan.marketer == 'Ugbobuaku'">Ugbobuaku Mmesoma</span>
-                              <span *ngIf = "loan.marketer == 'Eke'">Eke Emmanuella</span>
-                              <span *ngIf = "loan.marketer == 'Nnamso'">Nnamso violet</span>
-                              <span *ngIf = "loan.marketer == 'Iloabachie'">Stephanie Iloabachie </span>
-                              <span *ngIf = "loan.marketer == 'Clement'">Hephzibah Nasara Clement</span>
-                              <span *ngIf = "loan.marketer == 'blessing'">Blessing Ebute</span>
-                              <span *ngIf = "loan.marketer == 'Folashade'">Folashade Giwa</span>
-                              <span *ngIf = "loan.marketer == 'Atewe'">Atewe Evans</span>
-                            </td>
-                            <td>{{loan.numberofloans}} Customers</td>
-                            <td >{{loan.loanamount | currency:'₦': 3}}</td> 
-                            <td >{{(0.02 * loan.loanamount) | currency:'₦': 3}}</td>
-                            <td > <button class="btn btn-default" (click)="viewTransaction(loan.customers)" type="button">Transaction History</button></td>
-                           
-                          </tr>
-
-                        --> 
-                          <tr *ngIf = "salesreport">
-
-                         
-                              <td>{{totalcustomers}} Customers</td>
-                              <td >{{loanamount | currency:'₦': 3}}</td> 
-                             
-                            </tr>
-                      </tbody>
-                  </table>
-              </div>
-            </div>
-          </div>
-
-        </div>
-          
-    </div>
-  </div>
-  
-      <div class = "row">
+              <br/>
       
-  
-    </div>
-
-    <br/><br/>
-    <br/> <br/><br/>
-    <br/> <br/><br/>
-    <br/>
-
-
-</div> 
+              <div class = "row" *ngIf = "target">
+                <div class = "col-lg-12">
+                  <div class = "panel panel-default">
+                    <div class = "panel-body">
+      
+                   
+      
+                      <div [chart]="barchart"></div>
+                       
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+              <div class = "row ">
+                  <div class = "col-lg-12" >
+                      <div class = "panel panel-default no-radius2">
+                        <div class = "panel-body">
+                            <div [chart]="linechart"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+      
+              <div class = "row">
+                <div class = "col-lg-12">
+                  <div class = "panel panel-default">
+                    <div class = "panel-body">
+      
+                      <h4 class = "gray">Sales Report for {{myDate | date}}</h4>
+                        <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                <th>Number of Loans</th>
+                                <th>Loan Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                          
+                         
+                              <!--
+      
+       <tr  *ngFor="let loan of salesreport; let i = index ">
+      
+                                 
+                                  <td><span *ngIf = "loan.marketer == 'Credit Wallet'">Credit Wallet</span>
+                                    <span *ngIf = "loan.marketer == 'Ugbobuaku'">Ugbobuaku Mmesoma</span>
+                                    <span *ngIf = "loan.marketer == 'Eke'">Eke Emmanuella</span>
+                                    <span *ngIf = "loan.marketer == 'Nnamso'">Nnamso violet</span>
+                                    <span *ngIf = "loan.marketer == 'Iloabachie'">Stephanie Iloabachie </span>
+                                    <span *ngIf = "loan.marketer == 'Clement'">Hephzibah Nasara Clement</span>
+                                    <span *ngIf = "loan.marketer == 'blessing'">Blessing Ebute</span>
+                                    <span *ngIf = "loan.marketer == 'Folashade'">Folashade Giwa</span>
+                                    <span *ngIf = "loan.marketer == 'Atewe'">Atewe Evans</span>
+                                  </td>
+                                  <td>{{loan.numberofloans}} Customers</td>
+                                  <td >{{loan.loanamount | currency:'₦': 3}}</td> 
+                                  <td >{{(0.02 * loan.loanamount) | currency:'₦': 3}}</td>
+                                  <td > <button class="btn btn-default" (click)="viewTransaction(loan.customers)" type="button">Transaction History</button></td>
+                                 
+                                </tr>
+      
+                              --> 
+                                <tr *ngIf = "salesreport">
+      
+                               
+                                    <td>{{totalcustomers}} Customers</td>
+                                    <td >{{loanamount | currency:'₦': 3}}</td> 
+                                   
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+                
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div>
+</div>
+ 
 
 
 

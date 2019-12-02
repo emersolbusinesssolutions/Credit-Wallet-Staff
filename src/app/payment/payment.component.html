@@ -1,332 +1,334 @@
 
+<div class = "main">
+    <div class = "container-fluid spaceUp" >
 
-<div class = "container-fluid spaceUp" >
-
-  <div class = "row" >
-      <div class = "col-lg-10 col-lg-offset-2">
-         
-          <div class = "authDiv">
-              <h3 class = "heading"><strong>Payment Reconcillation</strong> 
-                <div class="btn-group" style="float:right">
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                  Import Payment <span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a data-toggle="modal" data-target="#import" >RSP</a></li>
-                  </ul>
-                </div>
-                <p *ngIf = "id == 'rsp'" style="color:gray; font-size:12px" >Reconcile RSP Payment</p>
-              </h3><hr/>
-
-
-
-              <div class = "row "  *ngIf = "totalamount">
-                <div class = "col-lg-3" >
-    
-            
-                 
-    
+        <div class = "row" >
+            <div class = "col-lg-12">
+               
+                <div class = "authDiv">
+                    <h3 class = "heading"><strong>Payment Reconcillation</strong> 
+                      <div class="btn-group" style="float:right">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Import Payment <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a data-toggle="modal" data-target="#import" >RSP</a></li>
+                        </ul>
+                      </div>
+                      <p *ngIf = "id == 'rsp'" style="color:gray; font-size:12px" >Reconcile RSP Payment</p>
+                    </h3><hr/>
+      
+      
+      
+                    <div class = "row "  *ngIf = "totalamount">
+                      <div class = "col-lg-3" >
+          
+                  
+                       
+          
+                          <div class  = "authDiv no-radius2">
+                            <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                              <div class ="row">
+                                  <div class = "col-lg-12">
+                                          <p style = "font-size:15px;" class = "gray">  Total Payment</p>
+                                  </div>
+                              </div>
+                              </div>
+                              <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ totalamount | currency:'₦ ': 2 }}</strong></p>
+                                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                    <div class ="row">
+                                        <div class = "col-lg-12">
+                                                <p style = "font-size:15px;" class = "gray"> {{totalcount}} Payments</p>
+                                        </div>
+                                    </div>
+                                    </div>
+                              </div> 
+                      </div>
+                      <div class = "col-lg-3" >
+          
+                  
+                       
+          
+                        <div class  = "authDiv no-radius2">
+                          <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                            <div class ="row">
+                                <div class = "col-lg-12">
+                                        <p style = "font-size:15px;" class = "gray">  Credit Wallet</p>
+                                </div>
+                            </div>
+                            </div>
+                            <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ creditwalletamount | currency:'₦ ': 2 }}</strong></p>
+                                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                  <div class ="row">
+                                      <div class = "col-lg-12">
+                                              <p style = "font-size:15px;" class = "gray"> {{creditwalletcount}} Payments</p>
+                                      </div>
+                                  </div>
+                                  </div>
+                            </div> 
+                    </div>
+                    <div class = "col-lg-3" >
+          
+                  
+                       
+          
+                      <div class  = "authDiv no-radius2">
+                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                          <div class ="row">
+                              <div class = "col-lg-12">
+                                      <p style = "font-size:15px;" class = "gray">  Credit Alert</p>
+                              </div>
+                          </div>
+                          </div>
+                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ creditalertamount | currency:'₦ ': 2 }}</strong></p>
+                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                <div class ="row">
+                                    <div class = "col-lg-12">
+                                            <p style = "font-size:15px;" class = "gray"> {{creditalertcount}} Payments</p>
+                                    </div>
+                                </div>
+                                </div>
+                          </div> 
+                  </div>
+                  <div class = "col-lg-3" >
+          
+                  
+                       
+          
                     <div class  = "authDiv no-radius2">
                       <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
                         <div class ="row">
                             <div class = "col-lg-12">
-                                    <p style = "font-size:15px;" class = "gray">  Total Payment</p>
+                                    <p style = "font-size:15px;" class = "gray">  Not Found</p>
                             </div>
                         </div>
                         </div>
-                        <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ totalamount | currency:'₦ ': 2 }}</strong></p>
+                        <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ notfoundamount | currency:'₦ ': 2 }}</strong></p>
                             <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
                               <div class ="row">
                                   <div class = "col-lg-12">
-                                          <p style = "font-size:15px;" class = "gray"> {{totalcount}} Payments</p>
+                                          <p style = "font-size:15px;" class = "gray"> {{notfoundcount}} Payments</p>
                                   </div>
                               </div>
                               </div>
                         </div> 
                 </div>
-                <div class = "col-lg-3" >
-    
-            
-                 
-    
-                  <div class  = "authDiv no-radius2">
-                    <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                      <div class ="row">
-                          <div class = "col-lg-12">
-                                  <p style = "font-size:15px;" class = "gray">  Credit Wallet</p>
-                          </div>
-                      </div>
-                      </div>
-                      <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ creditwalletamount | currency:'₦ ': 2 }}</strong></p>
-                          <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                            <div class ="row">
-                                <div class = "col-lg-12">
-                                        <p style = "font-size:15px;" class = "gray"> {{creditwalletcount}} Payments</p>
-                                </div>
-                            </div>
-                            </div>
-                      </div> 
-              </div>
-              <div class = "col-lg-3" >
-    
-            
-                 
-    
-                <div class  = "authDiv no-radius2">
-                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                    <div class ="row">
-                        <div class = "col-lg-12">
-                                <p style = "font-size:15px;" class = "gray">  Credit Alert</p>
-                        </div>
-                    </div>
-                    </div>
-                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ creditalertamount | currency:'₦ ': 2 }}</strong></p>
-                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                          <div class ="row">
-                              <div class = "col-lg-12">
-                                      <p style = "font-size:15px;" class = "gray"> {{creditalertcount}} Payments</p>
-                              </div>
-                          </div>
-                          </div>
-                    </div> 
-            </div>
-            <div class = "col-lg-3" >
-    
-            
-                 
-    
-              <div class  = "authDiv no-radius2">
-                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                  <div class ="row">
-                      <div class = "col-lg-12">
-                              <p style = "font-size:15px;" class = "gray">  Not Found</p>
-                      </div>
-                  </div>
-                  </div>
-                  <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ notfoundamount | currency:'₦ ': 2 }}</strong></p>
-                      <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                        <div class ="row">
-                            <div class = "col-lg-12">
-                                    <p style = "font-size:15px;" class = "gray"> {{notfoundcount}} Payments</p>
-                            </div>
-                        </div>
-                        </div>
-                  </div> 
-          </div>
-            
-              </div>
-              <br/>
-        
-
-              <div class="btn-group" *ngIf = "found">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                Download Repayment File <span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a (click)="export()" >Download Credit Wallet Repayment File</a></li>
-                  <li class = "divider"></li>
-                  <li><a (click)="exportcreditalert()" >Download Credit Alert Repayment File</a></li>
-                </ul>
-              </div>
-
-              <br/>
                   
-              <br/>
-            
-
-
-
-              <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#home">Credit Wallet</a></li>
-                  <li><a data-toggle="tab" href="#menu2">Credit Alert</a></li>
-                  <li><a data-toggle="tab" href="#menu1">Not Found</a></li>
-                </ul>
-                
-                <div class="tab-content">
-                  <div id="home" class="tab-pane fade in active">
-                      <table class="table table-striped ">
-                          <thead>
-                              <tr>
-                              <th>Options</th>
-                              <th>Payment Date</th>
-                              <th>Mandate Reference</th>
-                              <th>Loan ID</th>
-                              <th>Received</th>
-                              <th>Actual Payment</th>
-                              <th>Type</th>
-                              <th>Status</th>
-                              
-                              </tr>
-                          </thead>
-                          <tbody>
+                    </div>
+                    <br/>
+              
+      
+                    <div class="btn-group" *ngIf = "found">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      Download Repayment File <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a (click)="export()" >Download Credit Wallet Repayment File</a></li>
+                        <li class = "divider"></li>
+                        <li><a (click)="exportcreditalert()" >Download Credit Alert Repayment File</a></li>
+                      </ul>
+                    </div>
+      
+                    <br/>
                         
-                       
-                              <tr  *ngFor="let payment of found; let i = index ">
-          
-                                  <td >
-          
-                                      <div class="dropdown">
-                                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                          <span class="caret"></span></button>
-                                          <ul class="dropdown-menu">
-                                            <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
-                                            <li> <a (click)="confirmpayment(payment)">View</a></li>
-                                            <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
-                                            <li class="divider" *ngIf = "loan.loan.status == 0"></li>
-                                            <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
-          
-                                          </ul>
-                                      </div>
-          
-                                              
-                                             
-                                </td>
-                                <td >{{payment.mandatereference }}</td>
-                                <td >{{payment.date }}</td>
-                                <td>{{payment.loanid}}</td>
-                                <td>{{payment.received | currency:'₦ ': 2}}</td>
-                                <td>{{payment.actualpayment | currency:'₦ ': 2}}</td>
-                                <td>{{payment.type}}</td>
-                                <td >
-                                    <span class = "label label-warning" *ngIf =  " payment.received > payment.actualpayment">Over Payment</span>
-                                    <span class = "label label-success" *ngIf =  " payment.received == payment.actualpayment">Actual Payment</span>
-                                    <span class = "label label-danger" *ngIf =  " payment.received < payment.actualpayment">Less Payment</span>
-                                </td> 
-                             
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                  <div id="menu1" class="tab-pane fade">
-                      <table class="table table-striped ">
-                          <thead>
-                              <tr>
-                            
-                              <th>Mandate Reference</th>
-                              <th>Date</th>
-                              <th>Actual Payment</th>
-                              
-                              </tr>
-                          </thead>
-                          <tbody>
-                        
-                       
-                              <tr  *ngFor="let payment of notfound; let i = index ">
-          
-                                
-                                <td >{{payment.mandatereference }}</td>
-                                <td>{{payment.date}}</td>
-                                <td>{{payment.received | currency:'₦ ': 2}}</td>
-                             
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                  <div id="menu2" class="tab-pane fade in">
-                    <table class="table table-striped ">
-                        <thead>
-                            <tr>
-                            <th>Options</th>
-                            <th>Payment Date</th>
-                            <th>Mandate Reference</th>
-                            <th>Loan ID</th>
-                            <th>Received</th>
-                            <th>Actual Payment</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <br/>
+                  
+      
+      
+      
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Credit Wallet</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Credit Alert</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Not Found</a></li>
+                      </ul>
                       
-                     
-                            <tr  *ngFor="let payment of creditalert; let i = index ">
-        
-                                <td >
-        
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                          <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
-                                          <li> <a (click)="confirmpayment(payment)">View</a></li>
-                                          <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
-                                          <li class="divider" *ngIf = "loan.loan.status == 0"></li>
-                                          <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
-        
-                                        </ul>
-                                    </div>
-        
-                                            
-                                           
-                              </td>
-                              <td >{{payment.date }}</td>
-                              <td >{{payment.mandatereference }}</td>
-                              <td>{{payment.loanid}}</td>
-                              <td>{{payment.received | currency:'₦ ': 2}}</td>
-                              <td>{{payment.actualpayment | currency:'₦ ': 2}}</td>
-                              <td>{{payment.type}}</td>
-                              <td >
-                                  <span class = "label label-warning" *ngIf =  " payment.received > payment.actualpayment">Over Payment</span>
-                                  <span class = "label label-success" *ngIf =  " payment.received == payment.actualpayment">Actual Payment</span>
-                                  <span class = "label label-danger" *ngIf =  " payment.received < payment.actualpayment">Less Payment</span>
-                              </td> 
+                      <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                    <th>Options</th>
+                                    <th>Payment Date</th>
+                                    <th>Mandate Reference</th>
+                                    <th>Loan ID</th>
+                                    <th>Received</th>
+                                    <th>Actual Payment</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                              
+                             
+                                    <tr  *ngFor="let payment of found; let i = index ">
+                
+                                        <td >
+                
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                                <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                  <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
+                                                  <li> <a (click)="confirmpayment(payment)">View</a></li>
+                                                  <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
+                                                  <li class="divider" *ngIf = "loan.loan.status == 0"></li>
+                                                  <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
+                
+                                                </ul>
+                                            </div>
+                
+                                                    
+                                                   
+                                      </td>
+                                      <td >{{payment.mandatereference }}</td>
+                                      <td >{{payment.date }}</td>
+                                      <td>{{payment.loanid}}</td>
+                                      <td>{{payment.received | currency:'₦ ': 2}}</td>
+                                      <td>{{payment.actualpayment | currency:'₦ ': 2}}</td>
+                                      <td>{{payment.type}}</td>
+                                      <td >
+                                          <span class = "label label-warning" *ngIf =  " payment.received > payment.actualpayment">Over Payment</span>
+                                          <span class = "label label-success" *ngIf =  " payment.received == payment.actualpayment">Actual Payment</span>
+                                          <span class = "label label-danger" *ngIf =  " payment.received < payment.actualpayment">Less Payment</span>
+                                      </td> 
+                                   
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                  
+                                    <th>Mandate Reference</th>
+                                    <th>Date</th>
+                                    <th>Actual Payment</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                              
+                             
+                                    <tr  *ngFor="let payment of notfound; let i = index ">
+                
+                                      
+                                      <td >{{payment.mandatereference }}</td>
+                                      <td>{{payment.date}}</td>
+                                      <td>{{payment.received | currency:'₦ ': 2}}</td>
+                                   
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="menu2" class="tab-pane fade in">
+                          <table class="table table-striped ">
+                              <thead>
+                                  <tr>
+                                  <th>Options</th>
+                                  <th>Payment Date</th>
+                                  <th>Mandate Reference</th>
+                                  <th>Loan ID</th>
+                                  <th>Received</th>
+                                  <th>Actual Payment</th>
+                                  <th>Type</th>
+                                  <th>Status</th>
+                                  
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
                            
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            
-
-    
-            
-
-
-           					
-
-                           
-             
-           
+                                  <tr  *ngFor="let payment of creditalert; let i = index ">
+              
+                                      <td >
+              
+                                          <div class="dropdown">
+                                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                              <span class="caret"></span></button>
+                                              <ul class="dropdown-menu">
+                                                <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
+                                                <li> <a (click)="confirmpayment(payment)">View</a></li>
+                                                <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
+                                                <li class="divider" *ngIf = "loan.loan.status == 0"></li>
+                                                <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
+              
+                                              </ul>
+                                          </div>
+              
+                                                  
+                                                 
+                                    </td>
+                                    <td >{{payment.date }}</td>
+                                    <td >{{payment.mandatereference }}</td>
+                                    <td>{{payment.loanid}}</td>
+                                    <td>{{payment.received | currency:'₦ ': 2}}</td>
+                                    <td>{{payment.actualpayment | currency:'₦ ': 2}}</td>
+                                    <td>{{payment.type}}</td>
+                                    <td >
+                                        <span class = "label label-warning" *ngIf =  " payment.received > payment.actualpayment">Over Payment</span>
+                                        <span class = "label label-success" *ngIf =  " payment.received == payment.actualpayment">Actual Payment</span>
+                                        <span class = "label label-danger" *ngIf =  " payment.received < payment.actualpayment">Less Payment</span>
+                                    </td> 
+                                 
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      </div>
+                  
+      
           
+                  
+      
+      
+                           
+      
+                                 
+                   
+                 
+                
+              </div>
+              
         </div>
         
-  </div>
-  
-</div>
-</div>
-<br/>
-<br/>
-<br/>
-<br/>
-
-<div class="modal fade" id="import">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title">Import Payment</h5>
       </div>
-      <div class="modal-body">
-        <form role="form" novalidate>
-          <div class="row">
-              <div class="col-md-12">
-                    <div class = "well">
-                      <p style = "font-size: 50px;text-align: center"><span class = "glyphicon glyphicon-file"></span></p>
-                      <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                      <h3 style = "text-align: center"><a (click)="select()">{{filename}}</a></h3>
-                  </div>
-              </div>
-             
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      
+      <div class="modal fade" id="import">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h5 class="modal-title">Import Payment</h5>
+            </div>
+            <div class="modal-body">
+              <form role="form" novalidate>
+                <div class="row">
+                    <div class="col-md-12">
+                          <div class = "well">
+                            <p style = "font-size: 50px;text-align: center"><span class = "glyphicon glyphicon-file"></span></p>
+                            <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            <h3 style = "text-align: center"><a (click)="select()">{{filename}}</a></h3>
+                        </div>
+                    </div>
+                   
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="upload()">Upload Payment</button>
+            </div>
           </div>
-        </form>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="upload()">Upload Payment</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
 </div>
+
 

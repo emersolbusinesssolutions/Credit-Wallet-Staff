@@ -90,4 +90,34 @@ export class InvestmentoneComponent implements OnInit {
     );
   }
 
+  confirmpayment() {
+    var json = {
+      id : this.id
+    }
+
+    console.log(json)
+    this.loadingBar.start();
+    this.service.investmentconfirm(json).subscribe(
+      data => 
+      {
+        this.loadingBar.complete();
+        if(data["status"] == "success"){
+         console.log(data)
+        
+        }else{
+          this.toastr.success(data["message"], '');
+          this._router.navigate(['']);
+        }
+        
+      },
+      error => {
+        console.log(error);
+        this.toastr.success("Service Related Error", '');
+        this.loadingBar.complete();
+      }
+    );
+  }
+
+
+
 }

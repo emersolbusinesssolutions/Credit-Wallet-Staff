@@ -893,6 +893,18 @@ export class AppServiceService {
         return this.http.post(this.path + 'investment/process', param, httpOptionsForSignedUser);
     }
 
+    investmentconfirm(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/loandisk', param, httpOptionsForSignedUser);
+    }
+
     
 
     referralcodedelete(param) {

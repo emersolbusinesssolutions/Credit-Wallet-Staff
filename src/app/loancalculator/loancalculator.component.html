@@ -1,156 +1,158 @@
 
-
-<div class = "container-fluid spaceUp">
-    <div class = "row">
-      <div class = "col-lg-10 col-lg-offset-2">
-          
-          <div class  = "authDiv no-radius2">
-              <div class = "">
-                  <h3 class = "heading"><strong>Loan Calculator</strong> 
-                  <p style="font-size:12px">Calculate monthly repayment and loan amount for customers</p>
-                    
+<div class = "main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12">
               
-                  
-                </h3><hr/>
-
-                <ul class="nav nav-tabs nav-justified">
-                    <li class="active"><a data-toggle="pill" href="#home"><b>Calculate with Loan Amount, Start Date and Tenor</b></a></li>
-                    <li><a data-toggle="pill" href="#menu1"><b>Calculate with Monthly Repayment</b></a></li>
-                  </ul>
-                  
-                  <div class="tab-content  ">
-                    <div id="home" class="tab-pane fade in active">
-                        <br/>
-                     
-                        <div class = "row">
-                            <div class = "col-lg-6">
-                                <div  *ngIf = "calculateone">
-
-
-                                    <table class="table table-stripped table-bordered">
-                                        <thead>
-                                          <tr>
-                                            <th  style = "padding:20px" class ="headFont">Monthly Repayment</th>
-                                            <th  style = "padding:20px" class ="headFont">Fees</th>
-                                            <th  style = "padding:20px" class ="headFont">Monthly Interest</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td  style = "padding:20px">{{ result.monthlyrepayment | currency:'₦ ': 2  }}</td>
-                                            <td  style = "padding:20px">{{ result.fees | currency:'₦ ': 2  }}</td>
-                                            <td  style = "padding:20px">{{result.interest  | currency:'₦ '}}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-
-                                </div>
-                                <br/>
-                              <div class = "form-group">
-                                <p>Loan Start Date</p>
-                                <input type="date"
-                                class="textBoxDesign " id="startdate" name="startdate" [(ngModel)]="startdate" >  
-                              </div>
-            
-                              <div class = "form-group">
-                                <p>Loan Amount</p>
-                                <input type="number"
-                                class="textBoxDesign " id="amount" name="amount" [(ngModel)]="amount" >  
-                             
-                              </div>
-            
-                              <div class = "form-group">
-                                <p>Tenor</p>
-                                <input type="number"
-                                class="textBoxDesign" id="tenor" name="tenor" [(ngModel)]="tenor" >  
-                             
-                              </div>
-            
-                            
-                          
-                          
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>Loan Calculator</strong> 
+                      <p style="font-size:12px">Calculate monthly repayment and loan amount for customers</p>
                         
-                              <button class = "btn btn-default btn-lg" (click)="calculator()">Calculate Balance</button>
-                            </div>
-            
+                  
+                      
+                    </h3><hr/>
+    
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a data-toggle="pill" href="#home"><b>Calculate with Loan Amount, Start Date and Tenor</b></a></li>
+                        <li><a data-toggle="pill" href="#menu1"><b>Calculate with Monthly Repayment</b></a></li>
+                      </ul>
+                      
+                      <div class="tab-content  ">
+                        <div id="home" class="tab-pane fade in active">
+                            <br/>
                          
-                          </div>
-                    </div>
-                    <div id="menu1" class="tab-pane fade">
-                        <br/>
-                     
-                        <div class = "row">
-                            <div class = "col-lg-6">
-                                <div  *ngIf = "calculatetwo">
-                    
-                            
-                                    <div class  = "authDiv no-radius2">
-                    
-                                      <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ result.amount | currency:'₦ ': 2  }}</strong></p>
-                                          <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                                            <div class ="row">
-                                                <div class = "col-lg-12">
-                                                        <p style = "font-size:15px;" class = "gray"> Loan Amount</p>
-                                                </div>
-                                            </div>
-                                            </div>
-                                      </div> 
-
-                                      
-                                </div>
-                                <br/>
-                         
-            
-                              <div class = "form-group">
-                                <p>Monthly Repayment</p>
-                                <input type="number"
-                                class="textBoxDesign " id="amount" name="monthlyrepayment" [(ngModel)]="monthlyrepayment" >  
-                             
-                              </div>
-            
-                              <div class = "form-group">
-                                <p>Tenor</p>
-                                <input type="number"
-                                class="textBoxDesign" id="tenor" name="tenor" [(ngModel)]="tenor" >  
-                             
-                              </div>
-            
-                            
-                          
-                          
-                        
-                              <button class = "btn btn-default btn-lg" (click)="calculatortwo()">Calculate Balance</button>
-                            </div>
-            
-                         
-                          </div>
-
-                    </div>
+                            <div class = "row">
+                                <div class = "col-lg-6">
+                                    <div  *ngIf = "calculateone">
+    
+    
+                                        <table class="table table-stripped table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th  style = "padding:20px" class ="headFont">Monthly Repayment</th>
+                                                <th  style = "padding:20px" class ="headFont">Fees</th>
+                                                <th  style = "padding:20px" class ="headFont">Monthly Interest</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td  style = "padding:20px">{{ result.monthlyrepayment | currency:'₦ ': 2  }}</td>
+                                                <td  style = "padding:20px">{{ result.fees | currency:'₦ ': 2  }}</td>
+                                                <td  style = "padding:20px">{{result.interest  | currency:'₦ '}}</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+    
+                                    </div>
+                                    <br/>
+                                  <div class = "form-group">
+                                    <p>Loan Start Date</p>
+                                    <input type="date"
+                                    class="textBoxDesign " id="startdate" name="startdate" [(ngModel)]="startdate" >  
+                                  </div>
                 
-                  </div>
-  
-              
-        
+                                  <div class = "form-group">
+                                    <p>Loan Amount</p>
+                                    <input type="number"
+                                    class="textBoxDesign " id="amount" name="amount" [(ngModel)]="amount" >  
+                                 
+                                  </div>
+                
+                                  <div class = "form-group">
+                                    <p>Tenor</p>
+                                    <input type="number"
+                                    class="textBoxDesign" id="tenor" name="tenor" [(ngModel)]="tenor" >  
+                                 
+                                  </div>
+                
+                                
+                              
+                              
+                            
+                                  <button class = "btn btn-default btn-lg" (click)="calculator()">Calculate Balance</button>
+                                </div>
+                
+                             
+                              </div>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <br/>
+                         
+                            <div class = "row">
+                                <div class = "col-lg-6">
+                                    <div  *ngIf = "calculatetwo">
+                        
+                                
+                                        <div class  = "authDiv no-radius2">
+                        
+                                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ result.amount | currency:'₦ ': 2  }}</strong></p>
+                                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                                <div class ="row">
+                                                    <div class = "col-lg-12">
+                                                            <p style = "font-size:15px;" class = "gray"> Loan Amount</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                          </div> 
+    
+                                          
+                                    </div>
+                                    <br/>
+                             
+                
+                                  <div class = "form-group">
+                                    <p>Monthly Repayment</p>
+                                    <input type="number"
+                                    class="textBoxDesign " id="amount" name="monthlyrepayment" [(ngModel)]="monthlyrepayment" >  
+                                 
+                                  </div>
+                
+                                  <div class = "form-group">
+                                    <p>Tenor</p>
+                                    <input type="number"
+                                    class="textBoxDesign" id="tenor" name="tenor" [(ngModel)]="tenor" >  
+                                 
+                                  </div>
+                
+                                
+                              
+                              
+                            
+                                  <button class = "btn btn-default btn-lg" (click)="calculatortwo()">Calculate Balance</button>
+                                </div>
+                
+                             
+                              </div>
+    
+                        </div>
+                    
+                      </div>
       
                   
-              </div>
-              
-          </div> 
-      </div>
-    </div>
-    
-        <div class = "row">
+            
+          
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
         
-    
-      </div>
-  
-      <br/><br/>
-      <br/> <br/><br/>
-      <br/> <br/><br/>
-      <br/>
-  
-  
-  </div> 
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+</div>
+
   
   
   

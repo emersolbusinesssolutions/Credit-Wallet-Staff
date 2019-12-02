@@ -1,126 +1,128 @@
-
-<div class = "container-fluid spaceUp" *ngIf  = "loans">
-  <div class = "row">
-    <div class = "col-lg-10 col-lg-offset-2">
-        
-        <div class  = "authDiv no-radius2">
-            <div class = "">
-
+<div class = "main">
+    <div class = "container-fluid spaceUp" *ngIf  = "loans">
+        <div class = "row">
+          <div class = "col-lg-12">
               
-                <h3 class = "heading"><strong>Active Loans</strong> <div class = "row" style="float:right">
-
-                    <div class = "col-lg-12">
-                      <input class = "form-control" placeholder="Search"  name="searchtext" [(ngModel)]="searchtext" (ngModelChange)="search()"  >
-                    </div>
-
-                   
-
-                  </div>
-                
-                  <p style="font-size:12px; color:gray; margin-top:10px">Advanced Search : <a data-toggle="collapse" data-target="#demo">Click Here to Show</a></p></h3><hr/>
-
-                <div id="demo" class="collapse">
-                  <p class = "heading"><b>Loan Released Date</b></p>
-                    <div class="row" >
-                        <div class="col-lg-3">
-                          <p>From:</p>
-                            <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                            [(ngModel)]="from" required></my-date-picker>
-                        </div>
-                        <div class="col-lg-3">
-                          <p>To:</p>
-                            <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                            [(ngModel)]="to" required></my-date-picker>
-                        </div>
-                      </div>
-                      <button class = "btn btn-primary" (click) = "submit()">Search</button>
-                      <hr/>
-                </div>
-           
-        
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                            <th>Options</th>
-                            <th>Loan Released Date</th>
-                            <th>Loan ID</th>
-                            <th>Name</th>
-                            <th>Telephone</th>
-                            <th>Amount</th>
-                            <th>Tenor</th>
-                            <th>MDA Name</th>
-                            <th>Giro Reference</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                      
-                     
-                            <tr  *ngFor="let loan of loans; let i = index ">
-
-                                <td >
-
-                                    <div class="dropdown">
-                                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                      <span class="caret"></span></button>
-                                      <ul class="dropdown-menu">
-                                        <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
-                                        <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
-                                       
-                                        <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
-                                        <li class="divider" *ngIf = "loan.loan.status == 0"></li>
-                                        <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
-
-                                      </ul>
-                                    </div>
-
-                                            
-                                           
-                                </td>
-                              <td >{{loan.loan.loanreleaseddate }}</td>
-                              <td>{{loan.loan.loanid}}</td>
-                              <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
-                           
-                                <td>{{loan.loan.telephone}}</td>
-
-                              <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
-                              <td >{{loan.loan.tenor }} months</td>
-                              <td >{{loan.loan.place_of_work | titlecase}}</td>
-                              <td >{{loan.loan.giroreference}}</td>
-                              
-                           
-                            </tr>
-                        </tbody>
-                    </table>
-
-
-                    <h5> 
-                        Showing {{returnStart()}} to {{returnEnd()}} of {{result.total_size}} entries
-                        <div class="btn-group" style="float:right" *ngIf = "loans">
-                            <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
-                            <button type="button" (click)="next()" class="btn btn-default">Next</button>
-                          </div>
-                        </h5>
-       
-                      <br/>
-                
-            </div>
-            
-        </div> 
-    </div>
-  </div>
-  
-      <div class = "row">
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
       
-  
-    </div>
+                    
+                      <h3 class = "heading"><strong>Active Loans</strong> <div class = "row" style="float:right">
+      
+                          <div class = "col-lg-12">
+                            <input class = "form-control" placeholder="Search"  name="searchtext" [(ngModel)]="searchtext" (ngModelChange)="search()"  >
+                          </div>
+      
+                         
+      
+                        </div>
+                      
+                        <p style="font-size:12px; color:gray; margin-top:10px">Advanced Search : <a data-toggle="collapse" data-target="#demo">Click Here to Show</a></p></h3><hr/>
+      
+                      <div id="demo" class="collapse">
+                        <p class = "heading"><b>Loan Released Date</b></p>
+                          <div class="row" >
+                              <div class="col-lg-3">
+                                <p>From:</p>
+                                  <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                  [(ngModel)]="from" required></my-date-picker>
+                              </div>
+                              <div class="col-lg-3">
+                                <p>To:</p>
+                                  <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                  [(ngModel)]="to" required></my-date-picker>
+                              </div>
+                            </div>
+                            <button class = "btn btn-primary" (click) = "submit()">Search</button>
+                            <hr/>
+                      </div>
+                 
+              
+                          <table class="table table-striped">
+                              <thead>
+                                  <tr>
+                                  <th>Options</th>
+                                  <th>Loan Released Date</th>
+                                  <th>Loan ID</th>
+                                  <th>Name</th>
+                                  <th>Telephone</th>
+                                  <th>Amount</th>
+                                  <th>Tenor</th>
+                                  <th>MDA Name</th>
+                                  <th>Giro Reference</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                           
+                                  <tr  *ngFor="let loan of loans; let i = index ">
+      
+                                      <td >
+      
+                                          <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                              <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
+                                              <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
+                                             
+                                              <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
+                                              <li class="divider" *ngIf = "loan.loan.status == 0"></li>
+                                              <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
+      
+                                            </ul>
+                                          </div>
+      
+                                                  
+                                                 
+                                      </td>
+                                    <td >{{loan.loan.loanreleaseddate }}</td>
+                                    <td>{{loan.loan.loanid}}</td>
+                                    <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
+                                 
+                                      <td>{{loan.loan.telephone}}</td>
+      
+                                    <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
+                                    <td >{{loan.loan.tenor }} months</td>
+                                    <td >{{loan.loan.place_of_work | titlecase}}</td>
+                                    <td >{{loan.loan.giroreference}}</td>
+                                    
+                                 
+                                  </tr>
+                              </tbody>
+                          </table>
+      
+      
+                          <h5> 
+                              Showing {{returnStart()}} to {{returnEnd()}} of {{result.total_size}} entries
+                              <div class="btn-group" style="float:right" *ngIf = "loans">
+                                  <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
+                                  <button type="button" (click)="next()" class="btn btn-default">Next</button>
+                                </div>
+                              </h5>
+             
+                            <br/>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+</div>
 
-    <br/><br/>
-    <br/> <br/><br/>
-    <br/> <br/><br/>
-    <br/>
-
-
-</div> 
 
 
 

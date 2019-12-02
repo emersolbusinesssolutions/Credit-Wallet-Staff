@@ -1,180 +1,184 @@
 
 
-<div class = "container-fluid spaceUp" *ngIf = "loanrecovery">
-    <div class = "row">
-      <div class = "col-lg-10 col-lg-offset-2">
-          
-          <div class  = "authDiv no-radius2">
-              <div class = "">
-                  <h3 class = "heading"><strong>{{loanrecovery.name}}</strong> <span style="font-size:12px"> 
-                      <span *ngIf="loanrecovery.category == 0" class="label label-danger">Urgent/Loss</span>
-                      <span *ngIf="loanrecovery.category == 1" class="label label-warning">Performing</span>
-                      <span *ngIf="loanrecovery.category == 2" class="label label-success">Paid</span>
-                  </span> </h3>
-
-                    <br/>
-
-                    <div class="btn-group btn-group-justified">
-                        <a data-toggle="modal" data-target="#modal-comment" class="btn btn-default" class="btn btn-default">Add Comment</a>
-                        
-                        <a class="btn btn-default" data-toggle="modal" data-target="#modal-payment"  (click)="setpaymentdate">Set Payment Date</a>
-                        <a class="btn btn-warning" (click)="solved(1)">Mark as Performing</a>
-                        <a class="btn btn-success" (click)="solved(2)">Mark as Paid</a>
-                        <a class="btn btn-danger" (click)="solved(0)">Mark as Urgent/Loss</a>
-                      </div>
-  
-                    <table class="table table-stripped">
-                
-                        <tbody>
-                          <tr>
-                            <th  style = "padding:20px">Phone Number</th>
-                            <td  style = "padding:20px">
+<div class = "main">
+    <div class = "container-fluid spaceUp" *ngIf = "loanrecovery">
+        <div class = "row">
+          <div class = "col-lg-12">
+              
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>{{loanrecovery.name}}</strong> <span style="font-size:12px"> 
+                          <span *ngIf="loanrecovery.category == 0" class="label label-danger">Urgent/Loss</span>
+                          <span *ngIf="loanrecovery.category == 1" class="label label-warning">Performing</span>
+                          <span *ngIf="loanrecovery.category == 2" class="label label-success">Paid</span>
+                      </span> </h3>
+    
+                        <br/>
+    
+                        <div class="btn-group btn-group-justified">
+                            <a data-toggle="modal" data-target="#modal-comment" class="btn btn-default" class="btn btn-default">Add Comment</a>
                             
-                                {{startWith(loanrecovery.phoneno)}}</td>
-                            <th  style = "padding:20px">Loan Released Date</th>
-                            <td  style = "padding:20px">{{loanrecovery.loanreleaseddate}}</td>
-                          </tr>
-                          <tr>
-                              <th  style = "padding:20px">Last Payment Date</th>
-                              <td  style = "padding:20px">{{loanrecovery.lastpayment}}</td>
-                              <th  style = "padding:20px">IPPIS No</th>
-                              <td  style = "padding:20px">{{loanrecovery.ippisno}}</td>
-                            </tr>
-                          <tr>
-                            <th  style = "padding:20px">MDA Name</th>
-                            <td  style = "padding:20px">{{loanrecovery.business}}</td>
-                            <th  style = "padding:20px">Loan ID</th>
-                            <td  style = "padding:20px">{{loanrecovery.loanid}}</td>
-                          </tr>
-                          <tr>
-                              <th  style = "padding:20px">Loan Amount</th>
-                              <td  style = "padding:20px">{{loanrecovery.principal | currency:'₦': 3}}</td>
-                              <th  style = "padding:20px">Due Amount</th>
-                              <td  style = "padding:20px">{{loanrecovery.due | currency:'₦': 3}}</td>
-                            </tr>
-                            <tr>
-                                <th  style = "padding:20px">Paid</th>
-                                <td  style = "padding:20px">{{loanrecovery.paid | currency:'₦': 3}}</td>
-                                <th  style = "padding:20px">Balance</th>
-                                <td  style = "padding:20px">{{loanrecovery.balance | currency:'₦': 3}}</td>
+                            <a class="btn btn-default" data-toggle="modal" data-target="#modal-payment"  (click)="setpaymentdate">Set Payment Date</a>
+                            <a class="btn btn-warning" (click)="solved(1)">Mark as Performing</a>
+                            <a class="btn btn-success" (click)="solved(2)">Mark as Paid</a>
+                            <a class="btn btn-danger" (click)="solved(0)">Mark as Urgent/Loss</a>
+                          </div>
+      
+                        <table class="table table-stripped">
+                    
+                            <tbody>
+                              <tr>
+                                <th  style = "padding:20px">Phone Number</th>
+                                <td  style = "padding:20px">
+                                
+                                    {{startWith(loanrecovery.phoneno)}}</td>
+                                <th  style = "padding:20px">Loan Released Date</th>
+                                <td  style = "padding:20px">{{loanrecovery.loanreleaseddate}}</td>
                               </tr>
                               <tr>
-                                  <th  style = "padding:20px">Duration</th>
-                                  <td  style = "padding:20px">{{loanrecovery.duration}}</td>
-                                  <th  style = "padding:20px">Loan Status</th>
-                                  <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
+                                  <th  style = "padding:20px">Last Payment Date</th>
+                                  <td  style = "padding:20px">{{loanrecovery.lastpayment}}</td>
+                                  <th  style = "padding:20px">IPPIS No</th>
+                                  <td  style = "padding:20px">{{loanrecovery.ippisno}}</td>
+                                </tr>
+                              <tr>
+                                <th  style = "padding:20px">MDA Name</th>
+                                <td  style = "padding:20px">{{loanrecovery.business}}</td>
+                                <th  style = "padding:20px">Loan ID</th>
+                                <td  style = "padding:20px">{{loanrecovery.loanid}}</td>
+                              </tr>
+                              <tr>
+                                  <th  style = "padding:20px">Loan Amount</th>
+                                  <td  style = "padding:20px">{{loanrecovery.principal | currency:'₦': 3}}</td>
+                                  <th  style = "padding:20px">Due Amount</th>
+                                  <td  style = "padding:20px">{{loanrecovery.due | currency:'₦': 3}}</td>
                                 </tr>
                                 <tr>
-                                    <th  style = "padding:20px">Duration</th>
-                                    <td  style = "padding:20px">{{loanrecovery.duration}}</td>
-                                    <th  style = "padding:20px">Loan Status</th>
-                                    <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
+                                    <th  style = "padding:20px">Paid</th>
+                                    <td  style = "padding:20px">{{loanrecovery.paid | currency:'₦': 3}}</td>
+                                    <th  style = "padding:20px">Balance</th>
+                                    <td  style = "padding:20px">{{loanrecovery.balance | currency:'₦': 3}}</td>
                                   </tr>
                                   <tr>
-                                      <th  style = "padding:20px">Preferred Payment Date</th>
-                                      <td colspan="3" style = "padding:20px">{{loanrecovery.paymentdate | date}}</td>
-                                     
+                                      <th  style = "padding:20px">Duration</th>
+                                      <td  style = "padding:20px">{{loanrecovery.duration}}</td>
+                                      <th  style = "padding:20px">Loan Status</th>
+                                      <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
                                     </tr>
-                        </tbody>
-                      </table>
-
-                      <br/>
-                      <div *ngIf = "comments">
-                          <div class = "panel panel-default" *ngFor = "let comment of comments">
-                              <div class = "panel-body">
-                                      <h4  class="heading"><b>{{comment.firstname | titlecase}} {{comment.lastname | titlecase}} </b><span style="font-size:11px;float:right">{{comment.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}<br/>{{comment.department}}</span></h4>
-                                      <hr/>
-                                      
-                                      {{titleCaseWord(comment.comment)}}
+                                    <tr>
+                                        <th  style = "padding:20px">Duration</th>
+                                        <td  style = "padding:20px">{{loanrecovery.duration}}</td>
+                                        <th  style = "padding:20px">Loan Status</th>
+                                        <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
+                                      </tr>
+                                      <tr>
+                                          <th  style = "padding:20px">Preferred Payment Date</th>
+                                          <td colspan="3" style = "padding:20px">{{loanrecovery.paymentdate | date}}</td>
+                                         
+                                        </tr>
+                            </tbody>
+                          </table>
+    
+                          <br/>
+                          <div *ngIf = "comments">
+                              <div class = "panel panel-default" *ngFor = "let comment of comments">
+                                  <div class = "panel-body">
+                                          <h4  class="heading"><b>{{comment.firstname | titlecase}} {{comment.lastname | titlecase}} </b><span style="font-size:11px;float:right">{{comment.datecreated | date: 'dd/MM/yyyy h:mm:ss a'}}<br/>{{comment.department}}</span></h4>
+                                          <hr/>
+                                          
+                                          {{titleCaseWord(comment.comment)}}
+                                  </div>
                               </div>
                           </div>
-                      </div>
-    
-                    
-              </div>
-              
-          </div> 
-      </div>
-    </div>
-    
-        <div class = "row">
         
+                        
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
     
-      </div>
-  
-      <br/><br/>
-      <br/> <br/><br/>
-      <br/> <br/><br/>
-      <br/>
-  
-  
-  </div> 
-
-  <div class="modal fade" id="modal-comment" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h5 class="modal-title">Add Comment</h5>
-          </div>
-          <div class="modal-body">
-            <form role="form" novalidate>
-              <div class="row">
-                  <div class="col-md-12">
-                      
-                      <div class="form-group">
-                          <p>Comment</p>
-                          <input class="textBoxDesign " type="text" name="comment" [(ngModel)]="comment" required="required">
-                      </div>
-                  </div>
-                 
+      <div class="modal fade" id="modal-comment" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Add Comment</h5>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="addcomment()">Add Comment</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-  </div>
-  
-
-  <div class="modal fade" id="modal-payment" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h5 class="modal-title">Set Payment Date</h5>
-          </div>
-          <div class="modal-body">
-            <form role="form" novalidate>
-              <div class="row">
-                  <div class="col-md-12">
-                      
-                      <div class="form-group">
-                          <p>Set desired payment date from Customer</p>
-                          <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                                  [(ngModel)]="paymentdate" required></my-date-picker>
+              <div class="modal-body">
+                <form role="form" novalidate>
+                  <div class="row">
+                      <div class="col-md-12">
+                          
+                          <div class="form-group">
+                              <p>Comment</p>
+                              <input class="textBoxDesign " type="text" name="comment" [(ngModel)]="comment" required="required">
+                          </div>
                       </div>
+                     
                   </div>
-                 
+                </form>
               </div>
-            </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addcomment()">Add Comment</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="addpayment()">Set Payment</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
+          <!-- /.modal-dialog -->
       </div>
-      <!-- /.modal-dialog -->
-  </div>
+      
+    
+      <div class="modal fade" id="modal-payment" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Set Payment Date</h5>
+              </div>
+              <div class="modal-body">
+                <form role="form" novalidate>
+                  <div class="row">
+                      <div class="col-md-12">
+                          
+                          <div class="form-group">
+                              <p>Set desired payment date from Customer</p>
+                              <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                      [(ngModel)]="paymentdate" required></my-date-picker>
+                          </div>
+                      </div>
+                     
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addpayment()">Set Payment</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+</div>
+
+
   
   
   

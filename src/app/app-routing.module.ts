@@ -173,6 +173,10 @@ const routes: Routes = [
         loadChildren: './auditlog/auditlog.module#AuditlogModule'
       },
       {
+        path : 'disbursementreconciliation',
+        loadChildren: './disbursementreconcillation/disbursementreconcillation.module#DisbursementreconcillationModule'
+      },
+      {
         path : 'loan/:id',
         loadChildren: './viewloan/viewloan.module#ViewloanModule'
       },

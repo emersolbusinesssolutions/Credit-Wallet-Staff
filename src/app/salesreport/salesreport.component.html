@@ -1,154 +1,156 @@
 
-
-<div class = "container-fluid spaceUp" >
-    <div class = "row">
-      <div class = "col-lg-10 col-lg-offset-2">
-          
-          <div class  = "authDiv no-radius2">
-              <div class = "">
-                  <h3 class = "heading"><strong>Sales Reports</strong> <br/><p style="color:gray; font-size:13px">Get sales information between two dates</p></h3><hr/>
-                    
-                    <div class = "row ">
-                      <div class = "col-lg-3">
-                        <div class = "form-group">
-                          <p>From <span style="color:red">*</span></p>
-                          <input class="form-control " type="date" name="from" [(ngModel)]="from" >
-                        </div>
-                      </div>
-                      <div class = "col-lg-3">
-          
-                          <div class = "form-group">
-                              <p>To <span style="color:red">*</span></p>
-                              <input class="form-control " type="date" name="to" [(ngModel)]="to" >
-                            </div>
-                  
-                        </div>
-                        <div class = "col-lg-3">
-          
-                            <div class = "form-group">
-                                <p>Marketer</p>
-                                <select class="form-control"  name="marketer" [(ngModel)]="marketer">
-                                    <option value = "Credit Wallet">Credit Wallet</option>
-                                    <option value = "Ugbobuaku">Ugbobuaku Mmesoma</option>
-                                    <option value = "Eke">Eke Emmanuella</option>
-                                    <option value = "Nnamso">Nnamso violet</option>
-                                    <option value = "Iloabachie">Stephanie Iloabachie </option>
-                                    <option value = "Clement">Hephzibah Nasara Clement</option>
-                                    <option value = "blessing">Blessing Ebute</option>
-                                    <option value = "Folashade">Folashade Giwa</option>
-                                    <option value = "Atewe">Atewe Evans</option>
-                                </select>
-                              </div>
-                    
-                          </div>
-                  
-                    </div>
-
-                    <button class = "btn btn-primary" (click)="getReport()">Get Report</button>
-  
-                    <br/>  <br/>
-            
-          
-                      <table class="table table-striped ">
-                          <thead>
-                              <tr>
-                              <th>Marketer Name</th>
-                              <th>Number of Loans</th>
-                              <th>From</th>
-                              <th>To</th>
-                              <th>Loan Amount</th>
-                              <th>Commission</th>
-                              <th></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                        
-                       
-                              <tr  *ngFor="let loan of loans; let i = index ">
-  
-                               
-                                <td><span *ngIf = "loan.marketer == 'Credit Wallet'">Credit Wallet</span>
-                                  <span *ngIf = "loan.marketer == 'Ugbobuaku'">Ugbobuaku Mmesoma</span>
-                                  <span *ngIf = "loan.marketer == 'Eke'">Eke Emmanuella</span>
-                                  <span *ngIf = "loan.marketer == 'Nnamso'">Nnamso violet</span>
-                                  <span *ngIf = "loan.marketer == 'Iloabachie'">Stephanie Iloabachie </span>
-                                  <span *ngIf = "loan.marketer == 'Clement'">Hephzibah Nasara Clement</span>
-                                  <span *ngIf = "loan.marketer == 'blessing'">Blessing Ebute</span>
-                                  <span *ngIf = "loan.marketer == 'Folashade'">Folashade Giwa</span>
-                                  <span *ngIf = "loan.marketer == 'Atewe'">Atewe Evans</span>
-                                </td>
-                                <td>{{loan.numberofloans}} Customers</td>
-                                <td>{{from | date}}</td>
-                                  <td>{{to | date}}</td>
-                                <td >{{loan.loanamount | currency:'₦': 3}}</td> 
-                                <td >{{(0.02 * loan.loanamount) | currency:'₦': 3}}</td>
-                                <td > <button class="btn btn-default" (click)="viewTransaction(loan.customers)" type="button">Transaction History</button></td>
-                               
-                              </tr>
-                          </tbody>
-                      </table>
-                  
-              </div>
-              
-          </div> 
-      </div>
-    </div>
-    
+<div class = "main">
+    <div class = "container-fluid spaceUp" >
         <div class = "row">
-        
-    
-      </div>
-  
-      <br/><br/>
-      <br/> <br/><br/>
-      <br/> <br/><br/>
-      <br/>
-  
-      <button type="button" id = "modaltransaction" style="display:none" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-      <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Transaction History</h4>
-        </div>
-        <div class="modal-body">
-            <table class="table table-striped ">
-                <thead>
-                    <tr>
-                    <th>Customer Name</th>
-                    <th>Loan ID</th>
-                    <th>Loan Amount</th>
-                    <th>Date of Disbursement</th>
-                    </tr>
-                </thead>
-                <tbody>
+          <div class = "col-lg-12">
               
-             
-                    <tr  *ngFor="let customer of customers; let i = index ">
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>Sales Reports</strong> <br/><p style="color:gray; font-size:13px">Get sales information between two dates</p></h3><hr/>
+                        
+                        <div class = "row ">
+                          <div class = "col-lg-3">
+                            <div class = "form-group">
+                              <p>From <span style="color:red">*</span></p>
+                              <input class="form-control " type="date" name="from" [(ngModel)]="from" >
+                            </div>
+                          </div>
+                          <div class = "col-lg-3">
+              
+                              <div class = "form-group">
+                                  <p>To <span style="color:red">*</span></p>
+                                  <input class="form-control " type="date" name="to" [(ngModel)]="to" >
+                                </div>
+                      
+                            </div>
+                            <div class = "col-lg-3">
+              
+                                <div class = "form-group">
+                                    <p>Marketer</p>
+                                    <select class="form-control"  name="marketer" [(ngModel)]="marketer">
+                                        <option value = "Credit Wallet">Credit Wallet</option>
+                                        <option value = "Ugbobuaku">Ugbobuaku Mmesoma</option>
+                                        <option value = "Eke">Eke Emmanuella</option>
+                                        <option value = "Nnamso">Nnamso violet</option>
+                                        <option value = "Iloabachie">Stephanie Iloabachie </option>
+                                        <option value = "Clement">Hephzibah Nasara Clement</option>
+                                        <option value = "blessing">Blessing Ebute</option>
+                                        <option value = "Folashade">Folashade Giwa</option>
+                                        <option value = "Atewe">Atewe Evans</option>
+                                    </select>
+                                  </div>
+                        
+                              </div>
+                      
+                        </div>
+    
+                        <button class = "btn btn-primary" (click)="getReport()">Get Report</button>
+      
+                        <br/>  <br/>
+                
+              
+                          <table class="table table-striped ">
+                              <thead>
+                                  <tr>
+                                  <th>Marketer Name</th>
+                                  <th>Number of Loans</th>
+                                  <th>From</th>
+                                  <th>To</th>
+                                  <th>Loan Amount</th>
+                                  <th>Commission</th>
+                                  <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                           
+                                  <tr  *ngFor="let loan of loans; let i = index ">
+      
+                                   
+                                    <td><span *ngIf = "loan.marketer == 'Credit Wallet'">Credit Wallet</span>
+                                      <span *ngIf = "loan.marketer == 'Ugbobuaku'">Ugbobuaku Mmesoma</span>
+                                      <span *ngIf = "loan.marketer == 'Eke'">Eke Emmanuella</span>
+                                      <span *ngIf = "loan.marketer == 'Nnamso'">Nnamso violet</span>
+                                      <span *ngIf = "loan.marketer == 'Iloabachie'">Stephanie Iloabachie </span>
+                                      <span *ngIf = "loan.marketer == 'Clement'">Hephzibah Nasara Clement</span>
+                                      <span *ngIf = "loan.marketer == 'blessing'">Blessing Ebute</span>
+                                      <span *ngIf = "loan.marketer == 'Folashade'">Folashade Giwa</span>
+                                      <span *ngIf = "loan.marketer == 'Atewe'">Atewe Evans</span>
+                                    </td>
+                                    <td>{{loan.numberofloans}} Customers</td>
+                                    <td>{{from | date}}</td>
+                                      <td>{{to | date}}</td>
+                                    <td >{{loan.loanamount | currency:'₦': 3}}</td> 
+                                    <td >{{(0.02 * loan.loanamount) | currency:'₦': 3}}</td>
+                                    <td > <button class="btn btn-default" (click)="viewTransaction(loan.customers)" type="button">Transaction History</button></td>
+                                   
+                                  </tr>
+                              </tbody>
+                          </table>
+                      
+                  </div>
                   
-                      <td>{{customer.firstname | titlecase}} {{customer.lastname  | titlecase}}</td>
-                      <td>{{customer.loanid}}</td>
-                      <td >{{customer.loan_amount | currency:'₦': 3}}</td> 
-                      <td >{{customer.date_of_disbursement | date}}</td>
-                     
-                    </tr>
-                </tbody>
-            </table>
+              </div> 
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+          <button type="button" id = "modaltransaction" style="display:none" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+    
+          <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Transaction History</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                        <th>Customer Name</th>
+                        <th>Loan ID</th>
+                        <th>Loan Amount</th>
+                        <th>Date of Disbursement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                  
+                 
+                        <tr  *ngFor="let customer of customers; let i = index ">
+                      
+                          <td>{{customer.firstname | titlecase}} {{customer.lastname  | titlecase}}</td>
+                          <td>{{customer.loanid}}</td>
+                          <td >{{customer.loan_amount | currency:'₦': 3}}</td> 
+                          <td >{{customer.date_of_disbursement | date}}</td>
+                         
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
         </div>
       </div>
-  
-    </div>
-  </div>
-  </div> 
-  
+      </div> 
+      
+</div>
+
   
   
   

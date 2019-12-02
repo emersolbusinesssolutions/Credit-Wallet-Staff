@@ -1,85 +1,87 @@
-
-<div class = "container-fluid spaceUp">
-  <div class = "row">
-    <div class = "col-lg-10 col-lg-offset-2">
-        
-        <div class  = "authDiv no-radius2">
-            <div class = "">
-                <h3 class = "heading"><strong>Audit Log</strong></h3><hr/>
-
-                <p>Get report between two days</p>
-
-                <div class = "row ">
-                        <div class = "col-lg-3">
-                          <div class = "form-group">
-                            <p>From <span style="color:red">*</span></p>
-                            <input class="form-control " type="date" name="from" [(ngModel)]="from" >
-                          </div>
-                        </div>
-                        <div class = "col-lg-3">
-            
-                            <div class = "form-group">
-                                <p>To <span style="color:red">*</span></p>
-                                <input class="form-control " type="date" name="to" [(ngModel)]="to" >
-                              </div>
-                    
-                          </div>
-                     
-                    
-                      </div>
-  
-                      <button class = "btn btn-primary" (click)="getReport()">Get Report</button>
-    
-                      <br/>  <br/>
-          
-        
-                    <table class="table table-striped ">
-                        <thead>
-                            <tr>
-                            <th>S/NO</th>
-                            <th>Date and Time</th>
-                            <th>Staff Name</th>
-                            <th>Narration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                      
-                     
-                            <tr  *ngFor="let audit of auditlogs; let i = index ">
-
-                                <td >
-
-                                 
-{{i + 1}}
-                                            
-                                           
-                                </td>
-                              <td >{{audit.datecreated   | date : 'MMM d, y, h:mm:ss a' }}</td>
-                              <td >{{audit.firstname  | titlecase  }} {{audit.lastname  | titlecase  }}</td>
-                              <td>{{audit.description}}</td>
-                             
-                            </tr>
-                        </tbody>
-                    </table>
-                
-            </div>
-            
-        </div> 
-    </div>
-  </div>
-  
-      <div class = "row">
+<div class="main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12">
+              
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+                      <h3 class = "heading"><strong>Audit Log</strong></h3><hr/>
       
-  
-    </div>
+                      <p>Get report between two days</p>
+      
+                      <div class = "row ">
+                              <div class = "col-lg-3">
+                                <div class = "form-group">
+                                  <p>From <span style="color:red">*</span></p>
+                                  <input class="form-control " type="date" name="from" [(ngModel)]="from" >
+                                </div>
+                              </div>
+                              <div class = "col-lg-3">
+                  
+                                  <div class = "form-group">
+                                      <p>To <span style="color:red">*</span></p>
+                                      <input class="form-control " type="date" name="to" [(ngModel)]="to" >
+                                    </div>
+                          
+                                </div>
+                           
+                          
+                            </div>
+        
+                            <button class = "btn btn-primary" (click)="getReport()">Get Report</button>
+          
+                            <br/>  <br/>
+                
+              
+                          <table class="table table-striped ">
+                              <thead>
+                                  <tr>
+                                  <th>S/NO</th>
+                                  <th>Date and Time</th>
+                                  <th>Staff Name</th>
+                                  <th>Narration</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                           
+                                  <tr  *ngFor="let audit of auditlogs; let i = index ">
+      
+                                      <td >
+      
+                                       
+      {{i + 1}}
+                                                  
+                                                 
+                                      </td>
+                                    <td >{{audit.datecreated   | date : 'MMM d, y, h:mm:ss a' }}</td>
+                                    <td >{{audit.firstname  | titlecase  }} {{audit.lastname  | titlecase  }}</td>
+                                    <td>{{audit.description}}</td>
+                                   
+                                  </tr>
+                              </tbody>
+                          </table>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+</div>
 
-    <br/><br/>
-    <br/> <br/><br/>
-    <br/> <br/><br/>
-    <br/>
-
-
-</div> 
 
 
 

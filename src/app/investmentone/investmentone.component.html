@@ -1,198 +1,200 @@
 
 
+<div class = "main">
 
+    <div class = "container-fluid spaceUp" >
 
-<div class = "container-fluid spaceUp" >
-
-    <div class = "row" >
-        <div class = "col-lg-10 col-lg-offset-2">
-           
-            <div class = "authDiv" *ngIf = "user">
-                <h3 class = "heading"><strong>{{user.firstname | titlecase}} {{user.lastname | titlecase}}</strong> 
-                 
-                </h3><hr/>
-                <div >
-                    <a class="btn btn-default"  data-toggle="modal" data-target="#modal-reject">Cancel</a>
-                    <a class="btn btn-default" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
-                    <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Confirm Payment</a>
-                    <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
-                </div>
-
-                <hr/>
-
-                <table class="table table-striped table-bordered">
-                    
-                    <tbody>
-                        
-                        <tr style="padding:15px" >
-                            <th style="padding:15px" scope="row">Title</th> 
-                            <td style="padding:15px">{{user.title | titlecase}}</td>
-                            <th style="padding:15px" scope="row">Gender</th>
-                            <td style="padding:15px">{{user.gender | titlecase}}</td>
-                        </tr>
-                        <tr style="padding:15px" >
-                            <th style="padding:15px" scope="row">Firstname</th> 
-                            <td style="padding:15px">{{user.firstname | titlecase}}</td>
-                            <th style="padding:15px" scope="row">Lastname</th>
-                            <td style="padding:15px">{{user.lastname | titlecase}}</td>
-                        </tr>
-                        <tr style="padding:15px" >
-                            <th style="padding:15px" scope="row">Email Address</th> 
-                            <td style="padding:15px">{{user.email}}</td>
-                            <th style="padding:15px" scope="row">CW Number</th>
-                            <td style="padding:15px"></td>
-                        </tr>
-                      
-                        <tr style="padding:15px" >
-                            <th style="padding:15px" scope="row">Bank Name</th> 
-                            <td style="padding:15px"><span *ngIf="user.bankcode == '044'">ACCESS BANK PLC</span>
-                              <span *ngIf="user.bankcode == '023'">CITI BANK</span>
-                              <span *ngIf="user.bankcode == '063'">DIAMOND BANK PLC</span>
-                              <span *ngIf="user.bankcode == '050'">ECOBANK NIGERIA PLC</span>
-                              <span *ngIf="user.bankcode == '070'">FIDELITY BANK PLC</span>
-                              <span *ngIf="user.bankcode == '011'">FIRST BANK OF NIGERIA PLC</span>
-                              <span *ngIf="user.bankcode == '214'">FIRST CITY MONUMENT BANK PLC</span>
-                              <span *ngIf="user.bankcode == '058'">GUARANTY TRUST BANK PLC</span>
-                              <span *ngIf="user.bankcode == '030'">HERITAGE BANK</span>
-                              <span *ngIf="user.bankcode == '301'">JAIZ BANK</span>
-                              <span *ngIf="user.bankcode == '082'">KEYSTONE BANK</span>
-                              <span *ngIf="user.bankcode == '076'">SKYE BANK PLC</span>
-                              <span *ngIf="user.bankcode == '221'">STANBIC-IBTC BANK PLC</span>
-                              <span *ngIf="user.bankcode == '232'">STERLING BANK PLC</span>
-                              <span *ngIf="user.bankcode == '100'">SUNTRUST BANK</span>
-                              <span *ngIf="user.bankcode == '032'">UNION BANK OF NIGERIA PLC</span>
-                              <span *ngIf="user.bankcode == '033'">UNITED BANK FOR AFRICA PLC</span>
-                              <span *ngIf="user.bankcode == '215'">UNITY BANK PLC</span>
-                              <span *ngIf="user.bankcode == '035'">WEMA BANK PLC</span>
-                              <span *ngIf="user.bankcode == '057'">ZENITH BANK PLC</span></td>
-                            <th style="padding:15px" scope="row">Account Number</th>
-                            <td style="padding:15px">{{user.accountnumber}}</td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-
-                <ul class="nav nav-tabs">
-                    <li class="active" ><a style="border-radius:0px; color:#1B4E63" data-toggle="tab" href="#home">Invest Details</a></li>
-                    <li><a data-toggle="tab" href="#menu2" style="border-radius:0px; color:#1B4E63">Transaction Schedule</a></li>
-                    <li><a data-toggle="tab" href="#menu3" style="border-radius:0px; color:#1B4E63">Loan Disk</a></li>
-                    <li><a data-toggle="tab" href="#menu4" style="border-radius:0px; color:#1B4E63">Loan Comments</a></li>
-                    <li><a data-toggle="tab" href="#menu5" style="border-radius:0px; color:#1B4E63">Existing Record</a></li>
-                   <!-- <li><a data-toggle="tab" href="#menu7" style="border-radius:0px; color:#1B4E63">Reschedule</a></li> --> 
-                  </ul>
-
-                  
-              <div class="tab-content">
-                  <div id="home" class="tab-pane fade in active">
-                    <br/>
-                      <table class="table table-striped table-bordered">
-                    
-                          <tbody>
-                              
-                              <tr style="padding:15px" >
-                                  <th style="padding:15px" scope="row">Amount</th> 
-                                  <td style="padding:15px">{{investment.amount  | currency:'₦': 3}}</td>
-                                  <th style="padding:15px" scope="row">Duration</th>
-                                  <td style="padding:15px">{{investment.duration}} Months</td>
-                                  <th style="padding:15px" scope="row">Interest Rate</th>
-                                  <td style="padding:15px">{{investment.interestrate}}%</td>
-                                  <th style="padding:15px" scope="row">Referral Code</th>
-                                  <td style="padding:15px">{{investment.code}}</td>
-                              </tr>
-                              <tr style="padding:15px" >
-                                  <th style="padding:15px" scope="row">Start Date</th> 
-                                  <td style="padding:15px">{{investment.startdate  | date : 'MMM d, y' }}</td>
-                                  <th style="padding:15px" scope="row">End Date</th>
-                                  <td style="padding:15px">{{investment.enddate | date : 'MMM d, y'}}</td>
-                                  <th style="padding:15px" scope="row">First Month Interest</th>
-                                  <td style="padding:15px">{{investment.firstinterestamount | currency:'₦': 3}}</td>
-                                  <th style="padding:15px" scope="row">Subsequent Monthly Interest</th>
-                                  <td style="padding:15px">{{investment.lastinterestamount | currency:'₦': 3}}</td>
-                              </tr>
-                             
-                              
-                          </tbody>
-                      </table>
-                  </div>
-                  <div id="menu2" class="tab-pane fade in">
-                      <br/>
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                <th>S/No</th>
-                                <th>Due Date</th>
-                                <th>Account</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                <tr style="padding:15px" *ngFor = "let trans of investmenttransactions; let i = index" >
-                                    <td style="padding:15px">{{i + 1}}</td>
-
-                                    <td style="padding:15px">{{trans.duedate  | date : 'MMM d, y' }}</td>
-                                    <td style="padding:15px">{{trans.interestamount | currency:'₦': 3}}</td>
-                                </tr>
-                               
-                                
-                            </tbody>
-                        </table>
+        <div class = "row" >
+            <div class = "col-lg-12">
+               
+                <div class = "authDiv" *ngIf = "user">
+                    <h3 class = "heading"><strong>{{user.firstname | titlecase}} {{user.lastname | titlecase}}</strong> 
+                     
+                    </h3><hr/>
+                    <div >
+                        <a class="btn btn-default"  data-toggle="modal" data-target="#modal-reject">Cancel</a>
+                        <a class="btn btn-default" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
+                        <a class="btn btn-default" (click) = "confirmpayment()">Confirm Payment</a>
+                        <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
                     </div>
-              </div>
-
-
-  
+    
+                    <hr/>
+    
+                    <table class="table table-striped table-bordered">
+                        
+                        <tbody>
+                            
+                            <tr style="padding:15px" >
+                                <th style="padding:15px" scope="row">Title</th> 
+                                <td style="padding:15px">{{user.title | titlecase}}</td>
+                                <th style="padding:15px" scope="row">Gender</th>
+                                <td style="padding:15px">{{user.gender | titlecase}}</td>
+                            </tr>
+                            <tr style="padding:15px" >
+                                <th style="padding:15px" scope="row">Firstname</th> 
+                                <td style="padding:15px">{{user.firstname | titlecase}}</td>
+                                <th style="padding:15px" scope="row">Lastname</th>
+                                <td style="padding:15px">{{user.lastname | titlecase}}</td>
+                            </tr>
+                            <tr style="padding:15px" >
+                                <th style="padding:15px" scope="row">Email Address</th> 
+                                <td style="padding:15px">{{user.email}}</td>
+                                <th style="padding:15px" scope="row">CW Number</th>
+                                <td style="padding:15px"></td>
+                            </tr>
+                          
+                            <tr style="padding:15px" >
+                                <th style="padding:15px" scope="row">Bank Name</th> 
+                                <td style="padding:15px"><span *ngIf="user.bankcode == '044'">ACCESS BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '023'">CITI BANK</span>
+                                  <span *ngIf="user.bankcode == '063'">DIAMOND BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '050'">ECOBANK NIGERIA PLC</span>
+                                  <span *ngIf="user.bankcode == '070'">FIDELITY BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '011'">FIRST BANK OF NIGERIA PLC</span>
+                                  <span *ngIf="user.bankcode == '214'">FIRST CITY MONUMENT BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '058'">GUARANTY TRUST BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '030'">HERITAGE BANK</span>
+                                  <span *ngIf="user.bankcode == '301'">JAIZ BANK</span>
+                                  <span *ngIf="user.bankcode == '082'">KEYSTONE BANK</span>
+                                  <span *ngIf="user.bankcode == '076'">SKYE BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '221'">STANBIC-IBTC BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '232'">STERLING BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '100'">SUNTRUST BANK</span>
+                                  <span *ngIf="user.bankcode == '032'">UNION BANK OF NIGERIA PLC</span>
+                                  <span *ngIf="user.bankcode == '033'">UNITED BANK FOR AFRICA PLC</span>
+                                  <span *ngIf="user.bankcode == '215'">UNITY BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '035'">WEMA BANK PLC</span>
+                                  <span *ngIf="user.bankcode == '057'">ZENITH BANK PLC</span></td>
+                                <th style="padding:15px" scope="row">Account Number</th>
+                                <td style="padding:15px">{{user.accountnumber}}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+    
+                    <ul class="nav nav-tabs">
+                        <li class="active" ><a style="border-radius:0px; color:#1B4E63" data-toggle="tab" href="#home">Invest Details</a></li>
+                        <li><a data-toggle="tab" href="#menu2" style="border-radius:0px; color:#1B4E63">Transaction Schedule</a></li>
+                        <li><a data-toggle="tab" href="#menu3" style="border-radius:0px; color:#1B4E63">Loan Disk</a></li>
+                        <li><a data-toggle="tab" href="#menu4" style="border-radius:0px; color:#1B4E63">Loan Comments</a></li>
+                        <li><a data-toggle="tab" href="#menu5" style="border-radius:0px; color:#1B4E63">Existing Record</a></li>
+                       <!-- <li><a data-toggle="tab" href="#menu7" style="border-radius:0px; color:#1B4E63">Reschedule</a></li> --> 
+                      </ul>
+    
+                      
+                  <div class="tab-content">
+                      <div id="home" class="tab-pane fade in active">
+                        <br/>
+                          <table class="table table-striped table-bordered">
+                        
+                              <tbody>
+                                  
+                                  <tr style="padding:15px" >
+                                      <th style="padding:15px" scope="row">Amount</th> 
+                                      <td style="padding:15px">{{investment.amount  | currency:'₦': 3}}</td>
+                                      <th style="padding:15px" scope="row">Duration</th>
+                                      <td style="padding:15px">{{investment.duration}} Months</td>
+                                      <th style="padding:15px" scope="row">Interest Rate</th>
+                                      <td style="padding:15px">{{investment.interestrate}}%</td>
+                                      <th style="padding:15px" scope="row">Referral Code</th>
+                                      <td style="padding:15px">{{investment.code}}</td>
+                                  </tr>
+                                  <tr style="padding:15px" >
+                                      <th style="padding:15px" scope="row">Start Date</th> 
+                                      <td style="padding:15px">{{investment.startdate  | date : 'MMM d, y' }}</td>
+                                      <th style="padding:15px" scope="row">End Date</th>
+                                      <td style="padding:15px">{{investment.enddate | date : 'MMM d, y'}}</td>
+                                      <th style="padding:15px" scope="row">First Month Interest</th>
+                                      <td style="padding:15px">{{investment.firstinterestamount | currency:'₦': 3}}</td>
+                                      <th style="padding:15px" scope="row">Subsequent Monthly Interest</th>
+                                      <td style="padding:15px">{{investment.lastinterestamount | currency:'₦': 3}}</td>
+                                  </tr>
+                                 
+                                  
+                              </tbody>
+                          </table>
+                      </div>
+                      <div id="menu2" class="tab-pane fade in">
+                          <br/>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                    <th>S/No</th>
+                                    <th>Due Date</th>
+                                    <th>Account</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr style="padding:15px" *ngFor = "let trans of investmenttransactions; let i = index" >
+                                        <td style="padding:15px">{{i + 1}}</td>
+    
+                                        <td style="padding:15px">{{trans.duedate  | date : 'MMM d, y' }}</td>
+                                        <td style="padding:15px">{{trans.interestamount | currency:'₦': 3}}</td>
+                                    </tr>
+                                   
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                  </div>
+    
+    
+      
+                    
+                       
+      
+                 
                 
-                   
-  
-             
-            
-          </div>
-          
-    </div>
+              </div>
+              
+        </div>
+        
+      </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      
     
-  </div>
-  </div>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  
-
-  
-  <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Process Investment Documents</h4>
-          </div>
-          <div class="modal-body">
-            <div class = "form-group">
-             <p>Amount</p>
-             <input type="number"
-             class="textBoxDesign " id="name" name="name" [(ngModel)]="amount" >  
+      
+      <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+        
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Process Investment Documents</h4>
+              </div>
+              <div class="modal-body">
+                <div class = "form-group">
+                 <p>Amount</p>
+                 <input type="number"
+                 class="textBoxDesign " id="name" name="name" [(ngModel)]="amount" >  
+                </div>
+                <div class = "form-group">
+                  <p>Duration</p>
+                  <input type="number"
+                  class="textBoxDesign " id="duration" name="duration" [(ngModel)]="duration" >  
+                 </div>
+                 <div class = "form-group">
+                  <p>Interest</p>
+                  <input type="number"
+                  class="textBoxDesign " id="interestrate" name="interestrate" [(ngModel)]="interestrate" >  
+                 </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" style="float:right" class="btn btn-success"  (click)="investmentprocess()">Send</button>
+              </div>
             </div>
-            <div class = "form-group">
-              <p>Duration</p>
-              <input type="number"
-              class="textBoxDesign " id="duration" name="duration" [(ngModel)]="duration" >  
-             </div>
-             <div class = "form-group">
-              <p>Interest</p>
-              <input type="number"
-              class="textBoxDesign " id="interestrate" name="interestrate" [(ngModel)]="interestrate" >  
-             </div>
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" style="float:right" class="btn btn-success"  (click)="investmentprocess()">Send</button>
+        
           </div>
         </div>
-    
-      </div>
-    </div>
+</div>
+
   
   
