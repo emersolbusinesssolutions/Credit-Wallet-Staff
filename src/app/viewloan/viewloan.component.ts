@@ -51,6 +51,8 @@ export class ViewloanComponent implements OnInit {
   organizationcode: any;
   getorganizationalcode: boolean;
   showorganizationalcode: any;
+  showSuccess: boolean;
+  showDanger: boolean;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -227,7 +229,7 @@ export class ViewloanComponent implements OnInit {
     this.service.listoneloan({id: this.id}).subscribe(
       data => {
         this.result = data
-        console.log(data)
+        console.log(this.result.loan)
         this.data = this.result.loan;
         this.accountverificationgiro = this.result.accountverificationgiro.data;
         this.admindetails = this.result.admindetails;
@@ -241,16 +243,22 @@ export class ViewloanComponent implements OnInit {
         this.nonippis = this.result.nonippis;
         this.existingloandiskdetails = this.result.existingloandiskdetails
         this.showorganizationalcode = this.result.showorganizationalcode
-        console.log(this.existingloandiskdetails)
 
-        if (this.remita === undefined || this.remita.length == 0) {
-         
-        }else{
+        this.availablebalance = this.result.availablebalance;
+
+        
+
+        if(this.availablebalance == 0){
           this.availablebalance = this.remita[0].amount;
+          console.log(this.availablebalance)
         }
 
-        if (this.remita === undefined || this.remita.length == 0) {
-         
+        if((this.availablebalance - this.data.monthly_repayment) >= 10000){
+          this.showSuccess = true;
+        }
+
+        if((this.availablebalance - this.data.monthly_repayment) < 10000){
+          this.showDanger= true;
         }
 
        

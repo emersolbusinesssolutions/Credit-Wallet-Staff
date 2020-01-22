@@ -24,7 +24,8 @@ export class InvestmentoneComponent implements OnInit {
   savings_id: any;
   link: any;
   startdate: any;
-
+  DECIMAL_SEPARATOR=".";
+  GROUP_SEPARATOR=",";
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService, private titleService: Title, private _location: Location){
@@ -32,6 +33,29 @@ export class InvestmentoneComponent implements OnInit {
 
   
   }
+
+  format(valString) {
+    if (!valString) {
+        return '';
+    }
+    let val = valString.toString();
+    const parts = this.unFormat(val).split(this.DECIMAL_SEPARATOR);
+    return parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (!parts[1] ? '' : this.DECIMAL_SEPARATOR + parts[1]);
+  };
+
+
+  unFormat(val) {
+    if (!val) {
+        return '';
+    }
+    val = val.replace(/^0+/, '');
+
+    if (this.GROUP_SEPARATOR === ',') {
+        return val.replace(/,/g, '');
+    } else {
+        return val.replace(/\./g, '');
+    }
+  };
 
   ngOnInit() {
 
@@ -74,11 +98,27 @@ export class InvestmentoneComponent implements OnInit {
     );
   }
 
+  testVariable(value){
+    if(value == undefined){
+      return false;
+    }
+    if(value == ""){
+      return false
+    }
+  
+    return true;
+  }
+
 
   investmentprocess() {
+ 
+    if(this.testVariable(this.unFormat(this.amount)) == false){
+      this.toastr.error('Amount is required');
+      return;
+    }
     var json = {
       id : this.id,
-      amount : this.amount,
+      amount : this.unFormat(this.amount),
       interestrate : this.interestrate,
       duration : this.duration,
       startdate : this.startdate
@@ -150,11 +190,15 @@ export class InvestmentoneComponent implements OnInit {
   }
 
   confirmpayment() {
+    if(this.testVariable(this.unFormat(this.amount)) == false){
+      this.toastr.error('Amount is required');
+      return;
+    }
 
     if(confirm("Are you sure you want to confirm payment?")){
       var json = {
         id : this.id,
-        amount : this.amount,
+        amount : this.unFormat(this.amount),
         interestrate : this.interestrate,
         duration : this.duration,
         savingsproductid : this.savingsproductid,
@@ -230,7 +274,7 @@ export class InvestmentoneComponent implements OnInit {
   loandiskupload() {
     var json = {
       id : this.id,
-      amount : this.amount,
+      amount :this.unFormat(this.amount),
       authid : this.user.authid,
       savingsproductid : this.savingsproductid
     }
@@ -274,7 +318,7 @@ export class InvestmentoneComponent implements OnInit {
 
     var json = {
       id : this.id,
-      amount : this.amount,
+      amount : this.unFormat(this.amount),
       authid : this.user.authid,
       savingsproductid : this.savingsproductid,
       borrower_id : borrower_id,
@@ -320,7 +364,7 @@ export class InvestmentoneComponent implements OnInit {
 
     var json = {
       id : this.id,
-      amount : this.amount,
+      amount : this.unFormat(this.amount),
       savings_id : savings_id
     }
 

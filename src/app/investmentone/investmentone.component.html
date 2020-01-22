@@ -8,7 +8,7 @@
             <div class = "col-lg-12">
                
                 <div class = "authDiv" *ngIf = "user">
-                    <h3 class = "heading logoFont"><strong>{{user.firstname | titlecase}} {{user.lastname | titlecase}}</strong> 
+                    <h3 class = "heading"><strong>{{user.firstname | titlecase}} {{user.lastname | titlecase}}</strong> 
                      
                     </h3><hr/>
                     <div >
@@ -16,7 +16,7 @@
                         <a *ngIf = "investment.status == '1'" class="btn btn-danger" (click)="cancel()">Cancel</a>
                         <a *ngIf = "investment.status == '1'" class="btn btn-default" data-toggle="modal" data-target="#myModalEdit" >Edit Customer Data</a>
                         <a *ngIf = "investment.status == '0'" class="btn btn-default"  data-toggle="modal" data-target="#myModalEdit">Edit Customer Data</a>
-                        <a  class="btn btn-default" data-backdrop="static" data-keyboard="false" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
+                        <a  *ngIf = "investment.status == '0'"class="btn btn-default" data-backdrop="static" data-keyboard="false" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
                         <a *ngIf = "investment.status == '1'" class="btn btn-default"  id = "modalButton" data-toggle="modal" data-target="#myModalConfirm" data-backdrop="static" data-keyboard="false">Upload to Loan Disk</a>
                         <a *ngIf = "investment.status == '1'" class="btn btn-default"  id = "modalButton" data-toggle="modal" data-target="#myModalComplete" data-backdrop="static" data-keyboard="false">Complete Investment Process</a>
                     </div>
@@ -114,7 +114,7 @@
                                       <th style="padding:15px" scope="row">Interest Rate</th>
                                       <td style="padding:15px">{{investment.interestrate}}%</td>
                                       <th style="padding:15px" scope="row">Referral Code</th>
-                                      <td style="padding:15px">{{investment.code}}</td>
+                                      <td style="padding:15px">{{investment.code | uppercase}}</td>
                                   </tr>
                                   <tr style="padding:15px" >
                                       <th style="padding:15px" scope="row">Start Date</th> 
@@ -220,18 +220,20 @@
                      </div>
                 <div class = "form-group">
                  <p>Amount</p>
-                 <input type="number"
-                 class="textBoxDesign " id="name" name="name" [(ngModel)]="amount" >  
+                 <input type="text"
+                 class="textBoxDesign " pattern="^[$\-\s][\d\,]?([\.]\d{0,10})?\s*$" name="amount" (input)="amount = format(amount)" [(ngModel)]="amount" id="name" name="name" [(ngModel)]="amount" >  
                 </div>
                 <div class = "form-group">
                   <p>Duration</p>
-                  <input type="number"
-                  class="textBoxDesign " id="duration" name="duration" [(ngModel)]="duration" >  
+                  <select class="textBoxDesign " id="duration" name="duration" [(ngModel)]="duration" >
+                    <option value = "6">6 Months</option>
+                    <option value = "12">12 Months</option>
+                  </select> 
                  </div>
                  <div class = "form-group">
                   <p>Interest</p>
                   <input type="number"
-                  class="textBoxDesign " min="2" max="5" id="interestrate" name="interestrate" [(ngModel)]="interestrate" >  
+                  class="textBoxDesign " min="2" max="5"  id="interestrate" name="interestrate" (ngModelChange)="setinterest()"  [(ngModel)]="interestrate" >  
                  </div>
                 
               </div>
@@ -261,8 +263,8 @@
                        </div>
                   <div class = "form-group">
                    <p>Amount</p>
-                   <input type="number"
-                   class="textBoxDesign " id="name" name="name" [(ngModel)]="amount" >  
+                   <input type="text"
+                   class="textBoxDesign " pattern="^[$\-\s][\d\,]?([\.]\d{0,10})?\s*$" name="amount" (input)="amount = format(amount)"  id="name" [(ngModel)]="amount" >  
                   </div>
                   <div class = "form-group">
                     <p>Duration</p>
@@ -396,6 +398,48 @@
                        </div>
                     </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p>Preferred Bank Name</p>
+                          
+
+                            <select
+                                         class="textBoxDesign" id="text" name="bankcode" [(ngModel)]="user.bankcode">
+                                         <option value = "044">ACCESS BANK PLC</option>
+                                         <option value = "023">CITI BANK</option>
+                                         <option value = "063">DIAMOND BANK PLC</option>
+                                         <option value = "050">ECOBANK NIGERIA PLC</option>
+                                         <option value = "070">FIDELITY BANK PLC</option>
+                                         <option value = "011">FIRST BANK OF NIGERIA PLC</option>
+                                         <option value = "214">FIRST CITY MONUMENT BANK PLC</option>
+                                         <option value = "058">GUARANTY TRUST BANK PLC</option>
+                                         <option value = "030">HERITAGE BANK</option>
+                                         <option value = "301">JAIZ BANK</option>
+                                         <option value = "082">KEYSTONE BANK</option>
+                                         <option value = "101">PROVIDOUS BANK</option>
+                                         <option value = "076">SKYE BANK PLC</option>
+                                         <option value = "221">STANBIC-IBTC BANK PLC</option>
+                                         <option value = "068">STANDARD CHARTERED</option>
+                                         <option value = "232">STERLING BANK PLC</option>
+                                         <option value = "100">SUNTRUST BANK</option>
+                                         <option value = "032">UNION BANK OF NIGERIA PLC</option>
+                                         <option value = "033">UNITED BANK FOR AFRICA PLC</option>
+                                         <option value = "215">UNITY BANK PLC</option>
+                                         <option value = "035">WEMA BANK PLC</option>
+                                         <option value = "057">ZENITH BANK PLC</option>
+                                         </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p>Preferred Bank Account</p>
+                            <input class="textBoxDesign " type="text" name="accountnumber" [(ngModel)]="user.accountnumber" required="">
+                        </div>
+                    </div>
+                </div>
                   
                   
                   

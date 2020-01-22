@@ -172,7 +172,7 @@
                                             <td style="padding:15px">
                                                {{id}}
                                             </td>
-                                            <th style="padding:15px" scope = "row">Credit Code</th>
+                                            <th style="padding:15px" scope = "row">CREDIT CODE</th>
                                             <td style="padding:15px">{{data.creditcode}}
                                             </td>
                                         </tr>
@@ -326,7 +326,7 @@
                             <div id="home" class="tab-pane fade in active">
                                 <br/>
                                 <h4 style="padding:15px" class="heading"><b>REQUEST DETAILS</b></h4>
-                                <div *ngIf = "verification">
+                                <div>
                                     <table class="table table-striped table-bordered">
                                         
                                         <thead>
@@ -339,7 +339,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngIf = "verification.netpay - data.monthly_repayment > 10000" class="success">
+                                            <tr *ngIf = "showSuccess" class="success">
                                                 
                                                 <td style="padding:15px">
                                                     {{data.loan_amount | currency:'₦': 3}}
@@ -353,71 +353,14 @@
                                                 </td>
                     
                                                 
-                                                <td  *ngIf = "verification" style="padding:15px">{{verification.netpay |  currency:'₦ ': 2}}
-                                                </td>
-                    
-                                                
-                                                <td  *ngIf = "verification" style="padding:15px">{{verification.netpay - data.monthly_repayment |  currency:'₦ ': 2}}</td>
-                                            </tr>
-                    
-                                            <tr *ngIf = "(verification.netpay - data.monthly_repayment < 10000)" class="danger">
-                                                
-                                                    <td style="padding:15px">
-                                                        {{data.loan_amount | currency:'₦': 3}}
-                                                    </td>
-                                                    
-                                                    <td style="padding:15px">{{data.tenor}} months</td>
-                        
-                                                    
-                                                    <td style="padding:15px">
-                                                        {{data.monthly_repayment | currency:'₦': 3}}
-                                                    </td>
-                        
-                                                    
-                                                    <td  *ngIf = "verification" style="padding:15px">{{verification.netpay |  currency:'₦ ': 2}}
-                                                    </td>
-                        
-                                                    
-                                                    <td  *ngIf = "verification" style="padding:15px">{{verification.netpay - data.monthly_repayment |  currency:'₦ ': 2}}</td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div *ngIf = "nonippis == 1">
-                                    <table class="table table-striped table-bordered">
-                                        
-                                        <thead>
-                                            <tr>
-                                                <th style="padding:15px" scope = "row">AMOUNT</th>
-                                                <th style="padding:15px" scope = "row">TENOR</th>
-                                                <th style="padding:15px" scope = "row">MONTHLY REPAYMENT</th>
-                                                <th style="padding:15px" scope="row">NET PAY</th>
-                                                <th style="padding:15px" scope="row">AVAILABLE BALANCE</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngIf = "availablebalance - data.monthly_repayment > 10000" class="success">
-                                                
-                                                <td style="padding:15px">
-                                                    {{data.loan_amount | currency:'₦': 3}}
-                                                </td>
-                                                
-                                                <td style="padding:15px">{{data.tenor}} months</td>
-                    
-                                                
-                                                <td style="padding:15px">
-                                                    {{data.monthly_repayment | currency:'₦': 3}}
-                                                </td>
-                    
-                                                
-                                                <td style="padding:15px">{{availablebalance |  currency:'₦ ': 2}}
+                                                <td   style="padding:15px">{{availablebalance |  currency:'₦ ': 2}}
                                                 </td>
                     
                                                 
                                                 <td  style="padding:15px">{{availablebalance - data.monthly_repayment |  currency:'₦ ': 2}}</td>
                                             </tr>
                     
-                                            <tr *ngIf = "(availablebalance - data.monthly_repayment < 10000)" class="danger">
+                                            <tr *ngIf = "showDanger" class="danger">
                                                 
                                                     <td style="padding:15px">
                                                         {{data.loan_amount | currency:'₦': 3}}
@@ -431,15 +374,16 @@
                                                     </td>
                         
                                                     
-                                                    <td  style="padding:15px">{{availablebalance |  currency:'₦ ': 2}}
+                                                    <td   style="padding:15px">{{availablebalance |  currency:'₦ ': 2}}
                                                     </td>
                         
                                                     
-                                                    <td style="padding:15px">{{availablebalance - data.monthly_repayment |  currency:'₦ ': 2}}</td>
+                                                    <td  style="padding:15px">{{availablebalance - data.monthly_repayment |  currency:'₦ ': 2}}</td>
                                                 </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                            
             
                               
                                 <div *ngIf = "verification">
