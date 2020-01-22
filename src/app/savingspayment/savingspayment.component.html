@@ -1,0 +1,151 @@
+<div class = "main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12">
+            <h3 class = "heading logoFont"><strong>Savings Payment</strong> <div class = "row" style="float:right">
+      
+              <div class = "col-lg-12">
+                <button class = "btn btn-default" (click) = "select()">Upload Payment File</button>
+              </div>
+              
+              <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                           
+             
+  
+            </div>
+          </h3> <hr/>
+  
+          <div class = "row ">
+              <div class = "col-lg-3">
+  
+          
+                  <div class  = "authDiv no-radius2">
+  
+                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getCount() }}</strong></p>
+                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                          <div class ="row">
+                              <div class = "col-lg-12">
+                                      <p style = "font-size:15px;" class = "gray">  Total Number</p>
+                              </div>
+                          </div>
+                          </div>
+                    </div> 
+              </div>
+              <div class = "col-lg-3">
+  
+                      <div class  = "authDiv no-radius2">
+  
+                              <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
+                                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                    <div class ="row">
+                                        <div class = "col-lg-12">
+                                                <p style = "font-size:15px;" class = "gray"> Total Amount</p>
+                                        </div>
+                                    </div>
+                                    </div>
+                              </div> 
+          
+                </div>
+                <div class = "col-lg-3">
+  
+                    <div class  = "authDiv no-radius2">
+
+                            <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
+                                <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                  <div class ="row">
+                                      <div class = "col-lg-12">
+                                              <p style = "font-size:15px;" class = "gray"> Partial Payment</p>
+                                      </div>
+                                  </div>
+                                  </div>
+                            </div> 
+        
+              </div>
+              <div class = "col-lg-3">
+  
+                  <div class  = "authDiv no-radius2">
+
+                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
+                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                <div class ="row">
+                                    <div class = "col-lg-12">
+                                            <p style = "font-size:15px;" class = "gray">Greater Payment</p>
+                                    </div>
+                                </div>
+                                </div>
+                          </div> 
+      
+            </div>
+          
+            </div>
+            <br/>
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+      
+           
+      
+                
+                 
+              
+                          <table class="table table-striped">
+                              <thead>
+                                  <tr>
+                                  <th>S/No</th>
+                                  <th>Savings Account Number</th>
+                                  <th>Name</th>
+                                  <th>Amount Paid</th>
+                                  <th>Expected Amount</th>
+                                  <th>Payment Difference</th>
+                                  <th>Last Transaction</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                         
+                                  <tr  *ngFor="let loan of payment; let i = index " [className]="loan.perfectpayment == 1 ? 'success' : 'danger'">
+      
+                                      <td style="padding-top:10px; padding-bottom:10px">{{i + 1}}</td>
+                                      <td>{{loan.accountid}}</td>
+                                      <td>{{loan.customername | titlecase}}</td>
+                                      <td>{{loan.amountpaid | currency:'₦': 3}}</td>
+                                      <td>{{loan.expectedamount | currency:'₦': 3}}</td>
+                                      <td>{{loan.paymentdifference | currency:'₦': 3}}</td>
+                                      <td><p class = "label label-success" *ngIf = "loan.lasttransaction == 1">Yes</p>
+                                        <p class = "label label-default" *ngIf = "loan.lasttransaction == 0">No</p>
+                                      </td>
+                                   
+      
+                                 
+                                 
+                                  </tr>
+                              </tbody>
+                          </table>
+      
+    
+             
+                            <br/>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+  </div>
+  
+  
+  
+  
+  

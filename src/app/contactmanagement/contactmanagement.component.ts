@@ -36,26 +36,20 @@ export class ContactmanagementComponent implements OnInit {
   }
 
 ngOnInit() {
+  this.list();
 }
 
 
 
-search(){ 
-  var json = {
-    status : this.status,
-    from : this.from.formatted,
-    to : this.to.formatted
-  }
+list(){ 
 
-
-  console.log(json)
   this.loadingBar.start();
-  this.service.searchcalllog(json).subscribe(
+  this.service.returnbusiness().subscribe(
     data => {
-
-      this.result = <Result>data;
+console.log(data)
+     /* this.result = <Result>data;
       if(deepEqual(this.result.status,"success")){
-       this.calllogs = this.result.calllogs
+   console.log(data)
         this.chRef.detectChanges();
         const table: any = $('table');
         this.dataTable = table.DataTable();
@@ -63,7 +57,7 @@ search(){
       else{
         this._router.navigate(['/racks']);
         this.toastr.success(this.result.message, '');
-      }
+      }*/
       this.loadingBar.complete();
     },
       error => {

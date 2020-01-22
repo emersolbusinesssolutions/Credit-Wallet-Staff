@@ -33,11 +33,14 @@ export class AutodeductionsComponent implements OnInit {
   loanid: any;
   monthlyrepayment: any;
   deduction: any;
+  reportdata: any[];
+  reportdatanotfound: any[];
+  exportstatus: boolean;
   constructor( private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router:Router,protected storage: AsyncLocalStorage, private route:ActivatedRoute,private toastr: ToastrService) {
     
-
+      this.startdate = new Date()
      
   
   }
@@ -69,9 +72,9 @@ export class AutodeductionsComponent implements OnInit {
             var first_sheet_name = workbook.SheetNames[0];
             var worksheet = workbook.Sheets[first_sheet_name];
             var param = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-            console.log(param)
-            this.deductions = param
             $('#import').modal('hide'); 
+            this.toastr.success("Processing Deductions, Please wait", '');
+            this.processDeductions(param);
         }
         fileReader.readAsArrayBuffer(this.fileSelected);
 
@@ -140,6 +143,66 @@ export class AutodeductionsComponent implements OnInit {
     );
   }
 
+  notfound = [];
+  found = []
+  processDeductions(params){
+    this.loadingBar.start();
+    
+    this.service.autodeduction(params).subscribe(
+      data => {
+        this.result = data;
+        console.log(data)
+        for (let index = 0; index < this.result.length; ++index) {
+          this.exportstatus = true;
+          if(this.result[index].returnstatus == false){
+            this.notfound.push(this.result[index].data)
+          }else{
+            this.found.push(this.result[index].data)
+          }
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.toastr.success("Error connecting to server, please check your internet connection and try again", '');
+          this.loadingBar.complete();
+        }
+    );
+  }
+
+  export(){
+    this.reportdatanotfound = []
+    this.reportdata = []
+    for (let index = 0; index < this.result.length; ++index) {
+
+
+      if(this.result[index].returnstatus == false){
+
+        let json = {
+          "Status" : "Failed Deduction",
+          "Loan Id" : this.result[index].data.loanid,
+          "Amount" :  this.result[index].data.amountdue,
+          "RSP Linked No." :  this.result[index].data.telephone,
+          "Date of Upload" : this.startdate,
+        }
+        this.reportdatanotfound[index] = json
+      }else{
+        let json = {
+          "Status" : "Successful Deduction",
+          "Loan Id" : this.result[index].data.loanid,
+          "Amount" :  this.result[index].data.amountdue,
+          "RSP Linked No." :  this.result[index].data.telephone,
+          "Date of Upload" : this.startdate,
+        }
+        this.reportdata[index] = json
+      }
+      
+    }
+   
+
+   this.service.exportAsExcelFile(this.reportdata, 'Found Upload');
+   this.service.exportAsExcelFile(this.reportdatanotfound, 'Not Found Upload');
+  }
 
 
   setUpDeductions(){

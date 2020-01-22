@@ -8,19 +8,22 @@
             <div class = "col-lg-12">
                
                 <div class = "authDiv" *ngIf = "user">
-                    <h3 class = "heading"><strong>{{user.firstname | titlecase}} {{user.lastname | titlecase}}</strong> 
+                    <h3 class = "heading logoFont"><strong>{{user.firstname | titlecase}} {{user.lastname | titlecase}}</strong> 
                      
                     </h3><hr/>
                     <div >
-                        <a class="btn btn-default"  data-toggle="modal" data-target="#modal-reject">Cancel</a>
-                        <a class="btn btn-default" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
-                        <a class="btn btn-default" (click) = "confirmpayment()">Confirm Payment</a>
-                        <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
+                        <a *ngIf = "investment.status == '0'" class="btn btn-danger" (click)="cancel()">Cancel</a>
+                        <a *ngIf = "investment.status == '1'" class="btn btn-danger" (click)="cancel()">Cancel</a>
+                        <a *ngIf = "investment.status == '1'" class="btn btn-default" data-toggle="modal" data-target="#myModalEdit" >Edit Customer Data</a>
+                        <a *ngIf = "investment.status == '0'" class="btn btn-default"  data-toggle="modal" data-target="#myModalEdit">Edit Customer Data</a>
+                        <a  class="btn btn-default" data-backdrop="static" data-keyboard="false" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
+                        <a *ngIf = "investment.status == '1'" class="btn btn-default"  id = "modalButton" data-toggle="modal" data-target="#myModalConfirm" data-backdrop="static" data-keyboard="false">Upload to Loan Disk</a>
+                        <a *ngIf = "investment.status == '1'" class="btn btn-default"  id = "modalButton" data-toggle="modal" data-target="#myModalComplete" data-backdrop="static" data-keyboard="false">Complete Investment Process</a>
                     </div>
     
                     <hr/>
     
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped  ">
                         
                         <tbody>
                             
@@ -40,8 +43,14 @@
                                 <th style="padding:15px" scope="row">Email Address</th> 
                                 <td style="padding:15px">{{user.email}}</td>
                                 <th style="padding:15px" scope="row">CW Number</th>
-                                <td style="padding:15px"></td>
+                                <td style="padding:15px">{{user.uniquenumber}}</td>
                             </tr>
+                            <tr style="padding:15px" >
+                              <th style="padding:15px" scope="row">Telephone Number</th> 
+                              <td style="padding:15px">{{user.telephone}}</td>
+                              <th style="padding:15px" scope="row">Payment Reference</th>
+                              <td style="padding:15px">{{investment.paymentref}}</td>
+                          </tr>
                           
                             <tr style="padding:15px" >
                                 <th style="padding:15px" scope="row">Bank Name</th> 
@@ -73,11 +82,9 @@
                     </table>
     
                     <ul class="nav nav-tabs">
-                        <li class="active" ><a style="border-radius:0px; color:#1B4E63" data-toggle="tab" href="#home">Invest Details</a></li>
+                        <li class="active" ><a style="border-radius:0px; color:#1B4E63" data-toggle="tab" href="#home">Investment Details</a></li>
                         <li><a data-toggle="tab" href="#menu2" style="border-radius:0px; color:#1B4E63">Transaction Schedule</a></li>
-                        <li><a data-toggle="tab" href="#menu3" style="border-radius:0px; color:#1B4E63">Loan Disk</a></li>
-                        <li><a data-toggle="tab" href="#menu4" style="border-radius:0px; color:#1B4E63">Loan Comments</a></li>
-                        <li><a data-toggle="tab" href="#menu5" style="border-radius:0px; color:#1B4E63">Existing Record</a></li>
+                        <li><a data-toggle="tab" href="#menu3" style="border-radius:0px; color:#1B4E63">Loan Disk Operations</a></li>
                        <!-- <li><a data-toggle="tab" href="#menu7" style="border-radius:0px; color:#1B4E63">Reschedule</a></li> --> 
                       </ul>
     
@@ -85,7 +92,17 @@
                   <div class="tab-content">
                       <div id="home" class="tab-pane fade in active">
                         <br/>
-                          <table class="table table-striped table-bordered">
+
+                        <a class = "btn btn-default" target="blank" href = "https://test.creditwallet.ng/TestPDF/{{investment.process_investment_schedule}}">Proposed Deposit Terms</a>
+
+                        <a class = "btn btn-default"  target="blank" href = "https://test.creditwallet.ng/TestPDF/{{investment.process_savings_statement}}">Proposed Investment Schedule</a>
+
+                        <a class = "btn btn-default" target="blank" href = "https://test.creditwallet.ng/TestPDF/{{investment.confirm_investment_schedule}}">Confirmed Deposit Terms</a>
+
+                        <a class = "btn btn-default"  target="blank" href = "https://test.creditwallet.ng/TestPDF/{{investment.confirm_savings_statement}}">Confirmed Investment Schedule</a>
+                        <br/> <br/>
+
+                          <table class="table table-striped">
                         
                               <tbody>
                                   
@@ -137,6 +154,33 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div id="menu3" class="tab-pane fade in">
+                            <br/>
+                            
+                              <table class="table table-striped table-bordered" *ngIf = "investment.savings_id">
+                                  <thead>
+                                      <tr>
+                                      <th>S/No</th>
+                                      <th>Due Date</th>
+                                      <th>Account</th>
+                                      <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      
+                                      <tr style="padding:15px" *ngFor = "let trans of investmenttransactions; let i = index" >
+                                          <td style="padding:15px">{{i + 1}}</td>
+      
+                                          <td style="padding:15px">{{trans.duedate  | date : 'MMM d, y' }}</td>
+                                          <td style="padding:15px">{{trans.interestamount | currency:'₦': 3}}</td>
+                                          <td style="padding:15px"> <a (click)="transferout(trans);"  class="btn btn-primary" *ngIf ="trans.transstatus == '0' ">Add Transfer Out</a></td>
+                                      </tr>
+                                     
+                                      
+                                  </tbody>
+                              </table>
+                          </div>
                   </div>
     
     
@@ -159,7 +203,7 @@
       
     
       
-      <div id="myModal" class="modal fade" role="dialog">
+      <div id="myModal" class="modal fade" role="dialog" >
           <div class="modal-dialog">
         
             <!-- Modal content-->
@@ -169,6 +213,11 @@
                 <h4 class="modal-title">Process Investment Documents</h4>
               </div>
               <div class="modal-body">
+                  <div class = "form-group">
+                      <p>Start Date</p>
+                      <input type="date"
+                      class="textBoxDesign " id="startdate" name="startdate" [(ngModel)]="startdate" >  
+                     </div>
                 <div class = "form-group">
                  <p>Amount</p>
                  <input type="number"
@@ -182,7 +231,7 @@
                  <div class = "form-group">
                   <p>Interest</p>
                   <input type="number"
-                  class="textBoxDesign " id="interestrate" name="interestrate" [(ngModel)]="interestrate" >  
+                  class="textBoxDesign " min="2" max="5" id="interestrate" name="interestrate" [(ngModel)]="interestrate" >  
                  </div>
                 
               </div>
@@ -194,6 +243,171 @@
         
           </div>
         </div>
+
+        <div id="myModalConfirm" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Confirm Payment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class = "form-group">
+                        <p>Start Date</p>
+                        <input type="date"
+                        class="textBoxDesign " id="startdate" name="startdate" [(ngModel)]="startdate" >  
+                       </div>
+                  <div class = "form-group">
+                   <p>Amount</p>
+                   <input type="number"
+                   class="textBoxDesign " id="name" name="name" [(ngModel)]="amount" >  
+                  </div>
+                  <div class = "form-group">
+                    <p>Duration</p>
+                    <select class="textBoxDesign " id="duration" name="duration" [(ngModel)]="duration" >
+                      <option value = "6">6 Months</option>
+                      <option value = "12">12 Months</option>
+                    </select>
+                   </div>
+                   <div class = "form-group">
+                    <p>Interest</p>
+                    <input type="number"
+                    class="textBoxDesign " min="2" max="5"  id="interestrate" name="interestrate" (ngModelChange)="setinterest()"  [(ngModel)]="interestrate" >  
+                   </div>
+                   <div class = "form-group">
+                     <p>Savings Product</p>
+                      <select  class="textBoxDesign " id="savingsproduct" name="savingsproductid" [(ngModel)]="savingsproductid">
+                       <option value = "696">High Yield Deposit</option>
+                       <option value = "697">Std Yield Deposit</option>
+                       <option value = "717">Gold Yield Deposit</option>
+                       <option value = "1671">Gold Yield Deposit (UK)</option>
+                       <option value = "1885">Special Yield</option>
+                       <option value = "1913">Diamond Yeild</option>
+                       <option value = "1914">Platinum Yield</option>
+                       <option value = "1939">US $ Diamond Yield</option>
+                       <option value = "1960">High Yield Deposit</option>
+                      </select>
+                   </div>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" style="float:right" class="btn btn-success"  (click)="confirmpayment()">Send</button>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+
+          <div id="myModalComplete" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Complete Investment Process</h4>
+                </div>
+                <div class="modal-body">
+                  <div class = "form-group">
+                   <p>Borrower Invite Link</p>
+                   <input type="text"
+                   class="textBoxDesign " id="link" name="link" [(ngModel)]="link" >  
+                  </div>
+                  
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" style="float:right" class="btn btn-success"  (click)="completeInvestment()">Send</button>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+
+          <div id="myModalEdit" class="modal fade" role="dialog" *ngIf = "user">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Edit Application Form</h4>
+                </div>
+                <div class="modal-body">
+                  <div class = "row">
+                    <div class="col-lg-6">
+                      <div class = "form-group">
+                        <p>Title</p>
+                        <select  class="textBoxDesign "  name="title" [(ngModel)]="user.title">
+                          <option value = "Alhaja">Alhaja</option>
+                          <option value = "Alhaji">Alhaji</option>
+                          <option value = "Chief">Chief</option>
+                          <option value = "Dr">Dr</option>
+                          <option value = "Miss">Miss</option>
+                          <option value = "Mr">Mr</option>
+                          <option value = "Mrs">Mrs</option>
+                        </select>
+                       </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class = "form-group">
+                        <p>Title</p>
+                        <select  class="textBoxDesign "  name="title" [(ngModel)]="user.gender">
+                          <option value = "Male">Male</option>
+                          <option value = "Female">Female</option>
+                        </select>
+                       </div>
+                    </div>
+                  </div>
+                  <div class = "row">
+                    <div class="col-lg-6">
+                      <div class = "form-group">
+                        <p>Firstname</p>
+                        <input type="text"
+                        class="textBoxDesign " id="link" name="firstname" [(ngModel)]="user.firstname" >  
+                       </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class = "form-group">
+                        <p>Lastname</p>
+                        <input type="text"
+                        class="textBoxDesign " id="link" name="lastname" [(ngModel)]="user.lastname" > 
+                       </div>
+                    </div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="col-lg-6">
+                      <div class = "form-group">
+                        <p>Email Address</p>
+                        <input type="text"
+                        class="textBoxDesign " id="link" name="email" [(ngModel)]="user.email" >  
+                       </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class = "form-group">
+                        <p>Telephone</p>
+                        <input type="text"
+                        class="textBoxDesign " id="link" name="telephone" [(ngModel)]="user.telephone" > 
+                       </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" style="float:right" class="btn btn-success"  (click)="edit()">Send</button>
+                </div>
+              </div>
+          
+            </div>
+          </div>
 </div>
 
   

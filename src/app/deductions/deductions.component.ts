@@ -19,6 +19,10 @@ export class DeductionsComponent implements OnInit {
   result: any;
   deductions: any;
   dataTable :any;
+  pagenumber: any = 1;
+  searchtext: any = "";
+
+  
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -26,16 +30,26 @@ export class DeductionsComponent implements OnInit {
 
   ngOnInit() {
 
+    var json = {
+      searchtext : this.searchtext,
+      status : 0,
+      type : "Recurring",
+      pagenumber : this.pagenumber
+    }
+
     this.loadingBar.start();
-    this.service.getdeductions().subscribe(
+    this.service.getdeductionsNew(json).subscribe(
       data => {
         this.result = data
-        this.deductions = data.data
-        console.log(this.result)
+        console.log(data)
+        if(deepEqual(this.result.status,"success")){
+          this.deductions = this.result.deductions
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+          this._router.navigate(['']);
+        }
         this.loadingBar.complete();
-        this.chRef.detectChanges();
-        const table: any = $('table');
-        this.dataTable = table.DataTable();
       },
         error => {
           console.log(error);
@@ -46,6 +60,35 @@ export class DeductionsComponent implements OnInit {
 
     //deductions/all
   }
+
+  next(){
+  
+    this.pagenumber = this.pagenumber + 1
+
+    this.ngOnInit();
+ 
+  
+}
+
+previous(){
+  if(this.pagenumber == 1){
+    this.toastr.success("You are on the first page", '');
+    return;
+  }
+    this.pagenumber = this.pagenumber - 1
+    this.ngOnInit();
+ 
+}
+
+
+search(){
+
+    this.pagenumber = 1
+    this.ngOnInit();
+ 
+
+  
+}
 
   confirmPayment(deduction){
     this.loadingBar.start();

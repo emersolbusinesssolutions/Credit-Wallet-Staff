@@ -189,6 +189,15 @@ export class DashboardComponent implements OnInit {
       month = "December"
     }
 
+    if(this.target.month == "01"){
+      month = "January"
+    }
+
+    if(this.target.month == "02"){
+      month = "February"
+    }
+
+
 
     
     this.barchart = new Chart({

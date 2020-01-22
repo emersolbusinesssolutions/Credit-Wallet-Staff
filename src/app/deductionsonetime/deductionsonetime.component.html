@@ -1,4 +1,5 @@
 
+
 <div class ="main">
     <div class = "container-fluid spaceUp">
         <div class = "row">
@@ -6,9 +7,22 @@
               
               <div class  = "authDiv no-radius2">
                   <div class = "">
-                      <h3 class = "heading"><strong>Pending Deductions - One Time</strong> 
+                      <h3 class = "heading"><strong>Deductions - One Time</strong> 
+
+                        <div class = "row" style="float:right">
+      
+                            <div class = "col-lg-12">
+                              <input class = "form-control" placeholder="Search"  name="searchtext" [(ngModel)]="searchtext" (ngModelChange)="search()"  >
+                            </div>
+        
+                           
+        
+                          </div>
                         
-                        <div class="btn-group" style ="float:right">
+                       
+                      
+                    </h3><hr/>
+                    <div class="btn-group" >
                         <div class="btn-group" *ngIf = "deductions">
                           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                           Export <span class="caret"></span></button>
@@ -16,11 +30,8 @@
                             <li><a  (click)="export()">Excel Spreadsheet</a></li>
                           </ul>
                         </div>
-                          <button type="button" routerLink = "/newdeductions" class="btn btn-default">Create New Deductions</button>
-                          
+                        
                         </div>
-                      
-                    </h3><hr/>
       
       
                     
@@ -37,6 +48,8 @@
                                   <th>Loan ID</th>
                                   <th>RRR - Mandate Reference</th>
                                   <th>MDA Name</th>
+                                  <th>Amount Paid</th>
+                                  <th>Balance</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -44,32 +57,38 @@
                            
                                   <tr  *ngFor="let deduction of deductions; let i = index ">
       
+                                      
                                       <td>
       
                                           <div class="dropdown">
                                               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
                                               <span class="caret"></span></button>
                                               <ul class="dropdown-menu">
-                                                <li> <a (click) = "confirmPayment(deduction)">Confirm Payment</a></li>
+                                                <li> <a (click) = "confirmPayment(deduction.deduction)">Confirm Payment</a></li>
                                               </ul>
                                           </div>
       
                                                   
                                                  
                                       </td>
-                                    <td >{{deduction.created_at | date:'dd/MM/yyyy h:mm a' }}</td>
-                                    <td> {{deduction.firstname | titlecase}} {{deduction.lastname | titlecase}}</td>
-                                      <td>{{deduction.telephone}}</td>
-                                    <td >{{deduction.amount | currency:'₦': 3}}</td> 
-                                    <td >{{deduction.loanid }} </td>
-                                    <td >{{deduction.mandatereference }} </td>
-                                    <td >{{deduction.place_of_work | titlecase}}</td>
-                                    
+                                    <td >{{deduction.deduction.created_at | date:'dd/MM/yyyy h:mm a' }}</td>
+                                    <td> {{deduction.loan.firstname | titlecase}} {{deduction.loan.lastname | titlecase}}</td>
+                                      <td>{{deduction.loan.telephone}}</td>
+                                    <td >{{deduction.deduction.amount | currency:'₦': 3}}</td> 
+                                    <td >{{deduction.deduction.loanid }} </td>
+                                    <td >{{deduction.deduction.mandatereference }} </td>
+                                    <td >{{deduction.loan.place_of_work | titlecase}}</td>
+                                    <td >{{calculatePaid(deduction.deduction) | currency:'₦': 3}}</td>
+                                    <td >{{calculateBalance(deduction.deduction) | currency:'₦': 3}}</td>
                                   
                                   </tr>
                               </tbody>
                           </table>
-                      
+                          <div class="btn-group" style="float:right" *ngIf = "deductions">
+                              <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
+                              <button type="button" (click)="next()" class="btn btn-default">Next</button>
+                            </div>
+                      <br/>
                   </div>
                   
               </div> 
@@ -87,8 +106,14 @@
           <br/>
       
       
-      </div> 
+      </div>
 </div>
+ 
+
+
+
+
+
 
 
 

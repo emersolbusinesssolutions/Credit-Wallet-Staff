@@ -59,27 +59,26 @@ export class NewdeductionsComponent implements OnInit {
         if(deepEqual(this.result.status,"success")){
 
    
-          this.salary = this.result.response.salary;
-          this.loan = this.result.response.loan;
+          this.salary = this.result.salary;
+          this.loan = this.result.loan;
        
-          if(deepEqual(this.result.response.customerId,null)){
+          if(deepEqual(this.result.customerId,null)){
 
             
           }else{
             this.nodeduction = true
           }
-          this.authorisationCode = this.result.response.authorisationCode;
-          this.customerId = this.result.response.customerId;
-          this.accountNumber = this.result.response.accountNumber;
-          this.name = this.result.response.name;
-          this.companyName = this.result.response.companyName;
-          this.bankCode = this.result.response.bankCode;
+          this.authorisationCode = this.result.authorisationCode;
+          this.customerId = this.result.customerId;
+          this.accountNumber = this.result.accountNumber;
+          this.name = this.result.name;
+          this.companyName = this.result.companyName;
+          this.bankCode = this.result.bankCode;
         }
         else if(deepEqual(this.result.status,"err")){
           this.toastr.success(this.result.message, '');
         }
         else{
-          this._router.navigate(['/racks']);
           this.toastr.success(this.result.message, '');
         }
         this.loadingBar.complete();

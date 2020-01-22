@@ -27,10 +27,19 @@
                                   <td> {{data.ippisnumber}}
                                   </td>
                                 </tr>
-                        <tr *ngIf = "data.status != 10">
+                        <tr *ngIf = "data.status == 7 && data.plaasstatus == ''">
                             <td><p>Disburse Loan Automatically</p> </td>
                             <td>  <label class="switch">
                                 <input type="checkbox" (change)="onDisburseAutomatically($event)">
+                                <span class="slider round"></span>
+                              </label>  
+                            </td>
+                          </tr>
+                          
+                          <tr *ngIf = "data.plaasstatus == 1">
+                            <td><p>Disburse Loan Automatically from PLaaS Wallet</p> </td>
+                            <td>  <label class="switch">
+                                <input type="checkbox" (change)="onDisburseAutomaticallyPlaas($event)">
                                 <span class="slider round"></span>
                               </label>  
                             </td>

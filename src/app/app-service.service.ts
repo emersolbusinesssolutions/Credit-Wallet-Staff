@@ -11,6 +11,7 @@ import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx'
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -128,6 +129,31 @@ export class AppServiceService {
         return this.http.post(this.path + 'deductions/bulk', params, httpOptionsForSignedUser);
       }
 
+      investmentpayment(params: any): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'investment/payment/upload', params, httpOptionsForSignedUser);
+      }
+
+      
+       
+      
+      getPlaasPayment(params: any): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'plaas/payment', params, httpOptionsForSignedUser);
+      }
+
       sendmail(params: any): any {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
@@ -138,6 +164,18 @@ export class AppServiceService {
         
         return this.http.post(this.path + 'email/send/automatic', params, httpOptionsForSignedUser);
       }
+
+      bulkemail(params: any): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'email/bulk', params, httpOptionsForSignedUser);
+      }
+
 
       interestpaymentemail(params: any): any {
         const httpOptionsForSignedUser = {
@@ -168,6 +206,16 @@ export class AppServiceService {
             })
           };
         return this.http.get(this.path + 'deductions/all/recurring', httpOptionsForSignedUser);
+      }
+
+      getdeductionsNew(json): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'deductions/list/all', json, httpOptionsForSignedUser);
       }
 
       getdeductions2(): any {
@@ -292,6 +340,19 @@ export class AppServiceService {
         return this.http.post(this.path + 'loandisk/add/borrower', body, httpOptionsForSignedUser);
     }
 
+    plaasstart(params) {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        let body = JSON.stringify(params);
+        return this.http.post(this.path + 'plaas/start', body, httpOptionsForSignedUser);
+    }
+
+    
+
     deductionsapproval(params) {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
@@ -412,6 +473,34 @@ export class AppServiceService {
 
     }
 
+    getLoansNewActive(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'loans/list/active', params, httpOptionsForSignedUser);
+
+
+    }
+
+    getPlaas(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'plaas/list', params, httpOptionsForSignedUser);
+
+
+    }
+
     loansadvancedsearch(params) {
      
         const httpOptionsForSignedUser = {
@@ -425,6 +514,8 @@ export class AppServiceService {
 
 
     }
+
+    
 
 
 
@@ -469,6 +560,61 @@ export class AppServiceService {
 
     }
 
+
+    selectlender(param) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'lender/select',param , httpOptionsForSignedUser);
+
+    }
+
+    changeamount(param) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'loan/change/amount',param , httpOptionsForSignedUser);
+
+    }
+
+    getLenders() {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.get(this.path + 'lenders/list' , httpOptionsForSignedUser);
+
+    }
+
+    getOrganizationCode(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'organizational/code/get' , params, httpOptionsForSignedUser);
+
+    }
+
+    
+
     listoneloan(params) {
      
         const httpOptionsForSignedUser = {
@@ -478,7 +624,7 @@ export class AppServiceService {
             })
           };
         
-        return this.http.post(this.path + 'loan/one', params, httpOptionsForSignedUser);
+        return this.http.post(this.path + 'loan/one/new', params, httpOptionsForSignedUser);
         
     }
 
@@ -559,6 +705,21 @@ export class AppServiceService {
         return this.http.post(this.path + 'loan/disburse/giro', params, httpOptionsForSignedUser);
         
     }
+
+    disburseLoanPlaas(params) {
+     
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'loan/disburse/giro/plaas', params, httpOptionsForSignedUser);
+        
+    }
+
+    
 
     listoneuser(params) {
      
@@ -738,6 +899,16 @@ export class AppServiceService {
         return this.http.post(this.path + 'search-call-log', body, httpOptionsForSignedUser);
       }
 
+      returnbusiness(): any {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.get(this.path + 'returnbusiness/list',  httpOptionsForSignedUser);
+      }
+
 
     addRecord(json: { status: any; comment: any; telephone: any; }): any {
         const httpOptionsForSignedUser = {
@@ -793,6 +964,20 @@ export class AppServiceService {
         return this.http.post(this.path + 'staff-get-verification-result', body, httpOptionsForSignedUser);
     }
 
+
+    getverificationresults(params) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        let body = JSON.stringify(params);
+        return this.http.post(this.path + 'staff-get-verification-results', body, httpOptionsForSignedUser);
+    }
+
     
 
     deductionsinitiate(params) {
@@ -845,6 +1030,34 @@ export class AppServiceService {
         return this.http.get(this.path + 'referralcode/list', httpOptionsForSignedUser);
     }
 
+    investmentreport(json) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/report', json, httpOptionsForSignedUser);
+    }
+
+
+    
+    organizationcodes() {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.get(this.path + 'organizational/code', httpOptionsForSignedUser);
+    }
+
+    
+
     referralcodecreate(param) {
      
 
@@ -877,7 +1090,7 @@ export class AppServiceService {
                 'Content-Type': 'application/json',
                 'Authorization' : sessionStorage.getItem("currentUser")
             })
-          };
+        };
         return this.http.post(this.path + 'investment/one', param, httpOptionsForSignedUser);
     }
 
@@ -893,7 +1106,7 @@ export class AppServiceService {
         return this.http.post(this.path + 'investment/process', param, httpOptionsForSignedUser);
     }
 
-    investmentconfirm(param) {
+    investmentcomplete(param) {
      
 
         const httpOptionsForSignedUser = {
@@ -902,8 +1115,162 @@ export class AppServiceService {
                 'Authorization' : sessionStorage.getItem("currentUser")
             })
           };
-        return this.http.post(this.path + 'investment/loandisk', param, httpOptionsForSignedUser);
+        return this.http.post(this.path + 'investment/complete', param, httpOptionsForSignedUser);
     }
+
+    investmentprocessDocument(id) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post("https://test.creditwallet.ng/TestPDF/generate_file.php?id=" +id, httpOptionsForSignedUser);
+    }
+
+    investmentconfirmpayment(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/confirm/payment', param, httpOptionsForSignedUser);
+    }
+
+    investmentloandiskborrower(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/loandisk/borrower', param, httpOptionsForSignedUser);
+    }
+
+    investmentloandisksavings(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/loandisk/savings', param, httpOptionsForSignedUser);
+    }
+
+    investmentloandisktransaction(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/loandisk/savings/transaction', param, httpOptionsForSignedUser);
+    }
+
+    investmentloandisktransactions(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/loandisk/savings/transactions', param, httpOptionsForSignedUser);
+    }
+
+
+    requestDataFromMultipleSources(transactions, savings_id) {
+
+        let responses = []
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+        };
+
+        for (let index = 0; index < transactions.length; ++index) {
+            var param = {
+                id : transactions[index].id,
+                savings_id : savings_id
+              }
+            responses[index] = this.http.post(this.path + 'investment/loandisk/savings/transactions', param, httpOptionsForSignedUser);
+        }
+        
+        return forkJoin(responses);
+    }
+
+
+    autodeduction(params) {
+
+        let responses = []
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+        };
+
+        for (let index = 0; index < params.length; ++index) {
+            
+            responses[index] = this.http.post(this.path + 'deductions/start/auto', params[index], httpOptionsForSignedUser);
+        }
+        
+        return forkJoin(responses);
+    }
+
+    transferout(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/loandisk/savings/transferout', param, httpOptionsForSignedUser);
+    }
+
+    cancelinvestment(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/cancel', param, httpOptionsForSignedUser);
+    }
+
+    editinvestment(param) {
+     
+
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        return this.http.post(this.path + 'investment/edit', param, httpOptionsForSignedUser);
+    }
+
+
+
+    
+
 
     
 

@@ -47,7 +47,7 @@
       
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#loans">Loans</a></li>
-                    <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#verification">Verification</a></li>
+                    <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#verification">Investment</a></li>
                     <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#contact">Contact Management</a></li>
                     <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#customers">Customers</a></li>
                     <li><a data-toggle="tab" style = "border-radius:0px;background-color:#f1f1f1" href="#reporting">Report</a></li>
@@ -176,7 +176,63 @@
                               </table>
                     </div>
                     <div id ="verification" class="tab-pane fade in">
-                
+                      <table class="table table-striped table-hover">
+                        <thead class="thead-light addNav">
+                          <tr>
+                            <th scope="col">Permissions</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Permissions</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><p>Upload to Loan Disk</p> </td>
+                                <td> <label class="switch">
+                                    <input type="checkbox" [checked]="getStatus('investment/confirm/payment')" (change)="setPermission($event,'investment/confirm/payment')">
+                                    <span class="slider round"></span>
+                                  </label> 
+                                </td>
+                                <td><p>Complete Investment</p> </td>
+                                <td> <label class="switch">
+                                    <input type="checkbox" [checked]="getStatus('investment/complete')" (change)="setPermission($event,'investment/complete')">
+                                    <span class="slider round"></span>
+                                  </label>   
+                                </td>
+                              </tr>
+                              <tr>
+                                  <td><p>Cancel Investment</p> </td>
+                                  <td> <label class="switch">
+                                      <input type="checkbox" [checked]="getStatus('investment/cancel')" (change)="setPermission($event,'investment/cancel')">
+                                      <span class="slider round"></span>
+                                    </label> 
+                                  </td>
+                                  <td><p>Edit Investment</p> </td>
+                                  <td> <label class="switch">
+                                      <input type="checkbox" [checked]="getStatus('investment/edit')" (change)="setPermission($event,'investment/edit')">
+                                      <span class="slider round"></span>
+                                    </label> 
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td><p>List Investment</p> </td>
+                                    <td> <label class="switch">
+                                        <input type="checkbox" [checked]="getStatus('investment/list')" (change)="setPermission($event,'investment/list')">
+                                        <span class="slider round"></span>
+                                      </label> 
+                                    </td>
+                                    <td><p>Investment Report</p> </td>
+                                    <td><label class="switch">
+                                        <input type="checkbox" [checked]="getStatus('investment/report')" (change)="setPermission($event,'investment/report')">
+                                        <span class="slider round"></span>
+                                      </label>   
+                                    </td>
+                                  </tr>
+                                
+  
+                                      
+                          </tbody>
+                          </table>
                     </div>
       
                     <div id = "contact" class="tab-pane fade in" >

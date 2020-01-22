@@ -1,125 +1,132 @@
 
 <div class = "main">
-    <div class = "container-fluid spaceUp" *ngIf = "loans">
-        <div class = "row">
-          <div class = "col-lg-12">
-              
-              <div class  = "authDiv no-radius2">
-                  <div class = "">
-                      <h3 class = "heading"><strong>Ready For Disbursement</strong> <!-- <div class="btn-group" style ="float:right">
-                          <button type="button" routerLink = "/createloan" class="btn btn-default">Create Property</button>
-                        </div> --></h3><hr/>
-                        
-                        <div class = "row ">
-                          <div class = "col-lg-3">
-              
-                      
-                              <div class  = "authDiv no-radius2">
-              
-                                  <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getCount() }}</strong></p>
-                                      <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                                        <div class ="row">
-                                            <div class = "col-lg-12">
-                                                    <p style = "font-size:15px;" class = "gray"> Total Number</p>
-                                            </div>
-                                        </div>
-                                        </div>
-                                  </div> 
-                          </div>
-                          <div class = "col-lg-3">
-              
-                                  <div class  = "authDiv no-radius2">
-              
-                                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
-                                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
-                                                <div class ="row">
-                                                    <div class = "col-lg-12">
-                                                            <p style = "font-size:15px;" class = "gray"> Total Amount</p>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                          </div> 
-                      
-                            </div>
-                      
-                        </div>
-      
-                        <br/>  <br/>
-      
-                
-              
-                          <table class="table table-striped ">
-                              <thead>
-                                  <tr>
-                                  <th>Options</th>
-                                  <th>Date</th>
-                                  <th>Loan ID</th>
-                                  <th>Name</th>
-                                  <th>Email</th>
-                                  <th>Telephone</th>
-                                  <th>Amount</th>
-                                  <th>Tenor</th>
-                                  <th>MDA Name</th>
-                                  
-                                  </tr>
-                              </thead>
-                              <tbody>
-                            
-                           
-                                  <tr  *ngFor="let loan of loans; let i = index ">
-      
-                                      <td >
-      
-                                          <div class="dropdown">
-                                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                              <span class="caret"></span></button>
-                                              <ul class="dropdown-menu">
-                                                <!-- <li *ngIf = "loan.loan.status == -1" > <a (click) = "deleteProperty(loan)">Delete</a></li> -->
-                                                <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
-                                                <!-- <li *ngIf = "loan.loan.status == 0" > <a (click) = "disburseLoan(loan)">Disburse</a></li>
-                                                <li class="divider" *ngIf = "loan.loan.status == 0"></li>
-                                                <li *ngIf = "loan.loan.status == 0" > <a (click) = "rejectLoan(loan)">Reject Loan</a></li> -->
-      
-                                              </ul>
-                                          </div>
-      
-                                                  
-                                                 
-                                      </td>
-                                    <td >{{loan.loan.created_at | date:'dd/MM/yyyy h:mm:ss a' }}</td>
-                                    <td>{{loan.loan.loanid}}</td>
-                                    <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
-                                    <td>{{loan.loan.email}}</td>
-                                      <td>{{loan.loan.telephone}}</td>
-                                    <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
-                                    <td >{{loan.loan.tenor }} months</td>
-                                    <td >{{loan.loan.place_of_work | titlecase}}</td>
-                                 
-                                  </tr>
-                              </tbody>
-                          </table>
-                      
-                  </div>
-                  
-              </div> 
-          </div>
-        </div>
-        
+        <div class = "container-fluid spaceUp" *ngIf = "loans">
             <div class = "row">
+              <div class = "col-lg-12">
+                  
+                  <div class  = "authDiv no-radius2">
+                      <div class = "">
+                          <h3 class = "heading"><strong>Ready for Disbursement</strong> <div class = "row" style="float:right">
+          
+                              <div class = "col-lg-12">
+                                <input class = "form-control" placeholder="Search"  name="searchtext" [(ngModel)]="searchtext" (ngModelChange)="search()"  >
+                              </div>
+          
+                             
+          
+                            </div></h3>
+                            
+              
+          
+                            <div class = "row ">
+                              <div class = "col-lg-3">
+                  
+                          
+                                  <div class  = "authDiv no-radius2">
+                  
+                                    <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getCount() }}</strong></p>
+                                        <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                          <div class ="row">
+                                              <div class = "col-lg-12">
+                                                      <p style = "font-size:15px;" class = "gray">  Total Number</p>
+                                              </div>
+                                          </div>
+                                          </div>
+                                    </div> 
+                              </div>
+                              <div class = "col-lg-3">
+                  
+                                      <div class  = "authDiv no-radius2">
+                  
+                                              <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
+                                                  <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                                    <div class ="row">
+                                                        <div class = "col-lg-12">
+                                                                <p style = "font-size:15px;" class = "gray">Total Amount</p>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                              </div> 
+                          
+                                </div>
+                          
+                            </div>
+                    <br/>
+                  
+                              <table class="table table-striped ">
+                                  <thead>
+                                      <tr>
+                                      <th>Options</th>
+                                      <th>Date</th>
+                                      <th>Name</th>
+                                      <th>Email</th>
+                                      <th>IPPIS No</th>
+                                      <th>Telephone</th>
+                                      <th>Amount</th>
+                                      <th>Tenor</th>
+                                      <th>MDA Name</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                
+                               
+                                      <tr  *ngFor="let loan of loans; let i = index ">
+          
+                                          <td >
+          
+                                              <div class="dropdown">
+                                                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
+                                                  <span class="caret"></span></button>
+                                                  <ul class="dropdown-menu">
+                                                    <li> <a routerLink = "/loan/{{loan.loan.id}}">View</a></li>
+                                                  </ul>
+                                              </div>
+          
+                                                      
+                                                     
+                                          </td>
+                                        <td >{{loan.loan.created_at | date:'dd/MM/yyyy h:mm a' }}</td>
+                                        <td>{{loan.loan.title | titlecase}} {{loan.loan.firstname | titlecase}} {{loan.loan.lastname | titlecase}}</td>
+                                        <td>{{loan.loan.email}}</td>
+                                        <td>{{loan.loan.ippisnumber}}</td>
+                                          <td>{{loan.loan.telephone}}</td>
+                                        <td >{{loan.loan.loan_amount | currency:'₦': 3}}</td> 
+                                        <td >{{loan.loan.tenor }} months</td>
+                                        <td >{{loan.loan.place_of_work | titlecase}}</td>
+                                      
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <h5> 
+                                  Showing {{returnStart()}} to {{returnEnd()}} of {{result.total_size}} entries
+                                  <div class="btn-group" style="float:right" *ngIf = "loans">
+                                      <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
+                                      <button type="button" (click)="next()" class="btn btn-default">Next</button>
+                                    </div>
+                                  </h5>
+                          
+                      </div>
+                      
+                  </div> 
+              </div>
+            </div>
             
-        
-          </div>
-      
-          <br/><br/>
-          <br/> <br/><br/>
-          <br/> <br/><br/>
-          <br/>
-      
-      
-      </div> 
-</div>
-
-
-
-
-
+                <div class = "row">
+                
+            
+              </div>
+          
+              <br/><br/>
+              <br/> <br/><br/>
+              <br/> <br/><br/>
+              <br/>
+          
+          
+          </div> 
+    </div>
+    
+    
+    
+    
+    
+    

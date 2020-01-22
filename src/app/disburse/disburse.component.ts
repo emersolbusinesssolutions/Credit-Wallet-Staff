@@ -42,6 +42,7 @@ export class DisburseComponent implements OnInit {
   today: Date;
   month: number;
   accountverificationgiro: any;
+  automaticdisbursementplaas: boolean;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -146,12 +147,18 @@ export class DisburseComponent implements OnInit {
            if(deepEqual(result.status,"success")){
             
              if(this.automaticdisbursement == true){
-              this.toastr.success("Loan Disbursed, please wait for payment", '');
+              this.toastr.success("Loan Disbursed, please wait for payment from Credit Wallet", '');
                this.disburseAutomatic()
-             }else{
-              this.toastr.success("Loan Disbursed", '');
-              this._router.navigate(['loan/ready']);
              }
+             
+             if(this.automaticdisbursementplaas == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from PLAAS", '');
+              this.disburseAutomaticPlaas()
+             } 
+              
+            this.toastr.success("Loan Disbursed", '');
+            this._router.navigate(['loan/ready']);
+             
            }
            else{
              this.toastr.success(result.message, '');
@@ -214,11 +221,19 @@ export class DisburseComponent implements OnInit {
            console.log(data)
            if(deepEqual(result.status,"success")){
             this.toastr.success("Loan Disbursed, please wait for payment", '');
-             if(this.automaticdisbursement == true){
-              this.disburseAutomatic()
-            }else{
-             this._router.navigate(['loan/ready']);
-            }
+            if(this.automaticdisbursement == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from Credit Wallet", '');
+               this.disburseAutomatic()
+             }
+             
+             if(this.automaticdisbursementplaas == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from PLAAS", '');
+              this.disburseAutomaticPlaas()
+             } 
+              
+            this.toastr.success("Loan Disbursed", '');
+            this._router.navigate(['loan/ready']);
+             
            }
            else{
              this.toastr.success(result.message, '');
@@ -250,10 +265,18 @@ export class DisburseComponent implements OnInit {
            if(deepEqual(result.status,"success")){
              this.toastr.success(result.message, '');
              if(this.automaticdisbursement == true){
-              this.disburseAutomatic()
-            }else{
-             this._router.navigate(['loan/ready']);
-            }
+              this.toastr.success("Loan Disbursed, please wait for payment from Credit Wallet", '');
+               this.disburseAutomatic()
+             }
+             
+             if(this.automaticdisbursementplaas == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from PLAAS", '');
+              this.disburseAutomaticPlaas()
+             } 
+              
+            this.toastr.success("Loan Disbursed", '');
+            this._router.navigate(['loan/ready']);
+             
            }
            else{
              this.toastr.success(result.message, '');
@@ -276,6 +299,16 @@ export class DisburseComponent implements OnInit {
     }else{
       this.automaticdisbursement = false
     }
+  }
+
+  onDisburseAutomaticallyPlaas(eve){
+
+    if(eve.target.checked == true){
+      this.automaticdisbursementplaas = true
+    }else{
+      this.automaticdisbursementplaas = false
+    }
+    console.log()
   }
 
 
@@ -303,7 +336,36 @@ export class DisburseComponent implements OnInit {
            }
        );
    }
-  }
+
+   disburseAutomaticPlaas(){
+
+    this.loadingBar.start();
+     this.service.disburseLoanPlaas({id: this.id}).subscribe(
+       data => {
+         let result: any = data;
+         console.log(data)
+         if(deepEqual(result.status,"success")){
+           this.toastr.success(result.message, '');
+           this._router.navigate(['loan/ready']);
+         }
+         else{
+           this.toastr.success(result.message, '');
+           //this._router.navigate(['']);
+         }
+         this.loadingBar.complete();
+       },
+         error => {
+           console.log(error);
+           this.toastr.success("Network Related Error", '');
+           this.loadingBar.complete();
+         }
+     );
+     
+ }
+}
+  
+
+ 
 
 
 

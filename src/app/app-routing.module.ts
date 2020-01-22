@@ -44,8 +44,32 @@ const routes: Routes = [
         loadChildren: './loancalculator/loancalculator.module#LoancalculatorModule'
       },
       {
+        path : 'organizationcodes',
+        loadChildren: './organizationalcodes/organizationalcodes.module#OrganizationalcodesModule'
+      },
+      {
         path : 'complaints/create',
         loadChildren: './createcomplaints/createcomplaints.module#CreatecomplaintsModule'
+      }
+      ,
+      {
+        path : 'mailing/chairman',
+        loadChildren: './chairmanmailing/chairmanmailing.module#ChairmanmailingModule'
+      }
+      ,
+      {
+        path : 'savings/payment',
+        loadChildren: './savingspayment/savingspayment.module#SavingspaymentModule'
+      },
+      
+      {
+        path : 'investment/report',
+        loadChildren: './investmentreport/investmentreport.module#InvestmentreportModule'
+      },
+
+      {
+        path : 'investment/operation/:id',
+        loadChildren: './investmentoperations/investmentoperations.module#InvestmentoperationsModule'
       },
       {
         path : 'complaints/:id',
@@ -60,9 +84,18 @@ const routes: Routes = [
         path : 'lenders',
         loadChildren: './lenders/lenders.module#LendersModule'
       },
+
+      {
+        path : 'plaaslist/:id',
+        loadChildren: './plaaslist/plaaslist.module#PlaaslistModule'
+      },
       {
         path : 'viewcomplaint/:id',
         loadChildren: './viewcomplaints/viewcomplaints.module#ViewcomplaintsModule'
+      },
+      {
+        path : 'plaaspayment',
+        loadChildren: './plaaspayment/plaaspayment.module#PlaaspaymentModule'
       },
       {
         path : 'disburse/:id',

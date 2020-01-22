@@ -1,0 +1,164 @@
+
+
+
+<div class = "container-fluid spaceUp" >
+
+  <div class="main">
+         <div class = "row" >
+                 <div class = "col-lg-12">
+                  <h3 class = "heading"><strong>Investment Report</strong> 
+                  <p style="font-size:12px; color:gray">Get investment report between two dates using referral code, duration, start date and end date</p>
+                          
+                  </h3>
+                     <div class = "authDiv" *ngIf ="referralcodes">
+                         <p class = ""><b>Date Created</b></p>
+                         <div class = "row">
+                          <div class = "col-lg-2">
+                            <div class = "form-group">
+                              <p class = "gray small">From</p>
+                              <my-date-picker name="mydateFrom" [options]="myDatePickerOptions"
+                                [(ngModel)]="from" required></my-date-picker>
+                            </div>
+
+                          </div>
+                          <div class = "col-lg-2">
+                            <div class = "form-group">
+                              <p class = "gray small">To</p>
+                              <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                [(ngModel)]="to" required></my-date-picker>
+                            </div>
+
+                          </div>
+                          <div class = "col-lg-3">
+                            <div class = "form-group">
+                              <p class = "gray small">Referral Code</p>
+                              <select class  = "form-control"  name="code"
+                              [(ngModel)]="code">
+                                <option></option>
+                                <option value = "{{code.code}}" *ngFor = "let code of referralcodes">{{code.code}} - {{code.name | titlecase}}</option>
+                              </select>
+                             
+                            </div>
+
+                          </div>
+                          <div class = "col-lg-2">
+                            <div class = "form-group">
+                              <p class = "gray small">Duration</p>
+                              <select class  = "form-control" name="duration"
+                              [(ngModel)]="duration">
+                              <option value = ""></option>
+                                <option value = "6">6 Months</option>
+                                <option  value = "12">12 Months</option>
+                              </select>
+                            </div>
+
+                          </div>
+                          <div class = "col-lg-2">
+                            <div class = "form-group">
+                              <p class = "gray small">Status</p>
+                              <select class  = "form-control" name="status"
+                              [(ngModel)]="status">
+                                <option value="0">New Application</option>
+                                <option value="1">Processing</option>
+                                <option value="2">Completed</option>
+                              </select>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        
+                        <button (click) = "getReport()" class = "btn btn-default">Get Report</button>
+                        &nbsp;
+
+                        <a *ngIf = "investments"  class = "btn btn-primary" (click)="export()">Export Report</a>
+
+         <hr/>
+             
+                                 <table class="table table table-borderless">
+                                     <thead>
+                                         <tr>
+                                           
+                                         <th>Options</th>
+                                         <th>Status</th>
+                                         <th>Date Created</th>
+                                         <th>Name</th>
+                                         <th>Amount</th>
+                                         <th>Payment Ref</th>
+                                         <th>Referral Code</th>
+                                         <th>Duration</th>
+                                         <th>Interest Rate</th>
+                                         <th>Start Date</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                   
+                                  
+                                         <tr  *ngFor="let savings of investments; let i = index ">
+                                           <td >
+                     
+                                              
+                     
+                                             <button class="btn btn-default" routerLink = "/investmentone/{{savings.id}}">View</button>        
+                                                
+                                   </td>
+                                                 <td >
+
+                                                  <p style="font-size: 13px;" *ngIf = "savings.status == 0">New Application</p>
+                                                  <p style="font-size: 13px;" *ngIf = "savings.status == 1">Processing</p>
+                                                  <p style="font-size: 13px;"  *ngIf = "savings.status == 2">Completed</p>
+                                                 </td>
+                                                 <td >{{savings.datecreated   | date : 'MMM d, y, h:mm:ss a'  }}</td>
+                                             
+                                          
+                                           <td >{{savings.firstname  | titlecase }} {{savings.lastname   | titlecase}}</td>
+                                           <td >{{savings.amount | currency:'₦': 3}}</td>
+                                           <td >{{savings.paymentref}}</td>
+                                           <td >{{savings.code  | uppercase}}</td>
+                                           <td >{{savings.duration}} Months</td>
+                                           <td >{{savings.interestrate}}%</td>
+                                           <td >{{savings.startdate | date }}</td>
+                                       
+                                         </tr>
+                                         <tr *ngIf = "investments" >
+                                          <td >
+                    
+                                             
+                       </td>
+                                                <td >
+    </td>
+                                                <td ></td>
+                                            
+                                         
+                                          <td ></td>
+                                          <td ><b>{{sumReport() | currency:'₦': 3}}</b></td>
+                                          <td ></td>
+                                          <td ></td>
+                                          <td ></td>
+                                          <td ></td>
+                                          <td ></td>
+                                      
+                                        </tr>
+                                     </tbody>
+                                 </table>
+                              
+                               
+                            
+         
+                      
+                     
+                   </div>
+                   
+             </div>
+             
+           </div>
+           </div>
+           <br/>
+           <br/>
+           <br/>
+           <br/>
+  </div>
+   
+ 
+   
+   

@@ -65,13 +65,10 @@
                                       <th  style = "padding:20px">Loan Status</th>
                                       <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
                                     </tr>
-                                    <tr>
-                                        <th  style = "padding:20px">Duration</th>
-                                        <td  style = "padding:20px">{{loanrecovery.duration}}</td>
-                                        <th  style = "padding:20px">Loan Status</th>
-                                        <td  style = "padding:20px">{{loanrecovery.loanstatus}}</td>
-                                      </tr>
+                                 
                                       <tr>
+                                          <th  style = "padding:20px">Monthly Repayment</th>
+                                          <td  style = "padding:20px">{{loanrecovery.repayment | currency:'₦': 3}}</td>
                                           <th  style = "padding:20px">Preferred Payment Date</th>
                                           <td colspan="3" style = "padding:20px">{{loanrecovery.paymentdate | date}}</td>
                                          

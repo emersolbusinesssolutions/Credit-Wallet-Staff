@@ -29,26 +29,36 @@ export class ReadyForDisbursementLoanComponent implements OnInit {
   report : any[]
   reportorders : any[];
   dataTable :any;
-  data: any;
+  title: string ="";
+  searchtext: any = "";
+  status: any = 7;
+  pagenumber: any = 1;
+  total: any;
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService,private chRef: ChangeDetectorRef) {
-          
-          this.getLoans("7");  
+     this.getLoans();       
      
    }
 
-   getLoans(status){
+   getLoans(){
+
+    
+
+    var json = {
+      searchtext : this.searchtext,
+      status : this.status,
+      pagenumber : this.pagenumber
+    }
     this.loadingBar.start();
-    this.service.getLoans({status: status}).subscribe(
+    this.service.getLoansNew(json).subscribe(
       data => {
         this.result = data;
         this.loans = this.result.data
-      
+        this.total = this.result.total
+        console.log(data)
         if(deepEqual(this.result.status,"success")){
-          this.chRef.detectChanges();
-          const table: any = $('table');
-          this.dataTable = table.DataTable();
+      
         }
         else{
           this.toastr.success(this.result.message, '');
@@ -58,18 +68,71 @@ export class ReadyForDisbursementLoanComponent implements OnInit {
       },
         error => {
           console.log(error);
-          this.toastr.success(error, '');
+          this.toastr.success("Something went wrong, please try again", '');
           this.loadingBar.complete();
         }
     );
   }
 
+
+
+  returnStart(){
+    let current = (this.pagenumber - 1) * 10
+    return 1 + current;
+  }
+
+  returnEnd(){
+
+
+    let current  = this.pagenumber * 10
+    if( current > this.result.total_size){
+      return this.result.total_size;
+    }
+
+    return current;
+  }
+
+
+  next(){
+  
+      this.pagenumber = this.pagenumber + 1
+      this.returnEnd()
+      this.getLoans();
+   
+    
+  }
+
+  previous(){
+    if(this.pagenumber == 1){
+      this.toastr.success("You are on the first page", '');
+      return;
+    }
+      this.pagenumber = this.pagenumber - 1
+      this.returnEnd()
+      this.getLoans();
+   
+  }
+
+
+  search(){
+
+      this.pagenumber = 1
+      this.returnEnd()
+      this.getLoans();
+   
+
+    
+  }
+  ngOnInit() {
+  }
+
+
   getAmount(){
 
     let amount = 0;
-    for (let index = 0; index < this.loans.length; ++index) {
+    for (let index = 0; index < this.total.length; ++index) {
       console.log(this.loans[index]);
-      amount  = amount + parseFloat(this.loans[index].loan.loan_amount);
+      amount  = amount + parseFloat(this.total[index].loan_amount);
     }
 
     return amount;
@@ -77,47 +140,11 @@ export class ReadyForDisbursementLoanComponent implements OnInit {
 
   getCount(){
     let number = 0;
-    for (let index = 0; index < this.loans.length; ++index) {
+    for (let index = 0; index < this.total.length; ++index) {
       console.log(this.loans[index]);
       number  = number + 1;
     }
     return number;
-  }
-
-  ngOnInit() {
-  }
-
-  getPaymentFile(){
-
-    var options = { 
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true, 
-      showTitle: false,
-      useBom: true,
-      headers: ["Loan #", "Amount", "Method", "Collection Date", "Collection By","Description","IPPIS NO","Mandate Reference"]
-    };
-    this.data = []
-    for (let index = 0; index < this.loans.length; ++index) {
-      let ippisnumber = ""
-      if(this.loans[index].loan != null ){
-        ippisnumber = this.loans[index].loan.ippisnumber
-      }
-      let json = {
-        loanid : this.loans[index].loanid,
-        amount : this.loans[index].received,
-        method : "Remita Salary Platform (RSP)",
-        date  : this.loans[index].date,
-        by : "Remita Bacs Payment (RSP)",
-        description : "Part Loan Repayment",
-        ippisno : ippisnumber,
-        mandatereference : this.loans[index].mandatereference
-      }
-      this.data[index] = json
-    }
-
-    new Angular5Csv(this.data, "Payment File", options);
   }
 
 }

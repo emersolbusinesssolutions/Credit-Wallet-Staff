@@ -4,7 +4,7 @@ import { AppServiceService } from '../app-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import * as $ from 'jquery';
-
+import * as deepEqual from "deep-equal";
 @Component({
   selector: 'app-deductionsonetime',
   templateUrl: './deductionsonetime.component.html',
@@ -15,6 +15,10 @@ export class DeductionsonetimeComponent implements OnInit {
   result: any;
   deductions: any;
   dataTable :any;
+  pagenumber: any = 1;
+  searchtext: any = "";
+
+  
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -22,16 +26,26 @@ export class DeductionsonetimeComponent implements OnInit {
 
   ngOnInit() {
 
+    var json = {
+      searchtext : this.searchtext,
+      status : 0,
+      type : "One-Time",
+      pagenumber : this.pagenumber
+    }
+
     this.loadingBar.start();
-    this.service.getdeductions2().subscribe(
+    this.service.getdeductionsNew(json).subscribe(
       data => {
         this.result = data
-        this.deductions = data.data
-        console.log(this.result)
+        console.log(data)
+        if(deepEqual(this.result.status,"success")){
+          this.deductions = this.result.deductions
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+          this._router.navigate(['']);
+        }
         this.loadingBar.complete();
-        this.chRef.detectChanges();
-        const table: any = $('table');
-        this.dataTable = table.DataTable();
       },
         error => {
           console.log(error);
@@ -42,6 +56,35 @@ export class DeductionsonetimeComponent implements OnInit {
 
     //deductions/all
   }
+
+  next(){
+  
+    this.pagenumber = this.pagenumber + 1
+
+    this.ngOnInit();
+ 
+  
+}
+
+previous(){
+  if(this.pagenumber == 1){
+    this.toastr.success("You are on the first page", '');
+    return;
+  }
+    this.pagenumber = this.pagenumber - 1
+    this.ngOnInit();
+ 
+}
+
+
+search(){
+
+    this.pagenumber = 1
+    this.ngOnInit();
+ 
+
+  
+}
 
   confirmPayment(deduction){
     this.loadingBar.start();
@@ -66,8 +109,21 @@ export class DeductionsonetimeComponent implements OnInit {
 
 
   export(){
-    this.service.exportAsExcelFile(this.deductions, 'Pending Deductions');
+    this.service.exportAsExcelFile(this.deductions, 'One-Time Deductions');
   }
+
+
+  calculateBalance(deduction){
+    var paid = (deduction.paid * deduction.amount)
+    var outstanding = (deduction.no_of_times * deduction.amount)
+    return (outstanding - paid)
+  }
+
+  calculatePaid(deduction){
+    var paid = (deduction.paid * deduction.amount)
+    return paid;
+  }
+
 
 
 }

@@ -21,10 +21,10 @@ export class DeductionspaidComponent implements OnInit {
   result: any;
   deductions: any;
   dataTable :any;
-  @ViewChild('file') file: any
+  pagenumber: any = 1;
+  searchtext: any = "";
 
-  filename : any = "Select Payment File"
-  results: any;
+  
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -32,16 +32,26 @@ export class DeductionspaidComponent implements OnInit {
 
   ngOnInit() {
 
+    var json = {
+      searchtext : this.searchtext,
+      status : 1,
+      type : "",
+      pagenumber : this.pagenumber
+    }
+
     this.loadingBar.start();
-    this.service.getdeductionspaid().subscribe(
+    this.service.getdeductionsNew(json).subscribe(
       data => {
         this.result = data
-        this.deductions = data.data
-        console.log(this.result)
+        if(deepEqual(this.result.status,"success")){
+          this.deductions = this.result.deductions
+          console.log(this.deductions)
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+          this._router.navigate(['']);
+        }
         this.loadingBar.complete();
-        this.chRef.detectChanges();
-        const table: any = $('#result');
-        this.dataTable = table.DataTable();
       },
         error => {
           console.log(error);
@@ -52,6 +62,35 @@ export class DeductionspaidComponent implements OnInit {
 
     //deductions/all
   }
+
+  next(){
+  
+    this.pagenumber = this.pagenumber + 1
+
+    this.ngOnInit();
+ 
+  
+}
+
+previous(){
+  if(this.pagenumber == 1){
+    this.toastr.success("You are on the first page", '');
+    return;
+  }
+    this.pagenumber = this.pagenumber - 1
+    this.ngOnInit();
+ 
+}
+
+
+search(){
+
+    this.pagenumber = 1
+    this.ngOnInit();
+ 
+
+  
+}
 
   confirmPayment(deduction){
     this.loadingBar.start();
@@ -64,6 +103,7 @@ export class DeductionspaidComponent implements OnInit {
         this.result = data
         this.toastr.success(this.result.message, '');
         this.loadingBar.complete();
+        this.ngOnInit()
       },
         error => {
           console.log(error);
@@ -75,55 +115,20 @@ export class DeductionspaidComponent implements OnInit {
 
 
   export(){
-    this.service.exportAsExcelFile(this.deductions, 'Paid Deductions');
+    this.service.exportAsExcelFile(this.deductions, 'One-Time Deductions');
   }
 
 
-  arrayBuffer:any;
-  fileSelected:File;
-
-  public onChangePicture($event:any):void {
-    this.fileSelected = $event.target.files[0];
-    this.filename = this.fileSelected.name
+  calculateBalance(deduction){
+    var paid = (deduction.paid * deduction.amount)
+    var outstanding = (deduction.no_of_times * deduction.amount)
+    return (outstanding - paid)
   }
 
-  select(){
-    this.file.nativeElement.click();
+  calculatePaid(deduction){
+    var paid = (deduction.paid * deduction.amount)
+    return paid;
   }
 
-  upload(){
-    let fileReader = new FileReader();
-        fileReader.onload = (e) => {
-            this.arrayBuffer = fileReader.result;
-            var data = new Uint8Array(this.arrayBuffer);
-            var arr = new Array();
-            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-            var bstr = arr.join("");
-            var workbook = XLSX.read(bstr, {type:"binary"});
-            var first_sheet_name = workbook.SheetNames[0];
-            var worksheet = workbook.Sheets[first_sheet_name];
-            var param = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-            console.log(param)
-            this.loadingBar.start();
-            this.service.uploadpayment(param).subscribe(
-              data => 
-              {
-                $('#import').modal('hide'); 
-                console.log(data)
-                this.result = <Result>data;
-                this.results =  this.result.result
-                this.toastr.success(this.result.message, '');
-                this.loadingBar.complete();
-              },
-              error => {
-                console.log(error);
-                this.toastr.success("Service Related Error", '');
-                this.loadingBar.complete();
-              }
-            );
-        }
-        fileReader.readAsArrayBuffer(this.fileSelected);
-
-  }
 
 }

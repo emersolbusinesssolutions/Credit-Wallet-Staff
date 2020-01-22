@@ -18,6 +18,8 @@ export class ViewverificationComponent implements OnInit {
   result : Result
   ippisnumber: any;
   verification;
+  accountnumber: any;
+  verifications: any;
 
   constructor( private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -63,6 +65,38 @@ export class ViewverificationComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getVerifications(){
+    var json = {
+      accountnumber : this.accountnumber
+    }
+
+    this.loadingBar.start();
+    this.service.getverificationresults(json).subscribe(
+      data => {
+        this.result = <Result>data;
+        console.log(this.result)
+  
+        if(deepEqual(this.result.status,"success")){
+          this.toastr.success(this.result.message, '');
+          this.verifications = this.result.verificationdata
+        }
+        else if(deepEqual(this.result.status,"err")){
+          this.toastr.success(this.result.message, '');
+        }
+        else{
+          this._router.navigate(['/racks']);
+          this.toastr.success(this.result.message, '');
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.toastr.success("Error connecting to server, please check your internet connection and try again", '');
+          this.loadingBar.complete();
+        }
+    );
   }
 
 }

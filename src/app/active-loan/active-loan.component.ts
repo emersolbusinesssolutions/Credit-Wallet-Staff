@@ -54,7 +54,7 @@ export class ActiveLoanComponent implements OnInit {
       pagenumber : this.pagenumber
     }
     this.loadingBar.start();
-    this.service.getLoansNew(json).subscribe(
+    this.service.getLoansNewActive(json).subscribe(
       data => {
         this.result = data;
         this.loans = this.result.data

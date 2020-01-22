@@ -18,7 +18,7 @@ import 'datatables.net-bs4';
 })
 export class SavingsComponent implements OnInit {
 
-  id: any;
+  status: any;
   @ViewChild('file') file: any
 
   filename : any = "Select Payment File"
@@ -40,6 +40,8 @@ export class SavingsComponent implements OnInit {
   dataTable: any;
   investments: any;
   result: any;
+  pagenumber: any = 1;
+  searchtext: any =  "";
 
   
 
@@ -47,29 +49,38 @@ export class SavingsComponent implements OnInit {
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService, private titleService: Title,private chRef: ChangeDetectorRef){
       
-    this.id = this.router.snapshot.params['id'];
-    console.log(this.id)
-      
+ 
   }
 
   ngOnInit() {
 
+    this.router.params.subscribe(params => {   
+      this.status = +params['id'];
+      this.upload()
+    });
+  }
+
+
+  upload(){
     var json = {
-      status : this.id
+      status : this.status,
+      pagenumber : this.pagenumber,
+      searchtext : this.searchtext
     }
+
+    console.log(json)
     this.loadingBar.start();
     this.service.listinvestment(json).subscribe(
       data => 
       {
+
         this.loadingBar.complete();
         console.log(data)
         this.result = data
         if(deepEqual(this.result.status,"success")){
           
           this.investments = this.result.investments
-          this.chRef.detectChanges();
-          const table: any = $('table');
-          this.dataTable = table.DataTable();
+      
         }
         else{
           this.toastr.success(this.result.message, '');
@@ -84,13 +95,55 @@ export class SavingsComponent implements OnInit {
         this.loadingBar.complete();
       }
     );
-  }
-
-
-  upload(){
-    
   
   }
+
+  next(){
+  
+    this.pagenumber = this.pagenumber + 1
+    this.upload();
+ 
+  
+}
+
+previous(){
+  if(this.pagenumber == 1){
+    this.toastr.success("You are on the first page", '');
+    return;
+  }
+    this.pagenumber = this.pagenumber - 1
+    this.upload();
+ 
+}
+
+
+search(){
+
+    this.pagenumber = 1
+    this.upload();
+  
+}
+
+
+getAmount(){
+
+  let amount = 0;
+  for (let index = 0; index < this.investments.length; ++index) {
+  
+    amount  = amount + parseFloat(this.investments[index].amount);
+  }
+
+  return amount;
+}
+
+getCount(){
+  let number = 0;
+  for (let index = 0; index < this.investments.length; ++index) {
+   
+    number  = number + 1;
+  }
+  return number;
+}
 
 
 

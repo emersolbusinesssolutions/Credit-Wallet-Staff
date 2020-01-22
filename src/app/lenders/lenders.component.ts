@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lenders.component.css']
 })
 export class LendersComponent implements OnInit {
-
+  referralcodes
   constructor() { }
 
   ngOnInit() {

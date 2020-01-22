@@ -41,6 +41,16 @@ export class ViewloanComponent implements OnInit {
   existingloandiskdetails: any;
   admindetails: any;
   accountverificationgiro: any;
+  lenders: any;
+  lender: any;
+  plaasrepayment: any;
+  verificationsuggestion: any;
+  nonippis: any;
+  amount: any;
+  tenor: any;
+  organizationcode: any;
+  getorganizationalcode: boolean;
+  showorganizationalcode: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -73,7 +83,7 @@ export class ViewloanComponent implements OnInit {
         this.loadingBar.complete();
         if(this.result.status == "success"){
           this.toastr.success(this.result.message, '');
-          
+          location.reload()
         }else{
           this.toastr.success(this.result.message, '');
         }
@@ -177,6 +187,41 @@ export class ViewloanComponent implements OnInit {
    
   }
 
+  changeIPPISNumber(ippisnumber){
+    this.data.ippisnumber = ippisnumber
+    this.EditLoan();
+  }
+
+  changeLoanAmount(){
+    if(confirm("Are you sure you want to change loan amount")){
+      this.loadingBar.start();
+      var json = {
+        id : this.id,
+        amount : this.amount,
+        tenor : this.tenor
+      }
+      this.service.changeamount(json).subscribe(
+        data => {
+          this.result = data
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success(this.result.message, '');
+           location.reload();
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
+          this.loadingBar.complete();
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+      console.log(json)
+    }
+  }
+
   getLoan() {
     this.loadingBar.start();
     this.service.listoneloan({id: this.id}).subscribe(
@@ -190,14 +235,28 @@ export class ViewloanComponent implements OnInit {
         this.existingrecord = this.result.existingrecord;
         this.uniquenumber = this.result.uniquenumber;
         this.comments = this.result.comments
+        this.plaasrepayment = this.result.plaasrepayment
+        this.verificationsuggestion = this.result.verificationsuggestion;
         this.remita = this.result.remita
+        this.nonippis = this.result.nonippis;
         this.existingloandiskdetails = this.result.existingloandiskdetails
+        this.showorganizationalcode = this.result.showorganizationalcode
         console.log(this.existingloandiskdetails)
 
         if (this.remita === undefined || this.remita.length == 0) {
          
         }else{
           this.availablebalance = this.remita[0].amount;
+        }
+
+        if (this.remita === undefined || this.remita.length == 0) {
+         
+        }
+
+       
+
+        if(this.data.plaas != ''){
+          this.getLender()
         }
         
         this.verification = this.result.verification;
@@ -215,6 +274,90 @@ export class ViewloanComponent implements OnInit {
     );
   }
 
+
+  getBorrowerColor(){
+
+  }
+
+  setOrganizationCode(place_of_work){
+    var json = {
+      place_of_work : place_of_work
+    }
+    this.loadingBar.start();
+    this.service.getOrganizationCode(json).subscribe(
+      data => {
+        this.result = data
+        if(deepEqual(this.result.status,"success")){
+          this.toastr.success(this.result.message, '');
+          location.reload()
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.loadingBar.complete();
+          this.toastr.error("Network Error, please try again", '');
+        }
+    );
+  }
+
+  getLender() {
+    this.loadingBar.start();
+    this.service.getLenders().subscribe(
+      data => {
+        this.result = data
+        if(deepEqual(this.result.status,"success")){
+         this.lenders = this.result.lenders
+        }
+        else{
+          this.toastr.success(this.result.message, '');
+        }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.loadingBar.complete();
+          this.toastr.error("Network Error, please try again", '');
+        }
+    );
+  }
+
+
+  selectLender(){
+
+
+    if(confirm("Are you sure you want to select this Lender")){
+      this.loadingBar.start();
+      var json = {
+        id : this.id,
+        lenderid : this.lender
+      }
+      this.service.selectlender(json).subscribe(
+        data => {
+          this.result = data
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success("Successful", '');
+           location.reload();
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
+          this.loadingBar.complete();
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+      console.log(json)
+    }
+
+  }
+
   moveToLoanDisk() {
     if(confirm("Are you sure")){
       this.loadingBar.start();
@@ -223,7 +366,7 @@ export class ViewloanComponent implements OnInit {
           this.result = data;
           if(deepEqual(this.result.status,"success")){
             this.toastr.success(this.result.message, '');
-            //window.open('http://test.creditwallet.ng/TestPDF/index.php?id='+this.id, '_blank');
+            location.reload()
           }
           else{
             this.toastr.success(this.result.message, '');
@@ -238,6 +381,30 @@ export class ViewloanComponent implements OnInit {
       );
     }
     
+  }
+
+  disburseviaplaas(data){
+    if(confirm("Are you sure to disburse this loan via PLAAS")){
+      this.loadingBar.start();
+      this.service.plaasstart({id: this.id}).subscribe(
+        data => {
+          this.result = data;
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success(this.result.message, '');
+            location.reload()
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
+          this.loadingBar.complete();
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+    }
   }
 
   setReasonType(value){
@@ -395,6 +562,11 @@ export class ViewloanComponent implements OnInit {
             }
         );
     }
+  }
+
+  trimStr(str) {
+    if(!str) return str;
+    return str.replace(/^\s+|\s+$/g, '');
   }
 
   sendToAwaitingDisbursement(){

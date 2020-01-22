@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Lexend+Deca');
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
-@import url('https://fonts.googleapis.com/css?family=Mitr&display=swap');
+
 body{
-  font-family: 'Lexend Deca', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   background-color: #F3F5F8;
   font-size: 14px;
 }
@@ -511,7 +511,7 @@ background: linear-gradient(90deg, rgba(126,2,74,1) 0%, rgba(243,1,78,1) 100%);
   background-color: #1B4E63;
   position: fixed;
   top: 0px;
-  width: 270px;
+  width: 250px;
   height: 100%;
   color: #fff;
   font-size : 14px;

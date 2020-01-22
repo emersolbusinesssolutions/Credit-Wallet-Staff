@@ -6,47 +6,19 @@
             <div class = "col-lg-12">
                
                 <div class = "authDiv">
-                    <h3 class = "heading">Contact Management <a style="float:right" routerLink = "/newcontact" class = "btn btn-default">New Log</a></h3><hr/>
-                    <div class="row">
-                      <div class="col-lg-3">
-                        <p>From:</p>
-                          <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                          [(ngModel)]="from" required></my-date-picker>
-                      </div>
-                      <div class="col-lg-3">
-                        <p>To:</p>
-                          <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                          [(ngModel)]="to" required></my-date-picker>
-                      </div>
-                      <div class="col-lg-3">
-                        <p>Status</p>
-                        <select class = "form-control" [(ngModel)]="status">
-                            <option value = "0">All Response</option>
-                          <option value = "1">Not Called</option>
-                          <option value = "2">No Answer</option>
-                          <option value = "3">Phone not in use</option>
-                          <option value = "4">Answered - Busy to talk</option>
-                          <option value = "5">Answered - Not Interested</option>
-                          <option value = "6">Answered - Interested for the future</option>
-                          <option value = "7">Answered - Interested for now</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class = "row">
-                      <div class = "col-lg-4">
-                            <button type="button" class="btn btn-primary radiusaddition btnAdd" (click)="search()" >Search</button> 
-                      </div>
-                    </div>
-                    <br/>
-      
+                    <h3 class = "heading"><b>Return Business</b></h3><hr/>
+                  
+                 
                     <table class="table table-striped">
-                        <thead class="thead-light addNav">
+                        <thead class="thead-light">
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Telephone</th>
-                            <th scope="col">Date and Time</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Comment</th>
+                            <th scope="col"></th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Borrower ID</th>
+                            <th scope="col">IPPIS Number</th>
+                            <th scope="col">Telephone Number</th>
+                            <th scope="col">MDA Name</th>
                           </tr>
                         </thead>
                         <tbody>

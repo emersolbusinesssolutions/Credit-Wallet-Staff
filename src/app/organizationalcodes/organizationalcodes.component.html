@@ -1,0 +1,47 @@
+<div class = "main">
+  <div class = "container-fluid spaceUp" >
+
+      <div class = "row" >
+          <div class = "col-lg-12">
+             
+              <div class = "authDiv">
+                <h3 class = "heading"><strong>Organization Codes</strong> 
+                  <button style="float:right" id = "modalButton" data-toggle="modal" data-target="#myModal" class = "btn btn-default">New Code</button>
+                  <p style="color:gray; font-size:12px" >List, Create, edit and Delete Organization Codes</p>
+                </h3><hr/>
+  
+                        <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                <th>S/NO</th>
+                                <th>MDA Name</th>
+                                <th>Org. Code</th>
+                                <th>CW Bank Code</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                          
+                         
+                                <tr  *ngFor="let organizationcode of organizationcodes; let i = index ">
+            
+                                    <td >
+            
+                           {{i + 1}}
+            
+                                                
+                                               
+                                  </td>
+                                  <td >{{organizationcode.mdaname | titlecase }}</td>
+                                  <td >{{organizationcode.code }}</td>
+                                  <td >{{organizationcode.cwbankcode }}</td>
+                            
+                                </tr>
+                            </tbody>
+                        </table>
+                      
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>

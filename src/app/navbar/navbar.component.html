@@ -64,17 +64,17 @@
                             <a ><i class="glyphicon glyphicon-shopping-cart"></i> Loans  <span class="arrow"></span></a>
                         </li>
                         <ul  [ngClass]="'sub-menu collapse'"  id="orders">
-                            <li style="font-size:12px"><a  [routerLink]="['/loan/new']"  [queryParams]="{}">New Applications</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/loan/rejected']"  [queryParams]="{}">Rejected Loans</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/loan/cancel']"  [queryParams]="{}">Cancelled Loans</a></li>
+                            <li ><a  [routerLink]="['/loan/new']"  [queryParams]="{}">New Applications</a></li>
+                            <li ><a [routerLink]="['/loan/rejected']"  [queryParams]="{}">Rejected Loans</a></li>
+                            <li ><a [routerLink]="['/loan/cancel']"  [queryParams]="{}">Cancelled Loans</a></li>
                             
-                            <li style="font-size:12px"><a [routerLink]="['/loan/processing']"  [queryParams]="{}">Processing</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/loan/awaitingdisbursement']"  [queryParams]="{}">Awaiting Disbursement</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/readyfordeductions']"  [queryParams]="{}">Ready for Deductions</a></li>
-                            <!--<li style="font-size:12px"><a [routerLink]="['/loan/ready']"  [queryParams]="{}">PLAAS Queue</a></li>-->
-                            <li style="font-size:12px"><a [routerLink]="['/loan/ready']"  [queryParams]="{}">Ready for Disbursement</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/loan/active']"  [queryParams]="{}">Active Loans</a></li>
-                            <li style="font-size:12px"><a [routerLink]="['/loan/completed']"  [queryParams]="{}">Completed Loans</a></li>
+                            <li ><a [routerLink]="['/loan/processing']"  [queryParams]="{}">Processing</a></li>
+                            <li ><a [routerLink]="['/loan/awaitingdisbursement']"  [queryParams]="{}">Awaiting Disbursement</a></li>
+                            <li ><a [routerLink]="['/readyfordeductions']"  [queryParams]="{}">Ready for Deductions</a></li>
+                            <!--<li ><a [routerLink]="['/loan/ready']"  [queryParams]="{}">PLAAS Queue</a></li>-->
+                            <li ><a [routerLink]="['/loan/ready']"  [queryParams]="{}">Ready for Disbursement</a></li>
+                            <li ><a [routerLink]="['/loan/active']"  [queryParams]="{}">Active Loans</a></li>
+                            <li ><a [routerLink]="['/loan/completed']"  [queryParams]="{}">Completed Loans</a></li>
                             
                         </ul>
 
@@ -86,6 +86,10 @@
                             <li routerLink = "/referralcode">Referral Code</li>
                             <li routerLink = "/investment/0">New</li>
                             <li routerLink = "/investment/1">Processing</li>
+                            <li routerLink = "/investment/2">Completed</li>
+                            <li routerLink = "/savings/payment">Add Payment</li>
+                            <li routerLink = "/investment/3">Cancelled Application</li>
+                            <li routerLink = "/investment/report">Investment Report</li>
                           </ul>
         
         
@@ -94,47 +98,39 @@
                         </li>
                           
                         <ul class="sub-menu collapse" id="service">
-                          <li style="font-size:12px" routerLink = "/uploadverificationdata">BVN Verification</li>
-                          <li style="font-size:12px" routerLink = "/getverificationresult">IPPIS Verification</li>
-                          <li style="font-size:12px" routerLink = "/suggestion">Verification Suggestion</li>
+                          <li  routerLink = "/uploadverificationdata">BVN Verification</li>
+                          <li  routerLink = "/getverificationresult">IPPIS Verification</li>
+                          <li  routerLink = "/suggestion">Verification Suggestion</li>
 
                           
+                        </ul>
+
+                        <li data-toggle="collapse" data-target="#plaas" class="collapsed">
+                          <a><i class="glyphicon glyphicon-th-list"></i> PLAAS <span class="arrow"></span></a>
+                        </li>
+                          
+                        <ul class="sub-menu collapse" id="plaas">
+                          <li  routerLink = "/plaaslist/1">Awaiting Funding</li>
+                          <li  routerLink = "/plaaslist/2">Open Transactions</li>
+                          <li  routerLink = "/plaaslist/3">Closed Transactions</li>
                         </ul>
 
                         <li data-toggle="collapse" data-target="#payment" class="collapsed">
                           <a><i class="glyphicon glyphicon-th-list"></i> Payment <span class="arrow"></span></a>
                         </li>
                           
-                        <ul class="sub-menu collapse" id="payment" style="font-size:12px">
+                        <ul class="sub-menu collapse" id="payment" >
                           <li routerLink = "/payment/ippis">IPPIS</li>
                           <li routerLink = "/payment/rsp">RSP</li>
                           <li routerLink = "/liquidation">Liquidation Calculator</li>
                           <li routerLink = "/loancalculator">Loan Calculator</li>
+                          <li routerLink = "/plaaspayment">Complete Loan</li>
                           <li routerLink = "/disbursementreconciliation">Disbursement Reconciliation</li>
-                          
                         </ul>
 
-                        <li data-toggle="collapse" data-target="#complaint" class="collapsed">
-                          <a><i class="glyphicon glyphicon-th-list"></i> Tickets <span class="arrow"></span></a>
-                        </li>
-                          
-                        <ul class="sub-menu collapse" id="complaint">
-                          <li routerLink = "/complaints/create">Create Ticket</li>
-                          <li routerLink = "/complaints/0">New</li>
-                          <li routerLink = "/complaints/1">Processing</li>
-                          <li routerLink = "/complaints/2">Solved</li>
-                          
-                        </ul>
+                      
 
-                        <!--<li data-toggle="collapse" data-target="#lenders" class="collapsed">
-                          <a><i class="glyphicon glyphicon-th-list"></i> PLAAS <span class="arrow"></span></a>
-                        </li> -->
-                          
-                        <ul class="sub-menu collapse" id="lenders">
-                          <li routerLink = "/lenders">Processing</li>
-                          <li routerLink = "/lenders">Lenders</li>
-                          <li routerLink = "/lenders/reconciliation">Reconciliation</li>
-                        </ul>
+                   
 
 
                         <li data-toggle="collapse" data-target="#report" class="collapsed">
@@ -150,22 +146,22 @@
                           <a ><i class="glyphicon glyphicon-align-left"></i> Deductions<span class="arrow"></span></a>
                       </li>
                       <ul class="sub-menu collapse" id="reports">
-                          <li data-toggle="collapse" data-target="#subreports" class="collapsed">
-                              <a style="font-size:12px">Pending Deductions<span class="arrow"></span></a>
-                          </li>
-                          <ul class="sub-menu collapse" id="subreports">
-                              <li style="font-size:12px" routerLink = "/deductions">Recurring</li>
-                              <li style="font-size:12px" routerLink = "/deductions/onetime">One Time</li>
-                          </ul>
                           <li >
-                              <a style="font-size:12px" routerLink = "/deductions/paid">Paid</a>
+                              <a  routerLink = "/newdeductions">Create Deductions</a>
+                          </li>
+                         
+                          <li >
+                            <a  routerLink = "/deductions">Pending Deductions</a>
+                        </li>
+                          <li >
+                              <a  routerLink = "/deductions/paid">Paid Deductions</a>
                           </li>
 
                           <li >
-                            <a style="font-size:12px" routerLink = "/notfoundrrr">Not Found Mandate</a>
+                            <a  routerLink = "/notfoundrrr">Not Found Mandate</a>
                           </li>
                           <li >
-                            <a style="font-size:12px" routerLink = "/autodeductions">Auto Deductions</a>
+                            <a  routerLink = "/autodeductions">Auto Deductions</a>
                           </li>
                           
                       </ul>
@@ -175,7 +171,14 @@
                   
                           <li>
                             <a  routerLink = "/contactmanagement">
-                            <i class="glyphicon glyphicon-th-list"></i> Contact Management
+                            <i class="glyphicon glyphicon-th-list"></i> Return Business
+                            </a>
+                          </li>
+
+                          
+                          <li>
+                            <a  routerLink = "/lenders">
+                            <i class="glyphicon glyphicon-th-list"></i> Lenders
                             </a>
                           </li>
 
@@ -187,16 +190,19 @@
                               
                             <ul class="sub-menu collapse" id="recovery">
                               <li routerLink = "/recoveryoverview">Overview</li>
+
                               <li routerLink = "/recovery">Customer List</li>
                             </ul>
 
                           <li data-toggle="collapse" data-target="#mailing" class="collapsed">
-                              <a><i class="glyphicon glyphicon-th-list"></i> Mailing <span class="arrow"></span></a>
+                              <a><i class="glyphicon glyphicon-th-list"></i> Utilities <span class="arrow"></span></a>
                             </li>
                               
                             <ul class="sub-menu collapse" id="mailing">
-                              <li routerLink = "/mail">General</li>
+                              <li routerLink = "/mailing/chairman">Chairman's Update</li>
+                              <li routerLink = "/mail">General Mail</li>
                               <li routerLink = "/interestpayment">Interest Payment</li>
+                              <li routerLink = "/organizationcodes">Organizational Codes</li>
                             </ul>
 
                            

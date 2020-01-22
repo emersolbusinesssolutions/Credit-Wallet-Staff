@@ -16,58 +16,80 @@
                       </div>
                     
                     </h3><hr/>
+
+
+                    
+
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a data-toggle="tab" href="#home">Successful Deductions</a></li>
+                      <li><a data-toggle="tab" href="#menu1">Not Successful Deductions</a></li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                      <br/>
+                      <button (click) = "export()" *ngIf = "exportstatus" class = "btn btn-default">Export Result</button>
+                      <div id="home" class="tab-pane fade in active">
+                        <br/>
+                        <table class="table table-striped ">
+                          <thead>
+                              <tr>
+                                <th>S/NO</th>
+                                <th>Loan ID</th>
+                                <th>Telephone Number</th>
+                                <th>Amount Due</th>
+                                <th>Start Date</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                        
+                       
+                              <tr  *ngFor="let payment of found; let i = index ">
+          
+                              
+                                <td >{{i + 1}}</td>
+                                <td >{{payment.loanid}}</td>
+                                <td>{{payment.telephone}}</td>
+                                <td>{{payment.amountdue | currency:'₦ ': 2}}</td>
+                                <td>{{startdate | date}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </div>
+                      <div id="menu1" class="tab-pane fade">
+                        <br/>
+                        <table class="table table-striped ">
+                          <thead>
+                              <tr>
+                                <th>S/NO</th>
+                                <th>Loan ID</th>
+                                <th>Telephone Number</th>
+                                <th>Amount Due</th>
+                                <th>Start Date</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                        
+                       
+                              <tr  *ngFor="let payment of notfound; let i = index ">
+          
+                              
+                                <td >{{i + 1}}</td>
+                                <td >{{payment.loanid}}</td>
+                                <td>{{payment.telephone}}</td>
+                                <td>{{payment.amountdue | currency:'₦ ': 2}}</td>
+                                <td>{{startdate | date}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </div>
+                    </div>
+                    
+
+
               
       
               
-                            <table class="table table-striped ">
-                                <thead>
-                                    <tr>
-                                    <th>Options</th>
-                                    <th>S/NO</th>
-                                    <th>Loan ID</th>
-                                    <th>Customer's Name</th>
-                                    <th>Telephone Number</th>
-                                    <th>Monthly Repayment</th>
-                                    <th>Loan Amount</th>
-                                    
-                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                              
-                             
-                                    <tr  *ngFor="let payment of deductions; let i = index ">
-                
-                                        <td >
-                
-                                            <div class="dropdown">
-                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">More
-                                                <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                  <li> <a  (click)="getSalaryDetails(payment)">Get Salary History</a></li>
-                                                  <li class="divider"></li>
-                                                  <li> <a data-toggle="modal" data-target="#onetimededuction">Set Up One-Time Deductions</a></li>
-                                                  <li class="divider"></li>
-                                                 <li> <a (click) = "disburseLoan(loan)">Set Up Recurring Deductions</a></li>
-                                                 <li class="divider"></li>
-                                                 <li> <a (click) = "disburseLoan(loan)">Complete Transaction</a></li>
-                                        
-                                        
-                                                </ul>
-                                            </div>
-                
-                                                    
-                                                   
-                                      </td>
-                                      <td >{{i + 1}}</td>
-                                      <td >{{payment.loanid}}</td>
-                                      <td>{{payment.customername}}</td>
-                                      <td>{{payment.telephone}}</td>
-                                      <td>{{payment.monthlyrepayment | currency:'₦ ': 2}}</td>
-                                      <td>{{payment.loanamount | currency:'₦ ': 2}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        
                       
                 
               </div>

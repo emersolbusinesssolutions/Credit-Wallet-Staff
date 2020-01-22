@@ -7,48 +7,104 @@
         <div class = "row" >
                 <div class = "col-lg-12">
                    
-                    <div class = "authDiv">
+                    <div class = "authDiv" *ngIf = "investments">
                         <h3 class = "heading"><strong>Investments</strong> 
+                            <div class = "row" style="float:right">
+      
+                                <div class = "col-lg-12">
+                                  <input class = "form-control" placeholder="Search"  name="searchtext" [(ngModel)]="searchtext" (ngModelChange)="search()"  >
+                                </div>
+            
+                               
+            
+                              </div>
+                            <br/>
+                            <p style="font-size: 13px;" class = "label label-success" *ngIf = "status == 0">New Application</p>
+                            <p style="font-size: 13px;" class = "label label-success" *ngIf = "status == 1">Processing</p>
+                            <p style="font-size: 13px;" class = "label label-success" *ngIf = "status == 2">Completed</p>
                         </h3><hr/>
+
+                        <div class = "row ">
+                          <div class = "col-lg-3">
+              
+                      
+                              <div class  = "authDiv no-radius2">
+              
+                                <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getCount() }}</strong></p>
+                                    <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                      <div class ="row">
+                                          <div class = "col-lg-12">
+                                                  <p style = "font-size:15px;" class = "gray">  Total Application</p>
+                                          </div>
+                                      </div>
+                                      </div>
+                                </div> 
+                          </div>
+                          <div class = "col-lg-3">
+              
+                                  <div class  = "authDiv no-radius2">
+              
+                                          <p class = "heading"style = "font-size:25px;color:#1B4E63"><strong>{{ getAmount() | currency:'₦ ': 2 }}</strong></p>
+                                              <div style = "border-top: 1px solid #f2f2f2;padding-top: 10px;font-size:15px">
+                                                <div class ="row">
+                                                    <div class = "col-lg-12">
+                                                            <p style = "font-size:15px;" class = "gray"> Total Amount</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                          </div> 
+                      
+                            </div>
+                      
+                        </div>
         
             
                                 <table class="table table-striped ">
                                     <thead>
                                         <tr>
+                                          
+                                        <th>Options</th>
                                         <th>S/No</th>
                                         <th>Date Created</th>
                                         <th>Name</th>
-                                        <th>Account</th>
+                                        <th>Amount</th>
+                                        <th>Payment Ref</th>
+                                        <th>Referral Code</th>
                                         <th>Duration</th>
                                         <th>Interest Rate</th>
-                                        <th>Referral Code</th>
-                                        <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                   
                                  
                                         <tr  *ngFor="let savings of investments; let i = index ">
-                                                <td >{{i + 1}}</td>
-                                                <td >{{savings.datecreated   | date : 'MMM d, y, h:mm:ss a'  }}</td>
-                                            
-                                         
-                                          <td >{{savings.firstname }} {{savings.lastname }}</td>
-                                          <td >{{savings.amount | currency:'₦': 3}}</td>
-                                          <td >{{savings.duration}} Months</td>
-                                          <td >{{savings.interestrate}}%</td>
-                                          <td >{{savings.code}}</td>
                                           <td >
                     
                                              
                     
-                                                <button class="btn btn-default" routerLink = "/investmentone/{{savings.id}}"><i class="glyphicon glyphicon-th-list"></i></button>        
-                                                   
-                                      </td>
+                                            <button class="btn btn-default" routerLink = "/investmentone/{{savings.id}}">View</button>        
+                                               
+                                  </td>
+                                                <td >{{i + 1}}</td>
+                                                <td >{{savings.datecreated   | date : 'MMM d, y, h:mm:ss a'  }}</td>
+                                            
+                                         
+                                          <td >{{savings.firstname  | titlecase }} {{savings.lastname   | titlecase}}</td>
+                                          <td >{{savings.amount | currency:'₦': 3}}</td>
+                                          <td >{{savings.paymentref}}</td>
+                                          <td >{{savings.code  | uppercase}}</td>
+                                          <td >{{savings.duration}} Months</td>
+                                          <td >{{savings.interestrate}}%</td>
+                                        
                                       
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div class="btn-group" style="float:right" *ngIf = "investments">
+                                    <button type="button" (click)="previous()"  class="btn btn-default">Previous</button>
+                                    <button type="button" (click)="next()" class="btn btn-default">Next</button>
+                                  </div>
+                                  <br/>
                               
                            
         
