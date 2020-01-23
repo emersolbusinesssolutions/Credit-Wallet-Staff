@@ -50,6 +50,8 @@
                         </div>
     
                         <button class = "btn btn-primary" (click)="getReport()">Get Report</button>
+
+                        <button  *ngIf = "loans" class = "btn btn-primary" (click)="exportReport()">Export Report</button>
       
                         <br/>  <br/>
                 
@@ -92,7 +94,7 @@
                                       <td>{{to | date}}</td>
                                     <td >{{loan.loanamount | currency:'₦': 3}}</td> 
                                     <td >{{(0.02 * loan.loanamount) | currency:'₦': 3}}</td>
-                                    <td > <button class="btn btn-default" (click)="viewTransaction(loan.customers)" type="button">Transaction History</button></td>
+                                    <td > <button class="btn btn-default" (click)="viewTransaction(loan.customers)" type="button">Transaction History</button>&nbsp;<button class="btn btn-default" (click)="exportResult(loan.customers, loan.marketer)" type="button">Export</button></td>
                                    
                                   </tr>
                               </tbody>
