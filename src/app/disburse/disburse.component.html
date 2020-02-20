@@ -35,6 +35,15 @@
                               </label>  
                             </td>
                           </tr>
+
+                          <tr *ngIf = "data.status == 10 && data.plaasstatus == ''">
+                            <td><p>Disburse Loan Balance ({{data.deductionamount | currency:'₦ ': 2 }}) Automatically </p> </td>
+                            <td>  <label class="switch">
+                                <input type="checkbox" (change)="onDisburseAutomaticallyDeductions($event)">
+                                <span class="slider round"></span>
+                              </label>  
+                            </td>
+                          </tr>
                           
                           <tr *ngIf = "data.plaasstatus == 1">
                             <td><p>Disburse Loan Automatically from PLaaS Wallet</p> </td>

@@ -16,7 +16,7 @@
                         <a *ngIf = "investment.status == '1'" class="btn btn-danger" (click)="cancel()">Cancel</a>
                         <a *ngIf = "investment.status == '1'" class="btn btn-default" data-toggle="modal" data-target="#myModalEdit" >Edit Customer Data</a>
                         <a *ngIf = "investment.status == '0'" class="btn btn-default"  data-toggle="modal" data-target="#myModalEdit">Edit Customer Data</a>
-                        <a  *ngIf = "investment.status == '0'"class="btn btn-default" data-backdrop="static" data-keyboard="false" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
+                        <a  class="btn btn-default" data-backdrop="static" data-keyboard="false" id = "modalButton" data-toggle="modal" data-target="#myModal" >Process Documents</a>
                         <a *ngIf = "investment.status == '1'" class="btn btn-default"  id = "modalButton" data-toggle="modal" data-target="#myModalConfirm" data-backdrop="static" data-keyboard="false">Upload to Loan Disk</a>
                         <a *ngIf = "investment.status == '1'" class="btn btn-default"  id = "modalButton" data-toggle="modal" data-target="#myModalComplete" data-backdrop="static" data-keyboard="false">Complete Investment Process</a>
                     </div>
@@ -203,7 +203,7 @@
       
     
       
-      <div id="myModal" class="modal fade" role="dialog" >
+      <div id="myModal" class="modal fade" role="dialog" *ngIf = "investment" >
           <div class="modal-dialog">
         
             <!-- Modal content-->
@@ -278,21 +278,7 @@
                     <input type="number"
                     class="textBoxDesign " min="2" max="5"  id="interestrate" name="interestrate" (ngModelChange)="setinterest()"  [(ngModel)]="interestrate" >  
                    </div>
-                   <div class = "form-group">
-                     <p>Savings Product</p>
-                      <select  class="textBoxDesign " id="savingsproduct" name="savingsproductid" [(ngModel)]="savingsproductid">
-                       <option value = "696">High Yield Deposit</option>
-                       <option value = "697">Std Yield Deposit</option>
-                       <option value = "717">Gold Yield Deposit</option>
-                       <option value = "1671">Gold Yield Deposit (UK)</option>
-                       <option value = "1885">Special Yield</option>
-                       <option value = "1913">Diamond Yeild</option>
-                       <option value = "1914">Platinum Yield</option>
-                       <option value = "1939">US $ Diamond Yield</option>
-                       <option value = "1960">High Yield Deposit</option>
-                       <option value = "2135">Gold Yield Investment</option>
-                      </select>
-                   </div>
+              
                   
                 </div>
                 <div class="modal-footer">

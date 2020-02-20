@@ -47,7 +47,7 @@
                                   <th>Amount</th>
                                   <th>Loan ID</th>
                                   <th>RRR - Mandate Reference</th>
-                                  <th>MDA Name</th>
+                                  <th>Created By</th>
                                   <th>Amount Paid</th>
                                   <th>Balance</th>
                                   </tr>
@@ -77,7 +77,7 @@
                                     <td >{{deduction.deduction.amount | currency:'₦': 3}}</td> 
                                     <td >{{deduction.deduction.loanid }} </td>
                                     <td >{{deduction.deduction.mandatereference }} </td>
-                                    <td >{{deduction.loan.place_of_work | titlecase}}</td>
+                                    <td >{{deduction.admin.firstname | titlecase}} {{deduction.admin.lastname | titlecase}}</td>
                                     <td >{{calculatePaid(deduction.deduction) | currency:'₦': 3}}</td>
                                     <td >{{calculateBalance(deduction.deduction) | currency:'₦': 3}}</td>
                                   

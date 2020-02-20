@@ -121,13 +121,14 @@
                 <a class="btn btn-default"  data-toggle="modal" data-target="#modal-plaas" *ngIf = "data.plaasstatus == '' || data.plaasstatus == '1'" >Select Lender</a>
                 <a class="btn btn-default" routerLink = "/disburse/{{id}}">Disburse</a>
                 <a class="btn btn-default"  data-toggle="modal" data-target="#modal-changeamount">Change Loan Amount</a>
+                <a class="btn btn-default"  data-toggle="modal" data-target="#modal-setmarketer">Set Marketer</a>
             </div>
             
             <div *ngIf = "data.status == '10'">
                 <a class="btn btn-default" data-toggle="modal" data-target="#modal-cancel">Cancel</a>
                 <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
                 <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
-                <a class="btn btn-default" routerLink = "/disburse/{{id}}">Disburse</a>
+                <a class="btn btn-default" data-toggle="modal" data-target="#modal-acceptloanid">Disburse</a>
                 <a class="btn btn-default"  data-toggle="modal" data-target="#modal-changeamount">Change Loan Amount</a>
             </div>
             
@@ -136,7 +137,10 @@
                 <a class="btn btn-default" data-toggle="modal" data-target="#editapplicationform">Edit Loan Record</a>
                 <a class="btn btn-default" data-toggle="modal" data-target="#modal-comment">Add Comment</a>
                 <a class="btn btn-default" (click) = "complete(data)" data-target="#modal-comment">Complete</a>
+                <a class="btn btn-default" (click) = "disburseAutomatic()">Retry Payment</a>
                 <a class="btn btn-default"  data-toggle="modal" data-target="#modal-changeamount">Change Loan Amount</a>
+                <a class="btn btn-default"  data-toggle="modal" data-target="#modal-setmarketer">Set Marketer</a>
+                <a class="btn btn-default"  data-toggle="modal" data-target="#modal-plaas"  >Select Lender</a>
             </div>
             
             <div *ngIf = "data.status == '8'">
@@ -174,6 +178,32 @@
                                             </td>
                                             <th style="padding:15px" scope = "row">CREDIT CODE</th>
                                             <td style="padding:15px">{{data.creditcode}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding:15px" scope = "row">DATE CREATED</th>
+                                            <td style="padding:15px">
+                                               {{data.created_at | date}}
+                                            </td>
+                                            <th style="padding:15px" scope = "row">MARKETER</th>
+                                            <td style="padding:15px">
+                                                <span *ngIf = "data.marketer == 'Credit Wallet'">Credit Wallet</span>
+                                      <span *ngIf = "data.marketer == 'Ugbobuaku'">Ugbobuaku Mmesoma</span>
+                                      <span *ngIf = "data.marketer == 'Eke'">Eke Emmanuella</span>
+                                      <span *ngIf = "data.marketer == 'Nnamso'">Nnamso violet</span>
+                                      <span *ngIf = "data.marketer == 'Iloabachie'">Stephanie Iloabachie </span>
+                                      <span *ngIf = "data.marketer == 'Clement'">Hephzibah Nasara Clement</span>
+                                      <span *ngIf = "data.marketer == 'blessing'">Blessing Ebute</span>
+                                      <span *ngIf = "data.marketer == 'Folashade'">Folashade Giwa</span>
+                                      <span *ngIf = "data.marketer == 'Atewe'">Atewe Evans</span>
+                                      <span *ngIf = "data.marketer == 'osas'">Aganmwonyi Osas</span>
+                                      <span *ngIf = "data.marketer == 'okitika'">Okitika Mercy</span>
+                                      <span *ngIf = "data.marketer == 'akinbode'">Akinbode Kofoworola</span>
+                                      <span *ngIf = "data.marketer == 'adedoyinojo'">Adedoyin Ojo</span>
+                                      <span *ngIf = "data.marketer == 'tugboboayotunde'">Tugbobo Ayotunde</span>
+                                      <span *ngIf = "data.marketer == 'adefarasinaderonke'">Adefarasin Aderonke</span>
+                                      <span *ngIf = "data.marketer == 'bekesarah'">Beke Sarah</span>
+                                      
                                             </td>
                                         </tr>
                                 <tr style="padding:15px">
@@ -565,9 +595,9 @@
             
             <div *ngIf="data.status == '3' || data.status == '4' || data.status == '5' || data.status == '7'  || data.status == '10'"
                >
-                <a type="button" href = "https://creditwallet.ng/api/public/uploads/{{data.idcard}}"  target = "blank" class="btn btn-default">ID Card</a>
-                <a type="button"  href = "https://creditwallet.ng/api/public/uploads/{{data.passport}}"  target = "blank" class="btn btn-default">Passport</a>
-                <a type="button"  class="btn btn-default"  target = "blank"  href = "https://test.creditwallet.ng/TestPDF/{{data.offerletterdoc}}">Offer Letter</a>
+                <a type="button" href = "https://creditwallet.ng/api/app/api/uploads/{{data.idcard}}"  target = "_blank" class="btn btn-default">ID Card</a>
+                <a type="button"  href = "https://creditwallet.ng/api/app/api/uploads/{{data.passport}}"  target = "_blank" class="btn btn-default">Passport</a>
+                <a type="button"  class="btn btn-default"  target = "_blank"   href = "https://test.creditwallet.ng/TestPDF/{{data.offerletterdoc}}">Offer Letter</a>
                 <button type="button" (click)="verifyaccountnumber()" class="btn btn-default">Verify Account Number</button>
                 <button type="button"  (click)="moveToLoanDisk()" class="btn btn-default">Upload to Loan Disk</button>
                 <button type="button" (click)="getAccountVerification(data)" class="btn btn-default">Get Payment Verification</button>
@@ -1099,7 +1129,7 @@
                                   </div>
                               </div>
                               <div class="row">
-                                  <div class="col-md-12">
+                                  <div class="col-md-6">
                                       <div class="form-group">
                                           <p>Marketer</p>
                                           <select class="textBoxDesign"  name="marketer" [(ngModel)]="offerLetterData.marketer">
@@ -1117,10 +1147,22 @@
                                               <option value = "akinbode">Akinbode Kofoworola</option>
                                               <option value = "adedoyinojo">Adedoyin Ojo</option>
                                               <option value = "tugboboayotunde">Tugbobo Ayotunde</option>
+                                              <option value = "adefarasinaderonke">Adefarasin Aderonke</option>
+                                              <option value = "bekesarah">Beke Sarah</option>
                                               
                                           </select>
                                    </div>
                                   </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p>Loan Type</p>
+                                        <select class="textBoxDesign"  name="marketer" [(ngModel)]="offerLetterData.loantype">
+                                            <option value = "1">Remita Direct Debit</option>
+                                            <option value = "2">RSP</option>
+                                            
+                                        </select>
+                                 </div>
+                                </div>
                               </div>
                             </form>
                           </div>
@@ -1133,6 +1175,82 @@
                       </div>
                       <!-- /.modal-dialog -->
                   </div>
+
+                  <div class="modal fade" id="modal-electronic2" *ngIf="offerLetterData">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h5 class="modal-title">Generate Offer Letter</h5>
+                        </div>
+                        <div class="modal-body">
+                          <form role="form" novalidate>
+                            <div class="form-group">
+                              <p>Loan Amount</p>
+                              <input class="textBoxDesign " type="text" name="loan_amount" [(ngModel)]="offerLetterData.amount" required="">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p>Tenor</p>
+                                        <input class="textBoxDesign " type="number" name="tenure" [(ngModel)]="offerLetterData.tenor" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p>MDA Name</p>
+                                        <input class="textBoxDesign " type="text" name="place_of_work" [(ngModel)]="offerLetterData.place_of_work" required="" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p>Marketer</p>
+                                        <select class="textBoxDesign"  name="marketer" [(ngModel)]="offerLetterData.marketer">
+                                            <option value = "Credit Wallet">Credit Wallet</option>
+                                            <option value = "Ugbobuaku">Ugbobuaku Mmesoma</option>
+                                            <option value = "Eke">Eke Emmanuella</option>
+                                            <option value = "Nnamso">Nnamso violet</option>
+                                            <option value = "Iloabachie">Stephanie Iloabachie </option>
+                                            <option value = "Clement">Hephzibah Nasara Clement</option>
+                                            <option value = "blessing">Blessing Ebute</option>
+                                            <option value = "Folashade">Folashade Giwa</option>
+                                            <option value = "Atewe">Atewe Evans</option>
+                                            <option value = "osas">Aganmwonyi Osas</option>
+                                            <option value = "okitika">Okitika  Mercy</option>
+                                            <option value = "akinbode">Akinbode Kofoworola</option>
+                                            <option value = "adedoyinojo">Adedoyin Ojo</option>
+                                            <option value = "tugboboayotunde">Tugbobo Ayotunde</option>
+                                            <option value = "adefarasinaderonke">Adefarasin Aderonke</option>
+                                            <option value = "bekesarah">Beke Sarah</option>
+                                            
+                                        </select>
+                                 </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p>Loan Type</p>
+                                        <select class="textBoxDesign"  name="marketer" [(ngModel)]="offerLetterData.loantype">
+                                            <option value = "1">Remita Data Referencing</option>
+                                            <option value = "2">RSP</option>
+                                            
+                                        </select>
+                                 </div>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" (click)="generateOfferLetterElectronic2()">Generate</button>
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
               
                   <div class="modal fade" id="modal-awaitingdisbursement" *ngIf="awaitingDisbursementData">
                       <div class="modal-dialog">
@@ -1329,16 +1447,17 @@
                         <div class="modal-body">
                           <form role="form" novalidate>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <p>Duration</p>
-                                        <input class="textBoxDesign " type="number" name="tenor" [(ngModel)]="tenor" required="">
-                                    </div>
-                                </div>
+                               
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <p>Amount</p>
                                         <input class="textBoxDesign " type="number" name="amount" [(ngModel)]="amount" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <p>Duration</p>
+                                        <input class="textBoxDesign " type="number" name="tenor" [(ngModel)]="tenor" required="">
                                     </div>
                                 </div>
                                
@@ -1348,6 +1467,87 @@
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary" (click)="changeLoanAmount()">Send</button>
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+                <div class="modal fade" id="modal-acceptloanid">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h5 class="modal-title">Disburse Loan</h5>
+                        </div>
+                        <div class="modal-body">
+                          <form role="form" novalidate>
+                            <div class="row">
+                               
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <p>Loan ID from Loan Disk</p>
+                                        <input class="textBoxDesign " type="number" name="loanid" [(ngModel)]="loanid" required="">
+                                    </div>
+                                </div>
+                               
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" (click)="setDeductionsRecords()">Send</button>
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+                <div class="modal fade" id="modal-setmarketer">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h5 class="modal-title">Change Marketer</h5>
+                        </div>
+                        <div class="modal-body">
+                          <form role="form" novalidate>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <p>Marketer</p>
+                                        <select class="textBoxDesign"  name="marketer" [(ngModel)]="marketer">
+                                            <option value = "Credit Wallet">Credit Wallet</option>
+                                            <option value = "Ugbobuaku">Ugbobuaku Mmesoma</option>
+                                            <option value = "Eke">Eke Emmanuella</option>
+                                            <option value = "Nnamso">Nnamso violet</option>
+                                            <option value = "Iloabachie">Stephanie Iloabachie </option>
+                                            <option value = "Clement">Hephzibah Nasara Clement</option>
+                                            <option value = "blessing">Blessing Ebute</option>
+                                            <option value = "Folashade">Folashade Giwa</option>
+                                            <option value = "Atewe">Atewe Evans</option>
+                                            <option value = "osas">Aganmwonyi Osas</option>
+                                            <option value = "okitika">Okitika  Mercy</option>
+                                            <option value = "akinbode">Akinbode Kofoworola</option>
+                                            <option value = "adedoyinojo">Adedoyin Ojo</option>
+                                            <option value = "tugboboayotunde">Tugbobo Ayotunde</option>
+                                            <option value = "adefarasinaderonke">Adefarasin Aderonke</option>
+                                            <option value = "bekesarah">Beke Sarah</option>
+                                        </select>
+                                 </div>
+                                </div>
+                          
+                               
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" (click)="setmarketer()">Send</button>
                         </div>
                       </div>
                       <!-- /.modal-content -->

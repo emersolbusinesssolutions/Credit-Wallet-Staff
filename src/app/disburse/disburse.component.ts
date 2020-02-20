@@ -43,6 +43,7 @@ export class DisburseComponent implements OnInit {
   month: number;
   accountverificationgiro: any;
   automaticdisbursementplaas: boolean;
+  automaticdeductions: boolean;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -155,6 +156,11 @@ export class DisburseComponent implements OnInit {
               this.toastr.success("Loan Disbursed, please wait for payment from PLAAS", '');
               this.disburseAutomaticPlaas()
              } 
+
+             if(this.automaticdeductions == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from Credit Wallet", '');
+              this.disburseDeductions()
+             } 
               
             this.toastr.success("Loan Disbursed", '');
             this._router.navigate(['loan/ready']);
@@ -230,6 +236,11 @@ export class DisburseComponent implements OnInit {
               this.toastr.success("Loan Disbursed, please wait for payment from PLAAS", '');
               this.disburseAutomaticPlaas()
              } 
+
+             if(this.automaticdeductions == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from Credit Wallet", '');
+              this.disburseDeductions()
+             }
               
             this.toastr.success("Loan Disbursed", '');
             this._router.navigate(['loan/ready']);
@@ -273,6 +284,11 @@ export class DisburseComponent implements OnInit {
               this.toastr.success("Loan Disbursed, please wait for payment from PLAAS", '');
               this.disburseAutomaticPlaas()
              } 
+
+             if(this.automaticdeductions == true){
+              this.toastr.success("Loan Disbursed, please wait for payment from Credit Wallet", '');
+              this.disburseDeductions()
+             }
               
             this.toastr.success("Loan Disbursed", '');
             this._router.navigate(['loan/ready']);
@@ -298,6 +314,14 @@ export class DisburseComponent implements OnInit {
       this.automaticdisbursement = true
     }else{
       this.automaticdisbursement = false
+    }
+  }
+
+  onDisburseAutomaticallyDeductions(eve){
+    if(eve.target.checked == true){
+      this.automaticdeductions = true
+    }else{
+      this.automaticdeductions = false
     }
   }
 
@@ -336,6 +360,31 @@ export class DisburseComponent implements OnInit {
            }
        );
    }
+
+   disburseDeductions(){
+   
+    this.loadingBar.start();
+     this.service.disburseDeductions({id: this.id}).subscribe(
+       data => {
+         let result: any = data;
+         console.log(data)
+         if(deepEqual(result.status,"success")){
+           this.toastr.success(result.message, '');
+           this._router.navigate(['loan/ready']);
+         }
+         else{
+           this.toastr.success(result.message, '');
+           //this._router.navigate(['']);
+         }
+         this.loadingBar.complete();
+       },
+         error => {
+           console.log(error);
+           this.toastr.success("Network Related Error", '');
+           this.loadingBar.complete();
+         }
+     );
+ }
 
    disburseAutomaticPlaas(){
 

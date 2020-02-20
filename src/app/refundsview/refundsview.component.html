@@ -1,0 +1,358 @@
+
+
+
+<div class = "main">
+  <div class = "container-fluid spaceUp" *ngIf = "refund">
+
+      <div class = "row">
+          <div class = "col-lg-12">
+             
+              <div class = "authDiv">
+                  <h3 class = "heading"><b>Refund_{{refund.loan_id}}</b>
+                    <p style="font-size: 12px;" class = " gray">Date Created : {{refund.datecreated  | date:'dd/MM/yyyy h:mm a' }}</p>
+                  </h3><hr/>
+
+                  <div class = "" *ngIf = "refund.status == 0">
+                    <a class="btn btn-danger"  data-toggle="modal" data-target="#modal-reject">Reject</a>
+                    <a class="btn btn-default" (click)= "cancel()">Cancel</a>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modal-approve">Authorize for Initial Approval</a>
+                  </div>
+
+                  <div class = "" *ngIf = "refund.status == 1">
+                    <a class="btn btn-danger"  data-toggle="modal" data-target="#modal-reject">Reject</a>
+                    <a class="btn btn-default" (click)= "cancel()">Cancel</a>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modal-approve-final">Authorize for final approval and payment</a>
+                  </div>
+                 
+                  <br/>
+
+                  <table class="table table-striped table-bordered">
+                                
+                    <tbody>
+                        <tr>
+                            
+                            <td style="padding:15px">
+                               <b>STATUS</b>
+                            </td>
+                            
+                            <td style="padding:15px">
+                              <p style="font-size: 13px;" class = "label label-success" *ngIf = "refund.status == 0">Awaiting Initial Approval</p>
+                              <p style="font-size: 13px;" class = "label label-success" *ngIf = "refund.status == 1">Awaiting Final Approval</p>
+                              <p style="font-size: 13px;" class = "label label-success" *ngIf = "refund.status == 2">Completed</p>
+                              <p style="font-size: 13px;" class = "label label-danger" *ngIf = "refund.status == 3">Completed</p>
+                            </td>
+
+                            
+                            <td style="padding:15px">
+                               <b>AMOUNT</b>
+                            </td>
+
+                            
+                            <td  style="padding:15px">
+                              {{refund.amount | currency:'₦': 3}}
+                            </td>
+
+                            
+                            
+                            <td style="padding:15px"><b>BANK NAME</b></td>
+                            <td style="padding:15px">
+                              <span *ngIf="refund.bankcode == '044'">ACCESS BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '023'">CITI BANK</span>
+                              <span *ngIf="refund.bankcode == '063'">DIAMOND BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '050'">ECOBANK NIGERIA PLC</span>
+                              <span *ngIf="refund.bankcode == '070'">FIDELITY BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '011'">FIRST BANK OF NIGERIA PLC</span>
+                              <span *ngIf="refund.bankcode == '214'">FIRST CITY MONUMENT BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '058'">GUARANTY TRUST BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '030'">HERITAGE BANK</span>
+                              <span *ngIf="refund.bankcode == '301'">JAIZ BANK</span>
+                              <span *ngIf="refund.bankcode == '082'">KEYSTONE BANK</span>
+                              <span *ngIf="refund.bankcode == '076'">SKYE BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '221'">STANBIC-IBTC BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '232'">STERLING BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '100'">SUNTRUST BANK</span>
+                              <span *ngIf="refund.bankcode == '032'">UNION BANK OF NIGERIA PLC</span>
+                              <span *ngIf="refund.bankcode == '033'">UNITED BANK FOR AFRICA PLC</span>
+                              <span *ngIf="refund.bankcode == '215'">UNITY BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '035'">WEMA BANK PLC</span>
+                              <span *ngIf="refund.bankcode == '057'">ZENITH BANK PLC</span>
+                         
+                            </td>
+                            <td style="padding:15px"><b>ACCOUNT NUMBER</b></td>
+                            <td style="padding:15px">{{refund.accountnumber}}</td>
+                        </tr>
+
+                        <tr>
+
+                          <td style="padding:15px">
+                            <b>TELEPHONE</b>
+                         </td>
+
+                         
+                         <td  style="padding:15px">
+                           {{refund.telephone}}
+                         </td>
+                            
+                          <td style="padding:15px">
+                             <b>INITIAL AMOUNT</b>
+                          </td>
+                          
+                          <td style="padding:15px">
+                            {{refund.initialamount | currency:'₦': 3}}
+                          </td>
+
+                          
+                          <td style="padding:15px">
+                             <b>FINAL AMOUNT</b>
+                          </td>
+
+                          
+                          <td  style="padding:15px">
+                            {{refund.finalamount | currency:'₦': 3}}
+                          </td>
+
+                        
+
+                         <td style="padding:15px">
+                          <b>AMOUNT PAID</b>
+                       </td>
+
+                       
+                       <td  style="padding:15px">
+                         {{refund.finalamount | currency:'₦': 3}}
+                       </td>
+
+                          
+                          
+                         
+                      </tr>
+                        <tr>
+                            
+                          <td style="padding:15px">
+                            <b>GIRO REFERENCE</b> 
+                          </td>
+                          
+                          <td colspan = "7" style="padding:15px">{{refund.giroreference}}</td>
+
+                          
+                        
+                      </tr>
+
+                   
+                    </tbody>
+                </table>
+         
+    
+                <br/>
+
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active"><a data-toggle="tab" href="#home">Verification</a></li>
+                  <li><a data-toggle="tab" href="#menu1">Authorization</a></li>
+                </ul>
+                
+                <div class="tab-content">
+                  <div id="home" class="tab-pane fade in active">
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                                
+                      <tbody>
+                          
+                          <tr style="padding:15px" *ngIf = "totalpaid >= expectedpayment" class = "success">
+                              <th style="padding:15px" scope="row">Expected Payment</th> 
+                              <td style="padding:15px">{{expectedpayment  | currency:'₦': 3}}</td>
+                              <th style="padding:15px" scope="row">Total Paid</th>
+                              <td style="padding:15px">{{totalpaid  | currency:'₦': 3}}</td>
+                              <th style="padding:15px" scope="row">Expected Refund Amount</th>
+                              <td style="padding:15px">{{totalpaid - expectedpayment | currency:'₦': 3}}</td>
+                          </tr>
+                          <tr style="padding:15px" *ngIf = "totalpaid < expectedpayment" class = "danger">
+                            <th style="padding:15px" scope="row">Expected Payment</th> 
+                            <td style="padding:15px">{{expectedpayment  | currency:'₦': 3}}</td>
+                            <th style="padding:15px" scope="row">Total Paid</th>
+                            <td style="padding:15px">{{totalpaid  | currency:'₦': 3}}</td>
+                            <th style="padding:15px" scope="row">Expected Refund Amount</th>
+                            <td style="padding:15px">{{0  | currency:'₦': 3}}</td>
+                              </tr>
+                      </tbody>
+                  </table>
+                  </div>
+                  <div id="menu1" class="tab-pane fade">
+                    <br/>
+                    <table class="table table-striped table-bordered" >
+                                        
+                      <thead>
+                          <tr>
+                              <th style="padding:15px" scope = "row">NAME</th>
+                              <th style="padding:15px" scope = "row">DATE CREATED</th>
+                              <th style="padding:15px" scope = "row">AUTHORIZATION LEVEL</th>
+                              <th style="padding:15px" scope = "row">COMMENT</th>
+                  
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              
+                                  <td style="padding:15px">
+                                      {{creator.firstname | titlecase}} {{creator.lastname | titlecase}}
+                                  </td>
+                                  
+                                  <td style="padding:15px">{{refund.datecreated  | date:'dd/MM/yyyy h:mm a'}}</td>
+      
+                                  
+                                  <td style="padding:15px">
+                                      Creator
+                                  </td>
+                                  <td style="padding:15px">{{refund.comment}}</td></tr>
+                                  <tr *ngIf = "initialapprover">
+                              
+                                    <td style="padding:15px">
+                                        {{initialapprover.firstname | titlecase}} {{initialapprover.lastname | titlecase}}
+                                    </td>
+                                    
+                                    <td style="padding:15px">{{refund.initialdate  | date:'dd/MM/yyyy h:mm a'}}</td>
+        
+                                    
+                                    <td style="padding:15px">
+                                        Initial Approver
+                                    </td>
+                                    <td style="padding:15px">{{refund.initialcomment}}</td></tr>
+                                    <tr *ngIf = "finalapprover">
+                              
+                                      <td style="padding:15px">
+                                          {{finalapprover.firstname | titlecase}} {{finalapprover.lastname | titlecase}}
+                                      </td>
+                                      
+                                      <td style="padding:15px">{{refund.finaldate  | date:'dd/MM/yyyy h:mm a'}}</td>
+          
+                                      
+                                      <td style="padding:15px">
+                                        Final Approver
+                                      </td>
+                                      <td style="padding:15px">{{refund.finalcomment}}</td></tr>
+                      </tbody>
+                  </table>
+                  </div>
+             
+                </div>
+                
+             
+            
+                   
+                         
+    
+               
+              
+            </div>
+            
+      </div>
+      
+    </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<div class="modal fade" id="modal-reject">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Reject Refund</h5>
+      </div>
+      <div class="modal-body">
+        <form role="form" novalidate>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <p>Reason </p>
+                      <input class="textBoxDesign " type="text" name="reason" [(ngModel)]="reason" required="required">
+                  </div>
+              </div>
+             
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="rejectrefund()">Send</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-approve">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Authorization for Initial Approval</h5>
+      </div>
+      <div class="modal-body">
+        <form role="form" novalidate>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <p>Amount Due</p>
+                      <input class="textBoxDesign " type="number" name="initialamount" [(ngModel)]="initialamount" required="required">
+                  </div>
+                  <div class="form-group">
+                    <p>Reason </p>
+                    <input class="textBoxDesign " type="text" name="initialreason" [(ngModel)]="initialreason" required="required">
+                </div>
+              </div>
+             
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="initialapproval()">Send</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-approve-final">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Authorization for Final Approval</h5>
+      </div>
+      <div class="modal-body">
+        <form role="form" novalidate>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <p>Amount Due</p>
+                      <input class="textBoxDesign " type="number" name="finalamount" [(ngModel)]="finalamount" required="required">
+                  </div>
+                  <div class="form-group">
+                    <p>Reason </p>
+                    <input class="textBoxDesign " type="text" name="finalreason" [(ngModel)]="finalreason" required="required">
+                </div>
+              </div>
+             
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="finalapproval()">Send</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+

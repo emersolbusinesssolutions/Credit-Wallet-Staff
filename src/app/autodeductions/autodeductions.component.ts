@@ -36,6 +36,9 @@ export class AutodeductionsComponent implements OnInit {
   reportdata: any[];
   reportdatanotfound: any[];
   exportstatus: boolean;
+  searchtext: any = "";
+  pagenumber: any = 1;
+  data: any[];
   constructor( private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router:Router,protected storage: AsyncLocalStorage, private route:ActivatedRoute,private toastr: ToastrService) {
@@ -46,6 +49,7 @@ export class AutodeductionsComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.getDeductions()
   }
 
   arrayBuffer:any;
@@ -73,8 +77,8 @@ export class AutodeductionsComponent implements OnInit {
             var worksheet = workbook.Sheets[first_sheet_name];
             var param = XLSX.utils.sheet_to_json(worksheet,{raw:true});
             $('#import').modal('hide'); 
-            this.toastr.success("Processing Deductions, Please wait", '');
-            this.processDeductions(param);
+            this.toastr.success("Uploading Deductions, Please wait", '');
+            this.autoupload(param);
         }
         fileReader.readAsArrayBuffer(this.fileSelected);
 
@@ -83,6 +87,29 @@ export class AutodeductionsComponent implements OnInit {
   getSalaryDetails(deduction){
     this.deduction = deduction
     this.getVerification(deduction)
+  }
+
+  getDeductions(){
+    this.loadingBar.start();
+
+    var json = {
+      searchtext : this.searchtext,
+      pagenumber : this.pagenumber
+    }
+    
+    this.service.autodeductionslist(json).subscribe(
+      data => {
+        this.result = data;
+        console.log(data)
+          this.deductions = this.result.deductions
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.toastr.success("Error connecting to server, please check your internet connection and try again", '');
+          this.loadingBar.complete();
+        }
+    );
   }
 
 
@@ -160,6 +187,101 @@ export class AutodeductionsComponent implements OnInit {
             this.found.push(this.result[index].data)
           }
         }
+        this.loadingBar.complete();
+      },
+        error => {
+          console.log(error);
+          this.toastr.success("Error connecting to server, please check your internet connection and try again", '');
+          this.loadingBar.complete();
+        }
+    );
+  }
+
+  uploadMissedPayment(){
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+        this.arrayBuffer = fileReader.result;
+        var data = new Uint8Array(this.arrayBuffer);
+        var arr = new Array();
+        for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+        var bstr = arr.join("");
+        var workbook = XLSX.read(bstr, {type:"binary"});
+        var first_sheet_name = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[first_sheet_name];
+        var param = XLSX.utils.sheet_to_json(worksheet,{raw:true});
+        console.log(param)
+        this.loadingBar.start();
+        this.service.missedpaymentupload(param).subscribe(
+          data => 
+          {
+            if(data["status"] == "success"){
+              this.exportPaymentFile(data["result"])
+            }else{
+
+            }
+            this.loadingBar.complete();
+            $('#import2').modal('hide'); 
+            
+          },
+          error => {
+            console.log(error);
+            this.toastr.success("Service Related Error", '');
+            this.loadingBar.complete();
+          }
+        );
+    }
+    fileReader.readAsArrayBuffer(this.fileSelected);
+  }
+
+  exportPaymentFile(result){
+
+  
+    var options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: false,
+      useBom: true,
+      headers: ["loanid", "amountdue", "telephone"]
+    };
+
+
+    this.data = []
+    for (let index = 0; index < result.length; ++index) {
+     
+      let json = {
+        loanid : result[index].loanid,
+        amountdue : result[index].amount,
+        telephone : result[index].telephone
+      }
+      this.data[index] = json
+    }
+
+    this.service.exportAsExcelFile(this.data, 'Payment File');
+  }
+
+
+autoupload(params){
+    this.loadingBar.start();
+    
+    this.service.autodeduction(params).subscribe(
+      data => {
+        this.result = data;
+        this.found = []
+        this.notfound = []
+        for (let index = 0; index < this.result.length; ++index) {
+    
+          if(this.result[index].returnstatus == false){
+            this.exportstatus = true;
+            this.notfound.push(this.result[index].data)
+          }else{
+            this.exportstatus = true;
+            this.found.push(this.result[index].data)
+          }
+          
+        }
+        console.log(this.notfound)
         this.loadingBar.complete();
       },
         error => {

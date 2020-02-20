@@ -201,7 +201,6 @@ export class InvestmentoneComponent implements OnInit {
         amount : this.unFormat(this.amount),
         interestrate : this.interestrate,
         duration : this.duration,
-        savingsproductid : this.savingsproductid,
         startdate : this.startdate
       }
   

@@ -53,6 +53,8 @@ export class ViewloanComponent implements OnInit {
   showorganizationalcode: any;
   showSuccess: boolean;
   showDanger: boolean;
+  marketer: any;
+  loanid: any;
 
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
@@ -128,6 +130,34 @@ export class ViewloanComponent implements OnInit {
       );
     }
     
+  }
+
+  setmarketer(){
+    if(confirm("Are you sure?")){
+      var json = {
+        marketer : this.marketer,
+        id : this.id
+      }
+      this.loadingBar.start();
+      this.service.setmarketer(json).subscribe(
+        data => {
+          this.result = data;
+          console.log(this.result)
+          if(deepEqual(this.result.status,"success")){
+            this.toastr.success(this.result.message, '');
+          }
+          else{
+            this.toastr.success(this.result.message, '');
+          }
+          this.loadingBar.complete();
+        },
+          error => {
+            console.log(error);
+            this.loadingBar.complete();
+            this.toastr.error("Network Error, please try again", '');
+          }
+      );
+    }
   }
 
   complete(data){
@@ -249,8 +279,11 @@ export class ViewloanComponent implements OnInit {
         
 
         if(this.availablebalance == 0){
-          this.availablebalance = this.remita[0].amount;
-          console.log(this.availablebalance)
+          if(this.data.remitastatus == "1"){
+            this.availablebalance = this.remita[0].amount;
+            console.log(this.availablebalance)
+          }
+         
         }
 
         if((this.availablebalance - this.data.monthly_repayment) >= 10000){
@@ -446,6 +479,31 @@ export class ViewloanComponent implements OnInit {
      );
   }
 
+  generateOfferLetterElectronic2(){
+    $('#modal-electronic2').modal('hide'); 
+    this.loadingBar.start();
+     this.service.generateOfferLetterNew2(this.offerLetterData).subscribe(
+       data => {
+         let result: any = data;
+         console.log(data)
+         if(deepEqual(result.status,"success")){
+           this.toastr.success(result.message, '');
+           this.getLoan();
+         }
+         else{
+           this.toastr.success(result.message, '');
+           //this._router.navigate(['']);
+         }
+         this.loadingBar.complete();
+       },
+         error => {
+           console.log(error);
+           this.toastr.success("Network Related Error", '');
+           this.loadingBar.complete();
+         }
+     );
+  }
+
 
   rejectLoan(){
 
@@ -482,6 +540,32 @@ export class ViewloanComponent implements OnInit {
       }
   }
 
+  setDeductionsRecords(){
+    if (confirm('Are you sure you want to disburse this loan?')) {
+      this.loadingBar.start();
+      this.service.deductiondisburse({id: this.id, loanid:this.loanid}).subscribe(
+        data => {
+          let result: any = data;
+          console.log(data)
+          if(deepEqual(result.status,"success")){
+            $('#modal-acceptloanid').modal('hide'); 
+            this._router.navigate(['disburse/'+this.id]);
+          }
+          else{
+            this.toastr.success(result.message, '');
+            //this._router.navigate(['']);
+          }
+          this.loadingBar.complete();
+        },
+          error => {
+            console.log(error);
+            this.toastr.success("Network Related Error", '');
+            this.loadingBar.complete();
+          }
+      );
+     }
+  }
+
 
   updateLoan(){
 
@@ -515,6 +599,34 @@ export class ViewloanComponent implements OnInit {
         );
       }
   }
+
+  disburseAutomatic(){
+
+    if(confirm("Are you sure you want to retry this payment")){
+      this.loadingBar.start();
+      this.service.disburseLoan({id: this.id}).subscribe(
+        data => {
+          let result: any = data;
+          console.log(data)
+          if(deepEqual(result.status,"success")){
+            this.toastr.success(result.message, '');
+          }
+          else{
+            this.toastr.success(result.message, '');
+            //this._router.navigate(['']);
+          }
+          this.loadingBar.complete();
+        },
+          error => {
+            console.log(error);
+            this.toastr.success("Network Related Error", '');
+            this.loadingBar.complete();
+          }
+      );
+    }
+   
+    
+ }
 
   confirmDocuments(loan){
     if (confirm('You are about to acknowledge that loan documents have been received?')) {

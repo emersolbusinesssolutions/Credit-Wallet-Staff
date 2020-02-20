@@ -53,6 +53,12 @@ const routes: Routes = [
       }
       ,
       {
+        path : 'callinverification',
+        loadChildren: './callinverification/callinverification.module#CallinverificationModule'
+      }
+      
+      ,
+      {
         path : 'mailing/chairman',
         loadChildren: './chairmanmailing/chairmanmailing.module#ChairmanmailingModule'
       }
@@ -65,6 +71,41 @@ const routes: Routes = [
       {
         path : 'investment/report',
         loadChildren: './investmentreport/investmentreport.module#InvestmentreportModule'
+      },
+
+      {
+        path : 'refund/create',
+        loadChildren: './refundcreate/refundcreate.module#RefundcreateModule'
+      },
+      
+      {
+        path : 'refunds/:id',
+        loadChildren: './refunds/refunds.module#RefundsModule'
+      },
+
+      {
+        path : 'refund/:id',
+        loadChildren: './refundsview/refundsview.module#RefundsviewModule'
+      },
+
+      {
+        path : 'accountrequest',
+        loadChildren: './accountrequest/accountrequest.module#AccountrequestModule'
+      },
+
+      {
+        path : 'liquidation/create',
+        loadChildren: './liquidationcreate/liquidationcreate.module#LiquidationcreateModule'
+      },
+
+      {
+        path : 'liquidation/list/:id',
+        loadChildren: './liquidationlist/liquidationlist.module#LiquidationlistModule'
+      },
+
+      {
+        path : 'liquidation/view/:id',
+        loadChildren: './liquidationview/liquidationview.module#LiquidationviewModule'
       },
 
       {

@@ -97,11 +97,11 @@ export class InterestpaymentComponent implements OnInit {
           this.loadingBar.complete();
           if(deepEqual(data["status"],"success")){
             
-            this.toastr.success(data["message"], '');
+            this.toastr.success("Message Sent Successfully", '');
             location.reload()
           }
           else{
-            this.toastr.success(data["message"], '');
+            this.toastr.success("Something Went Wrong", '');
            
           }
           

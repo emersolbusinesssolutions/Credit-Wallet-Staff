@@ -85,6 +85,15 @@ export class SalesreportComponent implements OnInit {
     if(marketer =='tugboboayotunde' ){
       marketer = "Tugbobo Ayotunde";
     }
+
+    if(marketer =='bekesarah' ){
+      marketer = "Beke Sarah";
+    }
+
+    if(marketer =='adefarasinaderonke' ){
+      marketer = "Adefarasin Aderonke";
+    }
+
    this.reportdataindividal = []
     for (let index = 0; index < customers.length; ++index) {
       let json = {

@@ -1,0 +1,227 @@
+
+
+
+
+<div class = "main">
+  <div class = "container-fluid spaceUp" *ngIf = "liquidation">
+
+      <div class = "row">
+          <div class = "col-lg-12">
+             
+              <div class = "authDiv">
+                  <h3 class = "heading"><b>Liquidation_{{liquidation.reference}}</b>
+                    <p style="font-size: 12px;" class = " gray">Date Created : {{liquidation.datecreated  | date:'dd/MM/yyyy h:mm a' }}</p>
+                  </h3><hr/>
+
+                  <div class = "">
+                    <a class="btn btn-default" (click)= "setOption(2)">Cancel</a>
+                    <a class="btn btn-success"  (click)= "setOption(1)">Confirm Payment</a>
+                  </div>
+
+                
+                  <br/>
+
+                  <table class="table table-striped table-bordered">
+                                
+                    <tbody>
+                        <tr>
+
+                          <td style="padding:15px">
+                            <b>First Name</b>
+                         </td>
+                         
+                         <td style="padding:15px">
+                           {{liquidation.firstname}}
+                         </td>
+
+                         <td style="padding:15px">
+                          <b>Last Name</b>
+                       </td>
+                       
+                       <td style="padding:15px">
+                         {{liquidation.lastname}}
+                       </td>
+                            
+                            <td style="padding:15px">
+                               <b>LOAN ID</b>
+                            </td>
+                            
+                            <td style="padding:15px">
+                              {{liquidation.loan_id}}
+                            </td>
+
+                            
+                            <td style="padding:15px">
+                               <b>LIQUIDATION AMOUNT</b>
+                            </td>
+
+                            
+                            <td  style="padding:15px">
+                              {{liquidation.liquidationamount | currency:'₦': 3}}
+                            </td>
+                             
+                         
+                           
+                        </tr>
+
+                    
+
+                   
+                    </tbody>
+                </table>
+
+
+                <h5 class = "gray">Payment Breakdown</h5>
+         
+                <table class="table table-striped table-bordered">
+                                
+                  <tbody>
+                      <tr>
+                          
+                          <td style="padding:15px">
+                             <b>LOAN AMOUNT</b>
+                          </td>
+                          
+                          <td style="padding:15px">
+                            {{liquidation.loanamount | currency:'₦': 3}}
+                          </td>
+
+                          
+
+                         
+                      </tr>
+              
+
+                      <tr>
+                          
+                        <td style="padding:15px">
+                           <b>TOTAL INTEREST DUE</b><br/>
+                           <em>Interest Due for  {{liquidation.actualdaysused}} days</em>
+                        </td>
+                        
+                        <td style="padding:15px">
+                          {{liquidation.accruedinterest | currency:'₦': 3}}
+                        </td>
+
+                        
+
+                       
+                    </tr>
+                    <tr>
+                          
+                      <td style="padding:15px">
+                         <b>ADMIN FEES</b>
+                         <br/>
+                          <em>Insurance + Disbursement Fees</em>
+                      </td>
+                      
+                      <td style="padding:15px">
+                        {{liquidation.adminfees | currency:'₦': 3}}
+                      </td>
+
+                      
+
+                     
+                  </tr>
+
+                  <tr>
+                          
+                    <td style="padding:15px">
+                       <b>TOTAL PAID</b>
+                       <br/>
+                      <em>Total Paid as at {{liquidation.datecreated | date}}</em>
+                    </td>
+                    
+                    <td style="padding:15px">
+                      {{liquidation.paidamount | currency:'₦': 3}}
+                    </td>
+
+                    
+
+                   
+                </tr>
+
+           
+
+              <tr>
+                          
+                <td style="padding:15px">
+                   <b>LOAN BALANCE</b><br/>
+                   <em>(LOAN AMOUNT + TOTAL INTEREST DUE + ADMIN FEES) - TOTAL PAID</em>
+                </td>
+                
+                <td style="padding:15px">
+                  {{getLoanBalance()  | currency:'₦': 3}}
+                </td>
+
+                
+
+               
+            </tr>
+
+            
+            <tr>
+                          
+              <td style="padding:15px">
+                 <b>LIQUIDATION CHARGES</b><br/>
+                 <em>5% of loan balance</em>
+              </td>
+              
+              <td style="padding:15px">
+                {{liquidation.penalty | currency:'₦': 3}}
+              </td>
+
+              
+
+             
+          </tr>
+
+         
+
+            <tr>
+                          
+              <td style="padding:15px">
+                 <b></b>
+              </td>
+              
+              <td style="padding:15px">
+                <b>{{liquidation.liquidationamount | currency:'₦': 3}}</b>
+              </td>
+
+              
+
+             
+          </tr>
+
+
+
+
+                 
+                  </tbody>
+              </table>
+    
+                <br/>
+
+             
+                
+             
+            
+                   
+                         
+    
+               
+              
+            </div>
+            
+      </div>
+      
+    </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+
+

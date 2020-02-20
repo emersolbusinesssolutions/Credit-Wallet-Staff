@@ -63,7 +63,7 @@
                         <li  data-toggle="collapse" data-target="#orders" class="collapsed">
                             <a ><i class="glyphicon glyphicon-shopping-cart"></i> Loans  <span class="arrow"></span></a>
                         </li>
-                        <ul  [ngClass]="'sub-menu collapse'"  id="orders">
+                        <ul  style = "font-size:12px" [ngClass]="'sub-menu collapse'"  id="orders">
                             <li ><a  [routerLink]="['/loan/new']"  [queryParams]="{}">New Applications</a></li>
                             <li ><a [routerLink]="['/loan/rejected']"  [queryParams]="{}">Rejected Loans</a></li>
                             <li ><a [routerLink]="['/loan/cancel']"  [queryParams]="{}">Cancelled Loans</a></li>
@@ -97,10 +97,11 @@
                           <a><i class="glyphicon glyphicon-th-list"></i> Verification <span class="arrow"></span></a>
                         </li>
                           
-                        <ul class="sub-menu collapse" id="service">
+                        <ul  style = "font-size:12px"  class="sub-menu collapse" id="service">
                           <li  routerLink = "/uploadverificationdata">BVN Verification</li>
                           <li  routerLink = "/getverificationresult">IPPIS Verification</li>
                           <li  routerLink = "/suggestion">Verification Suggestion</li>
+                          <li  routerLink = "/callinverification">Call-In Verification</li>
 
                           
                         </ul>
@@ -110,9 +111,11 @@
                         </li>
                           
                         <ul class="sub-menu collapse" id="plaas">
+                          <li  routerLink = "/lenders">Lenders</li>
                           <li  routerLink = "/plaaslist/1">Awaiting Funding</li>
                           <li  routerLink = "/plaaslist/2">Open Transactions</li>
                           <li  routerLink = "/plaaslist/3">Closed Transactions</li>
+                          <li  routerLink = "/plaaslist/1">Add Payment</li>
                         </ul>
 
                         <li data-toggle="collapse" data-target="#payment" class="collapsed">
@@ -120,12 +123,13 @@
                         </li>
                           
                         <ul class="sub-menu collapse" id="payment" >
+                          <li routerLink = "/accountrequest">Account Request</li>
                           <li routerLink = "/payment/ippis">IPPIS</li>
                           <li routerLink = "/payment/rsp">RSP</li>
                           <li routerLink = "/liquidation">Liquidation Calculator</li>
                           <li routerLink = "/loancalculator">Loan Calculator</li>
                           <li routerLink = "/plaaspayment">Complete Loan</li>
-                          <li routerLink = "/disbursementreconciliation">Disbursement Reconciliation</li>
+                          <li routerLink = "/disbursementreconciliation">Reconciliation</li>
                         </ul>
 
                       
@@ -141,6 +145,19 @@
                             <li routerLink = "/salesreport">Sales Report</li>
                             <li routerLink = "/salesreport">Metrics</li>
                             <li routerLink = "/auditlog">Audit Log</li>
+                          </ul>
+
+                          <li data-toggle="collapse" data-target="#refunds" class="collapsed">
+                            <a><i class="glyphicon glyphicon-th-list"></i> Refunds <span class="arrow"></span></a>
+                          </li>
+                            
+                          <ul  style = "font-size:12px"  class="sub-menu collapse" id="refunds">
+                            <li routerLink = "/refund/create">Initiate Refund</li>
+                            <li routerLink = "/refunds/0">Awaiting Initial Approval</li>
+                            <li routerLink = "/refunds/1">Awaiting Final Approval</li>
+                            <li routerLink = "/refunds/2">Completed/Paid</li>
+                            <li routerLink = "/refunds/3">Rejected</li>
+                            <li routerLink = "/refunds/4">Cancelled</li>
                           </ul>
                         <li data-toggle="collapse" data-target="#reports" class="collapsed">
                           <a ><i class="glyphicon glyphicon-align-left"></i> Deductions<span class="arrow"></span></a>
@@ -167,20 +184,7 @@
                       </ul>
                     
 
-                       
-                  
-                          <li>
-                            <a  routerLink = "/contactmanagement">
-                            <i class="glyphicon glyphicon-th-list"></i> Return Business
-                            </a>
-                          </li>
-
-                          
-                          <li>
-                            <a  routerLink = "/lenders">
-                            <i class="glyphicon glyphicon-th-list"></i> Lenders
-                            </a>
-                          </li>
+          
 
                   
 
@@ -192,6 +196,20 @@
                               <li routerLink = "/recoveryoverview">Overview</li>
 
                               <li routerLink = "/recovery">Customer List</li>
+                            </ul>
+
+                            <li data-toggle="collapse" data-target="#liquidation" class="collapsed">
+                              <a><i class="glyphicon glyphicon-th-list"></i> Liquidation <span class="arrow"></span></a>
+                            </li>
+                              
+                            <ul class="sub-menu collapse" id="liquidation">
+                              <li routerLink = "/liquidation/create">Create Request</li>
+
+                              <li routerLink = "/liquidation/list/0">Awaiting Payment</li>
+
+                              <li routerLink = "/liquidation/list/1">Confirmed Payment</li>
+
+                              <li routerLink = "/liquidation/list/2">Cancelled</li>
                             </ul>
 
                           <li data-toggle="collapse" data-target="#mailing" class="collapsed">

@@ -23,6 +23,7 @@ export class RecoveryComponent implements OnInit {
   dataTable :any;
   notfound: any;
   loanrecovery: any;
+  data: any[];
   constructor(private loadingBar: LoadingBarService,
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService, private titleService: Title,private chRef: ChangeDetectorRef){
@@ -110,6 +111,37 @@ export class RecoveryComponent implements OnInit {
         fileReader.readAsArrayBuffer(this.fileSelected);
 
   }
+
+ 
+
+  export(result){
+
+  
+      var options = { 
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true, 
+        showTitle: false,
+        useBom: true,
+        headers: ["loanid", "amount", "telephone"]
+      };
+  
+  
+      this.data = []
+      for (let index = 0; index < result.length; ++index) {
+       
+        let json = {
+          loanid : result[index].loanid,
+          amount : result[index].amount,
+          telephone : result[index].telephone
+        }
+        this.data[index] = json
+      }
+  
+      this.service.exportAsExcelFile(this.data, 'Investment Report');
+    }
+  
 
 
   ExcelDateToJSDate(serial) {

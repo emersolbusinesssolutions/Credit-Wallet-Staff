@@ -134,23 +134,24 @@ console.log(json)
     this.reportdata = []
     for (let index = 0; index < this.investments.length; ++index) {
       let status = ""
-      if(this.investments[index].status == 0){
+      if(this.investments[index].status == "0"){
         status = "New Application"
       }
-      if(this.investments[index].status == 1){
+      if(this.investments[index].status == "1"){
         status = "Processing"
       }
 
-      if(this.investments[index].status == 3){
+      if(this.investments[index].status == "2"){
         status = "Paid"
       }
+      console.log(this.investments[index].status)
       let json = {
         "S/No" : index + 1,
         "Status" : status,
         "Name" : this.investments[index].title+" "+this.investments[index].firstname+" "+this.investments[index].lastname,
         "Amount" :  this.investments[index].amount,
         "Duration" :  this.investments[index].duration,
-        "Date Created" : this.investments[index].datecreated,
+        "Start Date" : this.investments[index].startdate,
       }
       this.reportdata[index] = json
     }

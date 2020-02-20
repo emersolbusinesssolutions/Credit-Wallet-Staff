@@ -1,0 +1,114 @@
+
+
+<div class = "main">
+  <div class = "container-fluid spaceUp" >
+
+      <div class = "row">
+          <div class = "col-lg-12">
+             
+              <div class = "authDiv">
+                  <h3 class = "heading"><b>Initiate Refund</b>
+                    <p style="font-size: 12px;" class = " gray">Provide the details below to start the refund process for the customer</p>
+                  </h3><hr/>
+                 
+                  <br/>
+
+                  <div class="row">
+                    <div class = "col-lg-4">
+                      <div class = "form-group">
+                        <p>Loan Disk Loan ID </p>
+                        <input type="text" class="textBoxDesign"  name = "loanid" [(ngModel)]="loanid" />
+                      </div>
+                    </div>
+                    <div class = "col-lg-4">
+                      <div class = "form-group">
+                        <p>Amount</p>
+                        <input type="number" class="textBoxDesign"  name = "amount" [(ngModel)]="amount" />
+                      </div>
+                    </div>
+                    <div class = "col-lg-4">
+                      <div class = "form-group">
+                        <p>Phone Number</p>
+                        <input type="text" class="textBoxDesign"  name = "telephone" [(ngModel)]="telephone" />
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="row">
+                    <div class = "col-lg-4">
+                      <div class = "form-group">
+                        <p>Bank Name </p>
+                        <select name = "salary_bank_name" class="textBoxDesign" [(ngModel)]="bankcode">
+                          <option value = "044">ACCESS BANK PLC</option>
+                          <option value = "023">CITI BANK</option>
+                          <option value = "063">DIAMOND BANK PLC</option>
+                          <option value = "050">ECOBANK NIGERIA PLC</option>
+                          <option value = "070">FIDELITY BANK PLC</option>
+                          <option value = "011">FIRST BANK OF NIGERIA PLC</option>
+                          <option value = "214">FIRST CITY MONUMENT BANK PLC</option>
+                          <option value = "058">GUARANTY TRUST BANK PLC</option>
+                          <option value = "030">HERITAGE BANK</option>
+                          <option value = "301">JAIZ BANK</option>
+                          <option value = "082">KEYSTONE BANK</option>
+                          <option value = "076">SKYE BANK PLC</option>
+                          <option value = "221">STANBIC-IBTC BANK PLC</option>
+                          <option value = "068">STANDARD CHARTERED</option>
+                          <option value = "232">STERLING BANK PLC</option>
+                          <option value = "100">SUNTRUST BANK</option>
+                          <option value = "032">UNION BANK OF NIGERIA PLC</option>
+                          <option value = "033">UNITED BANK FOR AFRICA PLC</option>
+                          <option value = "215">UNITY BANK PLC</option>
+                          <option value = "035">WEMA BANK PLC</option>
+                          <option value = "057">ZENITH BANK PLC</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class = "col-lg-4">
+                      <div class = "form-group">
+                        <p>Account Number</p>
+                        <input type="text" class="textBoxDesign"  name = "accountnumber" [(ngModel)]="accountnumber" />
+                      </div>
+                    </div>
+                    <div class = "col-lg-4">
+                      <div class = "form-group">
+                        <p>Email Address </p>
+                        <input type="text" class="textBoxDesign"  name = "email" [(ngModel)]="email" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                   
+                    <div class = "col-lg-12">
+                      <div class = "form-group">
+                        <p>Comment/Note</p>
+                        <textarea  class="textBoxDesign" rows = "3"  name = "comment" [(ngModel)]="comment"></textarea>
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                  <button (click)="getAccountNumber()" class = "btn btn-default btn-lg">Start Refund Process</button>
+    
+            
+    
+                <br/>
+             
+            
+                   
+                         
+    
+               
+              
+            </div>
+            
+      </div>
+      
+    </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
