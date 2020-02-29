@@ -130,8 +130,8 @@ export class DisburseComponent implements OnInit {
       telephone : this.data.telephone,
       authorisationCode : this.data.authcode,
       customerId : this.data.remita_customer_id,
-      accountNumber : this.data.salary_bank_account,
-      bankCode : this.data.salary_bank_name,
+      accountNumber : this.data.remita_salary_bank_account,
+      bankCode : this.data.remita_salary_bank_name,
       amount : this.amount,
       startdate : this.startdate.formatted
     }
@@ -205,8 +205,8 @@ export class DisburseComponent implements OnInit {
       telephone : this.data.telephone,
       authorisationCode : this.data.authcode,
       customerId : this.data.remita_customer_id,
-      accountNumber : this.data.salary_bank_account,
-      bankCode : this.data.salary_bank_name,
+      accountNumber : this.data.remita_salary_bank_account,
+      bankCode : this.data.remita_salary_bank_name,
       amount : this.amount,
       startdate : this.startdate.formatted,
       tenor : this.duration

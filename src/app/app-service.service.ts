@@ -84,6 +84,18 @@ export class AppServiceService {
         return this.http.post(this.path + 'loan/offerletter/new', params, httpOptionsForSignedUser);
     }
 
+    authorizeplaas(loans: any) {
+        const httpOptionsForSignedUser = {
+            headers: new HttpHeaders({ 
+                'Content-Type': 'application/json',
+                'Authorization' : sessionStorage.getItem("currentUser")
+            })
+          };
+        
+        return this.http.post(this.path + 'plaas/authorize', loans, httpOptionsForSignedUser);
+    }
+      
+
     generateOfferLetterNew2(params: any): any {
         const httpOptionsForSignedUser = {
             headers: new HttpHeaders({ 
@@ -94,6 +106,8 @@ export class AppServiceService {
         
         return this.http.post(this.path + 'loan/offerletter/new-two', params, httpOptionsForSignedUser);
     }
+
+    
 
 
       dashboard() {

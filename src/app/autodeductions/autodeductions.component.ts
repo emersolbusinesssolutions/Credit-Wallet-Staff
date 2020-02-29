@@ -78,7 +78,7 @@ export class AutodeductionsComponent implements OnInit {
             var param = XLSX.utils.sheet_to_json(worksheet,{raw:true});
             $('#import').modal('hide'); 
             this.toastr.success("Uploading Deductions, Please wait", '');
-            this.autoupload(param);
+            console.log(param)
         }
         fileReader.readAsArrayBuffer(this.fileSelected);
 

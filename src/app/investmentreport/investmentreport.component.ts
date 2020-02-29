@@ -148,10 +148,15 @@ console.log(json)
       let json = {
         "S/No" : index + 1,
         "Status" : status,
-        "Name" : this.investments[index].title+" "+this.investments[index].firstname+" "+this.investments[index].lastname,
+        "Unique Number" :  this.investments[index].uniquenumber,
+        "Title" :  this.investments[index].title,
+        "Full Name" :  this.investments[index].firstname+" "+this.investments[index].lastname,
         "Amount" :  this.investments[index].amount,
-        "Duration" :  this.investments[index].duration,
+        "Duration" :  this.investments[index].duration + " Months",
         "Start Date" : this.investments[index].startdate,
+        "Referral Code" : this.investments[index].code,
+        "Interest Rate" : this.investments[index].interestrate,
+        "Savings Account No." : this.investments[index].savings_account_number
       }
       this.reportdata[index] = json
     }

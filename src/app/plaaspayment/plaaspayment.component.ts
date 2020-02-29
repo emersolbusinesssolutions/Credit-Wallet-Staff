@@ -29,6 +29,7 @@ export class PlaaspaymentComponent implements OnInit {
   notfoundcount = 0;
   totalamount: any;
   totalcount: any;
+  loans: any;
 
   
 
@@ -36,8 +37,7 @@ export class PlaaspaymentComponent implements OnInit {
     private service : AppServiceService,
     private _router: Router,private router:ActivatedRoute,private toastr: ToastrService, private titleService: Title){
       
-    this.id = this.router.snapshot.params['id'];
-    console.log(this.id)
+
       
   }
 
@@ -74,23 +74,17 @@ export class PlaaspaymentComponent implements OnInit {
             this.service.getPlaasPayment(param).subscribe(
               data => 
               {
-                this.loadingBar.complete();
-                $('#import').modal('hide'); 
-                this.found = data["found"]
-                this.notfound = data["notfound"]
-               
-                for (let index = 0; index < this.found.length; ++index) {
-                  this.creditwalletamount= this.creditwalletamount + this.found[index].loan.loan_amount;
-                  this.creditwalletcount = this.creditwalletcount + 1;
-                }
-
-                for (let index = 0; index < this.notfound.length; ++index) {
-                  this.notfoundamount = this.notfoundamount + this.notfound[index].received;
-                  this.notfoundcount= this.notfoundcount + 1;
-                }
-
-
+                $('#import2').modal('hide'); 
                 console.log(data)
+                this.loadingBar.complete();
+                if(data["status"] == "success"){
+                  console.log(data)
+                  this.loans = data["data"]
+                  console.log(this.loans)
+                }else{
+                  this.toastr.success(data["message"], '');
+                  this._router.navigate(['']);
+                }
                 
               },
               error => {
@@ -102,6 +96,33 @@ export class PlaaspaymentComponent implements OnInit {
         }
         fileReader.readAsArrayBuffer(this.fileSelected);
 
+  }
+
+
+  submit(){
+    this.loadingBar.start();
+    this.service.authorizeplaas(this.loans).subscribe(
+      data => 
+      {
+        $('#import2').modal('hide'); 
+        console.log(data)
+        this.loadingBar.complete();
+        if(data["status"] == "success"){
+          console.log(data)
+          this.loans = data["data"]
+          console.log(this.loans)
+        }else{
+          this.toastr.success(data["message"], '');
+          this._router.navigate(['']);
+        }
+        
+      },
+      error => {
+        console.log(error);
+        this.toastr.success("Service Related Error", '');
+        this.loadingBar.complete();
+      }
+    );
   }
 
 }

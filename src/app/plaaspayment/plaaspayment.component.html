@@ -1,0 +1,123 @@
+<div class = "main">
+    <div class = "container-fluid spaceUp">
+        <div class = "row">
+          <div class = "col-lg-12">
+            <h3 class = "heading"><strong>PLAAS Payment</strong> <div class = "row" style="float:right">
+      
+              <div class = "col-lg-12">
+               <button data-toggle="modal" data-target="#import2" class= "btn btn-default">Upload Payment</button>
+               <button *ngIf = "loans" class= "btn btn-default">Authorize Payment</button>
+              </div>
+              
+  
+             
+
+            </div>
+            <p class = "gray" style="font-size:12px">Upload PLAAS monthly repayment</p>
+     </h3> <hr/>
+ 
+            <br/>
+              <div class  = "authDiv no-radius2">
+                  <div class = "">
+      
+           
+      
+                
+                 
+              
+                          <table class="table table-striped">
+                              <thead style="background-color: #1B4E63;color:white">
+                                  <tr>
+                                    <th>S/No</th>
+                                    <th>Loan Status</th>
+                                    <th>Loan ID</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                    <th>Due Date</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            
+                           
+                                  <tr  *ngFor="let loan of loans; let i = index ">
+                                    <td style="padding:20px">
+      
+                                  {{i + 1}}  
+                                 </td>
+                                      <td >
+      
+                                             <span class = "label label-danger" *ngIf = "loan.status == '0'">Not Found on PLAAS</span>    
+                                             <span class = "label label-success" *ngIf = "loan.status == '1'">Active PLAAS Loan</span>   
+                                                 
+                                      </td>
+                                      <td>{{loan.loanid}}</td>
+                                    <td>{{loan.name | titlecase}}</td>
+                                   
+      
+                                    <td >{{loan.payment | currency:'₦': 3}}</td> 
+                                    <td >{{loan.duedate | date}}</td> 
+                                    
+                                 
+                                  </tr>
+                              </tbody>
+                          </table>
+      
+      
+                
+             
+                            <br/>
+                      
+                  </div>
+                  
+              </div> 
+          </div>
+        </div>
+        
+            <div class = "row">
+            
+        
+          </div>
+      
+          <br/><br/>
+          <br/> <br/><br/>
+          <br/> <br/><br/>
+          <br/>
+      
+      
+      </div> 
+  </div>
+  
+  <div class="modal fade" id="import2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h5 class="modal-title">Import Missed Payment </h5>
+        </div>
+        <div class="modal-body">
+          <form role="form" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                      <div class = "well">
+                        <p style = "font-size: 50px;text-align: center"><span class = "glyphicon glyphicon-file"></span></p>
+                        <input (change)="onChangePicture($event)" style = "display:none" type="file" #file  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        <h3 style = "text-align: center"><a (click)="select()">Select Payment File</a></h3>
+                    </div>
+                </div>
+               
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="upload()">Upload Data</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  
+  
+  
