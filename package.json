@@ -38,7 +38,7 @@
     "angular5-csv": "^0.2.9",
     "angular5-data-table": "^1.0.3",
     "angular5-toaster": "^1.0.2",
-    "bootstrap": "^4.1.0",
+    "bootstrap": "^4.3.1",
     "chart.js": "^2.7.2",
     "core-js": "^2.4.1",
     "datatables.net": "^1.10.19",
